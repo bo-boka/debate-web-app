@@ -1,1 +1,3 @@
 /DebateWebApp/target/
+spring-persistence.xml
+test-applicationContext.xml

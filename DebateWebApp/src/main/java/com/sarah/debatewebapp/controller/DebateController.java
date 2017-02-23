@@ -5,9 +5,13 @@
  */
 package com.sarah.debatewebapp.controller;
 
+import com.sarah.debatewebapp.dao.DebateDaoImpl;
+import com.sarah.debatewebapp.dto.Debate;
+import java.util.List;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 /**
  *
@@ -17,6 +21,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @Controller
 public class DebateController {
     
+    DebateDaoImpl dao = new DebateDaoImpl();
+    
     public DebateController(){
         
     }
@@ -24,5 +30,11 @@ public class DebateController {
     @RequestMapping(value={"/","/home"}, method = RequestMethod.GET)
     public String displayHome(){
         return "home";
+    }
+    
+    @ResponseBody
+    @RequestMapping(value="/debates", method=RequestMethod.GET)
+    public List<Debate> getAllDebates(){
+        return dao.getAll();
     }
 }

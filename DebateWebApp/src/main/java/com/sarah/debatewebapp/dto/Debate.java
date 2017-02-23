@@ -25,6 +25,8 @@ public class Debate {
     private ArrayList<Rebuttal> rebuttals;
     private boolean published;
     
+    
+    
     public Debate(String res, String affUser, String cat, String date, boolean pub){
         this.resolution = res;
         this.affirmativeUser = affUser;
