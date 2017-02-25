@@ -18,13 +18,13 @@ public class DebateDaoImpl {
     HashMap<Integer, Debate> debMap = new HashMap<>();
     
    
-    Debate d1 = new Debate("Chron is better than dabs.", "mdb8r", "marijuana", "02/21/2017", false);
-    Debate d2 = new Debate("Elliot Smith is better than Bob Dylan.", "2truDebator", "music", "02/21/2017", true);
-    Debate d3 = new Debate("Going vegan is substantially better for the environment", "mdb8r", "ethics", "02/22/2017", true);
-    Debate d4 = new Debate("Peter Singer is one of the greatest thinkers of our time.", "snowOwl22", "philosophy", "02/23/2017", true);
-    Debate d5 = new Debate("Excessive advertisments are hurting the American mind.", "snowOwl22", "politics", "02/24/2017", true);
-    Debate d6 = new Debate("Capitalism is actually pretty inefficient.", "sawadeeka", "politics", "02/24/2017", true);
-    Debate d7 = new Debate("Cats are ninjas.", "2truDebator", "cats", "02/21/2017", true);
+    Debate d1 = new Debate("Chron is better than dabs.", "argumental;kdfksd", "mdb8r", "marijuana", "02/21/2017", false);
+    Debate d2 = new Debate("Elliot Smith is better than Bob Dylan.", "argumental;kdfksd", "2truDebator", "music", "02/21/2017", true);
+    Debate d3 = new Debate("Going vegan is substantially better for the environment", "argumental;kdfksd", "mdb8r", "ethics", "02/22/2017", true);
+    Debate d4 = new Debate("Peter Singer is one of the greatest thinkers of our time.", "argumental;kdfksd", "snowOwl22", "philosophy", "02/23/2017", true);
+    Debate d5 = new Debate("Excessive advertisments are hurting the American mind.", "argumental;kdfksd", "snowOwl22", "politics", "02/24/2017", true);
+    Debate d6 = new Debate("Capitalism is actually pretty inefficient.", "argumental;kdfksd", "sawadeeka", "politics", "02/24/2017", true);
+    Debate d7 = new Debate("Cats are ninjas.", "argumental;kdfksd", "2truDebator", "cats", "02/21/2017", true);
     
     public DebateDaoImpl(){
         debMap.put(1, d1);

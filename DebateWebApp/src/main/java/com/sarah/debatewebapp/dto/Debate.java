@@ -15,6 +15,8 @@ import java.util.Objects;
 public class Debate {
     private int id;
     private String resolution;
+    private String content;
+    private ArrayList<String> citedSources;
     private String status; //statuses are 'intro', 'live', 'proWon', 'conWon', or 'wash' ..(or maybe 'expired'?)
     private String affirmativeUser;
     private String negativeUser;
@@ -27,8 +29,9 @@ public class Debate {
     
     
     
-    public Debate(String res, String affUser, String cat, String date, boolean pub){
+    public Debate(String res, String content, String affUser, String cat, String date, boolean pub){
         this.resolution = res;
+        this.content = content;
         this.affirmativeUser = affUser;
         this.category = cat;
         this.date = date;
@@ -52,6 +55,22 @@ public class Debate {
 
     public void setResolution(String resolution) {
         this.resolution = resolution;
+    }
+
+    public String getContent() {
+        return content;
+    }
+
+    public void setContent(String content) {
+        this.content = content;
+    }
+
+    public ArrayList<String> getCitedSources() {
+        return citedSources;
+    }
+
+    public void setCitedSources(ArrayList<String> citedSources) {
+        this.citedSources = citedSources;
     }
 
     public String getStatus() {
@@ -129,17 +148,19 @@ public class Debate {
     @Override
     public int hashCode() {
         int hash = 7;
-        hash = 97 * hash + this.id;
-        hash = 97 * hash + Objects.hashCode(this.resolution);
-        hash = 97 * hash + Objects.hashCode(this.status);
-        hash = 97 * hash + Objects.hashCode(this.affirmativeUser);
-        hash = 97 * hash + Objects.hashCode(this.negativeUser);
-        hash = 97 * hash + this.proVotes;
-        hash = 97 * hash + this.conVotes;
-        hash = 97 * hash + Objects.hashCode(this.category);
-        hash = 97 * hash + Objects.hashCode(this.date);
-        hash = 97 * hash + Objects.hashCode(this.rebuttals);
-        hash = 97 * hash + (this.published ? 1 : 0);
+        hash = 47 * hash + this.id;
+        hash = 47 * hash + Objects.hashCode(this.resolution);
+        hash = 47 * hash + Objects.hashCode(this.content);
+        hash = 47 * hash + Objects.hashCode(this.citedSources);
+        hash = 47 * hash + Objects.hashCode(this.status);
+        hash = 47 * hash + Objects.hashCode(this.affirmativeUser);
+        hash = 47 * hash + Objects.hashCode(this.negativeUser);
+        hash = 47 * hash + this.proVotes;
+        hash = 47 * hash + this.conVotes;
+        hash = 47 * hash + Objects.hashCode(this.category);
+        hash = 47 * hash + Objects.hashCode(this.date);
+        hash = 47 * hash + Objects.hashCode(this.rebuttals);
+        hash = 47 * hash + (this.published ? 1 : 0);
         return hash;
     }
 
@@ -170,6 +191,9 @@ public class Debate {
         if (!Objects.equals(this.resolution, other.resolution)) {
             return false;
         }
+        if (!Objects.equals(this.content, other.content)) {
+            return false;
+        }
         if (!Objects.equals(this.status, other.status)) {
             return false;
         }
@@ -185,11 +209,15 @@ public class Debate {
         if (!Objects.equals(this.date, other.date)) {
             return false;
         }
+        if (!Objects.equals(this.citedSources, other.citedSources)) {
+            return false;
+        }
         if (!Objects.equals(this.rebuttals, other.rebuttals)) {
             return false;
         }
         return true;
     }
+
     
     
 }
