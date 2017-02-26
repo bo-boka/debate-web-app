@@ -1,12 +1,16 @@
+/* 
+ *  Copyright 2017 SarahBoka
+ */
 
 $(document).ready(function(){
-    loadDebates();
+    loadDebates();   
+    loadCategories();    
+    loadUsers();
 });
 
 function loadDebates(){
     
-    $.ajax({
-        
+    $.ajax({        
         url: 'debates',
         type: 'GET'
     }).success(function (data){
@@ -15,7 +19,7 @@ function loadDebates(){
 }
 
 function clearTable(){
-    $('#dvdRows').empty();
+    $('#debateRows').empty();
 }
 
 function processDebateList(debates){
@@ -30,7 +34,11 @@ function processDebateList(debates){
         var userField = $("<td>");
         var dateField = $("<td>");
         
-        resField.text(debate.resolution);
+        resField.append($("<a>").attr({
+                    'onclick' : 'goToDebate(' +debate.id+ ')'
+                }).text(debate.resolution));
+        
+        
         userField.text(debate.affirmativeUser);
         dateField.text(debate.date);
         
@@ -40,5 +48,55 @@ function processDebateList(debates){
         dRow.append(dateField);
         
         debateRows.append(dRow);
+    });
+}
+
+function goToDebate(id){
+    $.ajax({
+        url : 'singleDebate/' + id,
+        type: 'GET',
+        headers: {
+            'Accept' : 'application/json'
+        }
+    }).success(function(){
+        window.location="http://localhost:8080/DebateWebApp/singleDebate/"+ id;
+    });
+}
+
+function loadCategories(){
+    
+    $.ajax({
+        url: 'categories',
+        type: 'GET'
+    }).success( function (data){
+        
+        $('#cat-divs').empty();
+        
+        var cats = $("#cat-divs");
+        
+        $.each(data, function (index, category){
+            var catField = $("<div>");
+            catField.text(category);
+            cats.append(catField);
+        });
+    });
+}
+
+function loadUsers(){
+    
+    $.ajax({
+        url: 'users',
+        type: 'GET'
+    }).success( function (data){
+        
+        $('#user-divs').empty();
+        
+        var users = $("#user-divs");
+        
+        $.each(data, function (index, category){
+            var userField = $("<div>");
+            userField.text(category);
+            users.append(userField);
+        });
     });
 }

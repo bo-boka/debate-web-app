@@ -1,0 +1,17 @@
+/*
+ Copyright 2017 SarahBoka
+*/
+/* 
+    Created on : Feb 25, 2017, 12:34:10 PM
+    Author     : Sarah
+*/
+
+.heading {
+    font-size: 20px;
+}
+
+#cat-divs, #cat-divs > div, #user-divs, #user-divs > div, .heading {
+    padding-top: 15px;
+    padding-bottom: 7px;
+    text-align: center;
+}
