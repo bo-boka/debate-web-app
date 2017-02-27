@@ -8,26 +8,34 @@ import com.sarah.debatewebapp.dto.Debate;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
+import javax.transaction.Transactional;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
+import org.springframework.transaction.annotation.Propagation;
 
 /*
  * @author Sarah
  */
 
-public class DebateDaoImpl {
+public class DebateDaoImpl implements DebateDao {
     
 
     
     private JdbcTemplate jdbcTemplate;
     
     
+    @Override
     public void setJdbcTemplate(JdbcTemplate jdbcTemp){
         this.jdbcTemplate = jdbcTemp;
     }
     
-    //get all published blogs
+//    @Transactional(propagation = Propagation.REQUIRED, readOnly = false)
+    @Override
+    public Debate createDebate(Debate debate){
+        return new Debate();
+    }
     
+    //get all published blogs   
     private static final String SQL_GET_ALL_PBLSHD_DEBATES = "SELECT debates.debate_id AS id, resolution, content, deb_statuses.status, affU.username AS affirmativeUser, negU.username AS negativeUser, proVotes, conVotes, categories.category, date, published FROM debates\n" +
 "	LEFT OUTER JOIN `deb_statuses` ON debates.status_id = `deb_statuses`.status_id\n" +
 "	LEFT OUTER JOIN `users` AS affU ON debates.affirmativeUser_id = affU.user_id\n" +
@@ -35,25 +43,24 @@ public class DebateDaoImpl {
 "    LEFT OUTER JOIN `categories` ON debates.category_id = categories.category_id\n" +
 "    WHERE debates.published ORDER BY debates.date DESC";
    
+    @Override
     public List<Debate> getAllPublishedDebates(){
         List<Debate> allPubDebs;
-        allPubDebs = (List<Debate>) jdbcTemplate.query(SQL_GET_ALL_PBLSHD_DEBATES, new DebateMapper());
-        
+        allPubDebs = (List<Debate>) jdbcTemplate.query(SQL_GET_ALL_PBLSHD_DEBATES, new DebateMapper());       
         return allPubDebs;
     }
     //ADD REBUTTALS!!!!!!!!!
     private static final class DebateMapper implements RowMapper<Debate>{
         
         @Override
-        public Debate mapRow(ResultSet rs, int rowNum) throws SQLException {
-            
+        public Debate mapRow(ResultSet rs, int rowNum) throws SQLException {           
             Debate mappedD = new Debate();
             int id = rs.getInt("id");
             String res = rs.getString("resolution");
             String content = rs.getString("content");
             String status = rs.getString("status");
-            String affUser = rs.getString("username");
-            String negUser = rs.getString("username");
+            String affUser = rs.getString("affirmativeUser");
+            String negUser = rs.getString("negativeUser");
             int proV = rs.getInt("proVotes");
             int conV = rs.getInt("conVotes");
             String cat = rs.getString("category");
