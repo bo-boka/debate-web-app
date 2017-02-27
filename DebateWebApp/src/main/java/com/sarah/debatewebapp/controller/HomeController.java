@@ -23,37 +23,37 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @Controller
 public class HomeController {
     
-    DebateDaoImpl dao = new DebateDaoImpl();
+    DebateDaoImpl dao;
     
-    public HomeController(){
-        
+    public HomeController(DebateDaoImpl dao){
+        this.dao = dao;
     }
     
     @ResponseBody
     @RequestMapping(value="/debates", method=RequestMethod.GET)
     public List<Debate> getAllDebates(){
-        return dao.getAllDebates();
+        return dao.getAllPublishedDebates();
     }
     
     
-    @RequestMapping(value="/singleDebate/{id}", method=RequestMethod.GET)
-    public String getSingleDebate(@PathVariable int id, Model model){
-        
-        Debate aDebate = dao.getDebateById(id);
-        model.addAttribute("oneDebate", aDebate);
-        
-        return "single";
-    }
-    
-    @ResponseBody
-    @RequestMapping(value="/categories", method=RequestMethod.GET)
-    public List<String> getAllCategories() {
-        return dao.getCategories();
-    }
-    
-    @ResponseBody
-    @RequestMapping(value="/users", method=RequestMethod.GET)
-    public List<String> getUsers() {
-        return dao.getAllUsers();
-    }
+//    @RequestMapping(value="/singleDebate/{id}", method=RequestMethod.GET)
+//    public String getSingleDebate(@PathVariable int id, Model model){
+//        
+//        Debate aDebate = dao.getDebateById(id);
+//        model.addAttribute("oneDebate", aDebate);
+//        
+//        return "single";
+//    }
+//    
+//    @ResponseBody
+//    @RequestMapping(value="/categories", method=RequestMethod.GET)
+//    public List<String> getAllCategories() {
+//        return dao.getCategories();
+//    }
+//    
+//    @ResponseBody
+//    @RequestMapping(value="/users", method=RequestMethod.GET)
+//    public List<String> getUsers() {
+//        return dao.getAllUsers();
+//    }
 }

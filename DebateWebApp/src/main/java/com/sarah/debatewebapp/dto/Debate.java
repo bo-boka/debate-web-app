@@ -27,7 +27,9 @@ public class Debate {
     private ArrayList<Rebuttal> rebuttals;
     private boolean published;
     
-    
+    public Debate(){
+        
+    }
     
     public Debate(String res, String content, String affUser, String cat, String date, boolean pub){
         this.resolution = res;

@@ -12,14 +12,14 @@ CREATE TABLE IF NOT EXISTS `users` (
     `last_name` varchar(20) NOT NULL,
     `email` varchar(30) NOT NULL,
     `wins` int(11),
-    `washes` int(11),
+    `ties` int(11),
     `engages` int(11),
 	`enabled` tinyint(1) NOT NULL,
 	PRIMARY KEY (`user_id`),
 	UNIQUE KEY `username` (`username`)
 );
  
-INSERT INTO `users` (`user_id`, `username`, `password`, `first_name`, `last_name`, `email`, `wins`, `washes`, `engages`, `enabled`) 
+INSERT INTO `users` (`user_id`, `username`, `password`, `first_name`, `last_name`, `email`, `wins`, `ties`, `engages`, `enabled`) 
 VALUES (1, 'debatinNotHatin', 'password', 'Ally', 'Smith', 'asmith@debator.com', 47, 10, 60, 1),
 	(2, 'cheesinForTheWeekend', 'password', 'Lana', 'Brown', 'email@sendin.com', 13, 3, 30, 1),
 	(3, 'smoothDeb', 'password', 'Javier', 'Garcia', 'email@gmail.com', 23, 10, 43, 1);
@@ -55,7 +55,10 @@ CREATE TABLE IF NOT EXISTS `debates`(
 INSERT INTO `debates` (`debate_id`, `resolution`, `content`, `status_id`, `affirmativeUser_id`, `negativeUser_id`, `proVotes`, `conVotes`, `category_id`, `date`, `published`) 
 VALUES 
 	(1, 'Trump sucks', 'none necessary', 1, 1, null, null, null, 1, '2017-02-21', true),
-	(2, 'Islands are being eaten by the sea.', 'anthropogenic global warming', 1, 2, null, null, null, 2, '2017-02-22', true);
+	(2, 'Islands are being eaten by the sea.', 'anthropogenic global warming', 1, 2, null, null, null, 2, '2017-02-22', true),
+    (3, 'Elliot Smith is better than Bob Dylan.', 'sd;alejfjkskjs', 2, 1, 3, null, null, 4, '2017-01-18', true),
+    (4, 'Going vegan is substantially better for the environment.', 'sleirtysodldfksnd', 1, 3, null, null, null, 3, '2016-11-15', false),
+    (5, 'Capitalism is actually pretty inefficient.', 'dlsfeisrusanc,cmxjsjks.', 2, 2, 3, null, null, 1, '2016-04-11', true);
 
 CREATE TABLE IF NOT EXISTS `deb_statuses` (
 	`status_id` int(2) NOT NULL,
@@ -82,8 +85,9 @@ CREATE TABLE IF NOT EXISTS `rebuttals`(
 );
 
 INSERT INTO `rebuttals` (`rebuttal_id`, `content`, `user_id`, `debate_id`, `type_id`, `date`, `position`) 
-VALUES (1, 'You''re wrong, he''s great', 2, 1, 1, '2017-02-22', false),
-    (2, 'I''m not wrong. He tells unthruths', 1, 1, 2, '2017-02-20', true);
+VALUES (1, 'You''re wrong, he''s great', 3, 3, 1, '2017-02-22', false),
+    (2, 'I''m not wrong. He sings pretty.', 1, 3, 2, '2017-02-20', true),
+    (3, 'dkaj;dklsoieioarur', 3, 5, 1, '2016-4-26', false);
 
 CREATE TABLE IF NOT EXISTS `reb_types` (
 	`type_id` int(2) NOT NULL,
