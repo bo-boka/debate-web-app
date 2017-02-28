@@ -18,12 +18,28 @@ public class Rebuttal {
     private String content;
     private ArrayList<String> citedSources;    
     private String user;
-    private String debate;
+    private int debate;
     private String type; //opening, refute, question, closing
     private String date;
     private boolean position;
     
-    public Rebuttal(String content, String user, String debate, String type, String date, boolean position){
+    public Rebuttal(){
+        
+    }
+
+    //ResultSet Extractor constructor
+    public Rebuttal(int id, String content, String user, int debate, String type, String date, boolean position) {
+        this.id = id;
+        this.content = content;
+        this.user = user;
+        this.debate = debate;
+        this.type = type;
+        this.date = date;
+        this.position = position;
+    }
+    
+    //user constructor
+    public Rebuttal(String content, String user, int debate, String type, String date, boolean position){
         this.content = content;
         this.user = user;
         this.debate = debate;
@@ -65,11 +81,11 @@ public class Rebuttal {
         this.user = user;
     }
 
-    public String getDebate() {
+    public int getDebate() {
         return debate;
     }
 
-    public void setDebate(String debate) {
+    public void setDebate(int debate) {
         this.debate = debate;
     }
 

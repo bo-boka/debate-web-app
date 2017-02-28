@@ -16,7 +16,9 @@ import org.springframework.transaction.annotation.Propagation;
 public interface DebateDao {
     
 //    @Transactional(propagation = Propagation.REQUIRED, readOnly = false)
-    Debate createDebate(Debate debate);     
+    Debate createDebate(Debate debate);
+    
+    Debate getDebateById(int id);
 
     List<Debate> getAllPublishedDebates();
 

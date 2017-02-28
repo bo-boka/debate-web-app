@@ -10,6 +10,8 @@ import com.sarah.debatewebapp.dto.Debate;
 import java.util.List;
 import javax.inject.Inject;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -36,15 +38,15 @@ public class HomeController {
     }
     
     
-//    @RequestMapping(value="/singleDebate/{id}", method=RequestMethod.GET)
-//    public String getSingleDebate(@PathVariable int id, Model model){
-//        
-//        Debate aDebate = dao.getDebateById(id);
-//        model.addAttribute("oneDebate", aDebate);
-//        
-//        return "single";
-//    }
-//    
+    @RequestMapping(value="/singleDebate/{id}", method=RequestMethod.GET)
+    public String getSingleDebate(@PathVariable int id, Model model){
+        
+        Debate aDebate = dao.getDebateById(id);
+        model.addAttribute("oneDebate", aDebate);
+        
+        return "single";
+    }
+    
 //    @ResponseBody
 //    @RequestMapping(value="/categories", method=RequestMethod.GET)
 //    public List<String> getAllCategories() {

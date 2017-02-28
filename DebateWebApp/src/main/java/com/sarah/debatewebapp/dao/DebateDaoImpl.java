@@ -5,24 +5,25 @@
 package com.sarah.debatewebapp.dao;
 
 import com.sarah.debatewebapp.dto.Debate;
+import com.sarah.debatewebapp.dto.Rebuttal;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.List;
-import javax.transaction.Transactional;
+import java.util.Map;
+import org.springframework.dao.DataAccessException;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.jdbc.core.RowMapper;
-import org.springframework.transaction.annotation.Propagation;
+import org.springframework.jdbc.core.ResultSetExtractor;
 
 /*
  * @author Sarah
  */
 
 public class DebateDaoImpl implements DebateDao {
-    
 
-    
-    private JdbcTemplate jdbcTemplate;
-    
+    private JdbcTemplate jdbcTemplate;  
     
     @Override
     public void setJdbcTemplate(JdbcTemplate jdbcTemp){
@@ -35,114 +36,188 @@ public class DebateDaoImpl implements DebateDao {
         return new Debate();
     }
     
-    //get all published blogs   
-    private static final String SQL_GET_ALL_PBLSHD_DEBATES = "SELECT debates.debate_id AS id, resolution, content, deb_statuses.status, affU.username AS affirmativeUser, negU.username AS negativeUser, proVotes, conVotes, categories.category, date, published FROM debates\n" +
+    //USE % WHEN WRITING SEARCH QUERIES
+    
+    private static final String SQL_GET_DEBATE_BY_ID = "SELECT debates.debate_id AS id, resolution, debates.content AS deb_content, deb_statuses.status, affU.username AS affirmativeUser, negU.username AS negativeUser, proVotes, conVotes, categories.category, debates.date AS deb_date, published, rebuttal_id, rebuttals.content AS reb_content, rebU.username AS rebUser, `reb_types`.type, rebuttals.date AS reb_date, position FROM debates\n" +
 "	LEFT OUTER JOIN `deb_statuses` ON debates.status_id = `deb_statuses`.status_id\n" +
 "	LEFT OUTER JOIN `users` AS affU ON debates.affirmativeUser_id = affU.user_id\n" +
 "    LEFT OUTER JOIN `users` AS negU ON debates.negativeUser_id = negU.user_id\n" +
 "    LEFT OUTER JOIN `categories` ON debates.category_id = categories.category_id\n" +
+"    LEFT OUTER JOIN `rebuttals` ON debates.debate_id = `rebuttals`.debate_id\n" +
+"    LEFT OUTER JOIN `users` AS rebU ON rebuttals.user_id = rebU.user_id\n" +
+"    LEFT OUTER JOIN `reb_types` ON rebuttals.type_id = `reb_types`.type_id\n" +
+"    WHERE debates.published AND debates.debate_id = ?";
+    
+    @Override
+    public Debate getDebateById(int id){
+        try{
+            List<Debate> debate = (List<Debate>)jdbcTemplate.query(SQL_GET_DEBATE_BY_ID, new DebateExtractor(), id);
+            return debate.get(0);
+        }catch(EmptyResultDataAccessException | IndexOutOfBoundsException e){
+            return null;
+        }
+    }
+    
+    private static final String SQL_GET_ALL_PBLSHD_DEBATES = "SELECT debates.debate_id AS id, resolution, debates.content AS deb_content, deb_statuses.status, affU.username AS affirmativeUser, negU.username AS negativeUser, proVotes, conVotes, categories.category, debates.date AS deb_date, published, rebuttal_id, rebuttals.content AS reb_content, rebU.username AS rebUser, `reb_types`.type, rebuttals.date AS reb_date, position FROM debates\n" +
+"	LEFT OUTER JOIN `deb_statuses` ON debates.status_id = `deb_statuses`.status_id\n" +
+"	LEFT OUTER JOIN `users` AS affU ON debates.affirmativeUser_id = affU.user_id\n" +
+"    LEFT OUTER JOIN `users` AS negU ON debates.negativeUser_id = negU.user_id\n" +
+"    LEFT OUTER JOIN `categories` ON debates.category_id = categories.category_id\n" +
+"    LEFT OUTER JOIN `rebuttals` ON debates.debate_id = `rebuttals`.debate_id\n" +
+"    LEFT OUTER JOIN `users` AS rebU ON rebuttals.user_id = rebU.user_id\n" +
+"    LEFT OUTER JOIN `reb_types` ON rebuttals.type_id = `reb_types`.type_id\n" +
 "    WHERE debates.published ORDER BY debates.date DESC";
-   
+    
     @Override
     public List<Debate> getAllPublishedDebates(){
         List<Debate> allPubDebs;
-        allPubDebs = (List<Debate>) jdbcTemplate.query(SQL_GET_ALL_PBLSHD_DEBATES, new DebateMapper());       
+        allPubDebs = (List<Debate>) jdbcTemplate.query(SQL_GET_ALL_PBLSHD_DEBATES, new DebateExtractor());       
+  
         return allPubDebs;
     }
-    //ADD REBUTTALS!!!!!!!!!
-    private static final class DebateMapper implements RowMapper<Debate>{
-        
+    
+    private static class DebateExtractor implements ResultSetExtractor {
+
         @Override
-        public Debate mapRow(ResultSet rs, int rowNum) throws SQLException {           
-            Debate mappedD = new Debate();
-            int id = rs.getInt("id");
-            String res = rs.getString("resolution");
-            String content = rs.getString("content");
-            String status = rs.getString("status");
-            String affUser = rs.getString("affirmativeUser");
-            String negUser = rs.getString("negativeUser");
-            int proV = rs.getInt("proVotes");
-            int conV = rs.getInt("conVotes");
-            String cat = rs.getString("category");
-            String date = rs.getString("date");
-            boolean pub = rs.getBoolean("published");
-            
-            mappedD.setId(id);
-            mappedD.setResolution(res);
-            mappedD.setContent(content);
-            mappedD.setStatus(status);
-            mappedD.setAffirmativeUser(affUser);
-            mappedD.setNegativeUser(negUser);
-            mappedD.setProVotes(proV);
-            mappedD.setConVotes(conV);
-            mappedD.setCategory(cat);
-            mappedD.setDate(date);
-            mappedD.setPublished(pub);
-            
-            return mappedD;
+        public Object extractData(ResultSet rs) throws SQLException, DataAccessException {
+
+            Map<Integer, Debate> map = new LinkedHashMap<>();
+            ArrayList<Rebuttal> rebList = new ArrayList<>();
+            Debate debate = null;
+            while (rs.next()) {
+                int id = rs.getInt("id");
+                debate = map.get(id);
+                if (debate == null) {
+                    String res = rs.getString("resolution");
+                    String content = rs.getString("deb_content");
+                    String status = rs.getString("status");
+                    String affUser = rs.getString("affirmativeUser");
+                    String negUser = rs.getString("negativeUser");
+                    int proV = rs.getInt("proVotes");
+                    int conV = rs.getInt("conVotes");
+                    String cat = rs.getString("category");
+                    String date = rs.getString("deb_date");
+                    boolean pub = rs.getBoolean("published");
+                    debate = new Debate(id, res, content, status, affUser, negUser, proV, conV, cat, date, pub);
+                    map.put(id, debate);
+                    rebList = new ArrayList<>();
+                }
+                if (rs.getInt("rebuttal_id") != 0) {
+                    Rebuttal rebuttal;          
+                    int reb_id = rs.getInt("rebuttal_id");
+                    String reb_content = rs.getString("reb_content");
+                    String user = rs.getString("rebUser");
+                    int deb_id = rs.getInt("id");
+                    String type = rs.getString("type");
+                    String reb_date = rs.getString("reb_date");
+                    boolean position = rs.getBoolean("position");
+                    rebuttal = new Rebuttal(reb_id, reb_content, user, deb_id, type, reb_date, position);
+                    rebList.add(rebuttal);
+                    debate.setRebuttals(rebList);
+                } else {
+                    debate.setRebuttals(new ArrayList<Rebuttal>());
+                }
+            }
+            return new ArrayList<>(map.values());
         }
     }
 }
 
-
-
-
-
-
-
-
-//    HashMap<Integer, Debate> debMap = new HashMap<>();
-//   
-//    Debate d1 = new Debate("Chron is better than dabs.", "argumental;kdfksd", "mdb8r", "marijuana", "2017-02-21", false);
-//    Debate d2 = new Debate("Elliot Smith is better than Bob Dylan.", "argumental;kdfksd", "2truDebator", "music", "2017-02-21", true);
-//    Debate d3 = new Debate("Going vegan is substantially better for the environment", "argumental;kdfksd", "mdb8r", "ethics", "2017-02-22", true);
-//    Debate d4 = new Debate("Peter Singer is one of the greatest thinkers of our time.", "argumental;kdfksd", "snowOwl22", "philosophy", "2017-02-23", true);
-//    Debate d5 = new Debate("Excessive advertisments are hurting the American mind.", "argumental;kdfksd", "snowOwl22", "politics", "2017-02-24", true);
-//    Debate d6 = new Debate("Capitalism is actually pretty inefficient.", "argumental;kdfksd", "sawadeeka", "politics", "2017-02-24", true);
-//    Debate d7 = new Debate("Cats are ninjas.", "argumental;kdfksd", "2truDebator", "cats", "2017-02-21", true);
-    
-//    public DebateDaoImpl(){
-//        d1.setId(1);
-//        debMap.put(1, d1);
-//        d2.setId(2);
-//        debMap.put(2, d2);
-//        d3.setId(3);
-//        debMap.put(3, d3);
-//        d4.setId(4);
-//        debMap.put(4, d4);
-//        d5.setId(5);
-//        debMap.put(5, d5);
-//        d6.setId(6);
-//        debMap.put(6, d6);
-//        d7.setId(7);
-//        debMap.put(7, d7);
+    //get all published debates with RowMapper 
+//    private static final String SQL_GET_ALL_PBLSHD_DEBATES = "SELECT debates.debate_id AS id, resolution, content, deb_statuses.status, affU.username AS affirmativeUser, negU.username AS negativeUser, proVotes, conVotes, categories.category, date, published FROM debates\n" +
+//"	LEFT OUTER JOIN `deb_statuses` ON debates.status_id = `deb_statuses`.status_id\n" +
+//"	LEFT OUTER JOIN `users` AS affU ON debates.affirmativeUser_id = affU.user_id\n" +
+//"    LEFT OUTER JOIN `users` AS negU ON debates.negativeUser_id = negU.user_id\n" +
+//"    LEFT OUTER JOIN `categories` ON debates.category_id = categories.category_id\n" +
+//"    WHERE debates.published ORDER BY debates.date DESC";
+//    //matching rebuttal query
+//    private static final String SQL_GET_ALL_PBLSHD_REBUTTALS = "SELECT rebuttal_id AS id, content, `users`.username, debate_id, `reb_types`.type, date, position FROM rebuttals\n" +
+//"	LEFT OUTER JOIN `users` ON rebuttals.user_id = `users`.user_id\n" +
+//"    LEFT OUTER JOIN `reb_types` ON rebuttals.type_id = `reb_types`.type_id\n" +
+//"    ORDER BY rebuttals.date DESC";
+//    
+//    @Override
+//    public List<Debate> getAllPublishedDebates(){
+//        List<Debate> allPubDebs;
+//        allPubDebs = (List<Debate>) jdbcTemplate.query(SQL_GET_ALL_PBLSHD_DEBATES, new DebateMapper());       
 //        
-//    }
-//    
-//    public List<Debate> getAllDebates(){
-//        List<Debate> debArr = new ArrayList<>();
-//        for (Integer d : debMap.keySet()) {
-//            debArr.add(debMap.get(d));
+//        List<Rebuttal> allRebs;
+//        allRebs = (List<Rebuttal>) jdbcTemplate.query(SQL_GET_ALL_PBLSHD_REBUTTALS, new RebuttalMapper());
+//        
+//        ArrayList<Rebuttal> rebs = new ArrayList<>();
+//        for (Debate d : allPubDebs){
+//            for (Rebuttal r : allRebs){
+//                if (d.getId() == r.getDebate()){
+//                    rebs.add(r);
+//                }
+//            }
+//            d.setRebuttals(rebs);
 //        }
-//        return debArr;
+//        return allPubDebs;
 //    }
 //    
-//    public List<String> getCategories(){
-//        List<String> categories = new ArrayList<>();
-//        for (Integer d : debMap.keySet()) {
-//            categories.add(debMap.get(d).getCategory());
+//
+//    private static final class DebateMapper implements RowMapper<Debate>{
+//        
+//        @Override
+//        public Debate mapRow(ResultSet rs, int rowNum) throws SQLException {           
+//            Debate mappedD = new Debate();
+//            int id = rs.getInt("id");
+//            String res = rs.getString("resolution");
+//            String content = rs.getString("content");
+//            String status = rs.getString("status");
+//            String affUser = rs.getString("affirmativeUser");
+//            String negUser = rs.getString("negativeUser");
+//            int proV = rs.getInt("proVotes");
+//            int conV = rs.getInt("conVotes");
+//            String cat = rs.getString("category");
+//            String date = rs.getString("date");
+//            boolean pub = rs.getBoolean("published");
+//            
+//            mappedD.setId(id);
+//            mappedD.setResolution(res);
+//            mappedD.setContent(content);
+//            mappedD.setStatus(status);
+//            mappedD.setAffirmativeUser(affUser);
+//            mappedD.setNegativeUser(negUser);
+//            mappedD.setProVotes(proV);
+//            mappedD.setConVotes(conV);
+//            mappedD.setCategory(cat);
+//            mappedD.setDate(date);
+//            mappedD.setPublished(pub);
+//            
+//            return mappedD;
 //        }
-//        return categories;
 //    }
 //    
-//    public List<String> getAllUsers(){
-//        List<String> users = new ArrayList<>();
-//        for (Integer d : debMap.keySet()) {
-//            users.add(debMap.get(d).getAffirmativeUser());
-//        }
-//        return users;
+//    private static final class RebuttalMapper implements RowMapper<Rebuttal>{
+//        
+//        @Override
+//        public Rebuttal mapRow(ResultSet rs, int rowNum) throws SQLException { 
+//            Rebuttal mappedR = new Rebuttal();
+//            
+//            int id = rs.getInt("id");
+//            String content = rs.getString("content");
+//            String user = rs.getString("username");
+//            int deb_id = rs.getInt("debate_id");
+//            String type = rs.getString("type");
+//            String date = rs.getString("date");
+//            boolean position = rs.getBoolean("position");
+//            
+//            mappedR.setId(id);
+//            mappedR.setContent(content);
+//            mappedR.setUser(user);
+//            mappedR.setDebate(deb_id);
+//            mappedR.setType(type);
+//            mappedR.setDate(date);
+//            mappedR.setPosition(position);
+//            
+//            return mappedR;
+//        }          
 //    }
-//    
-//    public Debate getDebateById(int id){
-//        return debMap.get(id);
-//    }
+
+
+
+
+
+

@@ -30,7 +30,23 @@ public class Debate {
     public Debate(){
         
     }
+
+    //ResultSetExtractor constructor
+    public Debate(int id, String resolution, String content, String status, String affirmativeUser, String negativeUser, int proVotes, int conVotes, String category, String date, boolean published) {
+        this.id = id;
+        this.resolution = resolution;
+        this.content = content;
+        this.status = status;
+        this.affirmativeUser = affirmativeUser;
+        this.negativeUser = negativeUser;
+        this.proVotes = proVotes;
+        this.conVotes = conVotes;
+        this.category = category;
+        this.date = date;
+        this.published = published;
+    } 
     
+    //new user debate constructor
     public Debate(String res, String content, String affUser, String cat, String date, boolean pub){
         this.resolution = res;
         this.content = content;

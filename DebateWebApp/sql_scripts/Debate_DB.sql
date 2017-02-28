@@ -54,7 +54,7 @@ CREATE TABLE IF NOT EXISTS `debates`(
 
 INSERT INTO `debates` (`debate_id`, `resolution`, `content`, `status_id`, `affirmativeUser_id`, `negativeUser_id`, `proVotes`, `conVotes`, `category_id`, `date`, `published`) 
 VALUES 
-	(1, 'Trump sucks', 'none necessary', 1, 1, null, null, null, 1, '2017-02-21', true),
+	(1, 'DRY is good.', 'none necessary', 1, 1, null, null, null, 1, '2017-02-21', true),
 	(2, 'Islands are being eaten by the sea.', 'anthropogenic global warming', 1, 2, null, null, null, 2, '2017-02-22', true),
     (3, 'Elliot Smith is better than Bob Dylan.', 'sd;alejfjkskjs', 2, 1, 3, null, null, 4, '2017-01-18', true),
     (4, 'Going vegan is substantially better for the environment.', 'sleirtysodldfksnd', 1, 3, null, null, null, 3, '2016-11-15', false),
