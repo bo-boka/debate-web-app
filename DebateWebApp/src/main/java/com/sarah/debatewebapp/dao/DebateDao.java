@@ -5,9 +5,9 @@ package com.sarah.debatewebapp.dao;
 
 import com.sarah.debatewebapp.dto.Debate;
 import java.util.List;
-import javax.transaction.Transactional;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 
 /*
@@ -15,8 +15,10 @@ import org.springframework.transaction.annotation.Propagation;
  */
 public interface DebateDao {
     
-//    @Transactional(propagation = Propagation.REQUIRED, readOnly = false)
+    @Transactional(propagation = Propagation.REQUIRED, readOnly = false)
     Debate createDebate(Debate debate);
+    
+    List<String> getAllCategories();
     
     Debate getDebateById(int id);
 

@@ -1,6 +1,43 @@
 
 $(document).ready(function(){
     loadDebates();
+    
+    $('#submitDebate').click(function(event){
+        event.preventDefault();
+        var contentData = tinyMCE.get('addDebateContent');
+        $.ajax({
+            url: 'debate',
+            type: 'POST',
+            data: JSON.stringify({
+                resolution: $('#addResolution').val(),
+                content: contentData.getContent(),
+                affirmativeUser: "debatinNotHatin",
+                category: $('#addCategory').val()
+            }),
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            'dataType': 'json'
+        }).success(function (data, status){
+//            $("#validationErrors").hide();
+            clearTable();
+            loadDebates();
+//            window.onbeforeunload = function() {};
+            $('#addResolution').val('');
+            contentData.setContent('');
+            $('#addCategory').val('');
+//        }).error(function (data, status){
+//            var errorDiv = $("#validationErrors");
+//            errorDiv.empty();
+//            $.each(data.responseJSON.fieldErrors, function (index, validationError){
+//                errorDiv.append(validationError.message);
+//                errorDiv.append("<br>");
+//                errorDiv.show();
+//            });
+        });
+    });
+    
 });
 
 function loadDebates(){

@@ -15,7 +15,24 @@
         <title>Deft Debate</title>
     </head>
     <body>
-        <div>${oneDebate.resolution}</div>
+        <div class="container-fluid">
+            <div>${oneDebate.resolution}</div>
+            <div>${oneDebate.content}</div>
+            
+            <c:forEach items="${oneDebate.rebuttals}" var="rebute">
+                <br>
+                
+                ${rebute.id}
+                ${rebute.position}
+                ${rebute.type}
+                ${rebute.content}
+                ${rebute.user}               
+                ${rebute.date}
+                
+                <br>
+            </c:forEach>
+            
+        </div>
         
         <script src="${pageContext.request.contextPath}/js/jquery-2.2.4.min.js"></script>
         <script src="${pageContext.request.contextPath}/js/bootstrap.min.js"></script>

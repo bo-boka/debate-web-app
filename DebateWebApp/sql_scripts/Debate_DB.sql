@@ -17,7 +17,7 @@ CREATE TABLE IF NOT EXISTS `users` (
 	`enabled` tinyint(1) NOT NULL,
 	PRIMARY KEY (`user_id`),
 	UNIQUE KEY `username` (`username`)
-);
+)ENGINE=InnoDB DEFAULT CHARSET=latin1;
  
 INSERT INTO `users` (`user_id`, `username`, `password`, `first_name`, `last_name`, `email`, `wins`, `ties`, `engages`, `enabled`) 
 VALUES (1, 'debatinNotHatin', 'password', 'Ally', 'Smith', 'asmith@debator.com', 47, 10, 60, 1),
@@ -29,7 +29,7 @@ CREATE TABLE IF NOT EXISTS `authorities` (
  `username` varchar(20) NOT NULL,
  `authority` varchar(20) NOT NULL,
  KEY `username` (`username`)
-);
+)ENGINE=InnoDB DEFAULT CHARSET=latin1;
  
 INSERT INTO `authorities` (`username`, `authority`) VALUES
 ('smoothDeb', 'ROLE_ADMIN'),
@@ -37,7 +37,7 @@ INSERT INTO `authorities` (`username`, `authority`) VALUES
 ('debatinNotHatin', 'ROLE_ADMIN');
 
 
-CREATE TABLE IF NOT EXISTS `debates`(
+CREATE TABLE IF NOT EXISTS debates(
 	`debate_id` int(11) NOT NULL AUTO_INCREMENT,
     `resolution` varchar(150) NOT NULL,
     `content` text,
@@ -52,7 +52,7 @@ CREATE TABLE IF NOT EXISTS `debates`(
     PRIMARY KEY (`debate_id`)
 );
 
-INSERT INTO `debates` (`debate_id`, `resolution`, `content`, `status_id`, `affirmativeUser_id`, `negativeUser_id`, `proVotes`, `conVotes`, `category_id`, `date`, `published`) 
+INSERT INTO debates (`debate_id`, `resolution`, `content`, `status_id`, `affirmativeUser_id`, `negativeUser_id`, `proVotes`, `conVotes`, `category_id`, `date`, `published`) 
 VALUES 
 	(1, 'DRY is good.', 'none necessary', 1, 1, null, null, null, 1, '2017-02-21', true),
 	(2, 'Islands are being eaten by the sea.', 'anthropogenic global warming', 1, 2, null, null, null, 2, '2017-02-22', true),

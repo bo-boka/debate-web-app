@@ -8,7 +8,9 @@ import com.sarah.debatewebapp.dto.Debate;
 import com.sarah.debatewebapp.dto.Rebuttal;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -16,6 +18,8 @@ import org.springframework.dao.DataAccessException;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.ResultSetExtractor;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 /*
  * @author Sarah
@@ -30,10 +34,43 @@ public class DebateDaoImpl implements DebateDao {
         this.jdbcTemplate = jdbcTemp;
     }
     
-//    @Transactional(propagation = Propagation.REQUIRED, readOnly = false)
+    private static final String SQL_GET_PRO_USER_ID = "SELECT user_id FROM users WHERE username = ?";
+    
+    private static final String SQL_GET_CATEGORY_ID = "SELECT category_id FROM categories WHERE category = ?";
+    
+    private static final String SQL_ADD_DEBATE = "INSERT INTO debates (resolution, content, status_id, affirmativeUser_id, category_id, date, published)\n" +
+"	VALUES (?, ?, ?, ?, ?, ?, ?)";
+    
+    @Transactional(propagation = Propagation.REQUIRED, readOnly = false)
     @Override
     public Debate createDebate(Debate debate){
-        return new Debate();
+        
+        Date dizate = new Date();
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        int userId = jdbcTemplate.queryForObject(SQL_GET_PRO_USER_ID, Integer.class, debate.getAffirmativeUser());
+        int catId = jdbcTemplate.queryForObject(SQL_GET_CATEGORY_ID, Integer.class, debate.getCategory());
+        
+        
+        jdbcTemplate.update(SQL_ADD_DEBATE,
+                debate.getResolution(),
+                debate.getContent(),
+                1,
+                userId,
+                catId,
+                sdf.format(dizate),
+                1
+        );
+        int id = jdbcTemplate.queryForObject("SELECT LAST_INSERT_ID()", Integer.class);
+        debate.setId(id);
+        
+        return debate;
+    }
+    
+    private static final String SQL_GET_ALL_CATEGORIES = "SELECT category FROM categories";
+    
+    @Override
+    public List<String> getAllCategories(){
+        return jdbcTemplate.queryForList(SQL_GET_ALL_CATEGORIES, String.class);
     }
     
     //USE % WHEN WRITING SEARCH QUERIES
