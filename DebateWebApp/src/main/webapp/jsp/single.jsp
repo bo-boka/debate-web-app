@@ -12,10 +12,15 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <link href="${pageContext.request.contextPath}/css/bootstrap.min.css" rel="stylesheet">
+        <link href="${pageContext.request.contextPath}/css/debateCSS.css" rel="stylesheet">
+        
         <title>Deft Debate</title>
     </head>
     <body>
+        <%@include file="headerFragment.jsp" %>
         <div class="container-fluid">
+            
             <div>${oneDebate.resolution}</div>
             <div>${oneDebate.content}</div>
             

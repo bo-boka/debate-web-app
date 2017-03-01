@@ -26,7 +26,7 @@ function processDebateList(debates){
     
     clearTable();
     
-    var debateRows = $('#debateRows');
+    var debateRows = $('#homeRows');
     
     $.each(debates, function (index, debate){
         
@@ -63,24 +63,7 @@ function goToDebate(id){
     });
 }
 
-function loadCategories(){
-    
-    $.ajax({
-        url: 'categories',
-        type: 'GET'
-    }).success( function (data){
-        
-        $('#cat-divs').empty();
-        
-        var cats = $("#cat-divs");
-        
-        $.each(data, function (index, category){
-            var catField = $("<div>");
-            catField.text(category);
-            cats.append(catField);
-        });
-    });
-}
+
 
 function loadUsers(){
     
@@ -100,3 +83,22 @@ function loadUsers(){
         });
     });
 }
+
+//function loadCategories(){
+//    
+//    $.ajax({
+//        url: 'categories',
+//        type: 'GET'
+//    }).success( function (data){
+//        
+//        $('#cat-divs').empty();
+//        
+//        var cats = $("#cat-divs");
+//        
+//        $.each(data, function (index, category){
+//            var catField = $("<div>");
+//            catField.text(category);
+//            cats.append(catField);
+//        });
+//    });
+//}

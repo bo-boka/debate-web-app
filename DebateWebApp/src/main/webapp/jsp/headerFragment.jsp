@@ -21,7 +21,7 @@
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
         <li class="active"><a href="${pageContext.request.contextPath}/home">Home <span class="sr-only">(current)</span></a></li>
-        <li><a href="#">About</a></li>
+        <li><a href="${pageContext.request.contextPath}/admin">Admin</a></li>
       </ul>
       <form class="navbar-form navbar-left">
         <div class="form-group">

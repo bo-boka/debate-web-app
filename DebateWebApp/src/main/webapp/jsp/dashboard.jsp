@@ -41,7 +41,14 @@
     <body>
         <div class="container-fluid">
             <%@include file="headerFragment.jsp" %>
-            <%@include file="debateTableFrag.jsp" %>
+            <table class="table table-hover">
+                <tr>
+                    <th width="50%">Resolution</th>
+                    <th>User</th>
+                    <th>Date</th>
+                </tr>
+                <tbody id="dashRows"></tbody>
+            </table>
             
             <form class="form-horizontal" id="debateForm">
                 <h4>Add Debate</h4>

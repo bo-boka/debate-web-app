@@ -73,6 +73,15 @@ public class DebateDaoImpl implements DebateDao {
         return jdbcTemplate.queryForList(SQL_GET_ALL_CATEGORIES, String.class);
     }
     
+    private static final String SQL_DELETE_DEBATE = "DELETE FROM debates WHERE debate_id = ?";
+    private static final String SQL_DELETE_DEBATE_REBUTTALS = "DELETE FROM rebuttals WHERE debate_id = ?";
+    
+    @Override
+    public void deleteDebate(int id){
+        jdbcTemplate.update(SQL_DELETE_DEBATE, id);
+        jdbcTemplate.update(SQL_DELETE_DEBATE_REBUTTALS, id);
+    }
+    
     //USE % WHEN WRITING SEARCH QUERIES
     
     private static final String SQL_GET_DEBATE_BY_ID = "SELECT debates.debate_id AS id, resolution, debates.content AS deb_content, deb_statuses.status, affU.username AS affirmativeUser, negU.username AS negativeUser, proVotes, conVotes, categories.category, debates.date AS deb_date, published, rebuttal_id, rebuttals.content AS reb_content, rebU.username AS rebUser, `reb_types`.type, rebuttals.date AS reb_date, position FROM debates\n" +

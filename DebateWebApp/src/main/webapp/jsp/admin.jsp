@@ -10,7 +10,7 @@
         <link href="${pageContext.request.contextPath}/css/bootstrap.min.css" rel="stylesheet">
         <link href="${pageContext.request.contextPath}/css/debateCSS.css" rel="stylesheet">
         
-        <title>Deft Debate - Home</title>
+        <title>Deft Debate - Admin</title>
     </head>
     <body>
         <%@include file="headerFragment.jsp" %>
@@ -19,21 +19,20 @@
             <div class="row">
                 <div class="col-lg-3">
                     <div class="heading">Categories</div>
-                    <c:forEach items="${categories}" var="category">
-                        <option id="cat-div">"${category}"</option>
-                    </c:forEach>
-                    
+                    <div id="cat-divs"></div>
                 </div>
                 <div class="col-lg-6">
                     <div class="heading">Debates</div>
                     <br>Dropdown<br><br>
                     <table class="table table-hover">
                         <tr>
-                            <th width="50%">Resolution</th>
-                            <th>User</th>
-                            <th>Date</th>
+                            <th width="44%">Resolution</th>
+                            <th width="14%">User</th>
+                            <th width="14%">Date</th>
+                            <th width="14%">Edit</th>
+                            <th width="14%">Delete</th>
                         </tr>
-                        <tbody id="homeRows"></tbody>
+                        <tbody id="adminRows"></tbody>
                     </table>
                 </div>
                 <div class="col-lg-3">
@@ -45,7 +44,7 @@
        
         <script src="${pageContext.request.contextPath}/js/jquery-2.2.4.min.js"></script>
         <script src="${pageContext.request.contextPath}/js/bootstrap.min.js"></script>
-        <script src="${pageContext.request.contextPath}/js/homeJS.js"></script>
+        <script src="${pageContext.request.contextPath}/js/adminJS.js"></script>
         
     </body>
 </html>

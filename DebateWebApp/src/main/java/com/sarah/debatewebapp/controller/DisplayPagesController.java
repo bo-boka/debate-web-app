@@ -16,27 +16,33 @@ import org.springframework.web.bind.annotation.RequestMethod;
  * @author Sarah
  */
 @Controller
-public class DisplayPages {
+public class DisplayPagesController {
     
     private DebateDao dao;
     
     @Inject
-    public DisplayPages(DebateDao dao){
+    public DisplayPagesController(DebateDao dao){
         this.dao = dao;
     }
 
     @RequestMapping(value={"/","/home"}, method = RequestMethod.GET)
-    public String displayHome(){
+    public String displayHome(Model model){
+        List<String> categories = dao.getAllCategories();
+        model.addAttribute("categories", categories);
         return "home";
     }
     
     @RequestMapping(value="/dashboard", method = RequestMethod.GET)
-    public String displayDash(Model model){
-        
+    public String displayDash(Model model){      
         List<String> categories = dao.getAllCategories();
         model.addAttribute("categories", categories);
         return "dashboard";
     }
     
-    
+    @RequestMapping(value="/admin", method=RequestMethod.GET)
+    public String displayAdmin(Model model){
+        List<String> categories = dao.getAllCategories();
+        model.addAttribute("categories", categories);
+        return "admin";
+    }
 }

@@ -59,7 +59,7 @@ function processDebateList(debates){
     
     clearTable();
     
-    var debateRows = $('#debateRows');
+    var debateRows = $('#dashRows');
     
     $.each(debates, function (index, debate){
         

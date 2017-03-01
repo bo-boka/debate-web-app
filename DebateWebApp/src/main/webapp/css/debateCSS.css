@@ -7,10 +7,10 @@
 */
 
 .heading {
-    font-size: 20px;
+    font-size: 30px;
 }
 
-#cat-divs, #cat-divs > div, #user-divs, #user-divs > div, .heading {
+#cat-div, .heading {
     padding-top: 15px;
     padding-bottom: 7px;
     text-align: center;

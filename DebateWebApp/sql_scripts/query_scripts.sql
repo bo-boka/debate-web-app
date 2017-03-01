@@ -62,3 +62,6 @@ SELECT category_id FROM categories WHERE category = 'philosophy';
 /*get all categories to load into dropdown*/
 SELECT category FROM categories;
 
+/*delete debate*/
+DELETE FROM debates WHERE debate_id = ?;
+DELETE FROM rebuttals WHERE debate_id = ?;

@@ -20,6 +20,8 @@ public interface DebateDao {
     
     List<String> getAllCategories();
     
+    void deleteDebate(int id);
+    
     Debate getDebateById(int id);
 
     List<Debate> getAllPublishedDebates();
