@@ -3,7 +3,7 @@
  */
 
 $(document).ready(function(){
-    loadDebates(); 
+//    loadDebates(); 
     
     $('#challenge').click(function(event){
         
@@ -58,63 +58,6 @@ $(document).ready(function(){
     });
     
 });
-
-function loadDebates(){
-    
-    $.ajax({        
-        url: 'debates',
-        type: 'GET'
-    }).success(function (data){
-        processDebateList(data);
-    });
-}
-
-function clearTable(){
-    $('#adminRows').empty();
-}
-
-function processDebateList(debates){
-    
-    clearTable();
-    
-    var debateRows = $('#adminRows');
-    
-    $.each(debates, function (index, debate){
-        
-        $('#adminRows').append($('<tr>')
-                .append($('<td>').append($('<a>').attr({
-                    'onclick' : 'goToDebate(' +debate.id+ ')'}).text(debate.resolution)))
-                .append($('<td>').text(debate.affirmativeUser))
-                .append($('<td>').text(debate.date))
-                .append($('<td>').append($('<a>').attr({
-//                    'class': 'btn btn-primary',
-                    'data-toggle': 'modal',
-                    'data-target': '#editDebateModal',
-                    'data-debate-id': debate.id}).text('Edit')))
-                .append($('<td>').append($('<a>').attr({
-//                    'class': 'btn btn-default'
-                    'onclick':'publishDebate('+debate.id+')'}).text('Publish')))
-                .append($('<td>').append($('<a>').attr({
-//                    'class': 'btn btn-default'
-                    'onclick':'unpublishDebate('+debate.id+')'}).text('Unpublish')))
-                .append($('<td>').append($('<a>').attr({
-//                    'class': 'btn btn-danger',
-                    'onclick':'deleteDebate('+debate.id+')'}).text('Delete')))
-                );    
-    });
-}
-
-function goToDebate(id){
-    $.ajax({
-        url : 'singleDebate/' + id,
-        type: 'GET',
-        headers: {
-            'Accept' : 'application/json'
-        }
-    }).success(function(){
-        window.location="/DebateWebApp/singleDebate/"+ id;
-    });
-}
 
 function getDebateEditDetails(id){
     $.ajax({
@@ -176,7 +119,7 @@ function deleteDebate(){
         type: 'DELETE'
     }).success(function(){
        
-        loadDebates();
+//        loadDebates();
         window.location.reload(true);
         window.history.back();
         window.location.reload(true);
@@ -192,6 +135,3 @@ function publishDebate(){
 function unpublishDebate(){
     
 }
-
-
-
