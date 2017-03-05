@@ -10,5 +10,5 @@ package com.sarah.debatewebapp.dto;
  * @author Sarah
  */
 public enum Type {
-    OPENING, REFUTE, QUESTION, CLOSING
+    CHALLENGE, REFUTE, QUESTION, CLOSING
 }

@@ -19,7 +19,7 @@ public class Rebuttal {
     private ArrayList<String> citedSources;    
     private String user;
     private int debate;
-    private String type; //opening, refute, question, closing
+    private String type; //challenge, refute, question, closing
     private String date;
     private boolean position;
     

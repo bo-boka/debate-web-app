@@ -4,8 +4,8 @@
 
 $(document).ready(function(){
     loadDebates();   
-    loadCategories();    
-    loadUsers();
+//    loadCategories();    
+//    loadUsers();
 });
 
 function loadDebates(){
@@ -51,6 +51,7 @@ function processDebateList(debates){
     });
 }
 
+
 function goToDebate(id){
     $.ajax({
         url : 'singleDebate/' + id,
@@ -59,7 +60,7 @@ function goToDebate(id){
             'Accept' : 'application/json'
         }
     }).success(function(){
-        window.location="http://localhost:8080/DebateWebApp/singleDebate/"+ id;
+        window.location="/DebateWebApp/singleDebate/"+ id;
     });
 }
 
@@ -84,21 +85,21 @@ function loadUsers(){
     });
 }
 
-//function loadCategories(){
-//    
-//    $.ajax({
-//        url: 'categories',
-//        type: 'GET'
-//    }).success( function (data){
-//        
-//        $('#cat-divs').empty();
-//        
-//        var cats = $("#cat-divs");
-//        
-//        $.each(data, function (index, category){
-//            var catField = $("<div>");
-//            catField.text(category);
-//            cats.append(catField);
-//        });
-//    });
-//}
+function loadCategories(){
+    
+    $.ajax({
+        url: 'categories',
+        type: 'GET'
+    }).success( function (data){
+        
+        $('#cat-divs').empty();
+        
+        var cats = $("#cat-divs");
+        
+        $.each(data, function (index, category){
+            var catField = $("<div>");
+            catField.text(category);
+            cats.append(catField);
+        });
+    });
+}

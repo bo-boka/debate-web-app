@@ -96,7 +96,7 @@ CREATE TABLE IF NOT EXISTS `reb_types` (
 );
 
 INSERT INTO `reb_types` (`type_id`, `type`)
-VALUES (1, 'opening'),
+VALUES (1, 'challenge'),
 	(2, 'refute'),
     (3, 'question'),
     (4, 'closing');

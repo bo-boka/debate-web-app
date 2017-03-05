@@ -26,11 +26,13 @@
                     <br>Dropdown<br><br>
                     <table class="table table-hover">
                         <tr>
-                            <th width="44%">Resolution</th>
-                            <th width="14%">User</th>
-                            <th width="14%">Date</th>
-                            <th width="14%">Edit</th>
-                            <th width="14%">Delete</th>
+                            <th width="42%">Resolution</th>
+                            <th width="15%">User</th>
+                            <th width="13%">Date</th>
+                            <th width="5%">Edit</th>
+                            <th width="5%">Publish</th>
+                            <th width="5%">Unpublish</th>
+                            <th width="5%">Delete</th>
                         </tr>
                         <tbody id="adminRows"></tbody>
                     </table>

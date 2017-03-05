@@ -23,7 +23,7 @@ $(document).ready(function(){
 //            $("#validationErrors").hide();
             clearTable();
             loadDebates();
-//            window.onbeforeunload = function() {};
+            window.onbeforeunload = function() {};
             $('#addResolution').val('');
             contentData.setContent('');
             $('#addCategory').val('');
@@ -52,7 +52,7 @@ function loadDebates(){
 }
 
 function clearTable(){
-    $('#dvdRows').empty();
+    $('#dashRows').empty();
 }
 
 function processDebateList(debates){

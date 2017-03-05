@@ -18,7 +18,6 @@ SELECT debates.debate_id AS id, resolution, content, deb_statuses.status, affU.u
     LEFT OUTER JOIN `categories` ON debates.category_id = categories.category_id
     ORDER BY debates.date DESC;
     
-SELECT * FROM rebuttals;
 /*list of rebuttals for debates for rowmapper*/
 SELECT rebuttal_id AS id, content, `users`.username, debate_id, `reb_types`.type, date, position FROM rebuttals
 	LEFT OUTER JOIN `users` ON rebuttals.user_id = `users`.user_id
@@ -65,3 +64,21 @@ SELECT category FROM categories;
 /*delete debate*/
 DELETE FROM debates WHERE debate_id = ?;
 DELETE FROM rebuttals WHERE debate_id = ?;
+
+SELECT * FROM rebuttals;
+/*create rebuttal*/
+INSERT INTO rebuttals (content, user_id, debate_id, type_id, date, position)
+	VALUE ('sldfj;sd;f', 2, 2, 1, '2017-04-12', false);
+/*get user_id*/
+SELECT user_id FROM users WHERE username = 'debatinNotHatin';
+
+/*get type_id*/
+SELECT type_id FROM reb_types WHERE type= 'closing';
+
+/*update debate*/
+/*get status_id for update*/
+SELECT * FROM deb_statuses;
+SELECT status_id FROM deb_statuses WHERE status = 'live';
+UPDATE debates SET resolution = 'poop', content='looplooppoo', status_id=2, affirmativeUser_id=1, negativeUser_id=2, proVotes=2, conVotes=3, category_id=3, date='2017-03-22', published=1 
+	WHERE debate_id=2;
+SELECT * FROM debates WHERE debate_id=2;
