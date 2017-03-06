@@ -58,6 +58,20 @@ public class Debate {
         this.conVotes = 0;
         this.published = pub;
     }
+    
+    //test suite constructor
+    public Debate(int id, String res, String content, String affUser, String cat, String date, boolean pub){
+        this.id = id;
+        this.resolution = res;
+        this.content = content;
+        this.affirmativeUser = affUser;
+        this.category = cat;
+        this.date = date;
+        this.status = "intro";
+        this.proVotes = 0;
+        this.conVotes = 0;
+        this.published = pub;
+    }
 
     public int getId() {
         return id;

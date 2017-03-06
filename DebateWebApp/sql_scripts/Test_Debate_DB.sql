@@ -1,8 +1,7 @@
-DROP DATABASE IF EXISTS DebateDB;
-CREATE DATABASE DebateDB;
+DROP DATABASE IF EXISTS TestDebateDB;
+CREATE DATABASE TestDebateDB;
 
-USE DebateDB;
-
+USE TestDebateDB;
 
 CREATE TABLE IF NOT EXISTS `users` (
 	`user_id` int(11) NOT NULL AUTO_INCREMENT,
@@ -172,3 +171,4 @@ ALTER TABLE `deb_sources`
 
 ALTER TABLE `reb_sources`
 	ADD CONSTRAINT `reb_sources_debates_fk` FOREIGN KEY (`rebuttal_id`) REFERENCES `rebuttals` (`rebuttal_id`);
+

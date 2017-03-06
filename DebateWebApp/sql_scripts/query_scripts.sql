@@ -82,3 +82,5 @@ SELECT status_id FROM deb_statuses WHERE status = 'live';
 UPDATE debates SET resolution = 'poop', content='looplooppoo', status_id=2, affirmativeUser_id=1, negativeUser_id=2, proVotes=2, conVotes=3, category_id=3, date='2017-03-22', published=1 
 	WHERE debate_id=2;
 SELECT * FROM debates WHERE debate_id=2;
+
+SELECT * FROM users WHERE username='no';
