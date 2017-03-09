@@ -20,6 +20,9 @@ public interface DebateDao {
     Debate createDebate(Debate debate);
     
     @Transactional(propagation = Propagation.REQUIRED, readOnly = false)
+    Rebuttal createRebuttal(Rebuttal rebuttal);
+    
+    @Transactional(propagation = Propagation.REQUIRED, readOnly = false)
     void updateDebate(Debate debate);
     
     List<String> getAllCategories();
@@ -30,9 +33,8 @@ public interface DebateDao {
 
     List<Debate> getAllPublishedDebates();
     
-    @Transactional(propagation = Propagation.REQUIRED, readOnly = false)
-    Rebuttal createRebuttal(Rebuttal rebuttal);
-
+    List<Debate> getAllDebates();
+    
     void setJdbcTemplate(JdbcTemplate jdbcTemp);
     
 }

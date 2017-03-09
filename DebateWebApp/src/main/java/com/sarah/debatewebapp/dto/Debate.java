@@ -46,20 +46,7 @@ public class Debate {
         this.published = published;
     } 
     
-    //new user debate constructor
-    public Debate(String res, String content, String affUser, String cat, String date, boolean pub){
-        this.resolution = res;
-        this.content = content;
-        this.affirmativeUser = affUser;
-        this.category = cat;
-        this.date = date;
-        this.status = "intro";
-        this.proVotes = 0;
-        this.conVotes = 0;
-        this.published = pub;
-    }
-    
-    //test suite constructor
+    //test suite intro debates constructor
     public Debate(int id, String res, String content, String affUser, String cat, String date, boolean pub){
         this.id = id;
         this.resolution = res;
@@ -72,7 +59,23 @@ public class Debate {
         this.conVotes = 0;
         this.published = pub;
     }
-
+    
+    //test suite engaged debate constructor
+    public Debate(int id, String resolution, String content, String status, String affirmativeUser, String negativeUser, int proVotes, int conVotes, String category, String date, ArrayList list, boolean published) {
+        this.id = id;
+        this.resolution = resolution;
+        this.content = content;
+        this.status = status;
+        this.affirmativeUser = affirmativeUser;
+        this.negativeUser = negativeUser;
+        this.proVotes = proVotes;
+        this.conVotes = conVotes;
+        this.category = category;
+        this.date = date;
+        this.rebuttals = list;
+        this.published = published;
+    } 
+    
     public int getId() {
         return id;
     }

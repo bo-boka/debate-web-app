@@ -25,7 +25,9 @@ VALUES (1, 'debatinNotHatin', 'password', 'Ally', 'Smith', 'asmith@debator.com',
     (3, 'cheesinForTheWeekend', 'password', 'Lana', 'Brown', 'email@sendin.com', 13, 3, 30, 1),
     (4, 'mdb8r', 'password', 'Arielle', 'Cho', 'thisemail@gmail.com', 13, 10, 25, 1),
     (5, 'snowOwl22', 'password', 'Gertrude', 'Hammerquist', 'hammyq@gmail.com', 4, 3, 8, 1),
-	(6, 'smoothDeb', 'password', 'Neena', 'Gupta', 'neenag@gmail.com', 2, 2, 7, 1);
+	(6, 'sawadeeka', 'password', 'Juan', 'Jimenez', 'jimenez@gmail.com', 5, 4, 10, 1),
+	(7, 'smoothDeb', 'password', 'Neena', 'Gupta', 'neenag@gmail.com', 2, 2, 7, 1);
+ 
  
  
 CREATE TABLE IF NOT EXISTS `authorities` (
@@ -167,8 +169,9 @@ ALTER TABLE `debates`
 ALTER TABLE `rebuttals`
 	ADD CONSTRAINT `rebuttals_types_fk` FOREIGN KEY (`type_id`) REFERENCES `reb_types` (`type_id`);
 
-ALTER TABLE `deb_sources`
+/*ALTER TABLE `deb_sources`
 	ADD CONSTRAINT `deb_sources_debates_fk` FOREIGN KEY (`debate_id`) REFERENCES `debates` (`debate_id`);
 
 ALTER TABLE `reb_sources`
 	ADD CONSTRAINT `reb_sources_debates_fk` FOREIGN KEY (`rebuttal_id`) REFERENCES `rebuttals` (`rebuttal_id`);
+*/

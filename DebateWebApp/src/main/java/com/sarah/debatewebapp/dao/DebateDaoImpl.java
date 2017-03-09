@@ -50,11 +50,11 @@ public class DebateDaoImpl implements DebateDao {
         jdbcTemplate.update(SQL_ADD_DEBATE,
                 debate.getResolution(),
                 debate.getContent(),
-                1,
+                1, //status automatically set
                 userId,
                 catId,
-                sdf.format(dizate),
-                1
+                sdf.format(dizate), //date stamp automatically set
+                1 //published automatically set
         );
         int id = jdbcTemplate.queryForObject("SELECT LAST_INSERT_ID()", Integer.class);
         debate.setId(id);
@@ -168,6 +168,23 @@ public class DebateDaoImpl implements DebateDao {
         allPubDebs = (List<Debate>) jdbcTemplate.query(SQL_GET_ALL_PBLSHD_DEBATES, new DebateExtractor());       
         return allPubDebs;
     }
+    
+    private static final String SQL_GET_ALL_DEBATES = "SELECT debates.debate_id AS id, resolution, debates.content AS deb_content, deb_statuses.status, affU.username AS affirmativeUser, negU.username AS negativeUser, proVotes, conVotes, categories.category, debates.date AS deb_date, published, rebuttal_id, rebuttals.content AS reb_content, rebU.username AS rebUser, `reb_types`.type, rebuttals.date AS reb_date, position FROM debates\n" +
+"	LEFT OUTER JOIN `deb_statuses` ON debates.status_id = `deb_statuses`.status_id\n" +
+"	LEFT OUTER JOIN `users` AS affU ON debates.affirmativeUser_id = affU.user_id\n" +
+"    LEFT OUTER JOIN `users` AS negU ON debates.negativeUser_id = negU.user_id\n" +
+"    LEFT OUTER JOIN `categories` ON debates.category_id = categories.category_id\n" +
+"    LEFT OUTER JOIN `rebuttals` ON debates.debate_id = `rebuttals`.debate_id\n" +
+"    LEFT OUTER JOIN `users` AS rebU ON rebuttals.user_id = rebU.user_id\n" +
+"    LEFT OUTER JOIN `reb_types` ON rebuttals.type_id = `reb_types`.type_id\n" +
+"    ORDER BY debates.date DESC";
+    //GET ALL DEBATES, INCLUDING NON PUB
+    @Override
+    public List<Debate> getAllDebates(){
+        List<Debate> allDebs;
+        allDebs = (List<Debate>) jdbcTemplate.query(SQL_GET_ALL_DEBATES, new DebateExtractor());
+        return allDebs;
+     }
     
     //SET EXTRACTOR
     private static class DebateExtractor implements ResultSetExtractor {

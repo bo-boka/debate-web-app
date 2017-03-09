@@ -36,6 +36,17 @@ SELECT debates.debate_id AS id, resolution, debates.content AS deb_content, deb_
     LEFT OUTER JOIN `users` AS rebU ON rebuttals.user_id = rebU.user_id
     LEFT OUTER JOIN `reb_types` ON rebuttals.type_id = `reb_types`.type_id
     WHERE debates.published ORDER BY debates.date DESC;
+    
+/*get all debs, incl unpub using set ext*/
+SELECT debates.debate_id AS id, resolution, debates.content AS deb_content, deb_statuses.status, affU.username AS affirmativeUser, negU.username AS negativeUser, proVotes, conVotes, categories.category, debates.date AS deb_date, published, rebuttal_id, rebuttals.content AS reb_content, rebU.username AS rebUser, `reb_types`.type, rebuttals.date AS reb_date, position FROM debates
+	LEFT OUTER JOIN `deb_statuses` ON debates.status_id = `deb_statuses`.status_id
+	LEFT OUTER JOIN `users` AS affU ON debates.affirmativeUser_id = affU.user_id
+    LEFT OUTER JOIN `users` AS negU ON debates.negativeUser_id = negU.user_id
+    LEFT OUTER JOIN `categories` ON debates.category_id = categories.category_id
+    LEFT OUTER JOIN `rebuttals` ON debates.debate_id = `rebuttals`.debate_id
+    LEFT OUTER JOIN `users` AS rebU ON rebuttals.user_id = rebU.user_id
+    LEFT OUTER JOIN `reb_types` ON rebuttals.type_id = `reb_types`.type_id
+    ORDER BY debates.date DESC;
 	
 /*get a single debate w. result set extractor*/
 SELECT debates.debate_id AS id, resolution, debates.content AS deb_content, deb_statuses.status, affU.username AS affirmativeUser, negU.username AS negativeUser, proVotes, conVotes, categories.category, debates.date AS deb_date, published, rebuttal_id, rebuttals.content AS reb_content, rebU.username AS rebUser, `reb_types`.type, rebuttals.date AS reb_date, position FROM debates
