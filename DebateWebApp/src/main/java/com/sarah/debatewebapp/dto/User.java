@@ -15,24 +15,32 @@ public class User {
     
     private int id;
     private String username;
+    private String password;
     private String firstName;
     private String lastName;
     private String email;
-    private String role;
-    private String password;
     private int wins;
     private int ties;
     private int totalDebates;
+    private String role;
+    private boolean enabled;
     
-    public User(String username, String firstN, String lastN, String email, String passW){
+    public User(){
+    }
+    
+    //rowmapper constructor
+    public User(int id, String username, String passW, String firstN, String lastN, String email, int wins, int ties, int total, String role, boolean enabled){
+        this.id = id;
         this.username = username;
+        this.password = passW;
         this.firstName = firstN;
         this.lastName = lastN;
         this.email = email;
-        this.password = passW;
-        this.wins = 0;
-        this.ties = 0;
-        this.totalDebates = 0;
+        this.wins = wins;
+        this.ties = ties;
+        this.totalDebates = total;
+        this.role = role;
+        this.enabled = enabled;
     }
 
     public int getId() {
@@ -49,6 +57,14 @@ public class User {
 
     public void setUsername(String username) {
         this.username = username;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+    
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     public String getFirstName() {
@@ -83,10 +99,7 @@ public class User {
         this.role = role;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
+    
     public int getWins() {
         return wins;
     }
@@ -111,6 +124,16 @@ public class User {
         this.totalDebates = totalDebates;
     }
 
+    public boolean isEnabled() {
+        return enabled;
+    }
+
+    public void setEnabled(boolean enabled) {
+        this.enabled = enabled;
+    }
+    
+    
+
     @Override
     public int hashCode() {
         int hash = 5;
@@ -124,6 +147,7 @@ public class User {
         hash = 59 * hash + this.wins;
         hash = 59 * hash + this.ties;
         hash = 59 * hash + this.totalDebates;
+        hash = 59 * hash + (this.enabled ? 1 : 0);
         return hash;
     }
 
@@ -149,6 +173,9 @@ public class User {
             return false;
         }
         if (this.totalDebates != other.totalDebates) {
+            return false;
+        }
+        if (this.enabled != other.enabled) {
             return false;
         }
         if (!Objects.equals(this.username, other.username)) {

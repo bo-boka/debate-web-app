@@ -16,6 +16,8 @@ import org.springframework.transaction.annotation.Transactional;
  */
 public interface DebateDao {
     
+    void setJdbcTemplate(JdbcTemplate jdbcTemp);
+    
     @Transactional(propagation = Propagation.REQUIRED, readOnly = false)
     Debate createDebate(Debate debate);
     
@@ -34,7 +36,5 @@ public interface DebateDao {
     List<Debate> getAllPublishedDebates();
     
     List<Debate> getAllDebates();
-    
-    void setJdbcTemplate(JdbcTemplate jdbcTemp);
     
 }

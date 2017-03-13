@@ -111,7 +111,6 @@ public class DebateDaoImpl implements DebateDao {
                 debate.getDate(),
                 debate.getId()
         );
-        
     }
     
     private static final String SQL_GET_ALL_CATEGORIES = "SELECT category FROM categories";

@@ -3,10 +3,9 @@ CREATE DATABASE DebateDB;
 
 USE DebateDB;
 
-
 CREATE TABLE IF NOT EXISTS `users` (
 	`user_id` int(11) NOT NULL AUTO_INCREMENT,
-	`username` varchar(20) NOT NULL,
+	`username` varchar(25) NOT NULL,
 	`password` varchar(20) NOT NULL,
     `first_name` varchar(20) NOT NULL,
     `last_name` varchar(20) NOT NULL,
@@ -29,17 +28,20 @@ VALUES (1, 'debatinNotHatin', 'password', 'Ally', 'Smith', 'asmith@debator.com',
 	(7, 'smoothDeb', 'password', 'Neena', 'Gupta', 'neenag@gmail.com', 2, 2, 7, 1);
  
  
- 
 CREATE TABLE IF NOT EXISTS `authorities` (
- `username` varchar(20) NOT NULL,
+ `username` varchar(25) NOT NULL,
  `authority` varchar(20) NOT NULL,
- KEY `username` (`username`)
+ UNIQUE KEY `username` (`username`)
 )ENGINE=InnoDB DEFAULT CHARSET=latin1;
  
-INSERT INTO `authorities` (`username`, `authority`) VALUES
-('smoothDeb', 'ROLE_ADMIN'),
-('cheesinForTheWeekend', 'ROLE_WORKER'),
-('debatinNotHatin', 'ROLE_ADMIN');
+INSERT INTO `authorities` (`username`, `authority`) 
+VALUES ('debatinNotHatin', 'ROLE_ADMIN'),
+	('2truDebator', 'ROLE_USER'),
+	('cheesinForTheWeekend', 'ROLE_USER'),
+	('mdb8r', 'ROLE_USER'),
+	('snowOwl22', 'ROLE_USER'),
+	('sawadeeka', 'ROLE_USER'),
+	('smoothDeb', 'ROLE_ADMIN');
 
 
 CREATE TABLE IF NOT EXISTS debates(
