@@ -343,8 +343,8 @@ public class DebateDaoImplTest {
         Rebuttal testRebuttal = new Rebuttal(1, "TestTestTestContent", "cheesinForTheWeekend", testDebate.getId(), "challenge", date, false);
         testDao.createRebuttal(testRebuttal);
 
-//        // Step3: get rebuttal out of dao by id
-//        Rebuttal testRebuttalAgain = testDao.getRebuttalById(testRebuttal.getId());
+        // Step3: get rebuttal out of dao by id
+        Rebuttal testRebuttalRetrieve = testDao.getDebateById(testDebate.getId()).getRebuttals()[0];
 //
 //        Assert.assertEquals(testRebuttal.getId(), testRebuttalAgain.getId());
 //        Assert.assertEquals(testRebuttal.getTitle(), testRebuttalAgain.getTitle());
