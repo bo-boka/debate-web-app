@@ -182,20 +182,20 @@ public class Debate {
 
     @Override
     public int hashCode() {
-        int hash = 7;
-        hash = 47 * hash + this.id;
-        hash = 47 * hash + Objects.hashCode(this.resolution);
-        hash = 47 * hash + Objects.hashCode(this.content);
-        hash = 47 * hash + Objects.hashCode(this.citedSources);
-        hash = 47 * hash + Objects.hashCode(this.status);
-        hash = 47 * hash + Objects.hashCode(this.affirmativeUser);
-        hash = 47 * hash + Objects.hashCode(this.negativeUser);
-        hash = 47 * hash + this.proVotes;
-        hash = 47 * hash + this.conVotes;
-        hash = 47 * hash + Objects.hashCode(this.category);
-        hash = 47 * hash + Objects.hashCode(this.date);
-        hash = 47 * hash + Objects.hashCode(this.rebuttals);
-        hash = 47 * hash + (this.published ? 1 : 0);
+        int hash = 3;
+        hash = 11 * hash + this.id;
+        hash = 11 * hash + Objects.hashCode(this.resolution);
+        hash = 11 * hash + Objects.hashCode(this.content);
+        hash = 11 * hash + Objects.hashCode(this.citedSources);
+        hash = 11 * hash + Objects.hashCode(this.status);
+        hash = 11 * hash + Objects.hashCode(this.affirmativeUser);
+        hash = 11 * hash + Objects.hashCode(this.negativeUser);
+        hash = 11 * hash + this.proVotes;
+        hash = 11 * hash + this.conVotes;
+        hash = 11 * hash + Objects.hashCode(this.category);
+        hash = 11 * hash + Objects.hashCode(this.date);
+        hash = 11 * hash + Objects.hashCode(this.rebuttals);
+        hash = 11 * hash + (this.published ? 1 : 0);
         return hash;
     }
 
@@ -253,6 +253,5 @@ public class Debate {
         return true;
     }
 
-    
     
 }

@@ -1,8 +1,10 @@
 USE DebateDB;
+USE TestDebateDB;
+USE TestUserDB;
 
 SELECT * FROM debates;
 
-/*all published debates w/o rebuttals for rowmapper*/
+/*published debates w/o rebuttals for rowmapper*/
 SELECT debates.debate_id AS id, resolution, content, deb_statuses.status, affU.username AS affirmativeUser, negU.username AS negativeUser, proVotes, conVotes, categories.category, date, published FROM debates
 	LEFT OUTER JOIN `deb_statuses` ON debates.status_id = `deb_statuses`.status_id
 	LEFT OUTER JOIN `users` AS affU ON debates.affirmativeUser_id = affU.user_id
@@ -24,9 +26,8 @@ SELECT rebuttal_id AS id, content, `users`.username, debate_id, `reb_types`.type
     LEFT OUTER JOIN `reb_types` ON rebuttals.type_id = `reb_types`.type_id
     ORDER BY rebuttals.date DESC;
     
-/*get all pub debates w/ rebuttals using result set extractor*/
+/*get pub debates w/ rebuttals using result set extractor*/
 SELECT * FROM debates;
-
 SELECT debates.debate_id AS id, resolution, debates.content AS deb_content, deb_statuses.status, affU.username AS affirmativeUser, negU.username AS negativeUser, proVotes, conVotes, categories.category, debates.date AS deb_date, published, rebuttal_id, rebuttals.content AS reb_content, rebU.username AS rebUser, `reb_types`.type, rebuttals.date AS reb_date, position FROM debates
 	LEFT OUTER JOIN `deb_statuses` ON debates.status_id = `deb_statuses`.status_id
 	LEFT OUTER JOIN `users` AS affU ON debates.affirmativeUser_id = affU.user_id
@@ -60,11 +61,14 @@ SELECT debates.debate_id AS id, resolution, debates.content AS deb_content, deb_
     WHERE debates.published AND debates.debate_id = 3;
 
 /*add debate*/
-INSERT INTO debates (resolution, content, status_id, affirmativeUser_id, category_id, date, published)
-	VALUES ('this is a res', 'blah blah content', 1, 1, 1, '2015-11-11', true);
+INSERT INTO debates (debate_id, resolution, content, status_id, affirmativeUser_id, negativeUser_id, proVotes, conVotes, category_id, date, published)
+	VALUES (19, 'this is a res', 'blah blah content', 1, 1, 2, 0, 0, 1, '2015-11-11', true);
 
 /*get user_id from username to add a debate*/
 SELECT user_id FROM users WHERE username = 'cheesinForTheWeekend';
+
+/*get status id to add debate*/
+SELECT status_id FROM deb_statuses WHERE status = 'intro';
 
 /*get category_id to add debate*/
 SELECT category_id FROM categories WHERE category = 'philosophy';
@@ -95,6 +99,7 @@ UPDATE debates SET resolution = 'poop', content='looplooppoo', status_id=2, affi
 
 /*create user*/
 SELECT * FROM users;
+SELECT * FROM categories;
 INSERT INTO users (username, password, first_name, last_name, email, enabled)
 	VALUE ('bootynut', 'password', 'Ian', 'Raul', 'iamian@gmail.com', 1);
 SELECT * FROM authorities;

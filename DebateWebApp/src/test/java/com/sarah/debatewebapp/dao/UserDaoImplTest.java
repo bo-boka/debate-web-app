@@ -28,7 +28,7 @@ public class UserDaoImplTest {
     public void setUp() {
         ApplicationContext factory = new ClassPathXmlApplicationContext("test-applicationContext.xml");
         testDao = factory.getBean("userJdbcDao", UserDao.class);
-        JdbcTemplate cleaner = factory.getBean("jdbcTemplateBean", JdbcTemplate.class);
+        JdbcTemplate cleaner = factory.getBean("jdbcTemplateBeanUser", JdbcTemplate.class);
         cleaner.execute("DELETE FROM authorities WHERE 1=1");
         cleaner.execute("DELETE FROM debates WHERE 1=1"); 
         cleaner.execute("DELETE FROM users WHERE 1=1"); 

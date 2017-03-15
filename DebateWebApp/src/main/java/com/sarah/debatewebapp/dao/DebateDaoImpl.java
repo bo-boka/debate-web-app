@@ -36,62 +36,39 @@ public class DebateDaoImpl implements DebateDao {
         this.jdbcTemplate = jdbcTemp;
     }
     
+    private static final String SQL_GET_STATUS_ID = "SELECT status_id FROM deb_statuses WHERE status = ?";
     private static final String SQL_GET_USER_ID = "SELECT user_id FROM users WHERE username = ?";
     private static final String SQL_GET_CATEGORY_ID = "SELECT category_id FROM categories WHERE category = ?";
-    private static final String SQL_ADD_DEBATE = "INSERT INTO debates (resolution, content, status_id, affirmativeUser_id, category_id, date, published)\n" +
-"	VALUES (?, ?, ?, ?, ?, ?, ?)";
+    private static final String SQL_ADD_DEBATE = "INSERT INTO debates (resolution, content, status_id, affirmativeUser_id, negativeUser_id, proVotes, conVotes, category_id, date, published)\n" +
+"	VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
     //CREATE DEBATE
     @Transactional(propagation = Propagation.REQUIRED, readOnly = false)
     @Override
     public Debate createDebate(Debate debate){
         dizate = new Date();
-        int userId = jdbcTemplate.queryForObject(SQL_GET_USER_ID, Integer.class, debate.getAffirmativeUser());
+        int statusId = jdbcTemplate.queryForObject(SQL_GET_STATUS_ID, Integer.class, debate.getStatus());
+        int affUserId = jdbcTemplate.queryForObject(SQL_GET_USER_ID, Integer.class, debate.getAffirmativeUser());
+        int negUserId = jdbcTemplate.queryForObject(SQL_GET_USER_ID, Integer.class, debate.getNegativeUser());
         int catId = jdbcTemplate.queryForObject(SQL_GET_CATEGORY_ID, Integer.class, debate.getCategory());        
         jdbcTemplate.update(SQL_ADD_DEBATE,
                 debate.getResolution(),
                 debate.getContent(),
-                1, //status automatically set
-                userId,
+                statusId, //status automatically set
+                affUserId,
+                negUserId,
+                debate.getProVotes(),
+                debate.getConVotes(),
                 catId,
                 sdf.format(dizate), //date stamp automatically set
-                1 //published automatically set
+                debate.isPublished() //published automatically set
         );
         int id = jdbcTemplate.queryForObject("SELECT LAST_INSERT_ID()", Integer.class);
         debate.setId(id);
         return debate;
     } 
-        
-    private static final String SQL_ADD_REBUTTAL= "INSERT INTO rebuttals (content, user_id, debate_id, type_id, date, position)\n" +
-"	VALUE (?, ?, ?, ?, ?, ?)";
-    private static final String SQL_GET_REB_TYPE_ID = "SELECT type_id FROM reb_types WHERE type= ?";
-    //CREATE REBUTTAL
-    @Transactional(propagation = Propagation.REQUIRED, readOnly = false)
-    @Override
-    public Rebuttal createRebuttal(Rebuttal rebuttal){
-        dizate = new Date();
-        int userId = jdbcTemplate.queryForObject(SQL_GET_USER_ID, Integer.class, rebuttal.getUser());
-        int typeId = jdbcTemplate.queryForObject(SQL_GET_REB_TYPE_ID, Integer.class, rebuttal.getType());
-        jdbcTemplate.update(SQL_ADD_REBUTTAL,
-                rebuttal.getContent(),
-                userId,
-                rebuttal.getDebate(),
-                typeId,
-                sdf.format(dizate),
-                rebuttal.isPosition()
-                );
-        int id = jdbcTemplate.queryForObject("SELECT LAST_INSERT_ID()", Integer.class);
-        rebuttal.setId(id);
-        return rebuttal; 
-    }   
     
-    //add some way to edit debate status when rebuttal is added
-    //check blogdaotags when adding rebuttals
-    //below isfull update request with votes, and published added to query
-//    private static final String SQL_UPDATE_DEBATE = "UPDATE debates SET resolution = ?, content=?, status_id=?, affirmativeUser_id=?, negativeUser_id=?, proVotes=?, conVotes=?, category_id=?, date=?, published=? \n" +
-//"	WHERE debate_id=?";
-    private static final String SQL_UPDATE_DEBATE = "UPDATE debates SET resolution = ?, content=?, status_id=?, affirmativeUser_id=?, negativeUser_id=?, category_id=?, date=? \n" +
+    private static final String SQL_UPDATE_DEBATE = "UPDATE debates SET resolution =?, content=?, status_id=?, affirmativeUser_id=?, negativeUser_id=?, proVotes=?, conVotes=?, category_id=?, date=?, published=? \n" +
 "	WHERE debate_id=?";
-    private static final String SQL_GET_STATUS_ID= "SELECT status_id FROM deb_statuses WHERE status = ?";
     //UPDATE DEBATE
     @Transactional(propagation = Propagation.REQUIRED, readOnly = false)
     @Override
@@ -107,8 +84,11 @@ public class DebateDaoImpl implements DebateDao {
                 statusId,
                 affUserId,
                 negUserId,
+                debate.getProVotes(),
+                debate.getConVotes(),
                 catId,
                 debate.getDate(),
+                debate.isPublished(),
                 debate.getId()
         );
     }
@@ -139,12 +119,32 @@ public class DebateDaoImpl implements DebateDao {
 "    LEFT OUTER JOIN `rebuttals` ON debates.debate_id = `rebuttals`.debate_id\n" +
 "    LEFT OUTER JOIN `users` AS rebU ON rebuttals.user_id = rebU.user_id\n" +
 "    LEFT OUTER JOIN `reb_types` ON rebuttals.type_id = `reb_types`.type_id\n" +
-"    WHERE debates.published AND debates.debate_id = ?";
+"    WHERE debates.debate_id = ?";
     //GET A DEBATE
     @Override
     public Debate getDebateById(int id){
         try{
             List<Debate> debate = (List<Debate>)jdbcTemplate.query(SQL_GET_DEBATE_BY_ID, new DebateExtractor(), id);
+            return debate.get(0);
+        }catch(EmptyResultDataAccessException | IndexOutOfBoundsException e){
+            return null;
+        }
+    }
+    
+    private static final String SQL_GET__PUBLISHED_DEBATE_BY_ID = "SELECT debates.debate_id AS id, resolution, debates.content AS deb_content, deb_statuses.status, affU.username AS affirmativeUser, negU.username AS negativeUser, proVotes, conVotes, categories.category, debates.date AS deb_date, published, rebuttal_id, rebuttals.content AS reb_content, rebU.username AS rebUser, `reb_types`.type, rebuttals.date AS reb_date, position FROM debates\n" +
+"	LEFT OUTER JOIN `deb_statuses` ON debates.status_id = `deb_statuses`.status_id\n" +
+"	LEFT OUTER JOIN `users` AS affU ON debates.affirmativeUser_id = affU.user_id\n" +
+"    LEFT OUTER JOIN `users` AS negU ON debates.negativeUser_id = negU.user_id\n" +
+"    LEFT OUTER JOIN `categories` ON debates.category_id = categories.category_id\n" +
+"    LEFT OUTER JOIN `rebuttals` ON debates.debate_id = `rebuttals`.debate_id\n" +
+"    LEFT OUTER JOIN `users` AS rebU ON rebuttals.user_id = rebU.user_id\n" +
+"    LEFT OUTER JOIN `reb_types` ON rebuttals.type_id = `reb_types`.type_id\n" +
+"    WHERE debates.published AND debates.debate_id = ?";
+    //GET A PUBLISHED DEBATE
+    @Override
+    public Debate getPublishedDebateById(int id){
+        try{
+            List<Debate> debate = (List<Debate>)jdbcTemplate.query(SQL_GET__PUBLISHED_DEBATE_BY_ID, new DebateExtractor(), id);
             return debate.get(0);
         }catch(EmptyResultDataAccessException | IndexOutOfBoundsException e){
             return null;
@@ -184,6 +184,31 @@ public class DebateDaoImpl implements DebateDao {
         allDebs = (List<Debate>) jdbcTemplate.query(SQL_GET_ALL_DEBATES, new DebateExtractor());
         return allDebs;
      }
+    
+    private static final String SQL_ADD_REBUTTAL= "INSERT INTO rebuttals (content, user_id, debate_id, type_id, date, position)\n" +
+"	VALUE (?, ?, ?, ?, ?, ?)";
+    private static final String SQL_GET_REB_TYPE_ID = "SELECT type_id FROM reb_types WHERE type= ?";
+    //CREATE REBUTTAL
+    @Transactional(propagation = Propagation.REQUIRED, readOnly = false)
+    @Override
+    public Rebuttal createRebuttal(Rebuttal rebuttal){
+        dizate = new Date();
+        int userId = jdbcTemplate.queryForObject(SQL_GET_USER_ID, Integer.class, rebuttal.getUser());
+        int typeId = jdbcTemplate.queryForObject(SQL_GET_REB_TYPE_ID, Integer.class, rebuttal.getType());
+        jdbcTemplate.update(SQL_ADD_REBUTTAL,
+                rebuttal.getContent(),
+                userId,
+                rebuttal.getDebateId(),
+                typeId,
+                sdf.format(dizate),
+                rebuttal.isPosition()
+                );
+        int id = jdbcTemplate.queryForObject("SELECT LAST_INSERT_ID()", Integer.class);
+        rebuttal.setId(id);
+        return rebuttal; 
+    }   
+    //add some way to edit debate status when rebuttal is added
+    //check blogdaotags when adding rebuttals
     
     //SET EXTRACTOR
     private static class DebateExtractor implements ResultSetExtractor {

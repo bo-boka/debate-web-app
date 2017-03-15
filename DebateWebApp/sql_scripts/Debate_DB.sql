@@ -82,13 +82,14 @@ VALUES (1, 'intro'),
 
 CREATE TABLE IF NOT EXISTS `rebuttals`(
 	`rebuttal_id` int(11) NOT NULL AUTO_INCREMENT,
-    `content` text,
+    `content` text NOT NULL,
     `user_id` int(11),
-    `debate_id` int(11),
+    `debate_id` int(11) NOT NULL,
     `type_id` int(2),
     `date` date,
     `position` boolean,
 	PRIMARY KEY (`rebuttal_id`)
+    
 );
 
 INSERT INTO `rebuttals` (`rebuttal_id`, `content`, `user_id`, `debate_id`, `type_id`, `date`, `position`) 
@@ -98,14 +99,14 @@ VALUES (1, 'You''re wrong, he''s great', 3, 3, 1, '2017-02-22', false),
 
 CREATE TABLE IF NOT EXISTS `reb_types` (
 	`type_id` int(2) NOT NULL,
-    `type` varchar(10) UNIQUE,
+    `type` varchar(13) UNIQUE,
     PRIMARY KEY (`type_id`)
 );
 
 INSERT INTO `reb_types` (`type_id`, `type`)
 VALUES (1, 'challenge'),
-	(2, 'refute'),
-    (3, 'question'),
+	(2, 'refutation'),
+    (3, 'clarification'),
     (4, 'closing');
   
 CREATE TABLE IF NOT EXISTS `categories` (
@@ -167,6 +168,9 @@ ALTER TABLE `debates`
 
 ALTER TABLE `debates`
 	ADD CONSTRAINT `debates_statuses_fk` FOREIGN KEY (`status_id`) REFERENCES `deb_statuses` (`status_id`);
+
+ALTER TABLE `rebuttals`
+	ADD CONSTRAINT `rebuttals_debates_fk` FOREIGN KEY (`debate_id`) REFERENCES `debates` (`debate_id`);
 
 ALTER TABLE `rebuttals`
 	ADD CONSTRAINT `rebuttals_types_fk` FOREIGN KEY (`type_id`) REFERENCES `reb_types` (`type_id`);

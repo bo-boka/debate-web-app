@@ -32,6 +32,8 @@ public interface DebateDao {
     void deleteDebate(int id);
     
     Debate getDebateById(int id);
+    
+    Debate getPublishedDebateById(int id);
 
     List<Debate> getAllPublishedDebates();
     

@@ -18,8 +18,8 @@ public class Rebuttal {
     private String content;
     private ArrayList<String> citedSources;    
     private String user;
-    private int debate;
-    private String type; //challenge, refute, question, closing
+    private int debateId;
+    private String type; //challenge, refutation, clarification, closing
     private String date;
     private boolean position;
     
@@ -28,21 +28,21 @@ public class Rebuttal {
     }
 
     //ResultSet Extractor constructor
-    public Rebuttal(int id, String content, String user, int debate, String type, String date, boolean position) {
+    public Rebuttal(int id, String content, String user, int debateId, String type, String date, boolean position) {
         this.id = id;
         this.content = content;
         this.user = user;
-        this.debate = debate;
+        this.debateId = debateId;
         this.type = type;
         this.date = date;
         this.position = position;
     }
     
     //user constructor
-    public Rebuttal(String content, String user, int debate, String type, String date, boolean position){
+    public Rebuttal(String content, String user, int debateId, String type, String date, boolean position){
         this.content = content;
         this.user = user;
-        this.debate = debate;
+        this.debateId = debateId;
         this.type = type;
         this.date = date;
         this.position = position;
@@ -81,12 +81,12 @@ public class Rebuttal {
         this.user = user;
     }
 
-    public int getDebate() {
-        return debate;
+    public int getDebateId() {
+        return debateId;
     }
 
-    public void setDebate(int debate) {
-        this.debate = debate;
+    public void setDebateId(int debateId) {
+        this.debateId = debateId;
     }
 
     public String getType() {
@@ -120,7 +120,7 @@ public class Rebuttal {
         hash = 89 * hash + Objects.hashCode(this.content);
         hash = 89 * hash + Objects.hashCode(this.citedSources);
         hash = 89 * hash + Objects.hashCode(this.user);
-        hash = 89 * hash + Objects.hashCode(this.debate);
+        hash = 89 * hash + Objects.hashCode(this.debateId);
         hash = 89 * hash + Objects.hashCode(this.type);
         hash = 89 * hash + Objects.hashCode(this.date);
         hash = 89 * hash + (this.position ? 1 : 0);
@@ -151,7 +151,7 @@ public class Rebuttal {
         if (!Objects.equals(this.user, other.user)) {
             return false;
         }
-        if (!Objects.equals(this.debate, other.debate)) {
+        if (!Objects.equals(this.debateId, other.debateId)) {
             return false;
         }
         if (!Objects.equals(this.type, other.type)) {

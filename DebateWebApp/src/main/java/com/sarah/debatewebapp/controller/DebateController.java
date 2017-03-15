@@ -62,7 +62,7 @@ public class DebateController {
     @RequestMapping(value="/singleDebate/{id}", method=RequestMethod.GET)
     public String getSingleDebate(@PathVariable int id, Model model){
         
-        aDebate = dao.getDebateById(id);
+        aDebate = dao.getPublishedDebateById(id);
         model.addAttribute("oneDebate", aDebate);
         
         List<String> categories = dao.getAllCategories();
@@ -76,7 +76,7 @@ public class DebateController {
     @RequestMapping(value="/singleDebate/rebuttal", method=RequestMethod.POST)
     //add @Valid as parameter
     public Rebuttal createRebuttal(@RequestBody Rebuttal rebuttal){
-        rebuttal.setDebate(aDebate.getId());
+        rebuttal.setDebateId(aDebate.getId());
         dao.createRebuttal(rebuttal);
         return rebuttal;
     }  

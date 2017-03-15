@@ -46,7 +46,7 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="editDebateContent" class="weak col-sm-2 control-label">Content</label>
+                    <label for="editDebateContent" class="col-sm-2 control-label">Content</label>
                     <div class="col-sm-11">
                         <textarea name="editDebateContent" id="edit-debate-content"></textarea>
                     </div>
@@ -55,6 +55,13 @@
                     <label for="editDebateStatus" class="col-sm-2 control-label">Status</label>
                     <div class="col-sm-4">
                         <input type="text" class="form-control" id="edit-debate-status" placeholder="Status">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="isPublished" class="col-sm-4 control-label">Publish?</label>
+                    <div class="col-sm-4">
+                        <input type="radio" name="publishDebate" value="no" checked>No
+                        <input type="radio" name="publishDebate" value="yes">Yes
                     </div>
                 </div>
                 <div class="form-group">
