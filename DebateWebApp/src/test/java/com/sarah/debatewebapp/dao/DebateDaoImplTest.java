@@ -343,35 +343,20 @@ public class DebateDaoImplTest {
         Rebuttal testRebuttal = new Rebuttal(1, "TestTestTestContent", "cheesinForTheWeekend", testDebate.getId(), "challenge", date, false);
         testDao.createRebuttal(testRebuttal);
 
-        // Step3: get rebuttal out of dao by id
-        Rebuttal testRebuttalRetrieve = testDao.getDebateById(testDebate.getId()).getRebuttals()[0];
-//
-//        Assert.assertEquals(testRebuttal.getId(), testRebuttalAgain.getId());
-//        Assert.assertEquals(testRebuttal.getTitle(), testRebuttalAgain.getTitle());
-//        Assert.assertEquals(testRebuttal.getContent(), testRebuttalAgain.getContent());
-//        Assert.assertEquals(testRebuttal.getAuthor(), testRebuttalAgain.getAuthor());
-//        Assert.assertEquals(testRebuttal.getDate(), testRebuttalAgain.getDate());
-//        Assert.assertEquals(testRebuttal.getCategory(), testRebuttalAgain.getCategory());
-//        Assert.assertEquals(testRebuttal.getTags(), testRebuttalAgain.getTags());
-//
-//        junit.framework.Assert.assertEquals("Rebuttal stored, vs. rebuttal retrieved does not match",
-//                testRebuttal, testRebuttalAgain);
+        Rebuttal testRebuttalRetrieve = testDao.getDebateById(testDebate.getId()).getRebuttals().get(0);
+        Assert.assertEquals(testRebuttal, testRebuttalRetrieve);
+
+        Assert.assertEquals(testRebuttal.getId(), testRebuttalRetrieve.getId());
+        Assert.assertEquals(testRebuttal.getContent(), testRebuttalRetrieve.getContent());
+
+        junit.framework.Assert.assertEquals("Rebuttal stored, vs. rebuttal retrieved does not match",
+                testRebuttal, testRebuttalRetrieve);
     }
 
-    //++++++++++++++++++++++++++++++++++++++++++++++++++++++
+}
+    
     
    
-//    @Test
-//    public void testCreateRebuttal() {
-//        System.out.println("createRebuttal");
-//        Rebuttal rebuttal = null;
-//        DebateDaoImpl instance = new DebateDaoImpl();
-//        Rebuttal expResult = null;
-//        Rebuttal result = instance.createRebuttal(rebuttal);
-//        assertEquals(expResult, result);
-//        // TODO review the generated test code and remove the default call to fail.
-//        fail("The test case is a prototype.");
-//    }
 
 //    /**
 //     * Test of getAllCategories method, of class DebateDaoImpl.
@@ -388,10 +373,9 @@ public class DebateDaoImplTest {
 //    }
 
 
-}
+//++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 
-//=========================
 // debates for testing if create function is changed to omit unecessary properties
 
 //    Debate[] debatesForTesting = {

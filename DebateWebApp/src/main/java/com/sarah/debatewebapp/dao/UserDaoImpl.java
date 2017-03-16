@@ -107,8 +107,6 @@ public class UserDaoImpl implements UserDao {
         return allUsers; //might need list caste
     }
     
-    
-    
     private static final String SQL_DELETE_USER = "DELETE FROM users WHERE user_id = ?";
     //DELETE USER
     @Override

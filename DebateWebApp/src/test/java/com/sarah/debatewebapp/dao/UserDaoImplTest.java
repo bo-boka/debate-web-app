@@ -29,6 +29,7 @@ public class UserDaoImplTest {
         ApplicationContext factory = new ClassPathXmlApplicationContext("test-applicationContext.xml");
         testDao = factory.getBean("userJdbcDao", UserDao.class);
         JdbcTemplate cleaner = factory.getBean("jdbcTemplateBeanUser", JdbcTemplate.class);
+        cleaner.execute("DELETE FROM rebuttals WHERE 1=1");
         cleaner.execute("DELETE FROM authorities WHERE 1=1");
         cleaner.execute("DELETE FROM debates WHERE 1=1"); 
         cleaner.execute("DELETE FROM users WHERE 1=1"); 
@@ -209,23 +210,19 @@ public class UserDaoImplTest {
         for (User user : usersForTesting) {
             testDao.createUser(user);
         }
-
         for (User user : similarUsers) {
             testDao.createUser(user);
         }
-
         junit.framework.Assert.assertNotNull("List of all users should not be null.", testDao.getAllUsers());
         junit.framework.Assert.assertEquals("Expected user count does not match after adding several similar users.",
                 usersForTesting.length + similarUsers.length, testDao.getAllUsers().size());
         junit.framework.Assert.assertEquals("Expected user count of 'all users' does not match after adding several similar users.",
                 usersForTesting.length + similarUsers.length, testDao.getAllUsers().size());
-
         for (int i = 0; i < similarUsers.length; i++) {
             junit.framework.Assert.assertEquals("Get user does not match expected return on addition of similar user.", similarUsers[i],
                     testDao.getUserById(similarUsers[i].getId()));
             junit.framework.Assert.assertTrue("Returned user in getAllUsers does not match expected.", testDao.getAllUsers().contains(similarUsers[i]));
         }
-
         for (int i = 0; i < usersForTesting.length; i++) {
             junit.framework.Assert.assertEquals("Get user does not match expected return on addition of similar user.", usersForTesting[i],
                     testDao.getUserById(usersForTesting[i].getId()));
@@ -278,54 +275,43 @@ public class UserDaoImplTest {
                 junit.framework.Assert.assertNull("User should be removed and return null.", testDao.getUserById(usersForTesting[i].getId()));
             }
         }
-
     }
 
     @Test
     public void testAddAndRemoveUsersMultipleTimes() {
-
         for (User user : usersForTesting) {
             testDao.createUser(user);
         }
-
         for (User user : usersForTesting) {
             testDao.deleteUser(user.getId());
         }
-
         for (User user : usersForTesting) {
             testDao.createUser(user);
         }
-
         junit.framework.Assert.assertNotNull("List of all users should not be null.", testDao.getAllUsers());
         junit.framework.Assert.assertEquals("Expected user count of 'all users' should be zero when adding/removing a all users.",
                 usersForTesting.length, testDao.getAllUsers().size());
-
         for (int i = 0; i < usersForTesting.length; i++) {
             User user = usersForTesting[i];
             junit.framework.Assert.assertEquals("User should return after being re-added.", user, testDao.getUserById(user.getId()));
             testDao.deleteUser(user.getId());
             junit.framework.Assert.assertNull("User should return null after being removed.", testDao.getUserById(user.getId()));
         }
-
         junit.framework.Assert.assertEquals("Expected user count of 'all users' should be zero when adding/removing a all users.", 0, testDao.getAllUsers().size());
-
     }
 
     @Test
     public void testUserCountOnAddition() {
-
         // Add all users and check that count increments appropriately
         for (int i = 0; i < usersForTesting.length; i++) {
             testDao.createUser(usersForTesting[i]);
             junit.framework.Assert.assertEquals("Expected " + (i + 1) + " users after adding users.",
                     i + 1, testDao.getAllUsers().size());
         }
-
     }
 
     @Test
     public void testUserCountOnUpdate() {
-
         // Add all users and check that count increments appropriately
         for (int i = 0; i < usersForTesting.length; i++) {
             testDao.createUser(usersForTesting[i]);
@@ -334,7 +320,6 @@ public class UserDaoImplTest {
             junit.framework.Assert.assertEquals("Expected " + (i + 1) + " users after updating users.",
                     i + 1, testDao.getAllUsers().size());
         }
-
     }
 
     @Test
@@ -355,39 +340,31 @@ public class UserDaoImplTest {
 
     @Test
     public void testUsersAfterRemovalOfNonExistent() {
-
         // Add all users
         for (int i = 0; i < usersForTesting.length; i++) {
             testDao.createUser(usersForTesting[i]);
         }
-
         testDao.deleteUser(100);
         junit.framework.Assert.assertEquals("Expected " + usersForTesting.length + " users after removing users.",
                 usersForTesting.length, testDao.getAllUsers().size());
-
     }
 
     @Test
     public void testUserCountAfterTwiceRemoved() {
-
         // Add all users
         for (int i = 0; i < usersForTesting.length; i++) {
             testDao.createUser(usersForTesting[i]);
         }
-
         // Remove users one by one and test that count decrements properly
         for (int i = 0; i < usersForTesting.length; i++) {
             testDao.deleteUser(usersForTesting[i].getId());
         }
-
         junit.framework.Assert.assertEquals("Expected " + 0 + " users after removing users.",
                 0, testDao.getAllUsers().size());
-
         // Remove users one by one and test that count decrements properly
         for (int i = 0; i < usersForTesting.length; i++) {
             testDao.deleteUser(usersForTesting[i].getId());
         }
-
         junit.framework.Assert.assertEquals("Expected " + 0 + " users after attempting to re-remove users.",
                 0, testDao.getAllUsers().size());
     }

@@ -22,7 +22,7 @@ public interface DebateDao {
     Debate createDebate(Debate debate);
     
     @Transactional(propagation = Propagation.REQUIRED, readOnly = false)
-    Rebuttal createRebuttal(Rebuttal rebuttal);
+    Debate createIntroDebate(Debate debate);
     
     @Transactional(propagation = Propagation.REQUIRED, readOnly = false)
     void updateDebate(Debate debate);
@@ -38,5 +38,8 @@ public interface DebateDao {
     List<Debate> getAllPublishedDebates();
     
     List<Debate> getAllDebates();
+    
+    @Transactional(propagation = Propagation.REQUIRED, readOnly = false)
+    Rebuttal createRebuttal(Rebuttal rebuttal);
     
 }

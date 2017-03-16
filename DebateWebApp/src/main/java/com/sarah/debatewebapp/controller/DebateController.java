@@ -81,12 +81,13 @@ public class DebateController {
         return rebuttal;
     }  
     
+    //create debate from user dash
     @ResponseBody
     @ResponseStatus(HttpStatus.CREATED)
     @RequestMapping(value="/debate", method=RequestMethod.POST)
     //add @Valid as parameter when adding validation
     public Debate createDebate(@RequestBody Debate debate){
-        dao.createDebate(debate);
+        dao.createIntroDebate(debate);
         return debate;
     }
     

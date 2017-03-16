@@ -11,7 +11,6 @@ $(document).ready(function(){
             data: JSON.stringify({
                 resolution: $('#addResolution').val(),
                 content: contentData.getContent(),
-                affirmativeUser: "debatinNotHatin",
                 category: $('#addCategory').val()
             }),
             headers: {

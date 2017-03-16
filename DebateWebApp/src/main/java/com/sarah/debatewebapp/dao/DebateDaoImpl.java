@@ -41,7 +41,7 @@ public class DebateDaoImpl implements DebateDao {
     private static final String SQL_GET_CATEGORY_ID = "SELECT category_id FROM categories WHERE category = ?";
     private static final String SQL_ADD_DEBATE = "INSERT INTO debates (resolution, content, status_id, affirmativeUser_id, negativeUser_id, proVotes, conVotes, category_id, date, published)\n" +
 "	VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-    //CREATE DEBATE
+    //CREATE FULL DEBATE
     @Transactional(propagation = Propagation.REQUIRED, readOnly = false)
     @Override
     public Debate createDebate(Debate debate){
@@ -61,6 +61,29 @@ public class DebateDaoImpl implements DebateDao {
                 catId,
                 sdf.format(dizate), //date stamp automatically set
                 debate.isPublished() //published automatically set
+        );
+        int id = jdbcTemplate.queryForObject("SELECT LAST_INSERT_ID()", Integer.class);
+        debate.setId(id);
+        return debate;
+    } 
+    
+    private static final String SQL_ADD_INTRO_DEBATE = "INSERT INTO debates (resolution, content, status_id, affirmativeUser_id, category_id, date, published)\n" +
+"	VALUES (?, ?, ?, ?, ?, ?, ?)";
+    //CREATE INTRO DEBATE
+    @Transactional(propagation = Propagation.REQUIRED, readOnly = false)
+    @Override
+    public Debate createIntroDebate(Debate debate){
+        dizate = new Date();
+        int affUserId = jdbcTemplate.queryForObject(SQL_GET_USER_ID, Integer.class, debate.getAffirmativeUser());
+        int catId = jdbcTemplate.queryForObject(SQL_GET_CATEGORY_ID, Integer.class, debate.getCategory());        
+        jdbcTemplate.update(SQL_ADD_INTRO_DEBATE,
+                debate.getResolution(),
+                debate.getContent(),
+                1, //status automatically set
+                affUserId,
+                catId,
+                sdf.format(dizate), //date stamp automatically set
+                1 //published automatically set
         );
         int id = jdbcTemplate.queryForObject("SELECT LAST_INSERT_ID()", Integer.class);
         debate.setId(id);
@@ -108,8 +131,6 @@ public class DebateDaoImpl implements DebateDao {
         jdbcTemplate.update(SQL_DELETE_DEBATE, id);
         jdbcTemplate.update(SQL_DELETE_DEBATE_REBUTTALS, id);
     }
-    
-    //USE % WHEN WRITING SEARCH QUERIES
     
     private static final String SQL_GET_DEBATE_BY_ID = "SELECT debates.debate_id AS id, resolution, debates.content AS deb_content, deb_statuses.status, affU.username AS affirmativeUser, negU.username AS negativeUser, proVotes, conVotes, categories.category, debates.date AS deb_date, published, rebuttal_id, rebuttals.content AS reb_content, rebU.username AS rebUser, `reb_types`.type, rebuttals.date AS reb_date, position FROM debates\n" +
 "	LEFT OUTER JOIN `deb_statuses` ON debates.status_id = `deb_statuses`.status_id\n" +
