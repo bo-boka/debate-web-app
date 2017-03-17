@@ -30,25 +30,20 @@
         <button type="submit" class="btn btn-default">Submit</button>
       </form>
       <ul class="nav navbar-nav navbar-right">
-        <sec:authorize access="isFullyAuthenticated()">
-        <li><a href="${pageContext.request.contextPath}/dashboard">Dashboard</a></li>
-        </sec:authorize>
         <sec:authorize access="!isFullyAuthenticated()">
         <li><a href="${pageContext.request.contextPath}/login">Login</a></li>
         </sec:authorize>
         <sec:authorize access="isFullyAuthenticated()">
-        <li><a href="${pageContext.request.contextPath}/j_spring_security_logout">Log Out</a></li> 
-        </sec:authorize>
         <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">User Pic <span class="caret"></span></a>
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">User Name <span class="caret"></span></a>
           <ul class="dropdown-menu">
-            <li><a href="#">Action</a></li>
-            <li><a href="#">Another action</a></li>
+            <li><a href="${pageContext.request.contextPath}/dashboard">Dashboard</a></li>
             <li><a href="#">Something else here</a></li>
             <li role="separator" class="divider"></li>
-            <li><a href="#">Separated link</a></li>
+            <li><a href="${pageContext.request.contextPath}/j_spring_security_logout">Log Out</a></li> 
           </ul>
         </li>
+        </sec:authorize>
       </ul>
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->

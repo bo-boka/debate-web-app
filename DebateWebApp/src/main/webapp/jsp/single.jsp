@@ -61,14 +61,14 @@
                         <div>${oneDebate.date}</div>
                     </div>
                     <div class="col-sm-2">
-                        <div>${oneDebate.negativeUser} {Challenger}</div>
+                        <div>${oneDebate.negativeUser}</div>
                     </div>
                 </div>
-                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#edit-modal" data-debate-id="${oneDebate.id}">
-                    Edit
-                </button>
-                    <!-- Modal -->
-                    <%@include file="editDebateModalFrag.jsp" %>
+                <sec:authorize access="hasRole('ROLE_ADMIN')">
+                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#edit-modal" data-debate-id="${oneDebate.id}">Edit</button>
+                </sec:authorize>
+                <!-- Modal -->
+                <%@include file="editDebateModalFrag.jsp" %>
                     
                 <div style="border: solid 2px; padding: 5px; margin: 20px 150px;">${oneDebate.content}</div>
             

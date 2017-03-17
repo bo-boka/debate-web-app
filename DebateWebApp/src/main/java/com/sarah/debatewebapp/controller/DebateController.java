@@ -7,6 +7,7 @@ package com.sarah.debatewebapp.controller;
 import com.sarah.debatewebapp.dao.DebateDao;
 import com.sarah.debatewebapp.dto.Debate;
 import com.sarah.debatewebapp.dto.Rebuttal;
+import java.security.Principal;
 import java.util.List;
 import javax.inject.Inject;
 import org.springframework.http.HttpStatus;
@@ -28,26 +29,32 @@ public class DebateController {
     
     DebateDao dao;
     Debate aDebate;
+    String currentUser;
     
     @Inject
     public DebateController(DebateDao dao){
         this.dao = dao;
     }
     
-    //display page methods listed first
+    //display page methods
+    
+    //gets 
     @RequestMapping(value={"/","/home"}, method = RequestMethod.GET)
     public String displayHome(Model model){
         List<String> categories = dao.getAllCategories();
         model.addAttribute("categories", categories);
+        
 //        List<Debate> debs = dao.getAllPublishedDebates();
 //        model.addAttribute("debates", debs);
         return "home";
     }
     
+    //gets username with dashboard
     @RequestMapping(value="/dashboard", method = RequestMethod.GET)
-    public String displayDash(Model model){      
+    public String displayDash(Model model, Principal principal){      
         List<String> categories = dao.getAllCategories();
         model.addAttribute("categories", categories);
+        currentUser = principal.getName();
         return "dashboard";
     }
     
@@ -75,6 +82,8 @@ public class DebateController {
     //add @Valid as parameter
     public Rebuttal createRebuttal(@RequestBody Rebuttal rebuttal){
         rebuttal.setDebateId(aDebate.getId());
+        rebuttal.setUser(currentUser);
+        aDebate.setNegativeUser(currentUser);
         dao.createRebuttal(rebuttal);
         return rebuttal;
     }  
