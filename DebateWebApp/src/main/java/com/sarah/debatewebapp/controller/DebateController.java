@@ -75,7 +75,7 @@ public class DebateController {
         
         return "single";
     }   
-    //create rebuttal relies on aDebate variable changed in getSingleDebate method above
+    //create rebuttal & update debate meths rely on aDebate variable changed in getSingleDebate method above
     @ResponseBody
     @ResponseStatus(HttpStatus.CREATED)
     @RequestMapping(value="/singleDebate/rebuttal", method=RequestMethod.POST)
@@ -84,7 +84,9 @@ public class DebateController {
         rebuttal.setDebateId(aDebate.getId());
         rebuttal.setUser(currentUser);
         aDebate.setNegativeUser(currentUser);
+        aDebate.setStatus("live");
         dao.createRebuttal(rebuttal);
+        dao.updateDebate(aDebate);
         return rebuttal;
     }  
     

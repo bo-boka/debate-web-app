@@ -44,7 +44,6 @@ function challengeDebate(){
             type: 'POST',
             data: JSON.stringify({
                 content: contentData.getContent(),
-                user: 'smoothDeb',
                 type: 'challenge',
                 position: false
             }),

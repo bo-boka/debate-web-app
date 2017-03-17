@@ -6,6 +6,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="s" uri="http://www.springframework.org/tags"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -61,7 +62,7 @@
                         <div>${oneDebate.date}</div>
                     </div>
                     <div class="col-sm-2">
-                        <div>${oneDebate.negativeUser} ..doesnt work</div>
+                        <div>${oneDebate.negativeUser}</div>
                     </div>
                 </div>
                 <sec:authorize access="hasRole('ROLE_ADMIN')">
@@ -71,17 +72,20 @@
                 <%@include file="editDebateModalFrag.jsp" %>
                     
                 <div style="border: solid 2px; padding: 5px; margin: 20px 150px;">${oneDebate.content}</div>
-            
-                <c:if test="${empty oneDebate.rebuttals}">
-                    <form class="form-horizontal" id="challengeForm">
-                        <div class="form-group">
-                            <div>
-                                <textarea name="addRebuttalContent" id="add-rebuttal-content"></textarea>
+                <sec:authorize access="isFullyAuthenticated()">
+                    <sec:authentication var="user" property="principal.username" />
+                    <c:if test="${empty oneDebate.rebuttals && user != oneDebate.affirmativeUser}">
+                        <form class="form-horizontal" id="challengeForm">
+                            <div class="form-group">
+                                <div>
+                                    <textarea name="addRebuttalContent" id="add-rebuttal-content"></textarea>
+                                </div>
                             </div>
-                        </div>
-                        <button type="submit" class="btn btn-lg btn-default addButton" id="challenge">Challenge</button>
-                    </form>
-                </c:if>
+                            <button type="submit" class="btn btn-lg btn-default addButton" id="challenge">Challenge</button>
+                        </form>
+                    </c:if>
+                
+                </sec:authorize>
                 <c:forEach items="${oneDebate.rebuttals}" var="rebute">
                     <br>
 
