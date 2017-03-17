@@ -58,10 +58,22 @@
                     </div>
                 </div>
                 <div class="form-group">
+                    <label for="editDebateProVotes" class="col-sm-2 control-label">Pro Votes</label>
+                    <div class="col-sm-4">
+                        <input type="number" class="form-control" id="edit-debate-pro-votes" placeholder="Pro Votes">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="editDebateConVotes" class="col-sm-2 control-label">Con Votes</label>
+                    <div class="col-sm-4">
+                        <input type="number" class="form-control" id="edit-debate-con-votes" placeholder="Con Votes">
+                    </div>
+                </div>
+                <div class="form-group">
                     <label for="isPublished" class="col-sm-4 control-label">Publish?</label>
                     <div class="col-sm-4">
-                        <input type="radio" name="publishDebate" value="no" checked>No
-                        <input type="radio" name="publishDebate" value="yes">Yes
+                        <input type="radio" name="publishDebate" value="false">No
+                        <input type="radio" name="publishDebate" value="true">Yes
                     </div>
                 </div>
                 <div class="form-group">

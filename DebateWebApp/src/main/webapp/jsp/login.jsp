@@ -16,29 +16,19 @@
         <%@include file="headerFragment.jsp" %>
 
         <div class="container-fluid">
-            <div class="row">
-                <div class="col-lg-3">
-                    <div class="heading">Categories</div>
-                    <c:forEach items="${categories}" var="category">
-                        <option id="cat-div">"${category}"</option>
-                    </c:forEach>
+            <h1>Please log in</h1>
+            <hr/>
 
-                </div>
-                <div class="col-lg-6">
-                    <div class="heading">Debates</div>
-                    <br>Dropdown<br><br>
-                    <table class="table table-hover">
-                        <tr>
-                            <th width="50%">Resolution</th>
-                            <th>User</th>
-                            <th>Date</th>
-                        </tr>
-                        <tbody id="homeRows"></tbody>
-                    </table>
-                </div>
-                <div class="col-lg-3">
-                    <div class="heading">Featured Users</div>
-                    <div id="user-divs"></div>
+            <c:if test="${param.login_error == 1}">
+                <h3>Wrong Id or Password. Try Again.</h3>
+            </c:if>
+            <div class="row">
+                <div class="col-sm-4">
+                <form method="POST" action="j_spring_security_check">
+                    <p>Username: </p> <input class="form-control" name="j_username" type="text" /><br>
+                    <p>Password: </p> <input class="form-control" name="j_password" type="password"/>
+                    <button class="btn btn-default pull-right" type="submit" >Sign In</button>
+                </form>
                 </div>
             </div>
         </div>

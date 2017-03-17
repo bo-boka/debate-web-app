@@ -16,7 +16,7 @@ CREATE TABLE IF NOT EXISTS `users` (
 	`enabled` tinyint(1) NOT NULL,
 	PRIMARY KEY (`user_id`),
 	UNIQUE KEY `username` (`username`)
-)ENGINE=InnoDB DEFAULT CHARSET=latin1;
+);
  
 INSERT INTO `users` (`user_id`, `username`, `password`, `first_name`, `last_name`, `email`, `wins`, `ties`, `engages`, `enabled`) 
 VALUES (1, 'debatinNotHatin', 'password', 'Ally', 'Smith', 'asmith@debator.com', 47, 10, 60, 1),
@@ -32,7 +32,7 @@ CREATE TABLE IF NOT EXISTS `authorities` (
  `username` varchar(25) NOT NULL,
  `authority` varchar(20) NOT NULL,
  UNIQUE KEY `username` (`username`)
-)ENGINE=InnoDB DEFAULT CHARSET=latin1;
+);
  
 INSERT INTO `authorities` (`username`, `authority`) 
 VALUES ('debatinNotHatin', 'ROLE_ADMIN'),

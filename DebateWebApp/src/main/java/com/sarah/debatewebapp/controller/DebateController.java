@@ -39,8 +39,8 @@ public class DebateController {
     public String displayHome(Model model){
         List<String> categories = dao.getAllCategories();
         model.addAttribute("categories", categories);
-        List<Debate> debs = dao.getAllPublishedDebates();
-        model.addAttribute("debates", debs);
+//        List<Debate> debs = dao.getAllPublishedDebates();
+//        model.addAttribute("debates", debs);
         return "home";
     }
     
@@ -51,14 +51,12 @@ public class DebateController {
         return "dashboard";
     }
     
-    @RequestMapping(value="/admin", method=RequestMethod.GET)
-    public String displayAdmin(Model model){
-        List<String> categories = dao.getAllCategories();
-        model.addAttribute("categories", categories);
-        return "admin";
+    @RequestMapping(value="/login", method=RequestMethod.GET)
+    public String displayLogin(Model model){
+        return "login";
     }
     
-    //gets a debate, puts it in the model, and returns single page
+    //gets a pub debate, puts it in the model, and returns single page
     @RequestMapping(value="/singleDebate/{id}", method=RequestMethod.GET)
     public String getSingleDebate(@PathVariable int id, Model model){
         
@@ -87,22 +85,26 @@ public class DebateController {
     @RequestMapping(value="/debate", method=RequestMethod.POST)
     //add @Valid as parameter when adding validation
     public Debate createDebate(@RequestBody Debate debate){
+        debate.setAffirmativeUser("debatinNotHatin");
         dao.createIntroDebate(debate);
         return debate;
     }
     
+    //get all pub debates for home page
     @ResponseBody
     @RequestMapping(value="/debates", method=RequestMethod.GET)
     public List<Debate> getAllPublishedDebates(){
         return dao.getAllPublishedDebates();
     }
     
+    //gets a debate for edit modal
     @ResponseBody
     @RequestMapping(value="/singleDebate/debate/{id}", method=RequestMethod.GET)
     public Debate getDebateById(@PathVariable int id){
         return dao.getDebateById(id);
     }
     
+    //edit debate button
     //add @Valid twice
     @ResponseStatus(HttpStatus.NO_CONTENT)
     @RequestMapping(value="/singleDebate/debate/{id}", method=RequestMethod.PUT)

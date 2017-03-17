@@ -6,9 +6,30 @@ $(document).ready(function(){
 //    loadDebates(); 
     
     $('#challenge').click(function(event){
-        
         event.preventDefault();
-        var contentData = tinyMCE.get('add-rebuttal-content');
+        challengeDebate();
+    });
+    
+    $("#edit-modal").on('show.bs.modal', function(event){
+        var element = $(event.relatedTarget);
+        var id = element.data('debate-id');
+        getDebateEditDetails(id);
+    });
+    
+    $("#edit-debate").click(function(event){
+        event.preventDefault();
+        editDebate();
+    });
+    
+    $("#delete-debate").click(function(event){
+        event.preventDefault();
+        deleteDebate();
+    });
+    
+});
+
+function challengeDebate(){
+    var contentData = tinyMCE.get('add-rebuttal-content');
         $.ajax({
             url: 'rebuttal',
             type: 'POST',
@@ -39,25 +60,7 @@ $(document).ready(function(){
 //                    errorDiv.show();
 //                });
         });
-    });
-    
-    $("#edit-modal").on('show.bs.modal', function(event){
-        var element = $(event.relatedTarget);
-        var id = element.data('debate-id');
-        getDebateEditDetails(id);
-    });
-    
-    $("#edit-debate").click(function(event){
-        event.preventDefault();
-        editDebate();
-    });
-    
-    $("#delete-debate").click(function(event){
-        event.preventDefault();
-        deleteDebate();
-    });
-    
-});
+}
 
 function getDebateEditDetails(id){
     $.ajax({
@@ -75,7 +78,9 @@ function getDebateEditDetails(id){
         $("#edit-debate-neg-user").val(debate.negativeUser);
         $("#edit-debate-content").val(debate.content);
         $("#edit-category").val(debate.category);
-        
+        $("#edit-debate-pro-votes").val(debate.proVotes);
+        $("#edit-debate-con-votes").val(debate.conVotes);
+        $("input[name=publishDebate][value=" + debate.published + "]").prop('checked', true);
     });
 }
 
@@ -88,6 +93,9 @@ function editDebate(){
     var negUser = $("#edit-debate-neg-user").val();
     var content = $("#edit-debate-content").val();
     var cat = $("#edit-debate-category").val();
+    var pro = $("#edit-debate-pro-votes").val();
+    var con = $("#edit-debate-con-votes").val();
+    var pub = $('input[name=publishDebate]:checked').val();
     
     $.ajax({
         url: 'debate/' + id,
@@ -104,7 +112,10 @@ function editDebate(){
             affirmativeUser: affUser,
             negativeUser: negUser,
             content: content,
-            category: cat
+            category: cat,
+            proVotes: pro,
+            conVotes: con,
+            published: pub
         })
     }).success(function(data){
         window.location.reload(true);

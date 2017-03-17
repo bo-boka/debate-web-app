@@ -1,7 +1,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="s" uri="http://www.springframework.org/tags"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
 <nav class="navbar navbar-default">
@@ -30,7 +30,15 @@
         <button type="submit" class="btn btn-default">Submit</button>
       </form>
       <ul class="nav navbar-nav navbar-right">
+        <sec:authorize access="isFullyAuthenticated()">
         <li><a href="${pageContext.request.contextPath}/dashboard">Dashboard</a></li>
+        </sec:authorize>
+        <sec:authorize access="!isFullyAuthenticated()">
+        <li><a href="${pageContext.request.contextPath}/login">Login</a></li>
+        </sec:authorize>
+        <sec:authorize access="isFullyAuthenticated()">
+        <li><a href="${pageContext.request.contextPath}/j_spring_security_logout">Log Out</a></li> 
+        </sec:authorize>
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">User Pic <span class="caret"></span></a>
           <ul class="dropdown-menu">
