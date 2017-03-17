@@ -3,7 +3,8 @@
  */
 
 $(document).ready(function(){
-//    loadDebates(); 
+ 
+//    checkChallengeStatus();
     
     $('#challenge').click(function(event){
         event.preventDefault();
@@ -27,6 +28,14 @@ $(document).ready(function(){
     });
     
 });
+
+//function checkChallengeStatus(id){
+////    var challForm = document.getElementById("challengeForm");
+////    challForm.style.display = "none";
+//    
+//    var challForm = $("#challengeForm");
+//    challForm.hide();
+//}
 
 function challengeDebate(){
     var contentData = tinyMCE.get('add-rebuttal-content');
@@ -129,8 +138,7 @@ function deleteDebate(){
         url: 'debate/' +id,
         type: 'DELETE'
     }).success(function(){
-       
-//        loadDebates();
+
         window.location.reload(true);
         window.history.back();
         window.location.reload(true);

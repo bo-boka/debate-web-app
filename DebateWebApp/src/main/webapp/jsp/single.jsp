@@ -61,7 +61,7 @@
                         <div>${oneDebate.date}</div>
                     </div>
                     <div class="col-sm-2">
-                        <div>${oneDebate.negativeUser}</div>
+                        <div>${oneDebate.negativeUser} ..doesnt work</div>
                     </div>
                 </div>
                 <sec:authorize access="hasRole('ROLE_ADMIN')">
@@ -72,15 +72,16 @@
                     
                 <div style="border: solid 2px; padding: 5px; margin: 20px 150px;">${oneDebate.content}</div>
             
-                <form class="form-horizontal" id="challengeForm">
-                    <div class="form-group">
-                        <div class="col-sm-4">
-                            <textarea name="addRebuttalContent" id="add-rebuttal-content"></textarea>
+                <c:if test="${empty oneDebate.rebuttals}">
+                    <form class="form-horizontal" id="challengeForm">
+                        <div class="form-group">
+                            <div>
+                                <textarea name="addRebuttalContent" id="add-rebuttal-content"></textarea>
+                            </div>
                         </div>
-                    </div>
-                    <button type="submit" class="btn btn-lg btn-default addButton" id="challenge">Challenge</button>
-                </form>
-
+                        <button type="submit" class="btn btn-lg btn-default addButton" id="challenge">Challenge</button>
+                    </form>
+                </c:if>
                 <c:forEach items="${oneDebate.rebuttals}" var="rebute">
                     <br>
 
