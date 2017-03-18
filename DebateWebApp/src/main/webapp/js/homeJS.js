@@ -26,28 +26,28 @@ function processDebateList(debates){
     
     clearTable();
     
-    var debateRows = $('#homeRows');
-    
     $.each(debates, function (index, debate){
         
-        var resField = $("<td>");
-        var userField = $("<td>");
-        var dateField = $("<td>");
-        
-        resField.append($("<a>").attr({
-                    'onclick' : 'goToDebate(' +debate.id+ ')'
-                }).text(debate.resolution));
-        
-        
-        userField.text(debate.affirmativeUser);
-        dateField.text(debate.date);
-        
-        var dRow = $("<tr>");
-        dRow.append(resField);
-        dRow.append(userField);
-        dRow.append(dateField);
-        
-        debateRows.append(dRow);
+        $('#homeRows').append($('<tr>')
+                .append($('<td>').append($('<a>').attr({
+                    'onclick' : 'goToDebate(' +debate.id+ ')'}).text(debate.resolution)))
+                .append($('<td>').text(debate.affirmativeUser))
+                .append($('<td>').text(debate.date))
+//                .append($('<td>').append($('<a>').attr({
+////                    'class': 'btn btn-primary',
+//                    'data-toggle': 'modal',
+//                    'data-target': '#editDebateModal',
+//                    'data-debate-id': debate.id}).text('Edit')))
+//                .append($('<td>').append($('<a>').attr({
+////                    'class': 'btn btn-default'
+//                    'onclick':'publishDebate('+debate.id+')'}).text('Publish')))
+//                .append($('<td>').append($('<a>').attr({
+////                    'class': 'btn btn-default'
+//                    'onclick':'unpublishDebate('+debate.id+')'}).text('Unpublish')))
+//                .append($('<td>').append($('<a>').attr({
+////                    'class': 'btn btn-danger',
+//                    'onclick':'deleteDebate('+debate.id+')'}).text('Delete')))
+        );
     });
 }
 

@@ -8,6 +8,7 @@ import com.sarah.debatewebapp.dao.DebateDao;
 import com.sarah.debatewebapp.dto.Debate;
 import com.sarah.debatewebapp.dto.Rebuttal;
 import java.security.Principal;
+import java.util.ArrayList;
 import java.util.List;
 import javax.inject.Inject;
 import org.springframework.http.HttpStatus;
@@ -75,12 +76,12 @@ public class DebateController {
         
         return "single";
     }   
-    //create rebuttal & update debate meths rely on aDebate variable changed in getSingleDebate method above
+    //create challenge rebuttal & update debate meths rely on aDebate variable changed in getSingleDebate method above
     @ResponseBody
     @ResponseStatus(HttpStatus.CREATED)
-    @RequestMapping(value="/singleDebate/rebuttal", method=RequestMethod.POST)
+    @RequestMapping(value="/singleDebate/challenge", method=RequestMethod.POST)
     //add @Valid as parameter
-    public Rebuttal createRebuttal(@RequestBody Rebuttal rebuttal){
+    public Rebuttal createChallenge(@RequestBody Rebuttal rebuttal){
         rebuttal.setDebateId(aDebate.getId());
         rebuttal.setUser(currentUser);
         aDebate.setNegativeUser(currentUser);
@@ -88,7 +89,20 @@ public class DebateController {
         dao.createRebuttal(rebuttal);
         dao.updateDebate(aDebate);
         return rebuttal;
-    }  
+    } 
+    
+    //create reply rebuttals
+    @ResponseBody
+    @ResponseStatus(HttpStatus.CREATED)
+    @RequestMapping(value="/singleDebate/rebuttal", method=RequestMethod.POST)
+    //add @Valid as parameter
+    public Rebuttal createRebuttal(@RequestBody Rebuttal rebuttal){
+        rebuttal.setDebateId(aDebate.getId());
+        rebuttal.setUser(currentUser);
+        rebuttal.setPosition(currentUser.equals(aDebate.getAffirmativeUser()));
+        dao.createRebuttal(rebuttal);
+        return rebuttal;
+    }
     
     //create debate from user dash
     @ResponseBody
@@ -96,7 +110,7 @@ public class DebateController {
     @RequestMapping(value="/debate", method=RequestMethod.POST)
     //add @Valid as parameter when adding validation
     public Debate createDebate(@RequestBody Debate debate){
-        debate.setAffirmativeUser("debatinNotHatin");
+        debate.setAffirmativeUser(currentUser);
         dao.createIntroDebate(debate);
         return debate;
     }
@@ -106,6 +120,24 @@ public class DebateController {
     @RequestMapping(value="/debates", method=RequestMethod.GET)
     public List<Debate> getAllPublishedDebates(){
         return dao.getAllPublishedDebates();
+    }
+    
+    //get all pub debates for user dash
+    @ResponseBody
+    @RequestMapping(value="/userDebates", method=RequestMethod.GET)
+    public List<Debate> getAllUserDebates(){
+        List<Debate> allDs = dao.getAllPublishedDebates();
+        List<Debate> userDs = new ArrayList<>();
+        for(Debate d : allDs){
+            if (d.getAffirmativeUser().equals(currentUser)){
+                userDs.add(d);
+            } else if (d.getNegativeUser() != null){
+                if (d.getNegativeUser().equals(currentUser)){
+                    userDs.add(d);
+                }
+            }
+        }
+        return userDs;
     }
     
     //gets a debate for edit modal

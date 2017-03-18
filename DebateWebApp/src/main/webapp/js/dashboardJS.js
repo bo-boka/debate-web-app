@@ -1,6 +1,6 @@
 
 $(document).ready(function(){
-    loadDebates();
+    loadUserDebates();
     
     $('#submitDebate').click(function(event){
         event.preventDefault();
@@ -21,7 +21,7 @@ $(document).ready(function(){
         }).success(function (data, status){
 //            $("#validationErrors").hide();
             clearTable();
-            loadDebates();
+            loadUserDebates();
             window.onbeforeunload = function() {};
             $('#addResolution').val('');
             contentData.setContent('');
@@ -39,14 +39,13 @@ $(document).ready(function(){
     
 });
 
-function loadDebates(){
+function loadUserDebates(){
     
     $.ajax({
-        
-        url: 'debates',
+        url: 'userDebates',
         type: 'GET'
     }).success(function (data){
-        processDebateList(data);
+        processUserDebateList(data);
     });
 }
 
@@ -54,7 +53,7 @@ function clearTable(){
     $('#dashRows').empty();
 }
 
-function processDebateList(debates){
+function processUserDebateList(debates){
     
     clearTable();
     
@@ -65,20 +64,7 @@ function processDebateList(debates){
                     'onclick' : 'goToDebate(' +debate.id+ ')'}).text(debate.resolution)))
                 .append($('<td>').text(debate.affirmativeUser))
                 .append($('<td>').text(debate.date))
-//                .append($('<td>').append($('<a>').attr({
-////                    'class': 'btn btn-primary',
-//                    'data-toggle': 'modal',
-//                    'data-target': '#editDebateModal',
-//                    'data-debate-id': debate.id}).text('Edit')))
-//                .append($('<td>').append($('<a>').attr({
-////                    'class': 'btn btn-default'
-//                    'onclick':'publishDebate('+debate.id+')'}).text('Publish')))
-//                .append($('<td>').append($('<a>').attr({
-////                    'class': 'btn btn-default'
-//                    'onclick':'unpublishDebate('+debate.id+')'}).text('Unpublish')))
-//                .append($('<td>').append($('<a>').attr({
-////                    'class': 'btn btn-danger',
-//                    'onclick':'deleteDebate('+debate.id+')'}).text('Delete')))
+
                 );
     });
 }

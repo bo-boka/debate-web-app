@@ -4,11 +4,14 @@
 
 $(document).ready(function(){
  
-//    checkChallengeStatus();
-    
     $('#challenge').click(function(event){
         event.preventDefault();
         challengeDebate();
+    });
+    
+    $('#rebute').click(function(event){
+        event.preventDefault();
+        rebute();
     });
     
     $("#edit-modal").on('show.bs.modal', function(event){
@@ -38,14 +41,46 @@ $(document).ready(function(){
 //}
 
 function challengeDebate(){
+    var contentData = tinyMCE.get('add-challenge-content');
+        $.ajax({
+            url: 'challenge',
+            type: 'POST',
+            data: JSON.stringify({
+                content: contentData.getContent(),
+                type: 'challenge',
+                position: false
+            }),
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            'dataType': 'json'
+        }).success(function (data, status){
+            window.location.reload(true);
+//            $("#validationErrors").hide();
+
+            window.onbeforeunload = function() {};
+            
+            $('#add-challenge-content').val('');
+//            }).error(function (data, status) {
+//                var errorDiv = $("#validationErrors");
+//                errorDiv.empty();
+//                $.each(data.responseJSON.fieldErrors, function (index, validationError) {
+//                    errorDiv.append(validationError.message);
+//                    errorDiv.append("<br>");
+//                    errorDiv.show();
+//                });
+        });
+}
+
+function rebute(){
     var contentData = tinyMCE.get('add-rebuttal-content');
         $.ajax({
             url: 'rebuttal',
             type: 'POST',
             data: JSON.stringify({
                 content: contentData.getContent(),
-                type: 'challenge',
-                position: false
+                type: 'refutation'
             }),
             headers: {
                 'Accept': 'application/json',

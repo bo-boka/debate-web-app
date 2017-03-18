@@ -46,7 +46,7 @@ VALUES ('debatinNotHatin', 'ROLE_ADMIN'),
 
 CREATE TABLE IF NOT EXISTS debates(
 	`debate_id` int(11) NOT NULL AUTO_INCREMENT,
-    `resolution` varchar(150) NOT NULL,
+    `resolution` varchar(150) NOT NULL UNIQUE,
     `content` text,
     `status_id` int(2),
     `affirmativeUser_id` int(11),

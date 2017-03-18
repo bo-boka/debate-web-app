@@ -19,6 +19,24 @@
         <script src='//cdn.tinymce.com/4/tinymce.min.js'></script>
         <script type="text/javascript">
             tinymce.init({
+                selector: '#add-challenge-content',
+                min_width: 400,
+                min_height: 300,
+                plugins: [
+                    'advlist autolink autosave charmap hr link lists print preview ',
+                    ' wordcount visualblocks visualchars image imagetools',
+                    'table contextmenu emoticons template',
+                    'paste save searchreplace textcolor'
+                ],
+                contextmenu: "link image",
+                imagetools_toolbar: "rotateleft rotateright | flipv fliph | editimage imageoptions",
+                toolbar: 'insertfile undo redo | styleselect | forecolor backcolor bold italic underline \n\
+                | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent \n\
+                | link charmap image emoticons | preview save',
+                images_upload_base_path: '${pageContext.request.contextPath}/img'
+            });
+            
+            tinymce.init({
                 selector: '#add-rebuttal-content',
                 min_width: 400,
                 min_height: 300,
@@ -78,10 +96,30 @@
                         <form class="form-horizontal" id="challengeForm">
                             <div class="form-group">
                                 <div>
-                                    <textarea name="addRebuttalContent" id="add-rebuttal-content"></textarea>
+                                    <textarea name="addChallengeContent" id="add-challenge-content"></textarea>
                                 </div>
                             </div>
                             <button type="submit" class="btn btn-lg btn-default addButton" id="challenge">Challenge</button>
+                        </form>
+                    </c:if>
+                    <c:if test="${not empty oneDebate.rebuttals && user == oneDebate.affirmativeUser && oneDebate.rebuttals.size() % 2 != 0}">
+                        <form class="form-horizontal" id="challengeForm">
+                            <div class="form-group">
+                                <div>
+                                    <textarea name="addRebuttalContent" id="add-rebuttal-content"></textarea>
+                                </div>
+                            </div>
+                            <button type="submit" class="btn btn-lg btn-default addButton" id="rebute">Reply</button>
+                        </form>
+                    </c:if>
+                    <c:if test="${not empty oneDebate.rebuttals && user == oneDebate.negativeUser && oneDebate.rebuttals.size() % 2 == 0}">
+                        <form class="form-horizontal" id="challengeForm">
+                            <div class="form-group">
+                                <div>
+                                    <textarea name="addRebuttalContent" id="add-rebuttal-content"></textarea>
+                                </div>
+                            </div>
+                            <button type="submit" class="btn btn-lg btn-default addButton" id="rebute">Reply</button>
                         </form>
                     </c:if>
                 
