@@ -129,3 +129,5 @@ SELECT user_id AS id, users.username, password, first_name, last_name, email, wi
 SELECT username FROM users WHERE user_id = 5;
 DELETE FROM authorities WHERE username = 'snowOwl22';
 DELETE FROM users WHERE user_id = 5;
+
+SHOW FULL PROCESSLIST;

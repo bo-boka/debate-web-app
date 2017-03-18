@@ -88,9 +88,20 @@
                 </sec:authorize>
                 <!-- Modal -->
                 <%@include file="editDebateModalFrag.jsp" %>
-                    
+                
                 <div style="border: solid 2px; padding: 5px; margin: 20px 150px;">${oneDebate.content}</div>
-                <sec:authorize access="isFullyAuthenticated()">
+                
+                <sec:authorize access="isFullyAuthenticated()"> 
+                    <c:if test="${oneDebate.status == 'voting'}">
+                        <div class="row" id="vote-buttons">
+                            <div class="col-sm-6">
+                                <button type="button" class="btn btn-success" id="pro-vote">Pro</button>
+                            </div>
+                            <div class="col-sm-6">
+                                <button type="button" class="btn btn-danger" id="con-vote">Con</button>
+                            </div>
+                        </div>
+                    </c:if>
                     <sec:authentication var="user" property="principal.username" />
                     <c:if test="${empty oneDebate.rebuttals && user != oneDebate.affirmativeUser}">
                         <form class="form-horizontal" id="challengeForm">
@@ -102,40 +113,32 @@
                             <button type="submit" class="btn btn-lg btn-default addButton" id="challenge">Challenge</button>
                         </form>
                     </c:if>
-                    <c:if test="${not empty oneDebate.rebuttals && user == oneDebate.affirmativeUser && oneDebate.rebuttals.size() % 2 != 0}">
-                        <form class="form-horizontal" id="challengeForm">
-                            <div class="form-group">
-                                <div>
-                                    <textarea name="addRebuttalContent" id="add-rebuttal-content"></textarea>
-                                </div>
-                            </div>
-                            <button type="submit" class="btn btn-lg btn-default addButton" id="rebute">Reply</button>
-                        </form>
-                    </c:if>
-                    <c:if test="${not empty oneDebate.rebuttals && user == oneDebate.negativeUser && oneDebate.rebuttals.size() % 2 == 0}">
-                        <form class="form-horizontal" id="challengeForm">
-                            <div class="form-group">
-                                <div>
-                                    <textarea name="addRebuttalContent" id="add-rebuttal-content"></textarea>
-                                </div>
-                            </div>
-                            <button type="submit" class="btn btn-lg btn-default addButton" id="rebute">Reply</button>
-                        </form>
-                    </c:if>
-                
                 </sec:authorize>
+                
                 <c:forEach items="${oneDebate.rebuttals}" var="rebute">
                     <br>
-
                     ${rebute.id}
                     ${rebute.position}
                     ${rebute.type}
                     ${rebute.content}
                     ${rebute.user}               
                     ${rebute.date}
-
                     <br>
                 </c:forEach>
+                    
+                <sec:authorize access="isFullyAuthenticated()">
+                    <sec:authentication var="user" property="principal.username" /> 
+                    <c:if test="${not empty oneDebate.rebuttals && ((user == oneDebate.negativeUser && oneDebate.rebuttals.size() % 2 == 0) || (user == oneDebate.affirmativeUser && oneDebate.rebuttals.size() % 2 != 0))}">
+                        <form class="form-horizontal" id="challengeForm">
+                            <div class="form-group">
+                                <div>
+                                    <textarea name="addRebuttalContent" id="add-rebuttal-content"></textarea>
+                                </div>
+                            </div>
+                            <button type="submit" class="btn btn-lg btn-default addButton" id="rebute">Reply</button>
+                        </form>
+                    </c:if>
+                </sec:authorize>
             </center>
         </div>
         

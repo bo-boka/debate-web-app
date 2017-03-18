@@ -76,9 +76,10 @@ CREATE TABLE IF NOT EXISTS `deb_statuses` (
 INSERT INTO `deb_statuses` (`status_id`, `status`)
 VALUES (1, 'intro'),
 	(2, 'live'),
-	(3, 'proWon'),
-    (4, 'conWon'),
-    (5, 'wash');
+    (3, 'voting'),
+	(4, 'proWon'),
+    (5, 'conWon'),
+    (6, 'wash');
 
 CREATE TABLE IF NOT EXISTS `rebuttals`(
 	`rebuttal_id` int(11) NOT NULL AUTO_INCREMENT,

@@ -10,5 +10,5 @@ package com.sarah.debatewebapp.dto;
  * @author Sarah
  */
 public enum Status {
-    INTRO, LIVE, PROWON, CONWON, WASH, EXPIRED
+    INTRO, LIVE, VOTING, PROWON, CONWON, WASH, EXPIRED
 }

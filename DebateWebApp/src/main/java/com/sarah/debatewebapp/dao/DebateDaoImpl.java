@@ -213,20 +213,31 @@ public class DebateDaoImpl implements DebateDao {
     @Transactional(propagation = Propagation.REQUIRED, readOnly = false)
     @Override
     public Rebuttal createRebuttal(Rebuttal rebuttal){
-        dizate = new Date();
-        int userId = jdbcTemplate.queryForObject(SQL_GET_USER_ID, Integer.class, rebuttal.getUser());
-        int typeId = jdbcTemplate.queryForObject(SQL_GET_REB_TYPE_ID, Integer.class, rebuttal.getType());
-        jdbcTemplate.update(SQL_ADD_REBUTTAL,
-                rebuttal.getContent(),
-                userId,
-                rebuttal.getDebateId(),
-                typeId,
-                sdf.format(dizate),
-                rebuttal.isPosition()
-                );
-        int id = jdbcTemplate.queryForObject("SELECT LAST_INSERT_ID()", Integer.class);
-        rebuttal.setId(id);
-        return rebuttal; 
+        Debate deb = getDebateById(rebuttal.getDebateId());
+        if (deb.getRebuttals().size() < 5) {
+            dizate = new Date();
+            int userId = jdbcTemplate.queryForObject(SQL_GET_USER_ID, Integer.class, rebuttal.getUser());
+            int typeId = jdbcTemplate.queryForObject(SQL_GET_REB_TYPE_ID, Integer.class, rebuttal.getType());
+            jdbcTemplate.update(SQL_ADD_REBUTTAL,
+                    rebuttal.getContent(),
+                    userId,
+                    rebuttal.getDebateId(),
+                    typeId,
+                    sdf.format(dizate),
+                    rebuttal.isPosition()
+                    );
+            int id = jdbcTemplate.queryForObject("SELECT LAST_INSERT_ID()", Integer.class);
+            rebuttal.setId(id);
+            if (getDebateById(rebuttal.getDebateId()).getRebuttals().size() == 5) {
+                deb.setStatus("voting");
+                updateDebate(deb);
+            }
+            return rebuttal;
+        } else {
+            deb.setStatus("voting");
+            return null;
+        }
+        
     }   
     //add some way to edit debate status when rebuttal is added
     //check blogdaotags when adding rebuttals

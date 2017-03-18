@@ -14,6 +14,16 @@ $(document).ready(function(){
         rebute();
     });
     
+    $('#pro-vote').click(function(event){
+        event.preventDefault();
+        votePro();
+    });
+    
+    $('#con-vote').click(function(event){
+        event.preventDefault();
+        voteCon();
+    });
+    
     $("#edit-modal").on('show.bs.modal', function(event){
         var element = $(event.relatedTarget);
         var id = element.data('debate-id');
@@ -90,7 +100,6 @@ function rebute(){
         }).success(function (data, status){
             window.location.reload(true);
 //            $("#validationErrors").hide();
-//            loadDebates();
             window.onbeforeunload = function() {};
             
             $('#add-rebuttal-content').val('');
@@ -103,6 +112,30 @@ function rebute(){
 //                    errorDiv.show();
 //                });
         });
+}
+
+function votePro(){
+    $.ajax({
+        url: 'votePro',
+        type: 'PUT',
+        headers:{
+            'Content-type': 'application/json'
+        }
+    }).success(function(data){
+        window.location.reload(true);
+    });
+}
+
+function voteCon(){
+    $.ajax({
+        url: 'voteCon',
+        type: 'PUT',
+        headers:{
+            'Content-type': 'application/json'
+        }
+    }).success(function(data){
+        window.location.reload(true);
+    });
 }
 
 function getDebateEditDetails(id){

@@ -140,6 +140,20 @@ public class DebateController {
         return userDs;
     }
     
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    @RequestMapping(value="/singleDebate/votePro", method=RequestMethod.PUT)
+    public void updateDebateProVotes(){
+        aDebate.setProVotes(aDebate.getProVotes() + 1);
+        dao.updateDebate(aDebate);
+    }
+    
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    @RequestMapping(value="/singleDebate/voteCon", method=RequestMethod.PUT)
+    public void updateDebateConVotes(){
+        aDebate.setConVotes(aDebate.getConVotes() + 1);
+        dao.updateDebate(aDebate);
+    }
+    
     //gets a debate for edit modal
     @ResponseBody
     @RequestMapping(value="/singleDebate/debate/{id}", method=RequestMethod.GET)
