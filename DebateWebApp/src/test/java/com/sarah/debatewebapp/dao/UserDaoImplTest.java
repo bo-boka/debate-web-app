@@ -81,7 +81,7 @@ public class UserDaoImplTest {
         Assert.assertEquals(testUser.getEmail(), testUserAgain.getEmail());
         Assert.assertEquals(testUser.getWins(), testUserAgain.getWins());
         Assert.assertEquals(testUser.getTies(), testUserAgain.getTies());
-        Assert.assertEquals(testUser.getTotalDebates(), testUserAgain.getTotalDebates());
+        Assert.assertEquals(testUser.getLosses(), testUserAgain.getLosses());
         Assert.assertEquals(testUser.getRole(), testUserAgain.getRole());
         Assert.assertEquals(testUser.isEnabled(), testUserAgain.isEnabled());
 
@@ -110,7 +110,7 @@ public class UserDaoImplTest {
         Assert.assertEquals(testUser.getEmail(), testUserAgain.getEmail());
         Assert.assertEquals(testUser.getWins(), testUserAgain.getWins());
         Assert.assertEquals(testUser.getTies(), testUserAgain.getTies());
-        Assert.assertEquals(testUser.getTotalDebates(), testUserAgain.getTotalDebates());
+        Assert.assertEquals(testUser.getLosses(), testUserAgain.getLosses());
         Assert.assertEquals(testUser.getRole(), testUserAgain.getRole());
         Assert.assertEquals(testUser.isEnabled(), testUserAgain.isEnabled());
         junit.framework.Assert.assertEquals("Returned user does not match expected.", testUser, testUserAgain);
@@ -134,7 +134,7 @@ public class UserDaoImplTest {
         Assert.assertEquals(similarUsers[0].getEmail(), testDao.getUserById(similarUsers[0].getId()).getEmail());
         Assert.assertEquals(similarUsers[0].getWins(), testDao.getUserById(similarUsers[0].getId()).getWins());
         Assert.assertEquals(similarUsers[0].getTies(), testDao.getUserById(similarUsers[0].getId()).getTies());
-        Assert.assertEquals(similarUsers[0].getTotalDebates(), testDao.getUserById(similarUsers[0].getId()).getTotalDebates());
+        Assert.assertEquals(similarUsers[0].getLosses(), testDao.getUserById(similarUsers[0].getId()).getLosses());
         Assert.assertEquals(similarUsers[0].getRole(), testDao.getUserById(similarUsers[0].getId()).getRole());
         Assert.assertEquals(similarUsers[0].isEnabled(), testDao.getUserById(similarUsers[0].getId()).isEnabled());
         junit.framework.Assert.assertEquals("Updated user get does not match expected.", similarUsers[0], testDao.getUserById(similarUsers[0].getId()));
@@ -163,7 +163,7 @@ public class UserDaoImplTest {
             Assert.assertEquals(usersForTesting[i].getEmail(), testDao.getUserById(usersForTesting[i].getId()).getEmail());
             Assert.assertEquals(usersForTesting[i].getWins(), testDao.getUserById(usersForTesting[i].getId()).getWins());
             Assert.assertEquals(usersForTesting[i].getTies(), testDao.getUserById(usersForTesting[i].getId()).getTies());
-            Assert.assertEquals(usersForTesting[i].getTotalDebates(), testDao.getUserById(usersForTesting[i].getId()).getTotalDebates());
+            Assert.assertEquals(usersForTesting[i].getLosses(), testDao.getUserById(usersForTesting[i].getId()).getLosses());
             Assert.assertEquals(usersForTesting[i].getRole(), testDao.getUserById(usersForTesting[i].getId()).getRole());
             Assert.assertEquals(usersForTesting[i].isEnabled(), testDao.getUserById(usersForTesting[i].getId()).isEnabled());
             junit.framework.Assert.assertEquals("Returned user does not match expected.", usersForTesting[i], testDao.getUserById(usersForTesting[i].getId()));
@@ -196,7 +196,7 @@ public class UserDaoImplTest {
             Assert.assertEquals(similarUsers[i].getEmail(), testDao.getUserById(similarUsers[i].getId()).getEmail());
             Assert.assertEquals(similarUsers[i].getWins(), testDao.getUserById(similarUsers[i].getId()).getWins());
             Assert.assertEquals(similarUsers[i].getTies(), testDao.getUserById(similarUsers[i].getId()).getTies());
-            Assert.assertEquals(similarUsers[i].getTotalDebates(), testDao.getUserById(similarUsers[i].getId()).getTotalDebates());
+            Assert.assertEquals(similarUsers[i].getLosses(), testDao.getUserById(similarUsers[i].getId()).getLosses());
             Assert.assertEquals(similarUsers[i].getRole(), testDao.getUserById(similarUsers[i].getId()).getRole());
             Assert.assertEquals(similarUsers[i].isEnabled(), testDao.getUserById(similarUsers[i].getId()).isEnabled());
             junit.framework.Assert.assertEquals("Get user does not match expected return on update.", similarUsers[i], testDao.getUserById(similarUsers[i].getId()));
@@ -388,7 +388,7 @@ public class UserDaoImplTest {
 //        Assert.assertEquals(usersForTesting[0].getEmail(), testDao.getUserById(usersForTesting[0].getId()).getEmail());
 //        Assert.assertEquals(usersForTesting[0].getWins(), testDao.getUserById(usersForTesting[0].getId()).getWins());
 //        Assert.assertEquals(usersForTesting[0].getTies(), testDao.getUserById(usersForTesting[0].getId()).getTies());
-//        Assert.assertEquals(usersForTesting[0].getTotalDebates(), testDao.getUserById(usersForTesting[0].getId()).getTotalDebates());
+//        Assert.assertEquals(usersForTesting[0].getLosses(), testDao.getUserById(usersForTesting[0].getId()).getLosses());
 //        Assert.assertEquals(usersForTesting[0].getRole(), testDao.getUserById(usersForTesting[0].getId()).getRole());
 //        Assert.assertEquals(usersForTesting[0].isEnabled(), testDao.getUserById(usersForTesting[0].getId()).isEnabled());
 //        junit.framework.Assert.assertNotNull("List of all users should not be null.", testDao.getAllUsers());

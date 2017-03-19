@@ -12,13 +12,13 @@ CREATE TABLE IF NOT EXISTS `users` (
     `email` varchar(30) NOT NULL,
     `wins` int(11),
     `ties` int(11),
-    `engages` int(11),
+    `losses` int(11),
 	`enabled` tinyint(1) NOT NULL,
 	PRIMARY KEY (`user_id`),
 	UNIQUE KEY `username` (`username`)
 );
  
-INSERT INTO `users` (`user_id`, `username`, `password`, `first_name`, `last_name`, `email`, `wins`, `ties`, `engages`, `enabled`) 
+INSERT INTO `users` (`user_id`, `username`, `password`, `first_name`, `last_name`, `email`, `wins`, `ties`, `losses`, `enabled`) 
 VALUES (1, 'debatinNotHatin', 'password', 'Ally', 'Smith', 'asmith@debator.com', 47, 10, 60, 1),
 	(2, '2truDebator', 'password', 'Bob', 'Gualla', 'email@sendit.com', 10, 3, 40, 1),
     (3, 'cheesinForTheWeekend', 'password', 'Lana', 'Brown', 'email@sendin.com', 13, 3, 30, 1),

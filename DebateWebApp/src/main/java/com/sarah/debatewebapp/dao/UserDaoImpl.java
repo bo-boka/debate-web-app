@@ -57,7 +57,7 @@ public class UserDaoImpl implements UserDao {
     
     private static final String SQL_GET_USERNAME = "SELECT username FROM users WHERE user_id = ?";
     private static final String SQL_DELETE_ATHORITY = "DELETE FROM authorities WHERE username = ?";
-    private static final String SQL_UPDATE_USER = "UPDATE users SET username=?, password=?, first_name=?, last_name=?, email=?, wins=?, ties=?, engages=?, enabled=? \n" +
+    private static final String SQL_UPDATE_USER = "UPDATE users SET username=?, password=?, first_name=?, last_name=?, email=?, wins=?, ties=?, losses=?, enabled=? \n" +
 "	WHERE user_id=?";
     
     //UPDATE USER ... key constraints on username require deletion of child authorities, 
@@ -75,7 +75,7 @@ public class UserDaoImpl implements UserDao {
                 user.getEmail(),
                 user.getWins(),
                 user.getTies(),
-                user.getTotalDebates(),
+                user.getLosses(),
                 user.isEnabled(), //might need to turn into int first
                 user.getId()
         );
@@ -85,7 +85,7 @@ public class UserDaoImpl implements UserDao {
         );
     }
     
-    private static final String SQL_GET_USER_BY_ID = "SELECT user_id AS id, users.username, password, first_name, last_name, email, wins, ties, engages, authority, enabled FROM users \n" +
+    private static final String SQL_GET_USER_BY_ID = "SELECT user_id AS id, users.username, password, first_name, last_name, email, wins, ties, losses, authority, enabled FROM users \n" +
 "	LEFT JOIN authorities ON users.username = authorities.username \n" +
 "    WHERE user_id = ?";
     //GET USER BY ID
@@ -98,7 +98,7 @@ public class UserDaoImpl implements UserDao {
         }
     }
     
-    private static final String SQL_GET_ALL_USERS = "SELECT user_id AS id, users.username, password, first_name, last_name, email, wins, ties, engages, authority, enabled FROM users \n" +
+    private static final String SQL_GET_ALL_USERS = "SELECT user_id AS id, users.username, password, first_name, last_name, email, wins, ties, losses, authority, enabled FROM users \n" +
 "	LEFT JOIN authorities ON users.username = authorities.username";
     //GET ALL USERS
     @Override
@@ -133,7 +133,7 @@ public class UserDaoImpl implements UserDao {
             String email = rs.getString("email");
             int wins = rs.getInt("wins");
             int ties = rs.getInt("ties");
-            int totalD = rs.getInt("engages");
+            int totalD = rs.getInt("losses");
             String role = rs.getString("authority");
             Boolean enabled = rs.getBoolean("enabled");
             

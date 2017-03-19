@@ -39,7 +39,6 @@ public class DebateController {
     
     //display page methods
     
-    //gets 
     @RequestMapping(value={"/","/home"}, method = RequestMethod.GET)
     public String displayHome(Model model){
         List<String> categories = dao.getAllCategories();

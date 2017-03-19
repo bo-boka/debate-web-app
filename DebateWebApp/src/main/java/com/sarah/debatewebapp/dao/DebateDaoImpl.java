@@ -96,11 +96,16 @@ public class DebateDaoImpl implements DebateDao {
     @Transactional(propagation = Propagation.REQUIRED, readOnly = false)
     @Override
     public void updateDebate(Debate debate){
-        
         int statusId = jdbcTemplate.queryForObject(SQL_GET_STATUS_ID, Integer.class, debate.getStatus());
         int affUserId = jdbcTemplate.queryForObject(SQL_GET_USER_ID, Integer.class, debate.getAffirmativeUser());
-        int negUserId = jdbcTemplate.queryForObject(SQL_GET_USER_ID, Integer.class, debate.getNegativeUser());
+        Integer negUserId;
+        try {
+            negUserId = jdbcTemplate.queryForObject(SQL_GET_USER_ID, Integer.class, debate.getNegativeUser());
+        } catch(EmptyResultDataAccessException e){
+            negUserId = null;
+        }
         int catId = jdbcTemplate.queryForObject(SQL_GET_CATEGORY_ID, Integer.class, debate.getCategory());        
+        
         jdbcTemplate.update(SQL_UPDATE_DEBATE,
                 debate.getResolution(),
                 debate.getContent(),

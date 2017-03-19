@@ -21,7 +21,7 @@ public class User {
     private String email;
     private int wins;
     private int ties;
-    private int totalDebates;
+    private int losses;
     private String role;
     private boolean enabled;
     
@@ -38,7 +38,7 @@ public class User {
         this.email = email;
         this.wins = wins;
         this.ties = ties;
-        this.totalDebates = total;
+        this.losses = total;
         this.role = role;
         this.enabled = enabled;
     }
@@ -116,12 +116,12 @@ public class User {
         this.ties = ties;
     }
 
-    public int getTotalDebates() {
-        return totalDebates;
+    public int getLosses() {
+        return losses;
     }
 
-    public void setTotalDebates(int totalDebates) {
-        this.totalDebates = totalDebates;
+    public void setLosses(int losses) {
+        this.losses = losses;
     }
 
     public boolean isEnabled() {
@@ -146,7 +146,7 @@ public class User {
         hash = 59 * hash + Objects.hashCode(this.password);
         hash = 59 * hash + this.wins;
         hash = 59 * hash + this.ties;
-        hash = 59 * hash + this.totalDebates;
+        hash = 59 * hash + this.losses;
         hash = 59 * hash + (this.enabled ? 1 : 0);
         return hash;
     }
@@ -172,7 +172,7 @@ public class User {
         if (this.ties != other.ties) {
             return false;
         }
-        if (this.totalDebates != other.totalDebates) {
+        if (this.losses != other.losses) {
             return false;
         }
         if (this.enabled != other.enabled) {
