@@ -21,7 +21,13 @@
     <body>
         <%@include file="headerFragment.jsp" %>
 
-        <div class="container-fluid">
+        <div class="container-fluid"><br>
+            Username: ${oneUser.username}<br>
+            First name: ${oneUser.firstName}<br>
+            Last name: ${oneUser.lastName}<br>
+            Wins: ${oneUser.wins}<br>
+            Losses: ${oneUser.losses}<br>
+            Ties: ${oneUser.ties}<br>
             
         </div>
 

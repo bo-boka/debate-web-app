@@ -31,7 +31,8 @@ function processDebateList(debates){
         $('#homeRows').append($('<tr>')
                 .append($('<td>').append($('<a>').attr({
                     'onclick' : 'goToDebate(' +debate.id+ ')'}).text(debate.resolution)))
-                .append($('<td>').text(debate.affirmativeUser))
+                .append($('<td>').append($('<a>').attr({
+                    'onclick' : 'goToUserProfile(' +debate.affirmativeUser+ ')'}).text(debate.affirmativeUser)))
                 .append($('<td>').text(debate.date))
 //                .append($('<td>').append($('<a>').attr({
 ////                    'class': 'btn btn-primary',
@@ -64,7 +65,17 @@ function goToDebate(id){
     });
 }
 
-
+function goToUserProfile(username){
+    $.ajax({
+        url: 'singleUser/' + username,
+        type: 'GET',
+        headers: {
+            'Accept' : 'application/json'
+        }
+    }).success(function(){
+        window.location="/DebateWebApp/singleUser/"+ username;
+    });
+}
 
 function loadUsers(){
     

@@ -98,6 +98,19 @@ public class UserDaoImpl implements UserDao {
         }
     }
     
+    private static final String SQL_GET_USER_BY_USERNAME = "SELECT user_id AS id, users.username, password, first_name, last_name, email, wins, ties, losses, authority, enabled FROM users \n" +
+"	LEFT JOIN authorities ON users.username = authorities.username \n" +
+"    WHERE users.username = ?";
+    //GET USER BY USERNAME
+    @Override
+    public User getUserByUsername(String username){
+        try{
+            return jdbcTemp.queryForObject(SQL_GET_USER_BY_USERNAME, new UserMapper(), username);
+        } catch(EmptyResultDataAccessException e){
+            return null;
+        }
+    }
+    
     private static final String SQL_GET_ALL_USERS = "SELECT user_id AS id, users.username, password, first_name, last_name, email, wins, ties, losses, authority, enabled FROM users \n" +
 "	LEFT JOIN authorities ON users.username = authorities.username";
     //GET ALL USERS

@@ -112,17 +112,22 @@ SELECT * FROM users;
    
 SELECT username FROM users WHERE user_id = 1; 
 DELETE FROM authorities WHERE username = 'debatinNotHatin';
-UPDATE users SET username = 'debatingNotHating', password='password', first_name='Bianca', last_name='Trudy', email='someemail@email.com', wins=2, ties=3, engages=5, enabled=1 
+UPDATE users SET username = 'debatingNotHating', password='password', first_name='Bianca', last_name='Trudy', email='someemail@email.com', wins=2, ties=3, losses=5, enabled=1 
 	WHERE user_id=1;
 INSERT INTO authorities VALUE ('debatingNotHating', 'ROLE_USER');
 
 /*get user by id*/
-SELECT user_id AS id, users.username, password, first_name, last_name, email, wins, ties, engages, authority, enabled FROM users 
+SELECT user_id AS id, users.username, password, first_name, last_name, email, wins, ties, losses, authority, enabled FROM users 
 	LEFT JOIN authorities ON users.username = authorities.username 
     WHERE user_id = 4;
     
+/*get user by username*/
+SELECT user_id AS id, users.username, password, first_name, last_name, email, wins, ties, losses, authority, enabled FROM users 
+	LEFT JOIN authorities ON users.username = authorities.username 
+    WHERE users.username = "cheesinForTheWeekend"; 
+    
 /*get all users*/
-SELECT user_id AS id, users.username, password, first_name, last_name, email, wins, ties, engages, authority, enabled FROM users 
+SELECT user_id AS id, users.username, password, first_name, last_name, email, wins, ties, losses, authority, enabled FROM users 
 	LEFT JOIN authorities ON users.username = authorities.username;
 
 /*delete user*/
@@ -130,4 +135,5 @@ SELECT username FROM users WHERE user_id = 5;
 DELETE FROM authorities WHERE username = 'snowOwl22';
 DELETE FROM users WHERE user_id = 5;
 
+/*show process list*/
 SHOW FULL PROCESSLIST;

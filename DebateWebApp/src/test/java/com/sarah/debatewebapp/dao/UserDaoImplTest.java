@@ -142,6 +142,13 @@ public class UserDaoImplTest {
         junit.framework.Assert.assertEquals("Expected user count of 'all users' does not match after replacing one user.", 1, testDao.getAllUsers().size());
         junit.framework.Assert.assertTrue("Returned user in getAllUsers does not match expected.", testDao.getAllUsers().contains(similarUsers[0]));
     }
+    
+    @Test
+    public void testGetUserByUsername(){
+        testDao.createUser(usersForTesting[0]);
+        User testUser = testDao.getUserByUsername(usersForTesting[0].getUsername());
+        Assert.assertEquals(testUser, usersForTesting[0]);
+    }
 
     @Test
     public void testAddMultipleUsers() {
