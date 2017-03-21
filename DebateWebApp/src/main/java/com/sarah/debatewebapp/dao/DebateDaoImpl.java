@@ -120,13 +120,7 @@ public class DebateDaoImpl implements DebateDao {
                 debate.getId()
         );
     }
-    
-    private static final String SQL_GET_ALL_CATEGORIES = "SELECT category FROM categories";
-    //GET CATEGORIES
-    @Override
-    public List<String> getAllCategories(){
-        return jdbcTemplate.queryForList(SQL_GET_ALL_CATEGORIES, String.class);
-    }
+   
     
     private static final String SQL_DELETE_DEBATE = "DELETE FROM debates WHERE debate_id = ?";
     private static final String SQL_DELETE_DEBATE_REBUTTALS = "DELETE FROM rebuttals WHERE debate_id = ?";
@@ -244,8 +238,92 @@ public class DebateDaoImpl implements DebateDao {
         }
         
     }   
-    //add some way to edit debate status when rebuttal is added
-    //check blogdaotags when adding rebuttals
+    
+    private static final String SQL_GET_ALL_CATEGORIES = "SELECT category FROM categories";
+    //GET CATEGORIES
+    @Override
+    public List<String> getAllCategories(){
+        return jdbcTemplate.queryForList(SQL_GET_ALL_CATEGORIES, String.class);
+    }
+    
+    private static final String SQL_SEARCH_BY_RESOLUTION = "SELECT debates.debate_id AS id, resolution, debates.content AS deb_content, deb_statuses.status, affU.username AS affirmativeUser, negU.username AS negativeUser, proVotes, conVotes, categories.category, debates.date AS deb_date, published, rebuttal_id, rebuttals.content AS reb_content, rebU.username AS rebUser, `reb_types`.type, rebuttals.date AS reb_date, position FROM debates\n" +
+"	LEFT OUTER JOIN `deb_statuses` ON debates.status_id = `deb_statuses`.status_id\n" +
+"	LEFT OUTER JOIN `users` AS affU ON debates.affirmativeUser_id = affU.user_id\n" +
+"    LEFT OUTER JOIN `users` AS negU ON debates.negativeUser_id = negU.user_id\n" +
+"    LEFT OUTER JOIN `categories` ON debates.category_id = categories.category_id\n" +
+"    LEFT OUTER JOIN `rebuttals` ON debates.debate_id = `rebuttals`.debate_id\n" +
+"    LEFT OUTER JOIN `users` AS rebU ON rebuttals.user_id = rebU.user_id\n" +
+"    LEFT OUTER JOIN `reb_types` ON rebuttals.type_id = `reb_types`.type_id\n" +
+"    WHERE debates.published AND debates.resolution LIKE ? ORDER BY debates.date DESC";
+    //SEARCH RESOLUTION
+    @Override
+    public List<Debate> searchDebatesByResolution(String resolution){
+        try{
+            resolution = "%" + resolution + "%";
+            return (List<Debate>) jdbcTemplate.query(SQL_SEARCH_BY_RESOLUTION, new DebateExtractor(), resolution);
+        } catch(EmptyResultDataAccessException e) {
+            return null;
+        }
+    }
+    
+    //SEARCH BLOGS BY CATEGORY
+    private static final String SQL_SEARCH_BY_CATEGORY = "SELECT debates.debate_id AS id, resolution, debates.content AS deb_content, deb_statuses.status, affU.username AS affirmativeUser, negU.username AS negativeUser, proVotes, conVotes, categories.category, debates.date AS deb_date, published, rebuttal_id, rebuttals.content AS reb_content, rebU.username AS rebUser, `reb_types`.type, rebuttals.date AS reb_date, position FROM debates\n" +
+"	LEFT OUTER JOIN `deb_statuses` ON debates.status_id = `deb_statuses`.status_id\n" +
+"	LEFT OUTER JOIN `users` AS affU ON debates.affirmativeUser_id = affU.user_id\n" +
+"    LEFT OUTER JOIN `users` AS negU ON debates.negativeUser_id = negU.user_id\n" +
+"    LEFT OUTER JOIN `categories` ON debates.category_id = categories.category_id\n" +
+"    LEFT OUTER JOIN `rebuttals` ON debates.debate_id = `rebuttals`.debate_id\n" +
+"    LEFT OUTER JOIN `users` AS rebU ON rebuttals.user_id = rebU.user_id\n" +
+"    LEFT OUTER JOIN `reb_types` ON rebuttals.type_id = `reb_types`.type_id\n" +
+"    WHERE debates.published AND categories.category = ? ORDER BY debates.date DESC";
+    @Override
+    public List<Debate> searchDebatesByCategory(String searchCategory) {
+        try {
+            return (List<Debate>) jdbcTemplate.query(SQL_SEARCH_BY_CATEGORY, new DebateExtractor(), searchCategory);
+        } catch (EmptyResultDataAccessException e) {
+            return null;
+        }
+    }
+
+    //SEARCH BLOGS BY USER (aff and neg)
+    private static final String SQL_SEARCH_BY_USER = "SELECT debates.debate_id AS id, resolution, debates.content AS deb_content, deb_statuses.status, affU.username AS affirmativeUser, negU.username AS negativeUser, proVotes, conVotes, categories.category, debates.date AS deb_date, published, rebuttal_id, rebuttals.content AS reb_content, rebU.username AS rebUser, `reb_types`.type, rebuttals.date AS reb_date, position FROM debates\n" +
+"	LEFT OUTER JOIN `deb_statuses` ON debates.status_id = `deb_statuses`.status_id\n" +
+"	LEFT OUTER JOIN `users` AS affU ON debates.affirmativeUser_id = affU.user_id\n" +
+"    LEFT OUTER JOIN `users` AS negU ON debates.negativeUser_id = negU.user_id\n" +
+"    LEFT OUTER JOIN `categories` ON debates.category_id = categories.category_id\n" +
+"    LEFT OUTER JOIN `rebuttals` ON debates.debate_id = `rebuttals`.debate_id\n" +
+"    LEFT OUTER JOIN `users` AS rebU ON rebuttals.user_id = rebU.user_id\n" +
+"    LEFT OUTER JOIN `reb_types` ON rebuttals.type_id = `reb_types`.type_id\n" +
+"    WHERE debates.published AND affU.username = ? OR negU.username = ? ORDER BY debates.date DESC";
+    @Override
+    public List<Debate> searchDebatesByAuthor(String searchUser) {
+        try {
+            return (List<Debate>) jdbcTemplate.query(SQL_SEARCH_BY_USER, new DebateExtractor(), searchUser, searchUser);
+        } catch (EmptyResultDataAccessException e) {
+            return null;
+        }
+    }
+
+    //SEARCH BLOGS BY DATE
+    private static final String SQL_SEARCH_BY_DATE = "SELECT debates.debate_id AS id, resolution, debates.content AS deb_content, deb_statuses.status, affU.username AS affirmativeUser, negU.username AS negativeUser, proVotes, conVotes, categories.category, debates.date AS deb_date, published, rebuttal_id, rebuttals.content AS reb_content, rebU.username AS rebUser, `reb_types`.type, rebuttals.date AS reb_date, position FROM debates\n" +
+"	LEFT OUTER JOIN `deb_statuses` ON debates.status_id = `deb_statuses`.status_id\n" +
+"	LEFT OUTER JOIN `users` AS affU ON debates.affirmativeUser_id = affU.user_id\n" +
+"    LEFT OUTER JOIN `users` AS negU ON debates.negativeUser_id = negU.user_id\n" +
+"    LEFT OUTER JOIN `categories` ON debates.category_id = categories.category_id\n" +
+"    LEFT OUTER JOIN `rebuttals` ON debates.debate_id = `rebuttals`.debate_id\n" +
+"    LEFT OUTER JOIN `users` AS rebU ON rebuttals.user_id = rebU.user_id\n" +
+"    LEFT OUTER JOIN `reb_types` ON rebuttals.type_id = `reb_types`.type_id\n" +
+"    WHERE debates.published AND debates.date = ? ORDER BY debates.date DESC";
+
+    @Override
+    public List<Debate> searchDebatesByDate(String searchDate) {
+        try {
+            return (List<Debate>) jdbcTemplate.query(SQL_SEARCH_BY_DATE, new DebateExtractor(), searchDate);
+        } catch (EmptyResultDataAccessException e) {
+            return null;
+        }
+    }
+
     
     //SET EXTRACTOR
     private static class DebateExtractor implements ResultSetExtractor {

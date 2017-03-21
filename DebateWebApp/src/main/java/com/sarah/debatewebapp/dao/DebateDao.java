@@ -27,8 +27,6 @@ public interface DebateDao {
     @Transactional(propagation = Propagation.REQUIRED, readOnly = false)
     void updateDebate(Debate debate);
     
-    List<String> getAllCategories();
-    
     void deleteDebate(int id);
     
     Debate getDebateById(int id);
@@ -41,5 +39,15 @@ public interface DebateDao {
     
     @Transactional(propagation = Propagation.REQUIRED, readOnly = false)
     Rebuttal createRebuttal(Rebuttal rebuttal);
+    
+    List<String> getAllCategories();
+    
+    List<Debate> searchDebatesByResolution(String resolution);
+    
+    List<Debate> searchDebatesByCategory(String searchCategory);
+    
+    List<Debate> searchDebatesByAuthor(String searchAuthor);
+    
+    List<Debate> searchDebatesByDate(String searchDate);
     
 }

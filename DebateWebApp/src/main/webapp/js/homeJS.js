@@ -5,7 +5,7 @@
 $(document).ready(function(){
     loadDebates();   
 //    loadCategories();    
-//    loadUsers();
+    loadUsers();
 });
 
 function loadDebates(){
@@ -19,7 +19,7 @@ function loadDebates(){
 }
 
 function clearTable(){
-    $('#debateRows').empty();
+    $('#homeRows').empty();
 }
 
 function processDebateList(debates){
@@ -32,7 +32,7 @@ function processDebateList(debates){
                 .append($('<td>').append($('<a>').attr({
                     'onclick' : 'goToDebate(' +debate.id+ ')'}).text(debate.resolution)))
                 .append($('<td>').append($('<a>').attr({
-                    'onclick' : 'goToUserProfile(' +debate.affirmativeUser+ ')'}).text(debate.affirmativeUser)))
+                    'onclick' : 'goToUserProfileFromDebates(' +debate.id+ ')'}).text(debate.affirmativeUser)))
                 .append($('<td>').text(debate.date))
 //                .append($('<td>').append($('<a>').attr({
 ////                    'class': 'btn btn-primary',
@@ -65,15 +65,27 @@ function goToDebate(id){
     });
 }
 
-function goToUserProfile(username){
+function goToUserProfileFromDebates(id){
     $.ajax({
-        url: 'singleUser/' + username,
+        url: 'singleUser/' + id,
         type: 'GET',
         headers: {
             'Accept' : 'application/json'
         }
     }).success(function(){
-        window.location="/DebateWebApp/singleUser/"+ username;
+        window.location="/DebateWebApp/singleUser/"+ id;
+    });
+}
+
+function goToUserProfileFromUsers(id){
+    $.ajax({
+        url: 'profile/' + id,
+        type: 'GET',
+        headers: {
+            'Accept' : 'application/json'
+        }
+    }).success(function(){
+        window.location="/DebateWebApp/profile/"+ id;
     });
 }
 
@@ -88,10 +100,13 @@ function loadUsers(){
         
         var users = $("#user-divs");
         
-        $.each(data, function (index, category){
+        $.each(data, function (index, user){
             var userField = $("<div>");
-            userField.text(category);
-            users.append(userField);
+            userField.text(user.username);
+            users
+            .append($('<div>').append($('<a>').attr({
+                    'onclick' : 'goToUserProfileFromUsers(' +user.id+ ')'}).text(user.username))
+                );
         });
     });
 }
@@ -111,6 +126,7 @@ function loadCategories(){
             var catField = $("<div>");
             catField.text(category);
             cats.append(catField);
+             
         });
     });
 }

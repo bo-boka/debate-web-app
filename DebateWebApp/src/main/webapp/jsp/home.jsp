@@ -19,8 +19,9 @@
             <div class="row">
                 <div class="col-lg-3">
                     <div class="heading">Categories</div>
+                    
                     <c:forEach items="${categories}" var="category">
-                        <option id="cat-div">"${category}"</option>
+                        <div id="cat-div">"${category}"</div>
                     </c:forEach>
 
                 </div>

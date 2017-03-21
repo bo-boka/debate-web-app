@@ -14,27 +14,38 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="#">Deft Debate</a>
+      <a class="navbar-brand" href="${pageContext.request.contextPath}/home">Deft Debate</a>
     </div>
 
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-      <ul class="nav navbar-nav">
+<!--      <ul class="nav navbar-nav">
         <li class="active"><a href="${pageContext.request.contextPath}/home">Home <span class="sr-only">(current)</span></a></li>
         
-      </ul>
-      <form class="navbar-form navbar-left">
-        <div class="form-group">
-          <input type="text" class="form-control" placeholder="Search">
-        </div>
-        <button type="submit" class="btn btn-default">Submit</button>
-      </form>
+      </ul>-->
+      
       <ul class="nav navbar-nav navbar-right">
+          
+        <form class="navbar-form navbar-left" style="padding-right: 295px;">
+            <div class="form-group">
+                <select name="searchCategory" id="search-category">
+                    <option value="---">Choose...</option>
+                    <option value="resolution">Resolution</option>
+                    <option value="username">Username</option>
+                    <option value="date">Date</option>
+                </select>
+            </div>
+            <div class="form-group">
+              <input type="text" class="form-control" id="search-info" placeholder="keywords">
+            </div>
+            <button type="submit" class="btn btn-default" id="search-button">Search</button>
+        </form>
         <sec:authorize access="!isFullyAuthenticated()">
         <li><a href="${pageContext.request.contextPath}/login">Login</a></li>
+        <li><a>|</a></li>
+        <li><a href="${pageContext.request.contextPath}/login">Sign Up</a></li>
         </sec:authorize>
         <sec:authorize access="isFullyAuthenticated()">
-        
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><sec:authentication property="principal.username" /><span class="caret"></span></a>
           <ul class="dropdown-menu">
@@ -46,6 +57,7 @@
           </ul>
         </li>
         </sec:authorize>
+        
       </ul>
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->

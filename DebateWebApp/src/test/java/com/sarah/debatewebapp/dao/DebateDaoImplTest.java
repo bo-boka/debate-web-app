@@ -8,6 +8,7 @@ import com.sarah.debatewebapp.dto.Rebuttal;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import junit.framework.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -487,7 +488,7 @@ public class DebateDaoImplTest {
     }
     
     @Test
-    public void addRebuttalToEmptyDaoTest() {
+    public void testAddRebuttalToEmptyDaoTest() {
         Debate testDebate = new Debate(1, "Terrrrrrst Resolution.", "Some stuff in this test content.", "intro", "2truDebator", "cheesinForTheWeekend", 0, 0, "music", date, true);
         testDao.createDebate(testDebate);
         Rebuttal testRebuttal = new Rebuttal(1, "TestTestTestContent", "cheesinForTheWeekend", testDebate.getId(), "challenge", date, false);
@@ -504,7 +505,7 @@ public class DebateDaoImplTest {
     }
     
     @Test
-    public void addMaxRebuttalsOnADebate(){
+    public void testAddMaxRebuttalsOnADebate(){
         Debate testDebate = new Debate(1, "Terrrrrrst Resolution.", "Some stuff in this test content.", "intro", "2truDebator", "cheesinForTheWeekend", 0, 0, "music", date, true);
         testDao.createDebate(testDebate);
         for(Rebuttal r : rebuttalsForTesting){
@@ -513,6 +514,19 @@ public class DebateDaoImplTest {
         }
         Assert.assertEquals(5, testDao.getDebateById(testDebate.getId()).getRebuttals().size());
         Assert.assertEquals("voting", testDao.getDebateById(testDebate.getId()).getStatus());
+    }
+    
+    @Test
+    public void testSearchDebatesByResolution(){
+        for (Debate debate : debatesForTesting) {
+            testDao.createDebate(debate);
+            debate.setRebuttals(rebuttals);
+        }
+        junit.framework.Assert.assertNotNull("List of all debates should not be null.", testDao.getAllDebates());
+        junit.framework.Assert.assertEquals("Expected debate count of 'all debates' does not match after adding several debates.",
+                debatesForTesting.length, testDao.getAllDebates().size());
+        List<Debate> testSearchResDebResults = testDao.searchDebatesByResolution(debatesForTesting[0].getResolution());
+        Assert.assertTrue(testSearchResDebResults.contains(debatesForTesting[0]));
     }
 
 }
