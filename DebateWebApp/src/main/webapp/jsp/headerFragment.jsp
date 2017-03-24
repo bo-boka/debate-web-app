@@ -26,20 +26,22 @@
       
       <ul class="nav navbar-nav navbar-right">
           
-        <form class="navbar-form navbar-left" style="padding-right: 295px;">
+        <form action="search" method="POST" class="navbar-form navbar-left" style="padding-right: 295px;">
             <div class="form-group">
-                <select name="searchCategory" id="search-category">
+                <select name="searchOption" id="search-option">
                     <option value="---">Choose...</option>
                     <option value="resolution">Resolution</option>
-                    <option value="username">Username</option>
+                    <option value="category">Category</option>
+                    <option value="user">Username</option>
                     <option value="date">Date</option>
                 </select>
             </div>
             <div class="form-group">
-              <input type="text" class="form-control" id="search-info" placeholder="keywords">
+              <input type="text" class="form-control" name="searchInfo" id="search-info" placeholder="keywords">
             </div>
             <button type="submit" class="btn btn-default" id="search-button">Search</button>
         </form>
+          
         <sec:authorize access="!isFullyAuthenticated()">
         <li><a href="${pageContext.request.contextPath}/login">Login</a></li>
         <li><a>|</a></li>
@@ -62,3 +64,4 @@
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->
 </nav>
+        

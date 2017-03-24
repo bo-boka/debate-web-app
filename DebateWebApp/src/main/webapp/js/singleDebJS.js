@@ -140,7 +140,7 @@ function voteCon(){
 
 function getDebateEditDetails(id){
     $.ajax({
-        url: 'debate/'+id,
+        url: 'deb/'+id,
         type: 'GET',
         headers: {
             'Accept': 'application/json'
@@ -174,7 +174,7 @@ function editDebate(){
     var pub = $('input[name=publishDebate]:checked').val();
     
     $.ajax({
-        url: 'debate/' + id,
+        url: 'deb/' + id,
         type: 'PUT',
         headers:{
             'Content-type': 'application/json'
@@ -202,7 +202,7 @@ function deleteDebate(){
     var id = $("#edit-debate-id").text();
     
     $.ajax({
-        url: 'debate/' +id,
+        url: 'deb/' +id,
         type: 'DELETE'
     }).success(function(){
 

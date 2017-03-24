@@ -22,7 +22,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
 /*
- * @author Sarah
+ * @user Sarah
  */
 
 @Controller
@@ -52,8 +52,8 @@ public class DebateController {
     //gets username with dashboard
     @RequestMapping(value="/dashboard", method = RequestMethod.GET)
     public String displayDash(Model model, Principal principal){      
-        List<String> categories = dao.getAllCategories();
-        model.addAttribute("categories", categories);
+//        List<String> categories = dao.getAllCategories();
+//        model.addAttribute("categories", categories);
         currentUser = principal.getName();
         return "dashboard";
     }
@@ -64,7 +64,7 @@ public class DebateController {
     }
     
     //gets a pub debate, puts it in the model, and returns single page
-    @RequestMapping(value="/singleDebate/{id}", method=RequestMethod.GET)
+    @RequestMapping(value="/debate/{id}", method=RequestMethod.GET)
     public String getSingleDebate(@PathVariable int id, Model model){
         
         aDebate = dao.getPublishedDebateById(id);
@@ -74,11 +74,21 @@ public class DebateController {
         model.addAttribute("categories", categories);
         
         return "single";
-    }   
+    } 
+    
+    //goes to list of debs by category from home page
+    @RequestMapping(value = "/categories/{category}", method = RequestMethod.GET)
+    public String displayDebatesByCategory(@PathVariable String category, Model model){
+        List<Debate> result = dao.searchDebatesByCategory(category);
+        model.addAttribute("debates", result);
+        return "search";
+    }
+    
+    
     //create challenge rebuttal & update debate meths rely on aDebate variable changed in getSingleDebate method above
     @ResponseBody
     @ResponseStatus(HttpStatus.CREATED)
-    @RequestMapping(value="/singleDebate/challenge", method=RequestMethod.POST)
+    @RequestMapping(value="/debate/challenge", method=RequestMethod.POST)
     //add @Valid as parameter
     public Rebuttal createChallenge(@RequestBody Rebuttal rebuttal){
         rebuttal.setDebateId(aDebate.getId());
@@ -93,7 +103,7 @@ public class DebateController {
     //create reply rebuttals
     @ResponseBody
     @ResponseStatus(HttpStatus.CREATED)
-    @RequestMapping(value="/singleDebate/rebuttal", method=RequestMethod.POST)
+    @RequestMapping(value="/debate/rebuttal", method=RequestMethod.POST)
     //add @Valid as parameter
     public Rebuttal createRebuttal(@RequestBody Rebuttal rebuttal){
         rebuttal.setDebateId(aDebate.getId());
@@ -140,14 +150,14 @@ public class DebateController {
     }
     
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    @RequestMapping(value="/singleDebate/votePro", method=RequestMethod.PUT)
+    @RequestMapping(value="/debate/votePro", method=RequestMethod.PUT)
     public void updateDebateProVotes(){
         aDebate.setProVotes(aDebate.getProVotes() + 1);
         dao.updateDebate(aDebate);
     }
     
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    @RequestMapping(value="/singleDebate/voteCon", method=RequestMethod.PUT)
+    @RequestMapping(value="/debate/voteCon", method=RequestMethod.PUT)
     public void updateDebateConVotes(){
         aDebate.setConVotes(aDebate.getConVotes() + 1);
         dao.updateDebate(aDebate);
@@ -155,7 +165,7 @@ public class DebateController {
     
     //gets a debate for edit modal
     @ResponseBody
-    @RequestMapping(value="/singleDebate/debate/{id}", method=RequestMethod.GET)
+    @RequestMapping(value="/debate/deb/{id}", method=RequestMethod.GET)
     public Debate getDebateById(@PathVariable int id){
         return dao.getDebateById(id);
     }
@@ -163,14 +173,44 @@ public class DebateController {
     //edit debate button
     //add @Valid twice
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    @RequestMapping(value="/singleDebate/debate/{id}", method=RequestMethod.PUT)
+    @RequestMapping(value="/debate/deb/{id}", method=RequestMethod.PUT)
     public void updateDebate(@PathVariable int id, @RequestBody Debate deb){
         dao.updateDebate(deb);
     }
     
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    @RequestMapping(value="/singleDebate/debate/{id}", method=RequestMethod.DELETE)
+    @RequestMapping(value="/debate/deb/{id}", method=RequestMethod.DELETE)
     public void deleteDebate(@PathVariable int id) {
         dao.deleteDebate(id);
     }
+    
+//    //search by resolution
+//    @ResponseBody
+//    @RequestMapping(value = "/searchRes/{res}", method = RequestMethod.GET)
+//    public List<Debate> displayDebatesByResolution(@PathVariable String res){
+//        List<Debate> result = dao.searchDebatesByResolution(res);
+//        return result;
+//    }
+//    
+//    //search by category
+//    @ResponseBody
+//    @RequestMapping(value = "/searchCategory/{category}", method = RequestMethod.GET)
+//    public List<Debate> displayDebatesByCategory(@PathVariable String category){
+//        List<Debate> result = dao.searchDebatesByCategory(category);
+//        return result;
+//    }
+//    
+//    @ResponseBody
+//    @RequestMapping(value = "/searchUser/{user}", method = RequestMethod.GET)
+//    public List<Debate> displayDebatesByUser(@PathVariable String user){
+//        List<Debate> result = dao.searchDebatesByUser(user);
+//        return result;
+//    }
+//    
+//    @ResponseBody
+//    @RequestMapping(value = "/searchDate/{date}", method = RequestMethod.GET)
+//    public List<Debate> displayDebatesByDate(@PathVariable String date){
+//        List<Debate> result = dao.searchDebatesByDate(date);
+//        return result;
+//    }
 }

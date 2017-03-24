@@ -296,7 +296,7 @@ public class DebateDaoImpl implements DebateDao {
 "    LEFT OUTER JOIN `reb_types` ON rebuttals.type_id = `reb_types`.type_id\n" +
 "    WHERE debates.published AND affU.username = ? OR negU.username = ? ORDER BY debates.date DESC";
     @Override
-    public List<Debate> searchDebatesByAuthor(String searchUser) {
+    public List<Debate> searchDebatesByUser(String searchUser) {
         try {
             return (List<Debate>) jdbcTemplate.query(SQL_SEARCH_BY_USER, new DebateExtractor(), searchUser, searchUser);
         } catch (EmptyResultDataAccessException e) {

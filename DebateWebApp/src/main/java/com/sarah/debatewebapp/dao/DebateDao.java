@@ -46,7 +46,7 @@ public interface DebateDao {
     
     List<Debate> searchDebatesByCategory(String searchCategory);
     
-    List<Debate> searchDebatesByAuthor(String searchAuthor);
+    List<Debate> searchDebatesByUser(String searchUser);
     
     List<Debate> searchDebatesByDate(String searchDate);
     

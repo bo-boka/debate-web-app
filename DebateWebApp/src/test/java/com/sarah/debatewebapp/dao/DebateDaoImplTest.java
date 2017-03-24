@@ -23,6 +23,11 @@ import org.springframework.jdbc.core.JdbcTemplate;
 public class DebateDaoImplTest {
     
     private DebateDao testDao;
+    ArrayList<Rebuttal> rebuttals = new ArrayList<>();
+    Date dateStamp = new Date();
+    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+    String date = sdf.format(dateStamp);
+    List<Debate> testSearchDebateResults;
     
     public DebateDaoImplTest() {
     }
@@ -34,13 +39,7 @@ public class DebateDaoImplTest {
         JdbcTemplate cleaner = factory.getBean("jdbcTemplateBean", JdbcTemplate.class);
         cleaner.execute("DELETE FROM rebuttals WHERE 1=1");
         cleaner.execute("DELETE FROM debates WHERE 1=1");
-        
     }
-    
-    ArrayList<Rebuttal> rebuttals = new ArrayList<>();
-    Date dateStamp = new Date();
-    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-    String date = sdf.format(dateStamp);
         
     Debate[] debatesForTesting = {
         new Debate(1, "Technology has allowed bloody hongis to participate in the global conversation of sweet mates.", "After the Tui is skived off, you add all the pearler quater-acre patches to the pavlova you've got yourself a meal.", "live", "debatinNotHatin", "sawadeeka", 6, 3, "music", date,  new ArrayList<>(), true),
@@ -518,15 +517,83 @@ public class DebateDaoImplTest {
     
     @Test
     public void testSearchDebatesByResolution(){
+        
         for (Debate debate : debatesForTesting) {
-            testDao.createDebate(debate);
-            debate.setRebuttals(rebuttals);
+            if (debate.isPublished()){
+                testDao.createDebate(debate);
+                debate.setRebuttals(rebuttals);
+            }
         }
         junit.framework.Assert.assertNotNull("List of all debates should not be null.", testDao.getAllDebates());
+        //the -2 are the unpublished debates
         junit.framework.Assert.assertEquals("Expected debate count of 'all debates' does not match after adding several debates.",
-                debatesForTesting.length, testDao.getAllDebates().size());
-        List<Debate> testSearchResDebResults = testDao.searchDebatesByResolution(debatesForTesting[0].getResolution());
-        Assert.assertTrue(testSearchResDebResults.contains(debatesForTesting[0]));
+                debatesForTesting.length-2, testDao.getAllPublishedDebates().size());
+        testSearchDebateResults = testDao.searchDebatesByResolution(debatesForTesting[0].getResolution());
+        Assert.assertTrue(testSearchDebateResults.contains(debatesForTesting[0]));
+        //tests every debate for every resolution string combination in search
+        for (int k = 0; k < testDao.getAllPublishedDebates().size()-1; k++) {
+            String resolution = debatesForTesting[k].getResolution();
+            String subRes;
+            for (int i = 0; i < resolution.length()-1; i++) {
+                for (int j = i+1; j < resolution.length()-1; j++) {
+                    subRes = resolution.substring(i, j);
+                    testSearchDebateResults = testDao.searchDebatesByResolution(subRes);
+                    Assert.assertTrue(testSearchDebateResults.contains(debatesForTesting[k]));
+                }
+            }
+        }
+    }
+    
+    @Test
+    public void testSearchDebatesByCategory(){
+        for (Debate debate : debatesForTesting) {
+            if (debate.isPublished()){
+                testDao.createDebate(debate);
+                debate.setRebuttals(rebuttals);
+            }
+        }
+        for (Debate d : testDao.getAllPublishedDebates()) {
+            String category = d.getCategory();
+            testSearchDebateResults = testDao.searchDebatesByCategory(category);
+            Assert.assertTrue(testSearchDebateResults.contains(d));
+        }
+    }
+    
+    @Test
+    public void testSearchDebatesByUsers(){
+        for (Debate debate : debatesForTesting) {
+            if (debate.isPublished()){
+                testDao.createDebate(debate);
+                debate.setRebuttals(rebuttals);
+            }
+        }
+        //search by affirmative user
+        for (Debate d : testDao.getAllPublishedDebates()) {
+            String affUser = d.getAffirmativeUser();
+            testSearchDebateResults = testDao.searchDebatesByUser(affUser);
+            Assert.assertTrue(testSearchDebateResults.contains(d));
+        }
+        //search by negative user
+        for (Debate d : testDao.getAllPublishedDebates()) {
+            String negUser = d.getNegativeUser();
+            testSearchDebateResults = testDao.searchDebatesByUser(negUser);
+            Assert.assertTrue(testSearchDebateResults.contains(d));
+        }
+    }
+    
+    @Test
+    public void testSearchDebateByDate(){
+        for (Debate debate : debatesForTesting) {
+            if (debate.isPublished()){
+                testDao.createDebate(debate);
+                debate.setRebuttals(rebuttals);
+            }
+        }
+        for (Debate d : testDao.getAllPublishedDebates()) {
+            String testDate = d.getDate();
+            testSearchDebateResults = testDao.searchDebatesByDate(testDate);
+            Assert.assertTrue(testSearchDebateResults.contains(d));
+        }
     }
 
 }

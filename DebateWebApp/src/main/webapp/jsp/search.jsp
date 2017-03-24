@@ -10,7 +10,7 @@
         <link href="${pageContext.request.contextPath}/css/bootstrap.min.css" rel="stylesheet">
         <link href="${pageContext.request.contextPath}/css/debateCSS.css" rel="stylesheet">
 
-        <title>Deft Debate - Home</title>
+        <title>Deft Debate - Search</title>
     </head>
     <body>
         <%@include file="headerFragment.jsp" %>
@@ -21,23 +21,34 @@
                     <div class="heading">Categories</div>
                     
                     <c:forEach items="${categories}" var="category">
-                        <div id="cat-div">
-                            <a href="${pageContext.request.contextPath}/categories/${category}">${category}</a><br>
-                        </div>
+                        <div id="cat-div">"${category}"</div>
                     </c:forEach>
 
                 </div>
                 <div class="col-lg-6">
                     <div class="heading">Debates</div>
                     <br>Dropdown<br><br>
-                    <table class="table table-hover">
+<!--                    <table class="table table-hover">
                         <tr>
                             <th width="50%">Resolution</th>
                             <th>User</th>
                             <th>Date</th>
                         </tr>
                         <tbody id="home-rows"></tbody>
-                    </table>
+                    </table>-->
+
+                    <c:if test="${badInput}">
+                    <h1>You done it wrong. Try again.</h1><br><br>
+                    </c:if>
+                    <c:if test="${!badInput}">
+                        <c:forEach items="${debates}" var="deb">
+                            
+                            <a href="${pageContext.request.contextPath}/debate/${deb.id}">${deb.resolution}</a><br>
+                            ${deb.affirmativeUser} <br>
+                            ${deb.date} <br><br>
+                        
+                        </c:forEach>
+                    </c:if>
                 </div>
                 <div class="col-lg-3">
                     <div class="heading">Featured Users</div>
@@ -48,7 +59,7 @@
 
         <script src="${pageContext.request.contextPath}/js/jquery-2.2.4.min.js"></script>
         <script src="${pageContext.request.contextPath}/js/bootstrap.min.js"></script>
-        <script src="${pageContext.request.contextPath}/js/homeJS.js"></script>
+        <!--<script src="${pageContext.request.contextPath}/js/homeJS.js"></script>-->
         <script src="${pageContext.request.contextPath}/js/searchJS.js"></script>
 
     </body>

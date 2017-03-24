@@ -1,9 +1,11 @@
+
 /* 
  *  Copyright 2017 SarahBoka
  */
 
 $(document).ready(function(){
-    loadDebates();   
+    
+//    loadDebates();   
 //    loadCategories();    
     loadUsers();
     
@@ -15,12 +17,13 @@ $(document).ready(function(){
 //        event.preventDefault();
 //        if (option === "resolution") {
 //                var searchInfo = $("#search-info").val();
-////                window.location="/DebateWebApp/home";
+//                
 //                if (searchInfo === "") {
 //                    loadDebates();
 //                } else {
 //                    
 //                    getResolutionDebs(searchInfo);
+//                    
 //                }
 //        }
 //        if (option === "category") {
@@ -183,6 +186,7 @@ function getResolutionDebs(searchInfo) {
             }
         }).success(function (data) {
             processDebateList(data);
+            window.location="/DebateWebApp/search";
         });
     
 }
