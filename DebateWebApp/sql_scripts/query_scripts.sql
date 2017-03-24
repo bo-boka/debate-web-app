@@ -97,46 +97,6 @@ SELECT status_id FROM deb_statuses WHERE status = 'live';
 UPDATE debates SET resolution = 'poop', content='looplooppoo', status_id=2, affirmativeUser_id=1, negativeUser_id=2, proVotes=2, conVotes=3, category_id=3, date='2017-03-22', published=1 
 	WHERE debate_id=2;
 
-/*create user*/
-SELECT * FROM users;
-SELECT * FROM categories;
-INSERT INTO users (username, password, first_name, last_name, email, enabled)
-	VALUE ('bootynut', 'password', 'Ian', 'Raul', 'iamian@gmail.com', 1);
-SELECT * FROM authorities;
-INSERT INTO authorities (username, authority)
-	VALUE ('cutienut', 'ROLE_USER');
-    
-/*update user*/
-SELECT * FROM authorities;
-SELECT * FROM users;
-   
-SELECT username FROM users WHERE user_id = 1; 
-DELETE FROM authorities WHERE username = 'debatinNotHatin';
-UPDATE users SET username = 'debatingNotHating', password='password', first_name='Bianca', last_name='Trudy', email='someemail@email.com', wins=2, ties=3, losses=5, enabled=1 
-	WHERE user_id=1;
-INSERT INTO authorities VALUE ('debatingNotHating', 'ROLE_USER');
-
-/*get user by id*/
-SELECT user_id AS id, users.username, password, first_name, last_name, email, wins, ties, losses, authority, enabled FROM users 
-	LEFT JOIN authorities ON users.username = authorities.username 
-    WHERE user_id = 4;
-    
-/*get user by username*/
-SELECT user_id AS id, users.username, password, first_name, last_name, email, wins, ties, losses, authority, enabled FROM users 
-	LEFT JOIN authorities ON users.username = authorities.username 
-    WHERE users.username = ?; 
-    
-/*get all users*/
-SELECT user_id AS id, users.username, password, first_name, last_name, email, wins, ties, losses, authority, enabled FROM users 
-	LEFT JOIN authorities ON users.username = authorities.username;
-
-/*delete user*/
-SELECT username FROM users WHERE user_id = 5;
-DELETE FROM authorities WHERE username = 'snowOwl22';
-DELETE FROM users WHERE user_id = 5;
-
-/*show process list*/
-SHOW FULL PROCESSLIST;
 
 /*search all pub debs by resolution keywords*/
 SELECT debates.debate_id AS id, resolution, debates.content AS deb_content, deb_statuses.status, affU.username AS affirmativeUser, negU.username AS negativeUser, proVotes, conVotes, categories.category, debates.date AS deb_date, published, rebuttal_id, rebuttals.content AS reb_content, rebU.username AS rebUser, `reb_types`.type, rebuttals.date AS reb_date, position FROM debates
@@ -181,3 +141,48 @@ SELECT debates.debate_id AS id, resolution, debates.content AS deb_content, deb_
     LEFT OUTER JOIN `users` AS rebU ON rebuttals.user_id = rebU.user_id
     LEFT OUTER JOIN `reb_types` ON rebuttals.type_id = `reb_types`.type_id
     WHERE debates.published AND debates.date = '2017-03-19' ORDER BY debates.date DESC;
+
+/*create user*/
+SELECT * FROM users;
+SELECT * FROM categories;
+INSERT INTO users (username, password, first_name, last_name, email, enabled)
+	VALUE ('bootynut', 'password', 'Ian', 'Raul', 'iamian@gmail.com', 1);
+SELECT * FROM authorities;
+INSERT INTO authorities (username, authority)
+	VALUE ('cutienut', 'ROLE_USER');
+    
+/*register user*/
+
+    
+/*update user*/
+SELECT * FROM authorities;
+SELECT * FROM users;
+   
+SELECT username FROM users WHERE user_id = 1; 
+DELETE FROM authorities WHERE username = 'debatinNotHatin';
+UPDATE users SET username = 'debatingNotHating', password='password', first_name='Bianca', last_name='Trudy', email='someemail@email.com', wins=2, ties=3, losses=5, enabled=1 
+	WHERE user_id=1;
+INSERT INTO authorities VALUE ('debatingNotHating', 'ROLE_USER');
+
+/*get user by id*/
+SELECT user_id AS id, users.username, password, first_name, last_name, email, wins, ties, losses, authority, enabled FROM users 
+	LEFT JOIN authorities ON users.username = authorities.username 
+    WHERE user_id = 4;
+    
+/*get user by username*/
+SELECT user_id AS id, users.username, password, first_name, last_name, email, wins, ties, losses, authority, enabled FROM users 
+	LEFT JOIN authorities ON users.username = authorities.username 
+    WHERE users.username = ?; 
+    
+/*get all users*/
+SELECT user_id AS id, users.username, password, first_name, last_name, email, wins, ties, losses, authority, enabled FROM users 
+	LEFT JOIN authorities ON users.username = authorities.username;
+
+/*delete user*/
+SELECT username FROM users WHERE user_id = 5;
+DELETE FROM authorities WHERE username = 'snowOwl22';
+DELETE FROM users WHERE user_id = 5;
+
+
+/*show process list*/
+SHOW FULL PROCESSLIST;

@@ -71,12 +71,12 @@ function processUserDebateList(debates){
 
 function goToDebate(id){
     $.ajax({
-        url : 'singleDebate/' + id,
+        url : 'debate/' + id,
         type: 'GET',
         headers: {
             'Accept' : 'application/json'
         }
     }).success(function(){
-        window.location="/DebateWebApp/singleDebate/"+ id;
+        window.location="/DebateWebApp/debate/"+ id;
     });
 }

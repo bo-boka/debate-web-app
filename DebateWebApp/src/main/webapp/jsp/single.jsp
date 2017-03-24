@@ -85,6 +85,7 @@
                 </div>
                 <sec:authorize access="hasRole('ROLE_ADMIN')">
                     <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#edit-modal" data-debate-id="${oneDebate.id}">Edit</button>
+                    <button type="button" class="btn btn-danger" ><a href="${pageContext.request.contextPath}/debate/del/${oneDebate.id}">Delete</a></button>
                 </sec:authorize>
                 <!-- Modal -->
                 <%@include file="editDebateModalFrag.jsp" %>

@@ -4,8 +4,8 @@
 
 $(document).ready(function(){
     loadDebates();   
-    loadUsers();
-   
+//    loadUsers();
+
 });
 
 function loadDebates(){

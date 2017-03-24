@@ -43,7 +43,7 @@ public class DebateController {
     
     //display page methods
     
-    @RequestMapping(value={"/","/home"}, method = RequestMethod.GET)
+    @RequestMapping(value={"/","/home", "/debate/home"}, method = RequestMethod.GET)
     public String displayHome(Model model){
         List<String> categories = dao.getAllCategories();
         model.addAttribute("categories", categories);
@@ -59,8 +59,8 @@ public class DebateController {
     //gets username with dashboard
     @RequestMapping(value="/dashboard", method = RequestMethod.GET)
     public String displayDash(Model model, Principal principal){      
-//        List<String> categories = dao.getAllCategories();
-//        model.addAttribute("categories", categories);
+        List<String> categories = dao.getAllCategories();
+        model.addAttribute("categories", categories);
         currentUser = principal.getName();
         return "dashboard";
     }
@@ -185,11 +185,22 @@ public class DebateController {
         dao.updateDebate(deb);
     }
     
-    @ResponseStatus(HttpStatus.NO_CONTENT)
-    @RequestMapping(value="/debate/deb/{id}", method=RequestMethod.DELETE)
-    public void deleteDebate(@PathVariable int id) {
+//    //delete button in debate modal doesn't redirect properly
+//    @ResponseStatus(HttpStatus.NO_CONTENT)
+//    @RequestMapping(value="/debate/deb/{id}", method=RequestMethod.DELETE)
+//    public void deleteDebate(@PathVariable int id) {
+//        dao.deleteDebate(id);
+//    }
+    
+    //delete button on debate page
+    //using get meth type instead of delete to go through context path and return home page
+    @RequestMapping(value="/debate/del/{id}", method=RequestMethod.GET)
+    public String deleteDebateButton(@PathVariable int id) {
         dao.deleteDebate(id);
+        return "redirect:/home";
     }
+    
+    
     
 //    //search by resolution
 //    @ResponseBody

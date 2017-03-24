@@ -87,7 +87,7 @@
             </form>
             </div>
             <div class="modal-footer">
-                <button type="submit" class="btn btn-secondary" id="delete-debate">Delete</button>
+                <!--<button type="submit" class="btn btn-secondary" id="delete-debate">Delete</button>-->
                 <button type="submit" class="btn btn-lg btn-primary" id="edit-debate">Save changes</button>
             </div>
         </div>

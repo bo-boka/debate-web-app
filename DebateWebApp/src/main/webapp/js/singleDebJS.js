@@ -35,10 +35,10 @@ $(document).ready(function(){
         editDebate();
     });
     
-    $("#delete-debate").click(function(event){
-        event.preventDefault();
-        deleteDebate();
-    });
+//    $("#delete-debate").click(function(event){
+//        event.preventDefault();
+//        deleteDebate();
+//    });
     
 });
 
@@ -153,7 +153,7 @@ function getDebateEditDetails(id){
         $("#edit-debate-aff-user").val(debate.affirmativeUser);
         $("#edit-debate-neg-user").val(debate.negativeUser);
         $("#edit-debate-content").val(debate.content);
-        $("#edit-category").val(debate.category);
+        $("#edit-debate-category").val(debate.category);
         $("#edit-debate-pro-votes").val(debate.proVotes);
         $("#edit-debate-con-votes").val(debate.conVotes);
         $("input[name=publishDebate][value=" + debate.published + "]").prop('checked', true);
@@ -198,21 +198,23 @@ function editDebate(){
     });
 }
 
-function deleteDebate(){
-    var id = $("#edit-debate-id").text();
-    
-    $.ajax({
-        url: 'deb/' +id,
-        type: 'DELETE'
-    }).success(function(){
-
-        window.location.reload(true);
-        window.history.back();
-        window.location.reload(true);
-        //reload doesn't work when back is used
-        //so deleted item still appears in home list until page is manually refreshed
-    });
-}
+//function deleteDebate(){
+//    var id = $("#edit-debate-id").text();
+//    
+//    $.ajax({
+//        url: 'deb/' +id,
+//        type: 'DELETE'
+//    }).success(function(){
+//        alert("deleted");
+//        
+////        window.location.reload(true);
+////        window.history.back();
+////        window.location="redirect:/home";
+////        
+//        //reload doesn't work when back is used
+//        //so deleted item still appears in home list until page is manually refreshed
+//    });
+//}
 
 function publishDebate(){
     

@@ -22,20 +22,51 @@
         <%@include file="headerFragment.jsp" %>
 
         <div class="container-fluid">
-            <h1>Register</h1>
-            <hr/>
-
             <div class="row">
-                <div class="col-sm-4">
-                <form method="POST" action="j_spring_security_check">
-                    <p>Username: </p> <input class="form-control" name="j_username" type="text" /><br>
-                    <p>Password: </p> <input class="form-control" name="j_password" type="password"/>
-                    <p>Fist Name: </p> <input class="form-control" name="j_password" type="password"/>
-                    <p>Last Name: </p> <input class="form-control" name="j_password" type="password"/>
-                    <p>Email: </p> <input class="form-control" name="j_password" type="password"/>
-                    <button class="btn btn-default pull-right" type="submit" >Sign In</button>
-                </form>
+                <div class="col-md-6">
+                    <h2>Register</h2>
                 </div>
+                <hr>
+                <div class="col-md-6">
+                    <form class="form-horizontal" role="form">
+                        <div class="form-group">
+                            <label for="add-first-name" class="col-md-4 control-label">First Name:</label>
+                            <div class="col-md-8">
+                                <input id="add-first-name" name="firstName" type="text" class="form-control" placeholder="first name"/>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="add-last-name" class="col-md-4 control-label">Last Name:</label>
+                            <div class="col-md-8">
+                                <input id="add-last-name" name="lastName" type="text" class="form-control" placeholder="last name"/>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="add-username" class="col-md-4 control-label">Username:</label>
+                            <div class="col-md-8">
+                                <input id="add-username" name="username" type="text" class="form-control" placeholder="username"/>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="add-password" class="col-md-4 control-label">Password:</label>
+                            <div class="col-md-8">
+                                <input id="add-password" name="password" type="password" class="form-control" placeholder="password"/>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="add-email" class="col-md-4 control-label">Email:</label>
+                            <div class="col-md-8">
+                                <input id="add-email" name="email" type="text" class="form-control" placeholder="Email"/>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-offset-4 col-md-8">
+                                <button type="submit" id="user-register-button" class="btn btn-default">Register</button>
+                            </div>
+                        </div>
+                    </form>
+                    <!--<div id="validationErrors" class="alert alert-danger" style="display:none"></div>-->
+                </div>    
             </div>
         </div>
 
