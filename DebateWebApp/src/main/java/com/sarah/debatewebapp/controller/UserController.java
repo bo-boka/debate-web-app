@@ -42,6 +42,11 @@ public class UserController {
         return "profile";
     }
     
+    @RequestMapping(value = "/register", method = RequestMethod.GET)
+    public String displaySignUpPage(){
+        return "register";
+    }
+    
 //    //returns profile page from user dropdown menu
 //    @RequestMapping(value={"/profile"}, method = RequestMethod.GET)
 //    public String displayProfile(Model model, Principal principal){
