@@ -48,12 +48,12 @@
         <li><a href="${pageContext.request.contextPath}/login">Sign Up</a></li>
         </sec:authorize>
         <sec:authorize access="isFullyAuthenticated()">
+        <sec:authentication var="user" property="principal.username" /> 
         <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><sec:authentication property="principal.username" /><span class="caret"></span></a>
-          <ul class="dropdown-menu">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">${user}<span class="caret"></span></a>
+          <ul class="dropdown-menu">                
             <li><a href="${pageContext.request.contextPath}/dashboard">Dashboard</a></li>
-            <li><a href="${pageContext.request.contextPath}/profile">Profile</a></li>
-            
+            <li><a href="${pageContext.request.contextPath}/profile/${user}">Profile</a></li>
             <li role="separator" class="divider"></li>
             <li><a href="${pageContext.request.contextPath}/j_spring_security_logout">Log Out</a></li> 
           </ul>

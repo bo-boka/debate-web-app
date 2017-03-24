@@ -41,7 +41,12 @@
                 </div>
                 <div class="col-lg-3">
                     <div class="heading">Featured Users</div>
-                    <div id="user-divs"></div>
+                    <c:forEach items="${users}" var="user">
+                        <div id="cat-div">
+                            <a href="${pageContext.request.contextPath}/profile/${user.username}">${user.username}</a><br>
+                        </div>
+                    </c:forEach>
+                    
                 </div>
             </div>
         </div>
@@ -49,7 +54,6 @@
         <script src="${pageContext.request.contextPath}/js/jquery-2.2.4.min.js"></script>
         <script src="${pageContext.request.contextPath}/js/bootstrap.min.js"></script>
         <script src="${pageContext.request.contextPath}/js/homeJS.js"></script>
-        <script src="${pageContext.request.contextPath}/js/searchJS.js"></script>
-
+        
     </body>
 </html>

@@ -34,36 +34,44 @@ public class UserController {
         this.debDao = debDao;
     }
     
-    //returns profile page from user dropdown menu
-    @RequestMapping(value={"/profile"}, method = RequestMethod.GET)
-    public String displayProfile(Model model, Principal principal){
-        currentUser = principal.getName(); 
-        User user = userDao.getUserByUsername(currentUser);
-        model.addAttribute("oneUser", user);
-        return "profile";
-    }
-    
-    //gets user from listed debates on homepage, puts in model, returns profile page
-    @RequestMapping(value="/singleUser/{id}", method=RequestMethod.GET)
-    public String getUserByUsername(@PathVariable("id")int id, Model model){
-        Debate deb = debDao.getDebateById(id);
-        String user = deb.getAffirmativeUser();
+    //gets and displays user profile
+    @RequestMapping(value = "/profile/{user}", method = RequestMethod.GET)
+    public String displayDebatesByCategory(@PathVariable String user, Model model){
         User aUser = userDao.getUserByUsername(user);
         model.addAttribute("oneUser", aUser);
         return "profile";
     }
     
-    //gets user from listed users links on homepage, puts in model, returns profile page
-    @RequestMapping(value="/profile/{id}", method=RequestMethod.GET)
-    public String getUserById(@PathVariable("id")int id, Model model){
-        User aUser = userDao.getUserById(id);
-        model.addAttribute("oneUser", aUser);
-        return "profile";
-    }
-    
-    @ResponseBody
-    @RequestMapping(value="/users", method=RequestMethod.GET)
-    public List<User> getAllUsers(){
-        return userDao.getAllUsers();
-    }
+//    //returns profile page from user dropdown menu
+//    @RequestMapping(value={"/profile"}, method = RequestMethod.GET)
+//    public String displayProfile(Model model, Principal principal){
+//        currentUser = principal.getName(); 
+//        User user = userDao.getUserByUsername(currentUser);
+//        model.addAttribute("oneUser", user);
+//        return "profile";
+//    }
+//    
+//    //gets user from listed debates on homepage, puts in model, returns profile page
+//    @RequestMapping(value="/singleUser/{id}", method=RequestMethod.GET)
+//    public String getUserByUsername(@PathVariable("id")int id, Model model){
+//        Debate deb = debDao.getDebateById(id);
+//        String user = deb.getAffirmativeUser();
+//        User aUser = userDao.getUserByUsername(user);
+//        model.addAttribute("oneUser", aUser);
+//        return "profile";
+//    }
+//    
+//    //gets user from listed users links on homepage, puts in model, returns profile page
+//    @RequestMapping(value="/profile/{id}", method=RequestMethod.GET)
+//    public String getUserById(@PathVariable("id")int id, Model model){
+//        User aUser = userDao.getUserById(id);
+//        model.addAttribute("oneUser", aUser);
+//        return "profile";
+//    }
+//    
+//    @ResponseBody
+//    @RequestMapping(value="/users", method=RequestMethod.GET)
+//    public List<User> getAllUsers(){
+//        return userDao.getAllUsers();
+//    }
 }

@@ -236,7 +236,6 @@ public class DebateDaoImpl implements DebateDao {
             deb.setStatus("voting");
             return null;
         }
-        
     }   
     
     private static final String SQL_GET_ALL_CATEGORIES = "SELECT category FROM categories";

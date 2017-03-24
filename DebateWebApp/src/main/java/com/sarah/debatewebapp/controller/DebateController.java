@@ -5,8 +5,10 @@
 package com.sarah.debatewebapp.controller;
 
 import com.sarah.debatewebapp.dao.DebateDao;
+import com.sarah.debatewebapp.dao.UserDao;
 import com.sarah.debatewebapp.dto.Debate;
 import com.sarah.debatewebapp.dto.Rebuttal;
+import com.sarah.debatewebapp.dto.User;
 import java.security.Principal;
 import java.util.ArrayList;
 import java.util.List;
@@ -28,13 +30,15 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 @Controller
 public class DebateController {
     
+    UserDao userDao;
     DebateDao dao;
     Debate aDebate;
     String currentUser;
     
     @Inject
-    public DebateController(DebateDao dao){
+    public DebateController(DebateDao dao, UserDao userDao){
         this.dao = dao;
+        this.userDao = userDao;
     }
     
     //display page methods
@@ -43,6 +47,9 @@ public class DebateController {
     public String displayHome(Model model){
         List<String> categories = dao.getAllCategories();
         model.addAttribute("categories", categories);
+        
+        List<User> users = userDao.getAllUsers();
+        model.addAttribute("users", users);
         
 //        List<Debate> debs = dao.getAllPublishedDebates();
 //        model.addAttribute("debates", debs);

@@ -21,7 +21,9 @@
                     <div class="heading">Categories</div>
                     
                     <c:forEach items="${categories}" var="category">
-                        <div id="cat-div">"${category}"</div>
+                        <div id="cat-div">
+                            <a href="${pageContext.request.contextPath}/categories/${category}">${category}</a><br>
+                        </div>
                     </c:forEach>
 
                 </div>
@@ -59,8 +61,5 @@
 
         <script src="${pageContext.request.contextPath}/js/jquery-2.2.4.min.js"></script>
         <script src="${pageContext.request.contextPath}/js/bootstrap.min.js"></script>
-        <!--<script src="${pageContext.request.contextPath}/js/homeJS.js"></script>-->
-        <script src="${pageContext.request.contextPath}/js/searchJS.js"></script>
-
     </body>
 </html>
