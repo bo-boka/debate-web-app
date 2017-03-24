@@ -28,6 +28,15 @@ public class User {
     public User(){
     }
     
+    public User(String userN, String passW, String firstN, String lastN, String email, String role){
+        this.username = userN;
+        this.password = passW;
+        this.firstName = firstN;
+        this.lastName = lastN;
+        this.email = email;
+        this.role = role;
+    }
+    
     //rowmapper constructor
     public User(int id, String username, String passW, String firstN, String lastN, String email, int wins, int ties, int total, String role, boolean enabled){
         this.id = id;

@@ -6,17 +6,14 @@ package com.sarah.debatewebapp.controller;
 
 import com.sarah.debatewebapp.dao.DebateDao;
 import com.sarah.debatewebapp.dao.UserDao;
-import com.sarah.debatewebapp.dto.Debate;
 import com.sarah.debatewebapp.dto.User;
-import java.security.Principal;
-import java.util.List;
 import javax.inject.Inject;
+import javax.servlet.http.HttpServletRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 /*
  * @author Sarah
@@ -42,9 +39,23 @@ public class UserController {
         return "profile";
     }
     
-    @RequestMapping(value = "/register", method = RequestMethod.GET)
+    @RequestMapping(value = "/signup", method = RequestMethod.GET)
     public String displaySignUpPage(){
         return "register";
+    }
+    
+    @RequestMapping(value="/register", method=RequestMethod.POST)
+    public String doPost(HttpServletRequest request){
+        
+        String firstName = request.getParameter("firstName");
+        String lastName = request.getParameter("lastName");
+        String email = request.getParameter("email");
+        String username = request.getParameter("username");
+        String password = request.getParameter("password");
+        
+        User newUser = new User(username, password, firstName, lastName, email, "ROLE_USER");
+        userDao.createUser(newUser);
+        return "redirect:/home";
     }
     
 //    //returns profile page from user dropdown menu

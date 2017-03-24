@@ -45,7 +45,7 @@
         <sec:authorize access="!isFullyAuthenticated()">
         <li><a href="${pageContext.request.contextPath}/login">Login</a></li>
         <li><a>|</a></li>
-        <li><a href="${pageContext.request.contextPath}/register">Sign Up</a></li>
+        <li><a href="${pageContext.request.contextPath}/signup">Sign Up</a></li>
         </sec:authorize>
         <sec:authorize access="isFullyAuthenticated()">
         <sec:authentication var="user" property="principal.username" /> 

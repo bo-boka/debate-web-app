@@ -28,7 +28,7 @@
                 </div>
                 <hr>
                 <div class="col-md-6">
-                    <form class="form-horizontal" role="form">
+                    <form action="register" method="POST" class="form-horizontal" role="form">
                         <div class="form-group">
                             <label for="add-first-name" class="col-md-4 control-label">First Name:</label>
                             <div class="col-md-8">
@@ -42,6 +42,12 @@
                             </div>
                         </div>
                         <div class="form-group">
+                            <label for="add-email" class="col-md-4 control-label">Email:</label>
+                            <div class="col-md-8">
+                                <input id="add-email" name="email" type="text" class="form-control" placeholder="Email"/>
+                            </div>
+                        </div>
+                        <div class="form-group">
                             <label for="add-username" class="col-md-4 control-label">Username:</label>
                             <div class="col-md-8">
                                 <input id="add-username" name="username" type="text" class="form-control" placeholder="username"/>
@@ -51,12 +57,6 @@
                             <label for="add-password" class="col-md-4 control-label">Password:</label>
                             <div class="col-md-8">
                                 <input id="add-password" name="password" type="password" class="form-control" placeholder="password"/>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label for="add-email" class="col-md-4 control-label">Email:</label>
-                            <div class="col-md-8">
-                                <input id="add-email" name="email" type="text" class="form-control" placeholder="Email"/>
                             </div>
                         </div>
                         <div class="form-group">
