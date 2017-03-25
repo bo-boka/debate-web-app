@@ -41,6 +41,11 @@
     <body>
         <div class="container-fluid">
             <%@include file="headerFragment.jsp" %>
+            
+            <sec:authentication var="user" property="principal.username" /> 
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#edit-user-modal" data-user-name="${user}">Edit Account</button>
+            <%@include file="editUserModalFrag.jsp" %>
+            
             <h3>My Debates</h3>
             <table class="table table-hover">
                 <tr>

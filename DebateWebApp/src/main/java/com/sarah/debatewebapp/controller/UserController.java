@@ -48,6 +48,7 @@ public class UserController {
         return "register";
     }
     
+    //register user
     @RequestMapping(value="/register", method=RequestMethod.POST)
     public String doPost(HttpServletRequest request){
         
@@ -62,6 +63,7 @@ public class UserController {
         return "redirect:/home";
     }
     
+    //create moderator
     @ResponseStatus(HttpStatus.CREATED)
     @ResponseBody
     @RequestMapping(value="/mod", method=RequestMethod.POST)
@@ -71,6 +73,13 @@ public class UserController {
         User moderator = userDao.createUser(mod);
         
         return moderator;
+    }
+    
+    @ResponseBody
+    @RequestMapping(value="/user/{username}", method=RequestMethod.GET)
+    public User getUserByUsername(@PathVariable String username){
+        User user = userDao.getUserByUsername(username);
+        return user;
     }
     
 //    //returns profile page from user dropdown menu

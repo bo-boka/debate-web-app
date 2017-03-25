@@ -13,6 +13,12 @@ $(document).ready(function(){
         addModerator();
     });
     
+    $("#edit-user-modal").on('show.bs.modal', function(event){
+        var element = $(event.relatedTarget);
+        var username = element.data('user-name');
+        getUserEditDetails(username);
+    });
+    
 });
 
 function loadUserDebates(){
@@ -145,6 +151,22 @@ function addModerator(){
 //                errorDiv.append("<br>");
 //                errorDiv.show();
 //            });
+    });
+}
+
+function getUserEditDetails(name){
+    $.ajax({
+        url: 'user/'+ name,
+        type: 'GET',
+        headers: {
+            'Accept': 'application/json'
+        }
+    }).success(function(user){
+        $('#edit-user-id').text(user.id);
+        $('#edit-first-name').val(user.firstName);
+        $('#edit-last-name').val(user.lastName);
+        $('#edit-email').val(user.email);
+        $('#edit-username').val(user.username);
     });
 }
 

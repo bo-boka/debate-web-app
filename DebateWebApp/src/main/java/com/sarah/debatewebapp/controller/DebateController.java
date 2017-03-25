@@ -43,7 +43,7 @@ public class DebateController {
     
     //display page methods
     
-    @RequestMapping(value={"/","/home", "/debate/home"}, method = RequestMethod.GET)
+    @RequestMapping(value={"/","/home"}, method = RequestMethod.GET)
     public String displayHome(Model model){
         List<String> categories = dao.getAllCategories();
         model.addAttribute("categories", categories);
@@ -56,7 +56,7 @@ public class DebateController {
         return "home";
     }
     
-    //gets username with dashboard
+    //gets username with dashboard to use in controller
     @RequestMapping(value="/dashboard", method = RequestMethod.GET)
     public String displayDash(Model model, Principal principal){      
         List<String> categories = dao.getAllCategories();
@@ -156,6 +156,7 @@ public class DebateController {
         return userDs;
     }
     
+    //get all unpublished debates for moderator dash
     @ResponseBody
     @RequestMapping(value="/unpubDebates", method=RequestMethod.GET)
     public List<Debate> getAllUnpublishedDebates(){
@@ -206,7 +207,7 @@ public class DebateController {
 //    }
     
     //delete button on debate page
-    //using get meth type instead of delete to go through context path and return home page
+    //using get meth type instead of delete to go through context path and redirect to home page
     @RequestMapping(value="/debate/del/{id}", method=RequestMethod.GET)
     public String deleteDebateButton(@PathVariable int id) {
         dao.deleteDebate(id);
@@ -214,7 +215,7 @@ public class DebateController {
     }
     
     
-    
+    //search functionality is now handled via HttpServletRequest in SearchController
 //    //search by resolution
 //    @ResponseBody
 //    @RequestMapping(value = "/searchRes/{res}", method = RequestMethod.GET)
@@ -244,4 +245,5 @@ public class DebateController {
 //        List<Debate> result = dao.searchDebatesByDate(date);
 //        return result;
 //    }
+    
 }
