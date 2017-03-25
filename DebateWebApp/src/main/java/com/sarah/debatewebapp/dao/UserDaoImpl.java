@@ -61,7 +61,7 @@ public class UserDaoImpl implements UserDao {
         return user;
     }
     
-    private static final String SQL_GET_USERNAME = "SELECT username FROM users WHERE user_id = ?";
+    
     private static final String SQL_DELETE_ATHORITY = "DELETE FROM authorities WHERE username = ?";
     private static final String SQL_UPDATE_USER = "UPDATE users SET username=?, password=?, first_name=?, last_name=?, email=?, wins=?, ties=?, losses=?, enabled=? \n" +
 "	WHERE user_id=?";
@@ -71,8 +71,8 @@ public class UserDaoImpl implements UserDao {
     @Transactional(propagation = Propagation.REQUIRED, readOnly = false)
     @Override
     public void updateUser(User user){
-        String name = jdbcTemp.queryForObject(SQL_GET_USERNAME, String.class, user.getId());
-        jdbcTemp.update(SQL_DELETE_ATHORITY, name);
+        
+        jdbcTemp.update(SQL_DELETE_ATHORITY, user.getUsername());
         jdbcTemp.update(SQL_UPDATE_USER,
                 user.getUsername(),
                 user.getPassword(),
@@ -126,6 +126,7 @@ public class UserDaoImpl implements UserDao {
         return allUsers; //might need list caste
     }
     
+    private static final String SQL_GET_USERNAME = "SELECT username FROM users WHERE user_id = ?";
     private static final String SQL_DELETE_USER = "DELETE FROM users WHERE user_id = ?";
     //DELETE USER
     @Override

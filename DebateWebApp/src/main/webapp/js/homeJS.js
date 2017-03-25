@@ -4,7 +4,15 @@
 
 $(document).ready(function(){
     loadDebates();   
-//    loadUsers();
+
+    $( "#status-choice").change(function() {
+        var selected = $('#status-choice').val();
+        if (selected === 'all'){
+            loadDebates();
+        } else {
+            getStatusDebates(selected);
+        }
+    });
 
 });
 
@@ -62,6 +70,16 @@ function goToDebate(id){
         }
     }).success(function(){
         window.location="/DebateWebApp/debate/"+ id;
+    });
+}
+
+function getStatusDebates(selected){
+    
+    $.ajax({        
+        url: 'debates/' + selected,
+        type: 'GET'
+    }).success(function (data){
+        processDebateList(data);
     });
 }
 

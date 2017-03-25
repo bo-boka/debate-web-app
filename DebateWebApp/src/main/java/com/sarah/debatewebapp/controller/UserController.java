@@ -82,6 +82,20 @@ public class UserController {
         return user;
     }
     
+    //edit user info from user dash
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    @RequestMapping(value="/user", method=RequestMethod.PUT)
+    public void updateUserInfo(@RequestBody User user){
+        User ogUser = userDao.getUserById(user.getId());
+        if (user.getWins() == 0) user.setWins(ogUser.getWins());
+        if (user.getLosses() == 0) user.setLosses(ogUser.getLosses());
+        if (user.getTies() == 0) user.setTies(ogUser.getTies());
+        if (user.getPassword().equals("")) user.setPassword(ogUser.getPassword());
+        if (user.getRole() == null) user.setRole(ogUser.getRole());
+        userDao.updateUser(user);
+    }
+    
+    
 //    //returns profile page from user dropdown menu
 //    @RequestMapping(value={"/profile"}, method = RequestMethod.GET)
 //    public String displayProfile(Model model, Principal principal){

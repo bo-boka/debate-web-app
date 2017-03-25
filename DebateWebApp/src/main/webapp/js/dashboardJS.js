@@ -19,6 +19,11 @@ $(document).ready(function(){
         getUserEditDetails(username);
     });
     
+    $("#edit-user").click(function(event){
+        event.preventDefault();
+        editUser();
+    });
+    
 });
 
 function loadUserDebates(){
@@ -167,6 +172,30 @@ function getUserEditDetails(name){
         $('#edit-last-name').val(user.lastName);
         $('#edit-email').val(user.email);
         $('#edit-username').val(user.username);
+        $('#edit-password').val(user.password);
+    });
+}
+
+function editUser(){
+    var id = $("#edit-user-id").text();
+    
+    $.ajax({
+        url: 'user',
+        type: 'PUT',
+        headers:{
+            'Content-type': 'application/json'
+        },
+        'dataType' : 'json',
+        data: JSON.stringify({
+            id: id,
+            firstName: $('#edit-first-name').val(),
+            lastName: $('#edit-last-name').val(),
+            email: $('#edit-email').val(),
+            username: $('#edit-username').val(),
+            password: $('#edit-password').val()
+        })
+    }).success(function(data){
+        
     });
 }
 

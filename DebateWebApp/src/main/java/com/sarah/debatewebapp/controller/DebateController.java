@@ -47,12 +47,8 @@ public class DebateController {
     public String displayHome(Model model){
         List<String> categories = dao.getAllCategories();
         model.addAttribute("categories", categories);
-        
         List<User> users = userDao.getAllUsers();
         model.addAttribute("users", users);
-        
-//        List<Debate> debs = dao.getAllPublishedDebates();
-//        model.addAttribute("debates", debs);
         return "home";
     }
     
@@ -73,13 +69,8 @@ public class DebateController {
     //gets a debate, puts it in the model, and returns single page
     @RequestMapping(value="/debate/{id}", method=RequestMethod.GET)
     public String getSingleDebate(@PathVariable int id, Model model){
-        
         aDebate = dao.getDebateById(id);
         model.addAttribute("oneDebate", aDebate);
-        
-        List<String> categories = dao.getAllCategories();
-        model.addAttribute("categories", categories);
-        
         return "single";
     } 
     
@@ -90,7 +81,6 @@ public class DebateController {
         model.addAttribute("debates", result);
         return "search";
     }
-    
     
     //create challenge rebuttal & update debate meths rely on aDebate variable changed in getSingleDebate method above
     @ResponseBody
@@ -136,6 +126,17 @@ public class DebateController {
     @RequestMapping(value="/debates", method=RequestMethod.GET)
     public List<Debate> getAllPublishedDebates(){
         return dao.getAllPublishedDebates();
+    }
+    
+    @ResponseBody
+    @RequestMapping(value="/debates/{selected}", method=RequestMethod.GET)
+    public List<Debate> getStatusDebates(@PathVariable String selected){
+        List<Debate> statusDs = new ArrayList<>();
+        for (Debate d : dao.getAllPublishedDebates()){
+            if (d.getStatus().equals(selected)) statusDs.add(d);
+            else if (selected.equals("fin") && (d.getStatus().equals("proWon") || d.getStatus().equals("conWon") || d.getStatus().equals("wash"))) statusDs.add(d);
+        }
+        return statusDs;
     }
     
     //get all pub debates for user dash

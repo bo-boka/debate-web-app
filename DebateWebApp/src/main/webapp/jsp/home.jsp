@@ -29,7 +29,14 @@
                 </div>
                 <div class="col-lg-6">
                     <div class="heading">Debates</div>
-                    <br>Dropdown<br><br>
+                    
+                    <select name="statusChoice" id="status-choice">
+                        <option value="all">All</option>
+                        <option value="intro">Challenge</option>
+                        <option value="live">Live</option>
+                        <option value="voting">Vote</option>
+                        <option value="fin">Completed</option>
+                    </select><br>
                     <table class="table table-hover">
                         <tr>
                             <th width="50%">Resolution</th>

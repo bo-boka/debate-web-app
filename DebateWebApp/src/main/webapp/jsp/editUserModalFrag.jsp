@@ -43,7 +43,7 @@
                     </form>
             </div>
             <div class="modal-footer">
-                <button type="submit" class="btn btn-lg btn-primary" id="edit-user">Save changes</button>
+                <button type="submit" class="btn btn-lg btn-primary" id="edit-user" data-dismiss="modal">Save changes</button>
             </div>
         </div>
     </div>
