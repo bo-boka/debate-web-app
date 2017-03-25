@@ -9,11 +9,15 @@ import com.sarah.debatewebapp.dao.UserDao;
 import com.sarah.debatewebapp.dto.User;
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.ResponseStatus;
 
 /*
  * @author Sarah
@@ -56,6 +60,17 @@ public class UserController {
         User newUser = new User(username, password, firstName, lastName, email, "ROLE_USER");
         userDao.createUser(newUser);
         return "redirect:/home";
+    }
+    
+    @ResponseStatus(HttpStatus.CREATED)
+    @ResponseBody
+    @RequestMapping(value="/mod", method=RequestMethod.POST)
+    public User createModerator(@RequestBody User mod){
+        
+        mod.setRole("ROLE_ADMIN");
+        User moderator = userDao.createUser(mod);
+        
+        return moderator;
     }
     
 //    //returns profile page from user dropdown menu

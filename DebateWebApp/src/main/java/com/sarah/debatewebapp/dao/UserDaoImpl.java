@@ -37,12 +37,18 @@ public class UserDaoImpl implements UserDao {
     @Transactional(propagation = Propagation.REQUIRED, readOnly = false)
     @Override
     public User createUser(User user){
+        String userN = user.getUsername();
+        String passW = user.getPassword();
+        String firstN = user.getFirstName();
+        String lastN = user.getLastName();
+        String email = user.getEmail();
+        String role = user.getRole();
         jdbcTemp.update(SQL_ADD_USER,
-                user.getUsername(),
-                user.getPassword(),
-                user.getFirstName(),
-                user.getLastName(),
-                user.getEmail(),    
+                userN,
+                passW,
+                firstN,
+                lastN,
+                email,    
                 1 //enabled auto set
         );
         int id = jdbcTemp.queryForObject("SELECT LAST_INSERT_ID()", Integer.class);
@@ -50,7 +56,7 @@ public class UserDaoImpl implements UserDao {
         
         jdbcTemp.update(SQL_ADD_USER_AUTHORITY,
                 user.getUsername(),
-                user.getRole()
+                role
         );
         return user;
     }

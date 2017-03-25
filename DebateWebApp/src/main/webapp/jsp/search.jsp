@@ -30,15 +30,6 @@
                 <div class="col-lg-6">
                     <div class="heading">Debates</div>
                     <br>Dropdown<br><br>
-<!--                    <table class="table table-hover">
-                        <tr>
-                            <th width="50%">Resolution</th>
-                            <th>User</th>
-                            <th>Date</th>
-                        </tr>
-                        <tbody id="home-rows"></tbody>
-                    </table>-->
-
                     <c:if test="${badInput}">
                     <h1>You done it wrong. Try again.</h1><br><br>
                     </c:if>
@@ -54,7 +45,11 @@
                 </div>
                 <div class="col-lg-3">
                     <div class="heading">Featured Users</div>
-                    <div id="user-divs"></div>
+                    <c:forEach items="${users}" var="user">
+                        <div id="cat-div">
+                            <a href="${pageContext.request.contextPath}/profile/${user.username}">${user.username}</a><br>
+                        </div>
+                    </c:forEach>
                 </div>
             </div>
         </div>

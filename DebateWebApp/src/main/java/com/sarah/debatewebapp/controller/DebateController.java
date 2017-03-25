@@ -70,11 +70,11 @@ public class DebateController {
         return "login";
     }
     
-    //gets a pub debate, puts it in the model, and returns single page
+    //gets a debate, puts it in the model, and returns single page
     @RequestMapping(value="/debate/{id}", method=RequestMethod.GET)
     public String getSingleDebate(@PathVariable int id, Model model){
         
-        aDebate = dao.getPublishedDebateById(id);
+        aDebate = dao.getDebateById(id);
         model.addAttribute("oneDebate", aDebate);
         
         List<String> categories = dao.getAllCategories();
@@ -142,9 +142,9 @@ public class DebateController {
     @ResponseBody
     @RequestMapping(value="/userDebates", method=RequestMethod.GET)
     public List<Debate> getAllUserDebates(){
-        List<Debate> allDs = dao.getAllPublishedDebates();
+        List<Debate> allpubDs = dao.getAllPublishedDebates();
         List<Debate> userDs = new ArrayList<>();
-        for(Debate d : allDs){
+        for(Debate d : allpubDs){
             if (d.getAffirmativeUser().equals(currentUser)){
                 userDs.add(d);
             } else if (d.getNegativeUser() != null){
@@ -154,6 +154,19 @@ public class DebateController {
             }
         }
         return userDs;
+    }
+    
+    @ResponseBody
+    @RequestMapping(value="/unpubDebates", method=RequestMethod.GET)
+    public List<Debate> getAllUnpublishedDebates(){
+        List<Debate> allDs = dao.getAllDebates();
+        List<Debate> unpubDs = new ArrayList<>();
+        for(Debate d : allDs){
+            if (!d.isPublished()){
+                unpubDs.add(d);
+            }
+        }
+        return unpubDs;
     }
     
     @ResponseStatus(HttpStatus.NO_CONTENT)
