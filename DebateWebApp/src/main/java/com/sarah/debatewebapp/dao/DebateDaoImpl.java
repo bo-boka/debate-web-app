@@ -131,14 +131,13 @@ public class DebateDaoImpl implements DebateDao {
         jdbcTemplate.update(SQL_DELETE_DEBATE_REBUTTALS, id);
     }
     
-    private static final String SQL_GET_DEBATE_BY_ID = "SELECT debates.debate_id AS id, resolution, debates.content AS deb_content, deb_statuses.status, affU.username AS affirmativeUser, negU.username AS negativeUser, proVotes, conVotes, categories.category, debates.date AS deb_date, published, rebuttal_id, rebuttals.content AS reb_content, rebU.username AS rebUser, `reb_types`.type, rebuttals.date AS reb_date, position FROM debates\n" +
+    private static final String SQL_GET_DEBATE_BY_ID = "SELECT debates.debate_id AS id, resolution, debates.content AS deb_content, deb_statuses.status, affU.username AS affirmativeUser, negU.username AS negativeUser, proVotes, conVotes, categories.category, debates.date AS deb_date, published, rebuttal_id, rebuttals.content AS reb_content, rebU.username AS rebUser, rebuttals.date AS reb_date, position FROM debates\n" +
 "	LEFT OUTER JOIN `deb_statuses` ON debates.status_id = `deb_statuses`.status_id\n" +
 "	LEFT OUTER JOIN `users` AS affU ON debates.affirmativeUser_id = affU.user_id\n" +
 "    LEFT OUTER JOIN `users` AS negU ON debates.negativeUser_id = negU.user_id\n" +
 "    LEFT OUTER JOIN `categories` ON debates.category_id = categories.category_id\n" +
 "    LEFT OUTER JOIN `rebuttals` ON debates.debate_id = `rebuttals`.debate_id\n" +
 "    LEFT OUTER JOIN `users` AS rebU ON rebuttals.user_id = rebU.user_id\n" +
-"    LEFT OUTER JOIN `reb_types` ON rebuttals.type_id = `reb_types`.type_id\n" +
 "    WHERE debates.debate_id = ?";
     //GET A DEBATE
     @Override
@@ -151,14 +150,13 @@ public class DebateDaoImpl implements DebateDao {
         }
     }
     
-    private static final String SQL_GET__PUBLISHED_DEBATE_BY_ID = "SELECT debates.debate_id AS id, resolution, debates.content AS deb_content, deb_statuses.status, affU.username AS affirmativeUser, negU.username AS negativeUser, proVotes, conVotes, categories.category, debates.date AS deb_date, published, rebuttal_id, rebuttals.content AS reb_content, rebU.username AS rebUser, `reb_types`.type, rebuttals.date AS reb_date, position FROM debates\n" +
+    private static final String SQL_GET__PUBLISHED_DEBATE_BY_ID = "SELECT debates.debate_id AS id, resolution, debates.content AS deb_content, deb_statuses.status, affU.username AS affirmativeUser, negU.username AS negativeUser, proVotes, conVotes, categories.category, debates.date AS deb_date, published, rebuttal_id, rebuttals.content AS reb_content, rebU.username AS rebUser, rebuttals.date AS reb_date, position FROM debates\n" +
 "	LEFT OUTER JOIN `deb_statuses` ON debates.status_id = `deb_statuses`.status_id\n" +
 "	LEFT OUTER JOIN `users` AS affU ON debates.affirmativeUser_id = affU.user_id\n" +
 "    LEFT OUTER JOIN `users` AS negU ON debates.negativeUser_id = negU.user_id\n" +
 "    LEFT OUTER JOIN `categories` ON debates.category_id = categories.category_id\n" +
 "    LEFT OUTER JOIN `rebuttals` ON debates.debate_id = `rebuttals`.debate_id\n" +
 "    LEFT OUTER JOIN `users` AS rebU ON rebuttals.user_id = rebU.user_id\n" +
-"    LEFT OUTER JOIN `reb_types` ON rebuttals.type_id = `reb_types`.type_id\n" +
 "    WHERE debates.published AND debates.debate_id = ?";
     //GET A PUBLISHED DEBATE
     @Override
@@ -171,14 +169,13 @@ public class DebateDaoImpl implements DebateDao {
         }
     }
  
-    private static final String SQL_GET_ALL_PBLSHD_DEBATES = "SELECT debates.debate_id AS id, resolution, debates.content AS deb_content, deb_statuses.status, affU.username AS affirmativeUser, negU.username AS negativeUser, proVotes, conVotes, categories.category, debates.date AS deb_date, published, rebuttal_id, rebuttals.content AS reb_content, rebU.username AS rebUser, `reb_types`.type, rebuttals.date AS reb_date, position FROM debates\n" +
+    private static final String SQL_GET_ALL_PBLSHD_DEBATES = "SELECT debates.debate_id AS id, resolution, debates.content AS deb_content, deb_statuses.status, affU.username AS affirmativeUser, negU.username AS negativeUser, proVotes, conVotes, categories.category, debates.date AS deb_date, published, rebuttal_id, rebuttals.content AS reb_content, rebU.username AS rebUser, rebuttals.date AS reb_date, position FROM debates\n" +
 "	LEFT OUTER JOIN `deb_statuses` ON debates.status_id = `deb_statuses`.status_id\n" +
 "	LEFT OUTER JOIN `users` AS affU ON debates.affirmativeUser_id = affU.user_id\n" +
 "    LEFT OUTER JOIN `users` AS negU ON debates.negativeUser_id = negU.user_id\n" +
 "    LEFT OUTER JOIN `categories` ON debates.category_id = categories.category_id\n" +
 "    LEFT OUTER JOIN `rebuttals` ON debates.debate_id = `rebuttals`.debate_id\n" +
 "    LEFT OUTER JOIN `users` AS rebU ON rebuttals.user_id = rebU.user_id\n" +
-"    LEFT OUTER JOIN `reb_types` ON rebuttals.type_id = `reb_types`.type_id\n" +
 "    WHERE debates.published ORDER BY debates.date DESC";
     //GET ALL PUB DEBATES
     @Override
@@ -188,14 +185,13 @@ public class DebateDaoImpl implements DebateDao {
         return allPubDebs;
     }
     
-    private static final String SQL_GET_ALL_DEBATES = "SELECT debates.debate_id AS id, resolution, debates.content AS deb_content, deb_statuses.status, affU.username AS affirmativeUser, negU.username AS negativeUser, proVotes, conVotes, categories.category, debates.date AS deb_date, published, rebuttal_id, rebuttals.content AS reb_content, rebU.username AS rebUser, `reb_types`.type, rebuttals.date AS reb_date, position FROM debates\n" +
+    private static final String SQL_GET_ALL_DEBATES = "SELECT debates.debate_id AS id, resolution, debates.content AS deb_content, deb_statuses.status, affU.username AS affirmativeUser, negU.username AS negativeUser, proVotes, conVotes, categories.category, debates.date AS deb_date, published, rebuttal_id, rebuttals.content AS reb_content, rebU.username AS rebUser, rebuttals.date AS reb_date, position FROM debates\n" +
 "	LEFT OUTER JOIN `deb_statuses` ON debates.status_id = `deb_statuses`.status_id\n" +
 "	LEFT OUTER JOIN `users` AS affU ON debates.affirmativeUser_id = affU.user_id\n" +
 "    LEFT OUTER JOIN `users` AS negU ON debates.negativeUser_id = negU.user_id\n" +
 "    LEFT OUTER JOIN `categories` ON debates.category_id = categories.category_id\n" +
 "    LEFT OUTER JOIN `rebuttals` ON debates.debate_id = `rebuttals`.debate_id\n" +
 "    LEFT OUTER JOIN `users` AS rebU ON rebuttals.user_id = rebU.user_id\n" +
-"    LEFT OUTER JOIN `reb_types` ON rebuttals.type_id = `reb_types`.type_id\n" +
 "    ORDER BY debates.date DESC";
     //GET ALL DEBATES, INCLUDING NON PUB
     @Override
@@ -205,9 +201,8 @@ public class DebateDaoImpl implements DebateDao {
         return allDebs;
      }
     
-    private static final String SQL_ADD_REBUTTAL= "INSERT INTO rebuttals (content, user_id, debate_id, type_id, date, position)\n" +
-"	VALUE (?, ?, ?, ?, ?, ?)";
-    private static final String SQL_GET_REB_TYPE_ID = "SELECT type_id FROM reb_types WHERE type= ?";
+    private static final String SQL_ADD_REBUTTAL= "INSERT INTO rebuttals (content, user_id, debate_id, date, position)\n" +
+"	VALUE (?, ?, ?, ?, ?)";
     //CREATE REBUTTAL
     @Transactional(propagation = Propagation.REQUIRED, readOnly = false)
     @Override
@@ -216,12 +211,10 @@ public class DebateDaoImpl implements DebateDao {
         if (deb.getRebuttals().size() < 5) {
             dizate = new Date();
             int userId = jdbcTemplate.queryForObject(SQL_GET_USER_ID, Integer.class, rebuttal.getUser());
-            int typeId = jdbcTemplate.queryForObject(SQL_GET_REB_TYPE_ID, Integer.class, rebuttal.getType());
             jdbcTemplate.update(SQL_ADD_REBUTTAL,
                     rebuttal.getContent(),
                     userId,
                     rebuttal.getDebateId(),
-                    typeId,
                     sdf.format(dizate),
                     rebuttal.isPosition()
                     );
@@ -245,14 +238,13 @@ public class DebateDaoImpl implements DebateDao {
         return jdbcTemplate.queryForList(SQL_GET_ALL_CATEGORIES, String.class);
     }
     
-    private static final String SQL_SEARCH_BY_RESOLUTION = "SELECT debates.debate_id AS id, resolution, debates.content AS deb_content, deb_statuses.status, affU.username AS affirmativeUser, negU.username AS negativeUser, proVotes, conVotes, categories.category, debates.date AS deb_date, published, rebuttal_id, rebuttals.content AS reb_content, rebU.username AS rebUser, `reb_types`.type, rebuttals.date AS reb_date, position FROM debates\n" +
+    private static final String SQL_SEARCH_BY_RESOLUTION = "SELECT debates.debate_id AS id, resolution, debates.content AS deb_content, deb_statuses.status, affU.username AS affirmativeUser, negU.username AS negativeUser, proVotes, conVotes, categories.category, debates.date AS deb_date, published, rebuttal_id, rebuttals.content AS reb_content, rebU.username AS rebUser, rebuttals.date AS reb_date, position FROM debates\n" +
 "	LEFT OUTER JOIN `deb_statuses` ON debates.status_id = `deb_statuses`.status_id\n" +
 "	LEFT OUTER JOIN `users` AS affU ON debates.affirmativeUser_id = affU.user_id\n" +
 "    LEFT OUTER JOIN `users` AS negU ON debates.negativeUser_id = negU.user_id\n" +
 "    LEFT OUTER JOIN `categories` ON debates.category_id = categories.category_id\n" +
 "    LEFT OUTER JOIN `rebuttals` ON debates.debate_id = `rebuttals`.debate_id\n" +
 "    LEFT OUTER JOIN `users` AS rebU ON rebuttals.user_id = rebU.user_id\n" +
-"    LEFT OUTER JOIN `reb_types` ON rebuttals.type_id = `reb_types`.type_id\n" +
 "    WHERE debates.published AND debates.resolution LIKE ? ORDER BY debates.date DESC";
     //SEARCH RESOLUTION
     @Override
@@ -266,14 +258,13 @@ public class DebateDaoImpl implements DebateDao {
     }
     
     //SEARCH BLOGS BY CATEGORY
-    private static final String SQL_SEARCH_BY_CATEGORY = "SELECT debates.debate_id AS id, resolution, debates.content AS deb_content, deb_statuses.status, affU.username AS affirmativeUser, negU.username AS negativeUser, proVotes, conVotes, categories.category, debates.date AS deb_date, published, rebuttal_id, rebuttals.content AS reb_content, rebU.username AS rebUser, `reb_types`.type, rebuttals.date AS reb_date, position FROM debates\n" +
+    private static final String SQL_SEARCH_BY_CATEGORY = "SELECT debates.debate_id AS id, resolution, debates.content AS deb_content, deb_statuses.status, affU.username AS affirmativeUser, negU.username AS negativeUser, proVotes, conVotes, categories.category, debates.date AS deb_date, published, rebuttal_id, rebuttals.content AS reb_content, rebU.username AS rebUser, rebuttals.date AS reb_date, position FROM debates\n" +
 "	LEFT OUTER JOIN `deb_statuses` ON debates.status_id = `deb_statuses`.status_id\n" +
 "	LEFT OUTER JOIN `users` AS affU ON debates.affirmativeUser_id = affU.user_id\n" +
 "    LEFT OUTER JOIN `users` AS negU ON debates.negativeUser_id = negU.user_id\n" +
 "    LEFT OUTER JOIN `categories` ON debates.category_id = categories.category_id\n" +
 "    LEFT OUTER JOIN `rebuttals` ON debates.debate_id = `rebuttals`.debate_id\n" +
 "    LEFT OUTER JOIN `users` AS rebU ON rebuttals.user_id = rebU.user_id\n" +
-"    LEFT OUTER JOIN `reb_types` ON rebuttals.type_id = `reb_types`.type_id\n" +
 "    WHERE debates.published AND categories.category = ? ORDER BY debates.date DESC";
     @Override
     public List<Debate> searchDebatesByCategory(String searchCategory) {
@@ -285,14 +276,13 @@ public class DebateDaoImpl implements DebateDao {
     }
 
     //SEARCH BLOGS BY USER (aff and neg)
-    private static final String SQL_SEARCH_BY_USER = "SELECT debates.debate_id AS id, resolution, debates.content AS deb_content, deb_statuses.status, affU.username AS affirmativeUser, negU.username AS negativeUser, proVotes, conVotes, categories.category, debates.date AS deb_date, published, rebuttal_id, rebuttals.content AS reb_content, rebU.username AS rebUser, `reb_types`.type, rebuttals.date AS reb_date, position FROM debates\n" +
+    private static final String SQL_SEARCH_BY_USER = "SELECT debates.debate_id AS id, resolution, debates.content AS deb_content, deb_statuses.status, affU.username AS affirmativeUser, negU.username AS negativeUser, proVotes, conVotes, categories.category, debates.date AS deb_date, published, rebuttal_id, rebuttals.content AS reb_content, rebU.username AS rebUser, rebuttals.date AS reb_date, position FROM debates\n" +
 "	LEFT OUTER JOIN `deb_statuses` ON debates.status_id = `deb_statuses`.status_id\n" +
 "	LEFT OUTER JOIN `users` AS affU ON debates.affirmativeUser_id = affU.user_id\n" +
 "    LEFT OUTER JOIN `users` AS negU ON debates.negativeUser_id = negU.user_id\n" +
 "    LEFT OUTER JOIN `categories` ON debates.category_id = categories.category_id\n" +
 "    LEFT OUTER JOIN `rebuttals` ON debates.debate_id = `rebuttals`.debate_id\n" +
 "    LEFT OUTER JOIN `users` AS rebU ON rebuttals.user_id = rebU.user_id\n" +
-"    LEFT OUTER JOIN `reb_types` ON rebuttals.type_id = `reb_types`.type_id\n" +
 "    WHERE debates.published AND affU.username = ? OR negU.username = ? ORDER BY debates.date DESC";
     @Override
     public List<Debate> searchDebatesByUser(String searchUser) {
@@ -304,14 +294,13 @@ public class DebateDaoImpl implements DebateDao {
     }
 
     //SEARCH BLOGS BY DATE
-    private static final String SQL_SEARCH_BY_DATE = "SELECT debates.debate_id AS id, resolution, debates.content AS deb_content, deb_statuses.status, affU.username AS affirmativeUser, negU.username AS negativeUser, proVotes, conVotes, categories.category, debates.date AS deb_date, published, rebuttal_id, rebuttals.content AS reb_content, rebU.username AS rebUser, `reb_types`.type, rebuttals.date AS reb_date, position FROM debates\n" +
+    private static final String SQL_SEARCH_BY_DATE = "SELECT debates.debate_id AS id, resolution, debates.content AS deb_content, deb_statuses.status, affU.username AS affirmativeUser, negU.username AS negativeUser, proVotes, conVotes, categories.category, debates.date AS deb_date, published, rebuttal_id, rebuttals.content AS reb_content, rebU.username AS rebUser, rebuttals.date AS reb_date, position FROM debates\n" +
 "	LEFT OUTER JOIN `deb_statuses` ON debates.status_id = `deb_statuses`.status_id\n" +
 "	LEFT OUTER JOIN `users` AS affU ON debates.affirmativeUser_id = affU.user_id\n" +
 "    LEFT OUTER JOIN `users` AS negU ON debates.negativeUser_id = negU.user_id\n" +
 "    LEFT OUTER JOIN `categories` ON debates.category_id = categories.category_id\n" +
 "    LEFT OUTER JOIN `rebuttals` ON debates.debate_id = `rebuttals`.debate_id\n" +
 "    LEFT OUTER JOIN `users` AS rebU ON rebuttals.user_id = rebU.user_id\n" +
-"    LEFT OUTER JOIN `reb_types` ON rebuttals.type_id = `reb_types`.type_id\n" +
 "    WHERE debates.published AND debates.date = ? ORDER BY debates.date DESC";
 
     @Override
@@ -356,10 +345,9 @@ public class DebateDaoImpl implements DebateDao {
                     String reb_content = rs.getString("reb_content");
                     String user = rs.getString("rebUser");
                     int deb_id = rs.getInt("id");
-                    String type = rs.getString("type");
                     String reb_date = rs.getString("reb_date");
                     boolean position = rs.getBoolean("position");
-                    rebuttal = new Rebuttal(reb_id, reb_content, user, deb_id, type, reb_date, position);
+                    rebuttal = new Rebuttal(reb_id, reb_content, user, deb_id, reb_date, position);
                     rebList.add(rebuttal);
                     debate.setRebuttals(rebList);
                 } else {
@@ -370,100 +358,6 @@ public class DebateDaoImpl implements DebateDao {
         }
     }
 }
-
-    //get all published debates with RowMapper 
-//    private static final String SQL_GET_ALL_PBLSHD_DEBATES = "SELECT debates.debate_id AS id, resolution, content, deb_statuses.status, affU.username AS affirmativeUser, negU.username AS negativeUser, proVotes, conVotes, categories.category, date, published FROM debates\n" +
-//"	LEFT OUTER JOIN `deb_statuses` ON debates.status_id = `deb_statuses`.status_id\n" +
-//"	LEFT OUTER JOIN `users` AS affU ON debates.affirmativeUser_id = affU.user_id\n" +
-//"    LEFT OUTER JOIN `users` AS negU ON debates.negativeUser_id = negU.user_id\n" +
-//"    LEFT OUTER JOIN `categories` ON debates.category_id = categories.category_id\n" +
-//"    WHERE debates.published ORDER BY debates.date DESC";
-//    //matching rebuttal query
-//    private static final String SQL_GET_ALL_PBLSHD_REBUTTALS = "SELECT rebuttal_id AS id, content, `users`.username, debate_id, `reb_types`.type, date, position FROM rebuttals\n" +
-//"	LEFT OUTER JOIN `users` ON rebuttals.user_id = `users`.user_id\n" +
-//"    LEFT OUTER JOIN `reb_types` ON rebuttals.type_id = `reb_types`.type_id\n" +
-//"    ORDER BY rebuttals.date DESC";
-//    
-//    @Override
-//    public List<Debate> getAllPublishedDebates(){
-//        List<Debate> allPubDebs;
-//        allPubDebs = (List<Debate>) jdbcTemplate.query(SQL_GET_ALL_PBLSHD_DEBATES, new DebateMapper());       
-//        
-//        List<Rebuttal> allRebs;
-//        allRebs = (List<Rebuttal>) jdbcTemplate.query(SQL_GET_ALL_PBLSHD_REBUTTALS, new RebuttalMapper());
-//        
-//        ArrayList<Rebuttal> rebs = new ArrayList<>();
-//        for (Debate d : allPubDebs){
-//            for (Rebuttal r : allRebs){
-//                if (d.getId() == r.getDebate()){
-//                    rebs.add(r);
-//                }
-//            }
-//            d.setRebuttals(rebs);
-//        }
-//        return allPubDebs;
-//    }
-//    
-//
-//    private static final class DebateMapper implements RowMapper<Debate>{
-//        
-//        @Override
-//        public Debate mapRow(ResultSet rs, int rowNum) throws SQLException {           
-//            Debate mappedD = new Debate();
-//            int id = rs.getInt("id");
-//            String res = rs.getString("resolution");
-//            String content = rs.getString("content");
-//            String status = rs.getString("status");
-//            String affUser = rs.getString("affirmativeUser");
-//            String negUser = rs.getString("negativeUser");
-//            int proV = rs.getInt("proVotes");
-//            int conV = rs.getInt("conVotes");
-//            String cat = rs.getString("category");
-//            String date = rs.getString("date");
-//            boolean pub = rs.getBoolean("published");
-//            
-//            mappedD.setId(id);
-//            mappedD.setResolution(res);
-//            mappedD.setContent(content);
-//            mappedD.setStatus(status);
-//            mappedD.setAffirmativeUser(affUser);
-//            mappedD.setNegativeUser(negUser);
-//            mappedD.setProVotes(proV);
-//            mappedD.setConVotes(conV);
-//            mappedD.setCategory(cat);
-//            mappedD.setDate(date);
-//            mappedD.setPublished(pub);
-//            
-//            return mappedD;
-//        }
-//    }
-//    
-//    private static final class RebuttalMapper implements RowMapper<Rebuttal>{
-//        
-//        @Override
-//        public Rebuttal mapRow(ResultSet rs, int rowNum) throws SQLException { 
-//            Rebuttal mappedR = new Rebuttal();
-//            
-//            int id = rs.getInt("id");
-//            String content = rs.getString("content");
-//            String user = rs.getString("username");
-//            int deb_id = rs.getInt("debate_id");
-//            String type = rs.getString("type");
-//            String date = rs.getString("date");
-//            boolean position = rs.getBoolean("position");
-//            
-//            mappedR.setId(id);
-//            mappedR.setContent(content);
-//            mappedR.setUser(user);
-//            mappedR.setDebate(deb_id);
-//            mappedR.setType(type);
-//            mappedR.setDate(date);
-//            mappedR.setPosition(position);
-//            
-//            return mappedR;
-//        }          
-//    }
-
 
 
 

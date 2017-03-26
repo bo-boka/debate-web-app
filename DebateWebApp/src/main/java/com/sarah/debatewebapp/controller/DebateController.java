@@ -41,7 +41,7 @@ public class DebateController {
         this.userDao = userDao;
     }
     
-    //display page methods
+    //display page methods listed first
     
     @RequestMapping(value={"/","/home"}, method = RequestMethod.GET)
     public String displayHome(Model model){
@@ -66,11 +66,13 @@ public class DebateController {
         return "login";
     }
     
-    //gets a debate, puts it in the model, and returns single page
+    //gets a debate, puts it in the model, and returns single page (gets categories for edit modal)
     @RequestMapping(value="/debate/{id}", method=RequestMethod.GET)
     public String getSingleDebate(@PathVariable int id, Model model){
         aDebate = dao.getDebateById(id);
         model.addAttribute("oneDebate", aDebate);
+        List<String> categories = dao.getAllCategories();
+        model.addAttribute("categories", categories);
         return "single";
     } 
     
@@ -79,6 +81,10 @@ public class DebateController {
     public String displayDebatesByCategory(@PathVariable String category, Model model){
         List<Debate> result = dao.searchDebatesByCategory(category);
         model.addAttribute("debates", result);
+        List<String> categories = dao.getAllCategories();
+        model.addAttribute("categories", categories);
+        List<User> users = userDao.getAllUsers();
+        model.addAttribute("users", users);
         return "search";
     }
     
@@ -128,6 +134,7 @@ public class DebateController {
         return dao.getAllPublishedDebates();
     }
     
+    //dropdown debate status selector returns debates for specific status
     @ResponseBody
     @RequestMapping(value="/debates/{selected}", method=RequestMethod.GET)
     public List<Debate> getStatusDebates(@PathVariable String selected){
@@ -175,6 +182,17 @@ public class DebateController {
     @RequestMapping(value="/debate/votePro", method=RequestMethod.PUT)
     public void updateDebateProVotes(){
         aDebate.setProVotes(aDebate.getProVotes() + 1);
+        User user;
+        if (aDebate.getProVotes() >= 10) {
+            aDebate.setStatus("proWon");
+            user = userDao.getUserByUsername(aDebate.getAffirmativeUser());
+            user.setWins(user.getWins() + 1);
+            userDao.updateUser(user);
+            user = userDao.getUserByUsername(aDebate.getNegativeUser());
+            user.setLosses(user.getLosses() + 1);
+            userDao.updateUser(user);
+        }
+        //add code to 'tie' when timing functionality is added
         dao.updateDebate(aDebate);
     }
     
@@ -182,6 +200,17 @@ public class DebateController {
     @RequestMapping(value="/debate/voteCon", method=RequestMethod.PUT)
     public void updateDebateConVotes(){
         aDebate.setConVotes(aDebate.getConVotes() + 1);
+        User user;
+        if (aDebate.getConVotes() >= 10) {
+            aDebate.setStatus("conWon");
+            user = userDao.getUserByUsername(aDebate.getNegativeUser());
+            user.setWins(user.getWins() + 1);
+            userDao.updateUser(user);
+            user = userDao.getUserByUsername(aDebate.getAffirmativeUser());
+            user.setLosses(user.getLosses() + 1);
+            userDao.updateUser(user);
+        }
+        //add code to 'tie' when timing functionality is added
         dao.updateDebate(aDebate);
     }
     

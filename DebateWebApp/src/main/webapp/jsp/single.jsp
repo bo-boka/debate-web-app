@@ -120,7 +120,6 @@
                     <br>
                     ${rebute.id}
                     ${rebute.position}
-                    ${rebute.type}
                     ${rebute.content}
                     ${rebute.user}               
                     ${rebute.date}

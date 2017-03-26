@@ -57,7 +57,6 @@ function challengeDebate(){
             type: 'POST',
             data: JSON.stringify({
                 content: contentData.getContent(),
-                type: 'challenge',
                 position: false
             }),
             headers: {
@@ -215,11 +214,3 @@ function editDebate(){
 //        //so deleted item still appears in home list until page is manually refreshed
 //    });
 //}
-
-function publishDebate(){
-    
-}
-
-function unpublishDebate(){
-    
-}

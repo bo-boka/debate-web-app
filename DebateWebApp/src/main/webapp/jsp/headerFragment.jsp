@@ -19,14 +19,8 @@
 
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-<!--      <ul class="nav navbar-nav">
-        <li class="active"><a href="${pageContext.request.contextPath}/home">Home <span class="sr-only">(current)</span></a></li>
-        
-      </ul>-->
-      
       <ul class="nav navbar-nav navbar-right">
-          
-        <form action="search" method="POST" class="navbar-form navbar-left" style="padding-right: 295px;">
+        <form action="search" method="POST" class="navbar-form navbar-left" style="padding-right: 100px;">
             <div class="form-group">
                 <select name="searchOption" id="search-option">
                     <option value="---">Choose...</option>
@@ -41,7 +35,6 @@
             </div>
             <button type="submit" class="btn btn-default" id="search-button">Search</button>
         </form>
-          
         <sec:authorize access="!isFullyAuthenticated()">
         <li><a href="${pageContext.request.contextPath}/login">Login</a></li>
         <li><a>|</a></li>
@@ -59,7 +52,6 @@
           </ul>
         </li>
         </sec:authorize>
-        
       </ul>
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->

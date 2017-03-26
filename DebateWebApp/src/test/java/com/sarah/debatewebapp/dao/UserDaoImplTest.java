@@ -38,22 +38,22 @@ public class UserDaoImplTest {
     
     User[] usersForTesting = {
         new User(1, "debatinNotHatin", "password", "Ally", "Smith", "asmith@debator.com", 0, 0, 0, "ROLE_USER", true),
-	new User(2, "2truDebator", "password", "Bob", "Gualla", "email@sendit.com", 0, 0, 0, "ROLE_USER", true),
+	new User(2, "X2truDebatorX", "password", "Bob", "Gualla", "email@sendit.com", 0, 0, 0, "ROLE_USER", true),
         new User(3, "cheesinForTheWeekend", "password", "Lana", "Brown", "email@sendin.com", 0, 0, 0, "ROLE_USER", true),
         new User(4, "mdb8r", "password", "Arielle", "Cho", "thisemail@gmail.com", 0, 0, 0, "ROLE_USER", true),
         new User(5, "snowOwl22", "password", "Gertrude", "Hammerquist", "hammyq@gmail.com", 0, 0, 0, "ROLE_USER", true),
         new User(6, "sawadeeka", "password", "Juan", "Jimenez", "jimenez@gmail.com", 0, 0, 0, "ROLE_USER", true),
-	new User(7, "smoothDeb", "password", "Neena", "Gupta", "neenag@gmail.com", 0, 0, 0, "ROLE_USER", true)
+	new User(7, "SmoothDeb", "password", "Neena", "Gupta", "neenag@gmail.com", 0, 0, 0, "ROLE_USER", true)
     };
     
     User[] duplicateUsers = {
         new User(1, "debatinNotHatin", "password", "Ally", "Smith", "asmith@debator.com", 0, 0, 0, "ROLE_USER", true),
-	new User(2, "2truDebator", "password", "Bob", "Gualla", "email@sendit.com", 0, 0, 0, "ROLE_USER", true),
+	new User(2, "X2truDebatorX", "password", "Bob", "Gualla", "email@sendit.com", 0, 0, 0, "ROLE_USER", true),
         new User(3, "cheesinForTheWeekend", "password", "Lana", "Brown", "email@sendin.com", 0, 0, 0, "ROLE_USER", true),
         new User(4, "mdb8r", "password", "Arielle", "Cho", "thisemail@gmail.com", 0, 0, 0, "ROLE_USER", true),
         new User(5, "snowOwl22", "password", "Gertrude", "Hammerquist", "hammyq@gmail.com", 0, 0, 0, "ROLE_USER", true),
         new User(6, "sawadeeka", "password", "Juan", "Jimenez", "jimenez@gmail.com", 0, 0, 0, "ROLE_USER", true),
-	new User(7, "smoothDeb", "password", "Neena", "Gupta", "neenag@gmail.com", 0, 0, 0, "ROLE_USER", true)
+	new User(7, "SmoothDeb", "password", "Neena", "Gupta", "neenag@gmail.com", 0, 0, 0, "ROLE_USER", true)
     };
     
     User[] similarUsers = {
@@ -261,31 +261,31 @@ public class UserDaoImplTest {
     //!!!!
     //org.springframework.transaction.CannotCreateTransactionException: Could not open JDBC Connection for transaction; nested exception is java.sql.SQLException: Cannot create PoolableConnectionFactory (Data source rejected establishment of connection,  message from server: "Too many connections")
     
-//    @Test
-//    public void testAddAndRemoveMultipleUsers() {
-//
-//        for (User user : usersForTesting) {
-//            testDao.createUser(user);
-//        }
-//
-//        int usersAdded = usersForTesting.length;
-//        for (int i = 0; i < usersForTesting.length; i += 2) {
-//            testDao.deleteUser(usersForTesting[i].getId());
-//            usersAdded--;
-//        }
-//
-//        junit.framework.Assert.assertNotNull("List of all users should not be null.", testDao.getAllUsers());
-//        junit.framework.Assert.assertEquals("Expected user count of 'all users' does not match after adding & removing several users.",
-//                usersAdded, testDao.getAllUsers().size());
-//
-//        for (int i = 0; i < usersForTesting.length; i++) {
-//            if (i % 2 == 1) {
-//                junit.framework.Assert.assertEquals("Returned user does not match expected.", usersForTesting[i], testDao.getUserById(usersForTesting[i].getId()));
-//            } else {
-//                junit.framework.Assert.assertNull("User should be removed and return null.", testDao.getUserById(usersForTesting[i].getId()));
-//            }
-//        }
-//    }
+    @Test
+    public void testAddAndRemoveMultipleUsers() {
+
+        for (User user : usersForTesting) {
+            testDao.createUser(user);
+        }
+
+        int usersAdded = usersForTesting.length;
+        for (int i = 0; i < usersForTesting.length; i += 2) {
+            testDao.deleteUser(usersForTesting[i].getId());
+            usersAdded--;
+        }
+
+        junit.framework.Assert.assertNotNull("List of all users should not be null.", testDao.getAllUsers());
+        junit.framework.Assert.assertEquals("Expected user count of 'all users' does not match after adding & removing several users.",
+                usersAdded, testDao.getAllUsers().size());
+
+        for (int i = 0; i < usersForTesting.length; i++) {
+            if (i % 2 == 1) {
+                junit.framework.Assert.assertEquals("Returned user does not match expected.", usersForTesting[i], testDao.getUserById(usersForTesting[i].getId()));
+            } else {
+                junit.framework.Assert.assertNull("User should be removed and return null.", testDao.getUserById(usersForTesting[i].getId()));
+            }
+        }
+    }
 
     @Test
     public void testAddAndRemoveUsersMultipleTimes() {

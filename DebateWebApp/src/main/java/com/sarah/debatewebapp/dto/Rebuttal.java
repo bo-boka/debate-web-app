@@ -19,7 +19,6 @@ public class Rebuttal {
     private ArrayList<String> citedSources;    
     private String user;
     private int debateId;
-    private String type; //challenge, refutation, clarification, closing
     private String date;
     private boolean position;
     
@@ -28,22 +27,20 @@ public class Rebuttal {
     }
 
     //ResultSet Extractor constructor
-    public Rebuttal(int id, String content, String user, int debateId, String type, String date, boolean position) {
+    public Rebuttal(int id, String content, String user, int debateId, String date, boolean position) {
         this.id = id;
         this.content = content;
         this.user = user;
         this.debateId = debateId;
-        this.type = type;
         this.date = date;
         this.position = position;
     }
     
     //user constructor
-    public Rebuttal(String content, String user, int debateId, String type, String date, boolean position){
+    public Rebuttal(String content, String user, int debateId, String date, boolean position){
         this.content = content;
         this.user = user;
         this.debateId = debateId;
-        this.type = type;
         this.date = date;
         this.position = position;
         
@@ -89,14 +86,6 @@ public class Rebuttal {
         this.debateId = debateId;
     }
 
-    public String getType() {
-        return type;
-    }
-
-    public void setType(String type) {
-        this.type = type;
-    }
-
     public String getDate() {
         return date;
     }
@@ -121,7 +110,6 @@ public class Rebuttal {
         hash = 89 * hash + Objects.hashCode(this.citedSources);
         hash = 89 * hash + Objects.hashCode(this.user);
         hash = 89 * hash + Objects.hashCode(this.debateId);
-        hash = 89 * hash + Objects.hashCode(this.type);
         hash = 89 * hash + Objects.hashCode(this.date);
         hash = 89 * hash + (this.position ? 1 : 0);
         return hash;
@@ -152,9 +140,6 @@ public class Rebuttal {
             return false;
         }
         if (!Objects.equals(this.debateId, other.debateId)) {
-            return false;
-        }
-        if (!Objects.equals(this.type, other.type)) {
             return false;
         }
         if (!Objects.equals(this.date, other.date)) {

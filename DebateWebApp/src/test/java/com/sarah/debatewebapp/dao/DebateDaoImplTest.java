@@ -43,7 +43,7 @@ public class DebateDaoImplTest {
         
     Debate[] debatesForTesting = {
         new Debate(1, "Technology has allowed bloody hongis to participate in the global conversation of sweet mates.", "After the Tui is skived off, you add all the pearler quater-acre patches to the pavlova you've got yourself a meal.", "live", "debatinNotHatin", "sawadeeka", 6, 3, "music", date,  new ArrayList<>(), true),
-        new Debate(2, "Elliot Smith is better than Bob Dylan.", "Mean while, in Shortland Street, Cardigan Bay and a Taniwha were up to no good", "live", "2truDebator", "mdb8r", 6, 10, "music", date, new ArrayList<>(), true),
+        new Debate(2, "Elliot Smith is better than Bob Dylan.", "Mean while, in Shortland Street, Cardigan Bay and a Taniwha were up to no good", "live", "X2truDebatorX", "mdb8r", 6, 10, "music", date, new ArrayList<>(), true),
         new Debate(3, "Going vegan is substantially better for the environment", "The random force of his rooting was on par with Uncle Bully's wicked L&P.", "wash", "mdb8r", "snowOwl22", 4, 4, "ethics", date, new ArrayList<>(), true),
         new Debate(4, "Peter Singer is one of the greatest thinkers of our time.", "Put the jug on will you bro, all these fully sick tomato sauces can wait till later.", "conWon", "snowOwl22", "mdb8r", 5, 7, "philosophy", date, new ArrayList<>(), true),
         new Debate(5, "Chron is better than dabs.", "Sup bro! Where's the chips bro, this stoked seabed is as sweet as as a same same but different", "live", "mdb8r", "debatinNotHatin", 0, 0, "technology", date, new ArrayList<>(), false),
@@ -53,7 +53,7 @@ public class DebateDaoImplTest {
     
     Debate[] duplicateDebates = {
         new Debate(1, "Technology has allowed bloody hongis to participate in the global conversation of sweet mates.", "After the Tui is skived off, you add all the pearler quater-acre patches to the pavlova you've got yourself a meal.", "live", "debatinNotHatin", "sawadeeka", 6, 3, "music", date,  new ArrayList<>(), true),
-        new Debate(2, "Elliot Smith is better than Bob Dylan.", "Mean while, in Shortland Street, Cardigan Bay and a Taniwha were up to no good", "live", "2truDebator", "mdb8r", 6, 10, "music", date, new ArrayList<>(), true),
+        new Debate(2, "Elliot Smith is better than Bob Dylan.", "Mean while, in Shortland Street, Cardigan Bay and a Taniwha were up to no good", "live", "X2truDebatorX", "mdb8r", 6, 10, "music", date, new ArrayList<>(), true),
         new Debate(3, "Going vegan is substantially better for the environment", "The random force of his rooting was on par with Uncle Bully's wicked L&P.", "wash", "mdb8r", "snowOwl22", 4, 4, "ethics", date, new ArrayList<>(), true),
         new Debate(4, "Peter Singer is one of the greatest thinkers of our time.", "Put the jug on will you bro, all these fully sick tomato sauces can wait till later.", "conWon", "snowOwl22", "mdb8r", 5, 7, "philosophy", date, new ArrayList<>(), true),
         new Debate(5, "Chron is better than dabs.", "Sup bro! Where's the chips bro, this stoked seabed is as sweet as as a same same but different", "live", "mdb8r", "debatinNotHatin", 0, 0, "technology", date, new ArrayList<>(), false),
@@ -63,7 +63,7 @@ public class DebateDaoImplTest {
     
     Debate[] similarDebates = {
         new Debate(1, "zTechnology has allowed hongis to participate in the global conversation of sweet mates.", "After the Tui is skived off, you add all the pearler quater-acre patches to the pavlova you've got yourself a meal.", "live", "debatinNotHatin", "sawadeeka", 6, 3, "music", date,  new ArrayList<>(), true),
-        new Debate(2, "zElliot Smith is better than Bob Dylan.", "Mean while, in Shortland Street, Cardigan Bay and a Taniwha were up to no good", "conWon", "2truDebator", "mdb8r", 6, 10, "music", date, new ArrayList<>(), true),
+        new Debate(2, "zElliot Smith is better than Bob Dylan.", "Mean while, in Shortland Street, Cardigan Bay and a Taniwha were up to no good", "conWon", "X2truDebatorX", "mdb8r", 6, 10, "music", date, new ArrayList<>(), true),
         new Debate(3, "zGoing vegan is substantially better for the environment", "The random force of his rooting was on par with Uncle Bully's wicked L&P.", "wash", "sawadeeka", "snowOwl22", 4, 4, "ethics", date, new ArrayList<>(), true),
         new Debate(4, "zPeter Singer is one of the greatest thinkers of our time.", "Put the jug on will you bro, all these fully sick tomato sauces can wait till later", "conWon", "snowOwl22", "mdb8r", 4, 7, "philosophy", date, new ArrayList<>(), true),
         new Debate(5, "zChron is better than dabs.", "Sup bro! Where's the chips bro, this stoked seabed is as sweet as as a same same but different", "live", "mdb8r", "debatinNotHatin", 0, 0, "politics", date, new ArrayList<>(), false),
@@ -73,7 +73,7 @@ public class DebateDaoImplTest {
     
     Debate[] introDebatesForTesting = {
         new Debate(1, "Technology has allowed bloody hongis to participate in the global conversation of sweet mates.", "After the Tui is skived off, you add all the pearler quater-acre patches to the pavlova you've got yourself a meal.", "debatinNotHatin", "music", date, true),
-        new Debate(2, "Elliot Smith is better than Bob Dylan.", "Mean while, in Shortland Street, Cardigan Bay and a Taniwha were up to no good","2truDebator", "music", date, true),
+        new Debate(2, "Elliot Smith is better than Bob Dylan.", "Mean while, in Shortland Street, Cardigan Bay and a Taniwha were up to no good","X2truDebatorX", "music", date, true),
         new Debate(3, "Going vegan is substantially better for the environment", "The random force of his rooting was on par with Uncle Bully's wicked L&P.","mdb8r", "ethics", date, true),
         new Debate(4, "Peter Singer is one of the greatest thinkers of our time.", "Put the jug on will you bro, all these fully sick tomato sauces can wait till later.", "snowOwl22", "philosophy", date, true),
         new Debate(5, "Chron is better than dabs.", "Sup bro! Where's the chips bro, this stoked seabed is as sweet as as a same same but different", "mdb8r", "technology", date, false),
@@ -88,7 +88,7 @@ public class DebateDaoImplTest {
     
     Debate[] duplicateIntroDebates = {
         new Debate(1, "Technology has allowed bloody hongis to participate in the global conversation of sweet mates.", "After the Tui is skived off, you add all the pearler quater-acre patches to the pavlova you've got yourself a meal. ", "debatinNotHatin", "music", date, true),
-        new Debate(2, "Elliot Smith is better than Bob Dylan.", "Mean while, in Shortland Street, Cardigan Bay and a Taniwha were up to no good","2truDebator", "music", date, true),
+        new Debate(2, "Elliot Smith is better than Bob Dylan.", "Mean while, in Shortland Street, Cardigan Bay and a Taniwha were up to no good","X2truDebatorX", "music", date, true),
         new Debate(3, "Going vegan is substantially better for the environment", "The random force of his rooting was on par with Uncle Bully's wicked L&P.","mdb8r", "ethics", date, true),
         new Debate(4, "Peter Singer is one of the greatest thinkers of our time.", "Put the jug on will you bro, all these fully sick tomato sauces can wait till later.", "snowOwl22", "philosophy", date, true),
         new Debate(5, "Chron is better than dabs.", "Sup bro! Where's the chips bro, this stoked seabed is as sweet as as a same same but different", "mdb8r", "technology", date, false),
@@ -103,10 +103,10 @@ public class DebateDaoImplTest {
     
     Debate[] similarIntroDebates = {
         new Debate(1, "Technology hasn't allowed blood hongis to participate in the global convos of sweet mates.", "After the Tui is skived off, you add all the pearler quater-acre patches to the pavlova you've got yourself a meal. ", "debatinNotHatin", "music", date, true),
-        new Debate(2, "Elliot Smith is better than Bob Dylan.", "Mean while, in Shortland Street, Cardigan Bay and a Taniwha were up to no good","2truDebator", "music", date, true),
+        new Debate(2, "Elliot Smith is better than Bob Dylan.", "Mean while, in Shortland Street, Cardigan Bay and a Taniwha were up to no good","X2truDebatorX", "music", date, true),
         new Debate(3, "Going vegan is substantially better for the environment", "The random force of his rooting was on par with Uncle Bully's wicked L&P.","mdb8r", "ethics", date, true),
         new Debate(4, "Peter Singer is one of the greatest thinkers of our time.", "Put the jug on will you bro, all these fully sick tomato sauces can wait till later.", "snowOwl22", "music", date, true),
-        new Debate(5, "Chron is better than dabs.", "Sup bro! Where's the chips bro, this stoked seabed is as sweet as as a same same but different", "2truDebator", "technology", date, false),
+        new Debate(5, "Chron is better than dabs.", "Sup bro! Where's the chips bro, this stoked seabed is as sweet as as a same same but different", "X2truDebatorX", "technology", date, false),
         new Debate(6, "Excessive advertisments are hurting the American mind.", "The first prize for skiving off goes to.", "snowOwl22", "politics", date, false),
         new Debate(7, "Crapitalism is actually pretty inefficient.", "Fred Dagg and his outrageously awesome Monopoly.", "sawadeeka", "philosophy", date, true),
         new Debate(8, "New Zealand version with Queen Street and stuff.", "The naff force of his playing rugby was on par with the Armed Offenders Squad's rough as guts stubbies.", "mdb8r", "cats", date, true),
@@ -117,20 +117,20 @@ public class DebateDaoImplTest {
     };
     
     Rebuttal[] rebuttalsForTesting = {
-        new Rebuttal(1, "TestTestTestContent", "cheesinForTheWeekend", 1, "challenge", date, false),
-        new Rebuttal(2, "TestTestTestConte", "snowOwl22", 1, "refutation", date, true),
-        new Rebuttal(3, "TestTestTestCont", "cheesinForTheWeekend", 1, "refutation", date, false),
-        new Rebuttal(4, "TestTestTestCon", "snowOwl22", 1, "refutation", date, true),
-        new Rebuttal(5, "TestTestTestCo", "cheesinForTheWeekend", 1, "refutation", date, false),
-        new Rebuttal(6, "TestTestTestC", "snowOwl22", 1, "refutation", date, true),
-        new Rebuttal(7, "TestTestTes", "cheesinForTheWeekend", 1, "refutation", date, false),
-        new Rebuttal(8, "TestTestT", "snowOwl22", 1, "refutation", date, true)
+        new Rebuttal(1, "TestTestTestContent", "cheesinForTheWeekend", 1, date, false),
+        new Rebuttal(2, "TestTestTestConte", "snowOwl22", 1, date, true),
+        new Rebuttal(3, "TestTestTestCont", "cheesinForTheWeekend", 1, date, false),
+        new Rebuttal(4, "TestTestTestCon", "snowOwl22", 1, date, true),
+        new Rebuttal(5, "TestTestTestCo", "cheesinForTheWeekend", 1, date, false),
+        new Rebuttal(6, "TestTestTestC", "snowOwl22", 1, date, true),
+        new Rebuttal(7, "TestTestTes", "cheesinForTheWeekend", 1, date, false),
+        new Rebuttal(8, "TestTestT", "snowOwl22", 1, date, true)
     };
     
     @Test
     public void addOneToEmptyDaoTest(){
         
-        Debate testDebate = new Debate(1, "Terrrrrrst Resolution.", "Some stuff in this test content.", "intro", "2truDebator", "cheesinForTheWeekend", 0, 0, "music", date, true);
+        Debate testDebate = new Debate(1, "Terrrrrrst Resolution.", "Some stuff in this test content.", "intro", "X2truDebatorX", "cheesinForTheWeekend", 0, 0, "music", date, true);
         testDebate.setRebuttals(rebuttals);
         Debate testCreatedDebate = testDao.createDebate(testDebate);
         Debate testDebateRetrieve = testDao.getDebateById(testDebate.getId());
@@ -156,7 +156,7 @@ public class DebateDaoImplTest {
     @Test
     public void addIntroDebateToEmptyDaoTest(){
         
-        Debate testDebate = new Debate(1, "Terrrrrrst Resolution.", "Some stuff in this test content.", "2truDebator", "music", date, false);
+        Debate testDebate = new Debate(1, "Terrrrrrst Resolution.", "Some stuff in this test content.", "X2truDebatorX", "music", date, false);
         testDebate.setRebuttals(rebuttals);
         Debate testCreatedDebate = testDao.createIntroDebate(testDebate);
         Debate testDebateRetrieve = testDao.getDebateById(testDebate.getId());
@@ -488,9 +488,9 @@ public class DebateDaoImplTest {
     
     @Test
     public void testAddRebuttalToEmptyDaoTest() {
-        Debate testDebate = new Debate(1, "Terrrrrrst Resolution.", "Some stuff in this test content.", "intro", "2truDebator", "cheesinForTheWeekend", 0, 0, "music", date, true);
+        Debate testDebate = new Debate(1, "Terrrrrrst Resolution.", "Some stuff in this test content.", "intro", "X2truDebatorX", "cheesinForTheWeekend", 0, 0, "music", date, true);
         testDao.createDebate(testDebate);
-        Rebuttal testRebuttal = new Rebuttal(1, "TestTestTestContent", "cheesinForTheWeekend", testDebate.getId(), "challenge", date, false);
+        Rebuttal testRebuttal = new Rebuttal(1, "TestTestTestContent", "cheesinForTheWeekend", testDebate.getId(), date, false);
         testDao.createRebuttal(testRebuttal);
 
         Rebuttal testRebuttalRetrieve = testDao.getDebateById(testDebate.getId()).getRebuttals().get(0);
@@ -505,7 +505,7 @@ public class DebateDaoImplTest {
     
     @Test
     public void testAddMaxRebuttalsOnADebate(){
-        Debate testDebate = new Debate(1, "Terrrrrrst Resolution.", "Some stuff in this test content.", "intro", "2truDebator", "cheesinForTheWeekend", 0, 0, "music", date, true);
+        Debate testDebate = new Debate(1, "Terrrrrrst Resolution.", "Some stuff in this test content.", "intro", "X2truDebatorX", "cheesinForTheWeekend", 0, 0, "music", date, true);
         testDao.createDebate(testDebate);
         for(Rebuttal r : rebuttalsForTesting){
             r.setDebateId(testDebate.getId());
@@ -595,6 +595,7 @@ public class DebateDaoImplTest {
             Assert.assertTrue(testSearchDebateResults.contains(d));
         }
     }
+
 
 }
     
