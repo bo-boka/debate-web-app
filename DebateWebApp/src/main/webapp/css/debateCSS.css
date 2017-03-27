@@ -18,11 +18,14 @@ body {
     /*background-color: #e0e0d1;*/
 }
 
+/*doesn't work and i don't know*/
+/*.nav-brand:hover {
+    color: #fff;
+}*/
+
 header {
-    background-color: #c2c2a3;
     padding: 4% 0% 2% 0%;
     color: #fff;
-    margin: auto;
     font-family: verdana;
     letter-spacing: 75px;
 }
@@ -40,16 +43,51 @@ header {
 
 .main {
     background-color: #fff;
-    box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.5);
     margin: 1% 3%;
 }
 
 .heading {
     font-size: 30px;
+    color:#c2c2a3;
+    padding-top: 65px;
+    padding-bottom: 35px;
 }
 
-#cat-div, .heading {
-    padding-top: 15px;
-    padding-bottom: 7px;
+.margin {
+    
+    margin-right: 25%;
+    margin-left: 25%;
+    padding: 15px;
+}
+
+#side-div{
+    padding-top: 25px;
     text-align: center;
+}
+
+.margin a {
+    color: #fff;
+}
+
+.ddbar {
+    padding: 7px;
+    margin: 3px;
+}
+
+#status-choice {
+    margin: 10px;
+    background-color:#c2c2a3;
+}
+
+.main, .margin {
+    box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.5);
+    border-radius: 10px;
+}
+
+header, .heading {
+    text-align: center; 
+}
+
+header, .ddbar, .margin {
+    background-color: #c2c2a3;
 }

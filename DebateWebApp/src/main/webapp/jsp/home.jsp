@@ -9,41 +9,42 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <link href="${pageContext.request.contextPath}/css/bootstrap.min.css" rel="stylesheet">
         <link href="${pageContext.request.contextPath}/css/debateCSS.css" rel="stylesheet">
-
+        <link rel="shortcut icon" href="${pageContext.request.contextPath}/img/deft-logo2.png">
         <title>deft debate - Home</title>
     </head>
     <body>
         <%@include file="headerFragment.jsp" %>
+        <div>
         <header>
             <div class="container">
-                <h1 style="text-align: center; font-size: 55px;">deft debate</h1>
+                <h1 style="font-size: 55px;">deft debate</h1>
             </div>
         </header>
         <div id="head1"></div>
         <div id="head2"></div>
-        <div></div>
-
+        </div>
         <div class="container-fluid main">
             <div class="row">
                 <div class="col-lg-3">
                     <div class="heading">Categories</div>
-                    
-                    <c:forEach items="${categories}" var="category">
-                        <div id="cat-div">
-                            <a href="${pageContext.request.contextPath}/categories/${category}">${category}</a><br>
-                        </div>
-                    </c:forEach>
+                    <div class="margin">
+                        <c:forEach items="${categories}" var="category">
+                            <div id="side-div">
+                                <a href="${pageContext.request.contextPath}/categories/${category}">${category}</a><br>
+                            </div>
+                        </c:forEach>
+                    </div>
 
                 </div>
                 <div class="col-lg-6">
                     <div class="heading">Debates</div>
                     
-                    <select name="statusChoice" id="status-choice">
-                        <option value="all">All</option>
-                        <option value="intro">Challenge</option>
-                        <option value="live">Live</option>
-                        <option value="voting">Vote</option>
-                        <option value="fin">Completed</option>
+                    <select name="statusChoice" id="status-choice" class="ddbar">
+                        <option value="all">all</option>
+                        <option value="intro">challenge</option>
+                        <option value="live">live</option>
+                        <option value="voting">vote</option>
+                        <option value="fin">completed</option>
                     </select><br>
                     <table class="table table-hover">
                         <tr>
@@ -56,12 +57,13 @@
                 </div>
                 <div class="col-lg-3">
                     <div class="heading">Featured Users</div>
-                    <c:forEach items="${users}" var="user">
-                        <div id="cat-div">
-                            <a href="${pageContext.request.contextPath}/profile/${user.username}">${user.username}</a><br>
-                        </div>
-                    </c:forEach>
-                    
+                    <div class="margin">
+                        <c:forEach items="${users}" var="user">
+                            <div id="side-div">
+                                <a href="${pageContext.request.contextPath}/profile/${user.username}">${user.username}</a><br>
+                            </div>
+                        </c:forEach>
+                    </div>
                 </div>
             </div>
         </div>

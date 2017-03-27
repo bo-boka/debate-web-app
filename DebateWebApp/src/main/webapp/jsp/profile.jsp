@@ -20,8 +20,16 @@
     </head>
     <body>
         <%@include file="headerFragment.jsp" %>
-
-        <div class="container-fluid"><br>
+        <div>
+            <header>
+                <div class="container">
+                    <h1 style="font-size: 55px;">deft debate</h1>
+                </div>
+            </header>
+            <div id="head1"></div>
+            <div id="head2"></div>
+        </div>
+        <div class="container-fluid main"><br>
             Username: ${oneUser.username}<br>
             First name: ${oneUser.firstName}<br>
             Last name: ${oneUser.lastName}<br>
