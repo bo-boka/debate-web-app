@@ -50,7 +50,7 @@ public class SearchController extends HttpServlet{
         if (searchInfo.equals("")){
             debs = debDao.getAllDebates();
         } else if (searchOption.equals("---")){
-            request.setAttribute("badInput", true); //change to message
+            request.setAttribute("badInput", true); 
         } else if (searchOption.equals("resolution")){
             debs = debDao.searchDebatesByResolution(searchInfo);
         } else if (searchOption.equals("category")) {
@@ -60,6 +60,8 @@ public class SearchController extends HttpServlet{
         } else if (searchOption.equals("date")) {
             debs = debDao.searchDebatesByDate(searchInfo);
         }
+        
+        if (debs.isEmpty()) request.setAttribute("badInput", true);
 
         request.setAttribute("debates", debs);
             

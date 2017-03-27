@@ -6,6 +6,8 @@
 package com.sarah.debatewebapp.dto;
 
 import java.util.Objects;
+import javax.validation.constraints.Size;
+import org.hibernate.validator.constraints.NotEmpty;
 
 /**
  *
@@ -14,14 +16,40 @@ import java.util.Objects;
 public class User {
     
     private int id;
+    @NotEmpty(message="Username cannot be empty.")
+    @Size.List({
+        @Size(max=25, message="Username cannot be more than {max} characters."),
+        @Size(min=2, message="Username cannot be less than {min} characters.")
+    })
     private String username;
+    @NotEmpty(message="Password cannot be empty.")
+    @Size.List({
+        @Size(max=16, message="Password cannot be more than {max} characters."),
+        @Size(min=8, message="Password cannot be less than {min} characters.")
+    })
     private String password;
+    @NotEmpty(message="First name cannot be empty.")
+    @Size.List({
+        @Size(max=25, message="First name cannot be more than {max} characters."),
+        @Size(min=2, message="First name cannot be less than {min} characters.")
+    })
     private String firstName;
+    @NotEmpty(message="Last name cannot be empty.")
+    @Size.List({
+        @Size(max=25, message="Last name cannot be more than {max} characters."),
+        @Size(min=2, message="Last name cannot be less than {min} characters.")
+    })
     private String lastName;
+    @NotEmpty(message="Email cannot be empty.")
+    @Size.List({
+        @Size(max=30, message="Email cannot be more than {max} characters."),
+        @Size(min=5, message="Username cannot be less than {min} characters.")
+    })
     private String email;
     private int wins;
     private int ties;
     private int losses;
+    @NotEmpty(message="Role cannot be empty.")
     private String role;
     private boolean enabled;
     

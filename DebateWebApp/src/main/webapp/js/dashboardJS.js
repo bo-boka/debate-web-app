@@ -106,21 +106,23 @@ function addDebate(){
         },
         'dataType': 'json'
     }).success(function (data, status){
-//            $("#validationErrors").hide();
+        var errorDiv = $("#validationErrors");
+        errorDiv.empty();
+        $("#validationErrors").hide();
         $('#dashRows').empty();
         loadUserDebates();
         window.onbeforeunload = function() {};
         $('#addResolution').val('');
         contentData.setContent('');
         $('#addCategory').val('');
-//        }).error(function (data, status){
-//            var errorDiv = $("#validationErrors");
-//            errorDiv.empty();
-//            $.each(data.responseJSON.fieldErrors, function (index, validationError){
-//                errorDiv.append(validationError.message);
-//                errorDiv.append("<br>");
-//                errorDiv.show();
-//            });
+    }).error(function (data, status){
+        var errorDiv = $("#validationErrors");
+        errorDiv.empty();
+        errorDiv.show();
+        $.each(data.responseJSON.fieldErrors, function (index, validationError){
+            errorDiv.append(validationError.message);
+            errorDiv.append("<br>");
+        });
     });
 }
 
@@ -141,21 +143,25 @@ function addModerator(){
         },
         'dataType': 'json'
     }).success(function (data, status){
-//            $("#validationErrors").hide();
+        var errorDiv = $("#validationErrorsMod");
+        errorDiv.empty();
+        $("#validationErrorsMod").hide();
+        
         $('#add-mod-first-name').val('');
         $('#add-mod-last-name').val('');
         $('#add-mod-email').val('');
         $('#add-mod-username').val('');
         $('#add-mod-password').val('');
         
-//        }).error(function (data, status){
-//            var errorDiv = $("#validationErrors");
-//            errorDiv.empty();
-//            $.each(data.responseJSON.fieldErrors, function (index, validationError){
-//                errorDiv.append(validationError.message);
-//                errorDiv.append("<br>");
-//                errorDiv.show();
-//            });
+        }).error(function (data, status){
+            var errorDiv = $("#validationErrorsMod");
+            errorDiv.empty();
+            errorDiv.show();
+            $.each(data.responseJSON.fieldErrors, function (index, validationError){
+                errorDiv.append(validationError.message);
+                errorDiv.append("<br>");
+                
+            });
     });
 }
 

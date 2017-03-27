@@ -31,7 +31,7 @@
                     <div class="heading">Debates</div>
                     <br>Dropdown<br><br>
                     <c:if test="${badInput}">
-                    <h1>You done it wrong. Try again.</h1><br><br>
+                    <h1>No results found. Please choose a search option and try again.</h1><br><br>
                     </c:if>
                     <c:if test="${!badInput}">
                         <c:forEach items="${debates}" var="deb">

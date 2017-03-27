@@ -16,7 +16,7 @@
         <link href="${pageContext.request.contextPath}/css/bootstrap.min.css" rel="stylesheet">
         <link href="${pageContext.request.contextPath}/css/debateCSS.css" rel="stylesheet">
 
-        <title>Deft Debate - Login</title>
+        <title>Deft Debate - Register</title>
     </head>
     <body>
         <%@include file="headerFragment.jsp" %>

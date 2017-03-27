@@ -2,7 +2,7 @@ USE DebateDB;
 USE TestDebateDB;
 USE TestUserDB;
 
-SELECT * FROM debates;
+SELECT * FROM debates WHERE affirmativeUser_id = 4;
 
 /*published debates w/o rebuttals for rowmapper...not used*/
 SELECT debates.debate_id AS id, resolution, content, deb_statuses.status, affU.username AS affirmativeUser, negU.username AS negativeUser, proVotes, conVotes, categories.category, date, published FROM debates

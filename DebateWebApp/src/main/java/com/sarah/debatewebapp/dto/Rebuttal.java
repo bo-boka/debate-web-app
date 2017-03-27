@@ -7,6 +7,8 @@ package com.sarah.debatewebapp.dto;
 
 import java.util.ArrayList;
 import java.util.Objects;
+import javax.validation.constraints.Size;
+import org.hibernate.validator.constraints.NotEmpty;
 
 /**
  *
@@ -15,10 +17,18 @@ import java.util.Objects;
 public class Rebuttal {
     
     private int id;
+    @NotEmpty(message="Content cannot be empty.")
+    @Size.List({
+        @Size(max=10000, message="Content cannot be more than {max} characters."),
+        @Size(min=10, message="Content cannot be less than {min} characters.")
+    })
     private String content;
-    private ArrayList<String> citedSources;    
+    private ArrayList<String> citedSources; 
+    @NotEmpty(message="Username cannot be empty.")
     private String user;
+    @NotEmpty(message="Debate ID cannot be empty.")
     private int debateId;
+    @NotEmpty(message="Date cannot be empty.")
     private String date;
     private boolean position;
     

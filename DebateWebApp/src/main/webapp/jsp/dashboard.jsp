@@ -12,7 +12,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Deft Debate</title>
+        <title>Deft Debate - <sec:authentication property="principal.username" /> </title>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <link href="${pageContext.request.contextPath}/css/bootstrap.min.css" rel="stylesheet">
         <link href="${pageContext.request.contextPath}/css/debateCSS.css" rel="stylesheet">
@@ -109,7 +109,7 @@
                             </div>
                         </div>
                     </form>
-                    <!--<div id="validationErrors" class="alert alert-danger" style="display:none"></div>-->
+                    <div id="validationErrorsMod" class="alert alert-danger" style="display:none"></div>
                 </div>    
             </div>
             </sec:authorize>
@@ -140,9 +140,9 @@
                     
                 </div>
                 <div class="form-group">
-<!--                    <div id="validationErrors" class="alert alert-danger" style="display:none">
+                    <div id="validationErrors" class="alert alert-danger" style="display:none">
                         <p>Make sure all fields are filled out!</p>
-                    </div>   -->
+                    </div>   
                     <div class="pull-right addButton">
                         <button type="submit" class="btn btn-lg btn-default" id="submitDebate">Submit</button>
                     </div> 
