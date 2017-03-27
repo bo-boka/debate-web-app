@@ -18,10 +18,9 @@ body {
     /*background-color: #e0e0d1;*/
 }
 
-/*doesn't work and i don't know*/
-/*.nav-brand:hover {
+.navbar-default .navbar-brand:hover {
     color: #fff;
-}*/
+}
 
 header {
     padding: 4% 0% 2% 0%;
@@ -55,8 +54,8 @@ header {
 
 .margin {
     
-    margin-right: 25%;
-    margin-left: 25%;
+    margin-right: 18%;
+    margin-left: 18%;
     padding: 15px;
 }
 
@@ -77,6 +76,73 @@ header {
 #status-choice {
     margin: 10px;
     background-color:#c2c2a3;
+}
+
+table {
+    background-color: #d6d6c2;
+    border-radius: 10px;
+    color: #777;
+}
+
+table a {
+    color: #3d3d29;
+    cursor: pointer;
+}
+
+.deb-div {
+    border: 1px solid black;
+    margin-bottom: 25px;
+    padding: 5px;
+    border-radius: 10px;
+    background-color: #d6d6c2;
+    color: #777;
+}
+
+.deb-div a {
+    color: #3d3d29;
+}
+
+.deb-div a:hover {
+    color: #fff;
+}
+
+#deb-main {
+    padding-right: 10%;
+    padding-left: 10%;
+}
+
+.deb-user {
+    border: 1px solid black;
+    padding: 7%;
+    border-radius: 40px;
+}
+
+#challengeForm, #rebuteForm {
+    margin: 7% 20%;
+}
+
+#deb-deets {
+    border: 1px solid black;
+    padding: 1%;
+    border-radius: 10px;
+    background-color: #d6d6c2;
+    color: #777;
+}
+
+#deb-status {
+    border: 1px dashed black; 
+    margin: 5% 20% 5% 20%; 
+    padding: 1%;
+    font-size: 25px;
+    background-color: #fff;
+    color: black;
+}
+
+.deb-reb {
+    border: solid 2px; 
+    padding: 1%; 
+    margin: 5% 20%;
+    background-color: #c2c2a3;
 }
 
 .main, .margin {

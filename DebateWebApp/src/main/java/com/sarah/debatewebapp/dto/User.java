@@ -18,7 +18,7 @@ public class User {
     private int id;
     @NotEmpty(message="Username cannot be empty.")
     @Size.List({
-        @Size(max=25, message="Username cannot be more than {max} characters."),
+        @Size(max=21, message="Username cannot be more than {max} characters."),
         @Size(min=2, message="Username cannot be less than {min} characters.")
     })
     private String username;

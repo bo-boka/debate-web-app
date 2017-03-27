@@ -5,7 +5,7 @@ USE DebateDB;
 
 CREATE TABLE IF NOT EXISTS `users` (
 	`user_id` int(11) NOT NULL AUTO_INCREMENT,
-	`username` varchar(25) NOT NULL,
+	`username` varchar(21) NOT NULL,
 	`password` varchar(20) NOT NULL,
     `first_name` varchar(25) NOT NULL,
     `last_name` varchar(25) NOT NULL,

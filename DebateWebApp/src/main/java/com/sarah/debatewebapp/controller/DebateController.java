@@ -70,9 +70,19 @@ public class DebateController {
     @RequestMapping(value="/debate/{id}", method=RequestMethod.GET)
     public String getSingleDebate(@PathVariable int id, Model model){
         aDebate = dao.getDebateById(id);
+        String status = aDebate.getStatus();
+        String message;
+        if (status.equals("intro")) message = "You can challenge this debate!";
+        else if (status.equals("live")) message = "This is a live debate.";
+        else if (status.equals("voting")) message = "You can vote on this resolution!";
+        else if (status.equals("proWon")) message = "The affirmative won this debate.";
+        else if (status.equals("conWon")) message = "The challenger won this debate.";
+        else if (status.equals("wash")) message = "It's a tie!";
+        else message= "Oops! Something went wrong.";
         model.addAttribute("oneDebate", aDebate);
         List<String> categories = dao.getAllCategories();
         model.addAttribute("categories", categories);
+        model.addAttribute("message", message);
         return "single";
     } 
     

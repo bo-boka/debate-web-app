@@ -19,25 +19,6 @@
         <link rel="shortcut icon" href="${pageContext.request.contextPath}/img/deft-logo2.png">
         
         <script src='//cdn.tinymce.com/4/tinymce.min.js'></script>
-        <script type="text/javascript">
-            tinymce.init({
-                selector: '#addDebateContent',
-                min_width: 400,
-                min_height: 300,
-                plugins: [
-                    'advlist autolink autosave charmap hr link lists print preview ',
-                    ' wordcount visualblocks visualchars image imagetools',
-                    'table contextmenu emoticons template',
-                    'paste save searchreplace textcolor'
-                ],
-                contextmenu: "link image",
-                imagetools_toolbar: "rotateleft rotateright | flipv fliph | editimage imageoptions",
-                toolbar: 'insertfile undo redo | styleselect | forecolor backcolor bold italic underline \n\
-                | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent \n\
-                | link charmap image emoticons | preview save',
-                images_upload_base_path: '${pageContext.request.contextPath}/img'
-            });
-        </script>
     </head>
     <body>
         <%@include file="headerFragment.jsp" %>

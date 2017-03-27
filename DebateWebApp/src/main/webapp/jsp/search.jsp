@@ -28,37 +28,42 @@
             <div class="row">
                 <div class="col-lg-3">
                     <div class="heading">Categories</div>
-                    
-                    <c:forEach items="${categories}" var="category">
-                        <div id="cat-div">
-                            <a href="${pageContext.request.contextPath}/categories/${category}">${category}</a><br>
-                        </div>
-                    </c:forEach>
-
+                    <div class="margin">
+                        <c:forEach items="${categories}" var="category">
+                            <div id="side-div">
+                                <a href="${pageContext.request.contextPath}/categories/${category}">${category}</a><br>
+                            </div>
+                        </c:forEach>
+                    </div>
                 </div>
+                
                 <div class="col-lg-6">
                     <div class="heading">Debates</div>
-                    <br>Dropdown<br><br>
                     <c:if test="${badInput}">
-                    <h1>No results found. Please choose a search option and try again.</h1><br><br>
+                        <h1>No results found. Please choose a search option and try again.</h1><br><br>
                     </c:if>
                     <c:if test="${!badInput}">
                         <c:forEach items="${debates}" var="deb">
-                            
-                            <a href="${pageContext.request.contextPath}/debate/${deb.id}">${deb.resolution}</a><br>
-                            ${deb.affirmativeUser} <br>
-                            ${deb.date} <br><br>
-                        
+                            <div class="deb-div">
+                                <h4><a href="${pageContext.request.contextPath}/debate/${deb.id}">${deb.resolution}</a></h4>
+                                <hr>
+                                <div><strong>Affirmative:</strong> ${deb.affirmativeUser}</div>
+                                <div><strong>Status:</strong> ${deb.status}</div>
+                                <div align="right">${deb.date}</div>
+                            </div>
                         </c:forEach>
                     </c:if>
                 </div>
+                
                 <div class="col-lg-3">
                     <div class="heading">Featured Users</div>
-                    <c:forEach items="${users}" var="user">
-                        <div id="cat-div">
-                            <a href="${pageContext.request.contextPath}/profile/${user.username}">${user.username}</a><br>
-                        </div>
-                    </c:forEach>
+                    <div class="margin">
+                        <c:forEach items="${users}" var="user">
+                            <div id="side-div">
+                                <a href="${pageContext.request.contextPath}/profile/${user.username}">${user.username}</a><br>
+                            </div>
+                        </c:forEach>
+                    </div>
                 </div>
             </div>
         </div>
