@@ -24,19 +24,20 @@
             <div id="head2"></div>
         </div>
         <div class="container-fluid main">
-            <h1>Please log in</h1>
-            <hr/>
-
-            <c:if test="${param.login_error == 1}">
-                <h3>Wrong Id or Password. Try Again.</h3>
-            </c:if>
-            <div class="row">
-                <div class="col-sm-4">
-                <form method="POST" action="j_spring_security_check">
-                    <p>Username: </p> <input class="form-control" name="j_username" type="text" /><br>
-                    <p>Password: </p> <input class="form-control" name="j_password" type="password"/>
-                    <button class="btn btn-default pull-right" type="submit" >Sign In</button>
-                </form>
+            <div id="login">
+                <h1>Please log in</h1>
+                <hr/>
+                <c:if test="${param.login_error == 1}">
+                    <h3>Wrong Id or Password. Try Again.</h3>
+                </c:if>
+                <div class="row">
+                    <div class="col-sm-12">
+                    <form method="POST" action="j_spring_security_check">
+                        <p>Username: </p> <input class="form-control" name="j_username" type="text" /><br>
+                        <p>Password: </p> <input class="form-control" name="j_password" type="password"/><br>
+                        <button class="btn btn-default pull-right" type="submit" >Sign In</button><br>
+                    </form>
+                    </div>
                 </div>
             </div>
         </div>

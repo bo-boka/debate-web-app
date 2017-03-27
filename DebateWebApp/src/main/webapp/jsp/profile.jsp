@@ -28,15 +28,20 @@
             </header>
             <div id="head1"></div>
             <div id="head2"></div>
-        </div>
-        <div class="container-fluid main"><br>
-            Username: ${oneUser.username}<br>
+        </div> <!--header end-->
+        
+        <div class="container-fluid main">
+            
+            <div class="heading">${oneUser.username}</div>
+            <center>
+            <div>
             First name: ${oneUser.firstName}<br>
             Last name: ${oneUser.lastName}<br>
             Wins: ${oneUser.wins}<br>
             Losses: ${oneUser.losses}<br>
             Ties: ${oneUser.ties}<br>
-            
+            </div>
+            </center>
         </div>
 
         <script src="${pageContext.request.contextPath}/js/jquery-2.2.4.min.js"></script>

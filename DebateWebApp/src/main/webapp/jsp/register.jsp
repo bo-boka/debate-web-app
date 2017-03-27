@@ -29,15 +29,15 @@
             </header>
             <div id="head1"></div>
             <div id="head2"></div>
-        </div>
+        </div><!--end of head-->
         <div class="container-fluid main">
             <div class="row">
-                <div class="col-md-6">
-                    <h2>Register</h2>
-                </div>
-                <hr>
-                <div class="col-md-6">
+                <div class="col-md-8">
                     <form action="register" method="POST" class="form-horizontal" role="form">
+                        <center>
+                        <h2>Register</h2>
+                        </center>
+                        <hr>
                         <div class="form-group">
                             <label for="add-first-name" class="col-md-4 control-label">First Name:</label>
                             <div class="col-md-8">
@@ -70,12 +70,12 @@
                         </div>
                         <div class="form-group">
                             <div class="col-md-offset-4 col-md-8">
-                                <button type="submit" id="user-register-button" class="btn btn-default">Register</button>
+                                <button type="submit" id="user-register-button" class="btn btn-primary">Register</button>
                             </div>
                         </div>
                     </form>
                     <!--<div id="validationErrors" class="alert alert-danger" style="display:none"></div>-->
-                </div>    
+                </div>   
             </div>
         </div>
 

@@ -23,46 +23,85 @@
     <body>
         <%@include file="headerFragment.jsp" %>
         <div>
-            <header>
-                <div class="container">
-                    <h1 style="font-size: 55px;">deft debate</h1>
-                </div>
-            </header>
+            <header></header>
             <div id="head1"></div>
             <div id="head2"></div>
-        </div>
+        </div><!--end dash head-->
         <div class="container-fluid main">
-            <sec:authentication var="user" property="principal.username" /> 
-            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#edit-user-modal" data-user-name="${user}">Edit Account</button>
-            <%@include file="editUserModalFrag.jsp" %>
-            
-            <h3>My Debates</h3>
-            <table class="table table-hover">
-                <tr>
-                    <th width="50%">Resolution</th>
-                    <th>User</th>
-                    <th>Date</th>
-                </tr>
-                <tbody id="dashRows"></tbody>
-            </table>
-            <br><br>
-            <sec:authorize access="hasRole('ROLE_ADMIN')">
-            <h3>Unpublished Debates</h3>
-            <table class="table table-hover">
-                <tr>
-                    <th width="50%">Resolution</th>
-                    <th>User</th>
-                    <th>Date</th>
-                </tr>
-                <tbody id="unpubRows"></tbody>
-            </table>
+             
+            <div align="right">
+                <sec:authentication var="user" property="principal.username" />
+                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#edit-user-modal" data-user-name="${user}">Edit Account</button>
+            </div>
             <div class="row">
-                <div class="col-md-6">
-                    <h2>Create Moderator</h2>
+                <div class="col-sm-6">
+                    <form class="form-horizontal" id="debateForm">
+                        <center><h3>Add Debate</h3></center>
+                        <hr>
+                        <div class="form-group">
+                            <label for="addResolution" class="col-sm-2 control-label">Resolution</label>
+                            <div class="col-sm-4">
+                                <input type="text" class="form-control" id="addResolution" placeholder="Resolution">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            
+                            <div class="col-sm-11">
+                                <textarea name="addDebateContent" id="addDebateContent"></textarea>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="addDebateCategory" class="col-sm-2 control-label">Category</label>
+                            <div class="col-sm-4">
+                                <select name="add-debate-category" class="form-control" id="addCategory">
+                                    <c:forEach items="${categories}" var="category">
+                                        <option value="${category}">${category}</option>
+                                    </c:forEach>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div id="validationErrors" class="alert alert-danger" style="display:none">
+                                <p>Make sure all fields are filled out!</p>
+                            </div>   
+                            <div class="col-sm-3 pull-right addButton">
+                                <button type="submit" class="btn btn-lg btn-primary" id="submitDebate">Submit</button>
+                            </div> 
+                        </div>
+                    </form>
                 </div>
-                <hr>
-                <div class="col-md-6">
+                <div class="col-sm-6">
+                    <div class="heading">My Debates</div>
+                    <table class="table table-hover">
+                        <tr>
+                            <th width="50%">Resolution</th>
+                            <th>User</th>
+                            <th>Date</th>
+                        </tr>
+                        <tbody id="dashRows"></tbody>
+                    </table>
+                    <sec:authorize access="hasRole('ROLE_ADMIN')">
+                        <div class="heading">Unpublished Debates</div>
+                        <table class="table table-hover">
+                            <tr>
+                                <th width="50%">Resolution</th>
+                                <th>User</th>
+                                <th>Date</th>
+                            </tr>
+                            <tbody id="unpubRows"></tbody>
+                        </table>
+                    </sec:authorize>
+                </div>
+            </div>
+            <!--mod stuff-->
+            <sec:authorize access="hasRole('ROLE_ADMIN')">
+            <div class="row">
+                <div class="col-sm-6">
                     <form class="form-horizontal" role="form">
+                        <center><br><br><br>
+                        <h2>Create Moderator</h2>
+                        <hr>
+                        </center>
                         <div class="form-group">
                             <label for="add-mod-first-name" class="col-md-4 control-label">First Name:</label>
                             <div class="col-md-8">
@@ -103,41 +142,7 @@
                 </div>    
             </div>
             </sec:authorize>
-            <form class="form-horizontal" id="debateForm">
-                <h4>Add Debate</h4>
-                <hr>
-                <div class="form-group">
-                    <label for="addResolution" class="col-sm-1 control-label">Resolution</label>
-                    <div class="col-sm-4">
-                        <input type="text" class="form-control" id="addResolution" placeholder="Resolution">
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label for="addDebateContent" class="weak col-sm-1 control-label">Content</label>
-                    <div class="col-sm-11">
-                        <textarea name="addDebateContent" id="addDebateContent"></textarea>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label for="addDebateCategory" class="col-sm-1 control-label">Category</label>
-                    <div class="col-sm-4">
-                        <select name="add-debate-category" class="form-control" id="addCategory">
-                            <c:forEach items="${categories}" var="category">
-                                <option value="${category}">${category}</option>
-                            </c:forEach>
-                        </select>
-                    </div>
-                    
-                </div>
-                <div class="form-group">
-                    <div id="validationErrors" class="alert alert-danger" style="display:none">
-                        <p>Make sure all fields are filled out!</p>
-                    </div>   
-                    <div class="pull-right addButton">
-                        <button type="submit" class="btn btn-lg btn-default" id="submitDebate">Submit</button>
-                    </div> 
-                </div>
-            </form>
+            <%@include file="editUserModalFrag.jsp" %>
         </div>
         <script src="${pageContext.request.contextPath}/js/jquery-2.2.4.min.js"></script>
         <script src="${pageContext.request.contextPath}/js/bootstrap.min.js"></script>

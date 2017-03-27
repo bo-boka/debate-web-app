@@ -138,10 +138,18 @@ table a {
     color: black;
 }
 
-.deb-reb {
+.deb-reb, #login {
     border: solid 2px; 
     padding: 1%; 
     margin: 5% 20%;
+    background-color: #c2c2a3;
+}
+
+#login, #reg{
+    border: solid 1px; 
+    padding: 1%; 
+    margin: 5% 30%;
+    border-radius: 10px;
     background-color: #c2c2a3;
 }
 
