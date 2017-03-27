@@ -15,6 +15,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <link href="${pageContext.request.contextPath}/css/bootstrap.min.css" rel="stylesheet">
         <link href="${pageContext.request.contextPath}/css/debateCSS.css" rel="stylesheet">
+        <link rel="shortcut icon" href="${pageContext.request.contextPath}/img/deft-logo2.png">
         
         <script src='//cdn.tinymce.com/4/tinymce.min.js'></script>
         <script type="text/javascript">
@@ -54,7 +55,7 @@
                 images_upload_base_path: '${pageContext.request.contextPath}/img'
             });
         </script>
-        <title>Deft Debate</title>
+        <title>deft | ${oneDebate.resolution}</title>
     </head>
     <body>
         <%@include file="headerFragment.jsp" %>

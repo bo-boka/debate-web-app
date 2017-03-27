@@ -15,8 +15,9 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <link href="${pageContext.request.contextPath}/css/bootstrap.min.css" rel="stylesheet">
         <link href="${pageContext.request.contextPath}/css/debateCSS.css" rel="stylesheet">
-
-        <title>Deft Debate - Register</title>
+        <link rel="shortcut icon" href="${pageContext.request.contextPath}/img/deft-logo2.png">
+        
+        <title>deft debate | register</title>
     </head>
     <body>
         <%@include file="headerFragment.jsp" %>

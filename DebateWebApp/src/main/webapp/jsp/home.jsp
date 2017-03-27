@@ -10,18 +10,18 @@
         <link href="${pageContext.request.contextPath}/css/bootstrap.min.css" rel="stylesheet">
         <link href="${pageContext.request.contextPath}/css/debateCSS.css" rel="stylesheet">
         <link rel="shortcut icon" href="${pageContext.request.contextPath}/img/deft-logo2.png">
-        <title>deft debate - Home</title>
+        <title>deft debate | home</title>
     </head>
     <body>
         <%@include file="headerFragment.jsp" %>
         <div>
-        <header>
-            <div class="container">
-                <h1 style="font-size: 55px;">deft debate</h1>
-            </div>
-        </header>
-        <div id="head1"></div>
-        <div id="head2"></div>
+            <header>
+                <div class="container">
+                    <h1 style="font-size: 55px;">deft debate</h1>
+                </div>
+            </header>
+            <div id="head1"></div>
+            <div id="head2"></div>
         </div>
         <div class="container-fluid main">
             <div class="row">
