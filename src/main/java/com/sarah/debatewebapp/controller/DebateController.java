@@ -13,6 +13,7 @@ import java.security.Principal;
 import java.util.ArrayList;
 import java.util.List;
 import javax.inject.Inject;
+import javax.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -102,8 +103,7 @@ public class DebateController {
     @ResponseBody
     @ResponseStatus(HttpStatus.CREATED)
     @RequestMapping(value="/debate/challenge", method=RequestMethod.POST)
-    //add @Valid as parameter
-    public Rebuttal createChallenge(@RequestBody Rebuttal rebuttal){
+    public Rebuttal createChallenge(@Valid @RequestBody Rebuttal rebuttal){
         rebuttal.setDebateId(aDebate.getId());
         rebuttal.setUser(currentUser);
         aDebate.setNegativeUser(currentUser);

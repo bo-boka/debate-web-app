@@ -17,18 +17,18 @@ import org.hibernate.validator.constraints.NotEmpty;
 public class Rebuttal {
     
     private int id;
-    @NotEmpty(message="Content cannot be empty.")
-    @Size.List({
-        @Size(max=10000, message="Content cannot be more than {max} characters."),
-        @Size(min=10, message="Content cannot be less than {min} characters.")
-    })
+//    @NotEmpty(message="Content cannot be empty.")
+//    @Size.List({
+//        @Size(max=10000, message="Content cannot be more than {max} characters."),
+//        @Size(min=10, message="Content cannot be less than {min} characters.")
+//    })
     private String content;
     private ArrayList<String> citedSources; 
-    @NotEmpty(message="Username cannot be empty.")
+//    @NotEmpty(message="Username cannot be empty.")
     private String user;
-    @NotEmpty(message="Debate ID cannot be empty.")
+//    @NotEmpty(message="Debate ID cannot be empty.")
     private int debateId;
-    @NotEmpty(message="Date cannot be empty.")
+//    @NotEmpty(message="Date cannot be empty.")
     private String date;
     private boolean position;
     
