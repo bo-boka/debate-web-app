@@ -1,4 +1,3 @@
-<!-- #1 - Make security the default namespace -->
 <beans:beans xmlns="http://www.springframework.org/schema/security"
              xmlns:beans="http://www.springframework.org/schema/beans"
              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
@@ -8,6 +7,7 @@
  http://www.springframework.org/schema/security/spring-security-3.1.xsd">
     <beans:bean id="webexpressionHandler"
                 class="org.springframework.security.web.access.expression.DefaultWebSecurityExpressionHandler"/> 
+    <bean:bean id="encoder" class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder">
     <beans:bean id="simpleUrlAuthenticationSuccessHandler" class="org.springframework.security.web.authentication.SimpleUrlAuthenticationSuccessHandler">
         <beans:property name="defaultTargetUrl" value="/dashboard"/>
         <beans:property name="targetUrlParameter" value="spring-security-redirect"/>
@@ -29,17 +29,23 @@
         <!-- #3d - Go back to home page when user logs out -->
         <logout logout-success-url="/home" />
         <!-- #3e - Access to these endpoints require admin role -->
-    
-        <!-- #3f - Access to all other controller endpoints require user role -->
-        <!--        <intercept-url pattern="/**" access="ROLE_USER" />
-        <intercept-url pattern="/home" access="ROLE_ADMIN" />-->
-        <intercept-url pattern="/search/**" access="IS_AUTHENTICATED_ANONYMOUSLY, IS_AUTHENTICATED_FULLY" />
         <intercept-url pattern="/dashboard" access="IS_AUTHENTICATED_FULLY" />
+        <intercept-url pattern="/mod" access="ROLE_ADMIN" />
+        <intercept-url pattern="/unpubDebates" access="ROLE_ADMIN" />
+        <intercept-url pattern="/debate/deb" access="ROLE_ADMIN" />
+        <intercept-url pattern="/debate/del/**" access="ROLE_ADMIN" />
+        <intercept-url pattern="/debate/rebuttal" access="IS_AUTHENTICATED_FULLY" />
+        <intercept-url pattern="/debate/challenge" access="IS_AUTHENTICATED_FULLY" />
+        <!-- #3f - Access to all other controller endpoints require user role -->
+        <!--<intercept-url pattern="/**" access="ROLE_USER" />-->
+        <intercept-url pattern="/search/**" access="IS_AUTHENTICATED_ANONYMOUSLY, IS_AUTHENTICATED_FULLY" />
+        
     </http>
     <!-- #4 - Authentication Manager config -->
     <authentication-manager>
         <!-- #4a - Authentication Provider - we're using the JDBC service -->
         <authentication-provider>
+            <password-encoder ref="encoder"/>
             <!-- #4b - Tells Spring Security where to look for user information -->
             <!-- We use the dataSource defined in spring-persistence.xml -->
             <!-- and we give Spring Security the query to use to lookup -->

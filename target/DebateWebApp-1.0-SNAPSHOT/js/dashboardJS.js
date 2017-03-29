@@ -110,13 +110,17 @@ function goToDebate(id){
 
 function addDebate(){
     var contentData = tinyMCE.get('addDebateContent');
+    var errorDiv = $("#validationErrors");
     $.ajax({
         url: 'debate',
         type: 'POST',
         data: JSON.stringify({
             resolution: $('#addResolution').val(),
             content: contentData.getContent(),
-            category: $('#addCategory').val()
+            category: $('#addCategory').val(),
+            affirmativeUser:  'user', //dummie data to pass validation
+            date: 'date', //same
+            status: 'intro' //same
         }),
         headers: {
             'Accept': 'application/json',
@@ -124,9 +128,8 @@ function addDebate(){
         },
         'dataType': 'json'
     }).success(function (data, status){
-        var errorDiv = $("#validationErrors");
         errorDiv.empty();
-        $("#validationErrors").hide();
+        errorDiv.hide();
         $('#dashRows').empty();
         loadUserDebates();
         window.onbeforeunload = function() {};
@@ -134,7 +137,6 @@ function addDebate(){
         contentData.setContent('');
         $('#addCategory').val('');
     }).error(function (data, status){
-        var errorDiv = $("#validationErrors");
         errorDiv.empty();
         errorDiv.show();
         $.each(data.responseJSON.fieldErrors, function (index, validationError){
@@ -161,9 +163,6 @@ function addModerator(){
         },
         'dataType': 'json'
     }).success(function (data, status){
-        var errorDiv = $("#validationErrorsMod");
-        errorDiv.empty();
-        $("#validationErrorsMod").hide();
         
         $('#add-mod-first-name').val('');
         $('#add-mod-last-name').val('');
@@ -178,7 +177,6 @@ function addModerator(){
             $.each(data.responseJSON.fieldErrors, function (index, validationError){
                 errorDiv.append(validationError.message);
                 errorDiv.append("<br>");
-                
             });
     });
 }
@@ -219,7 +217,15 @@ function editUser(){
             password: $('#edit-password').val()
         })
     }).success(function(data){
-        
+        window.location.reload(true);
+    }).error(function (data, status){
+            var errorDiv = $("#validationEditUserErrors");
+            errorDiv.empty();
+            errorDiv.show();
+            $.each(data.responseJSON.fieldErrors, function (index, validationError){
+                errorDiv.append(validationError.message);
+                errorDiv.append("<br>");
+            });
     });
 }
 

@@ -74,7 +74,9 @@
                             </div>
                         </div>
                     </form>
-                    <!--<div id="validationErrors" class="alert alert-danger" style="display:none"></div>-->
+                    <c:if test="${not empty message}">
+                        <div id="validationRegisterUserErrors" class="alert alert-danger" style="display:none">${message}</div>
+                    </c:if>
                 </div>   
             </div>
         </div>

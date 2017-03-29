@@ -25,8 +25,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @Controller
 public class SearchController extends HttpServlet{
     
-    DebateDao debDao;
-    UserDao userDao;
+    private DebateDao debDao;
+    private UserDao userDao;
     
     @Inject
     public SearchController(DebateDao debDao, UserDao userDao){
@@ -48,7 +48,7 @@ public class SearchController extends HttpServlet{
         String searchInfo = request.getParameter("searchInfo");
 
         if (searchInfo.equals("")){
-            debs = debDao.getAllDebates();
+            request.setAttribute("badInput", true); 
         } else if (searchOption.equals("---")){
             request.setAttribute("badInput", true); 
         } else if (searchOption.equals("resolution")){

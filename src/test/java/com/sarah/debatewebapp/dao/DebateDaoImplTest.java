@@ -128,6 +128,13 @@ public class DebateDaoImplTest {
     };
     
     @Test
+    public void testAgainstEmptyDao(){
+        junit.framework.Assert.assertNull("Asking for a nonexistent debate should return null", testDao.getDebateById(123));
+        junit.framework.Assert.assertNotNull("List all debates shouldn't be null.", testDao.getAllDebates());
+        junit.framework.Assert.assertEquals("Expectedd debate count of all published debates is nonzero against empty dao.", 0, testDao.getAllDebates().size());
+    }
+    
+    @Test
     public void addOneToEmptyDaoTest(){
         
         Debate testDebate = new Debate(1, "Terrrrrrst Resolution.", "Some stuff in this test content.", "intro", "X2truDebatorX", "cheesinForTheWeekend", 0, 0, "music", date, true);
@@ -179,12 +186,7 @@ public class DebateDaoImplTest {
         junit.framework.Assert.assertFalse("Returned debate in getAllDebates should not match expected.", testDao.getAllDebates().contains(testDebate));
     }
     
-    @Test
-    public void testAgainstEmptyDao(){
-        junit.framework.Assert.assertNull("Asking for a nonexistent debate should return null", testDao.getDebateById(123));
-        junit.framework.Assert.assertNotNull("List all debates shouldn't be null.", testDao.getAllDebates());
-        junit.framework.Assert.assertEquals("Expectedd debate count of all published debates is nonzero against empty dao.", 0, testDao.getAllDebates().size());
-    }
+    
     
     @Test
     public void testUpdateDebate(){

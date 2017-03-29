@@ -100,6 +100,7 @@
                                     <textarea name="addChallengeContent" id="add-challenge-content"></textarea>
                                 </div>
                             </div>
+                            <div id="validationChallengeError" class="alert alert-danger" style="display:none"></div>
                             <button type="submit" class="btn btn-lg btn-warning addButton" id="challenge">Challenge</button>
                         </form>
                     </c:if>
@@ -123,6 +124,7 @@
                                     <textarea name="addRebuttalContent" id="add-rebuttal-content"></textarea>
                                 </div>
                             </div>
+                            <div id="validationRebuttalError" class="alert alert-danger" style="display:none"></div>
                             <button type="submit" class="btn btn-lg btn-warning addButton" id="rebute">Reply</button>
                         </form>
                     </c:if>

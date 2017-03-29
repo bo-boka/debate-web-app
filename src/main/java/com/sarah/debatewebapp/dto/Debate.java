@@ -20,31 +20,29 @@ import org.hibernate.validator.constraints.NotEmpty;
 public class Debate {
     private int id;
     
-    
-//    @List({
-        
-//        @Length(min=5, message="Resolution cannot be less than {min} characters.")
-//    })
-    @NotEmpty(message="Resolution cannot be empty.")
-    @Length(max=5, message="Resolution cannot be more than characters.")
+    //    @NotEmpty(message="Resolution cannot be empty.")
+    @List({
+        @Length(max=110, message="Resolution cannot be more than characters."),
+        @Length(min=5, message="Resolution cannot be less than {min} characters.")
+    })
     private String resolution;
 //    @NotEmpty(message="Content cannot be empty.")
-//    @Size.List({
-//        @Size(max=10000, message="Content cannot be more than {max} characters."),
-//        @Size(min=10, message="Content cannot be less than {min} characters.")
-//    })
+    @List({
+        @Length(max=10000, message="Content cannot be more than {max} characters."),
+        @Length(min=10, message="Content cannot be less than {min} characters.")
+    })
     private String content;
     private ArrayList<String> citedSources;
-//    @NotEmpty(message="Status cannot be empty.")
-    private String status; //statuses are 'intro', 'live', 'proWon', 'conWon', or 'wash' ..(or maybe 'expired'?)
-//    @NotEmpty(message="Pro user cannot be empty.")
+    @NotEmpty(message="Status cannot be empty.")
+    private String status; //statuses are 'intro', 'live', 'proWon', 'conWon', or 'wash' ..(or maybe 'expired' eventually?)
+    @NotEmpty(message="Pro user cannot be empty.")
     private String affirmativeUser;
     private String negativeUser;
     private int proVotes;
     private int conVotes; 
-//    @NotEmpty(message="Category cannot be empty.")
+    @NotEmpty(message="Category cannot be empty.")
     private String category;
-//    @NotEmpty(message="Date cannot be empty.")
+    @NotEmpty(message="Date cannot be empty.")
     private String date;
     private ArrayList<Rebuttal> rebuttals;
     private boolean published;

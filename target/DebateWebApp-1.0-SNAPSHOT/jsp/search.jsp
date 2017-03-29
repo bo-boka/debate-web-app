@@ -40,7 +40,7 @@
                 <div class="col-lg-6">
                     <div class="heading">Debates</div>
                     <c:if test="${badInput}">
-                        <h1>No results found. Please choose a search option and try again.</h1><br><br>
+                        <h1 style="color: red;">No results found. Please choose a search option and try again.</h1><br><br>
                     </c:if>
                     <c:if test="${!badInput}">
                         <c:forEach items="${debates}" var="deb">

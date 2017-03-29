@@ -6,7 +6,7 @@ USE DebateDB;
 CREATE TABLE IF NOT EXISTS `users` (
 	`user_id` int(11) NOT NULL AUTO_INCREMENT,
 	`username` varchar(21) NOT NULL,
-	`password` varchar(20) NOT NULL,
+	`password` varchar(70) NOT NULL,
     `first_name` varchar(25) NOT NULL,
     `last_name` varchar(25) NOT NULL,
     `email` varchar(30) NOT NULL,
@@ -19,19 +19,19 @@ CREATE TABLE IF NOT EXISTS `users` (
 );
  
 INSERT INTO `users` (`user_id`, `username`, `password`, `first_name`, `last_name`, `email`, `wins`, `ties`, `losses`, `enabled`) 
-VALUES (1, 'debatinNotHatin', 'password', 'Ally', 'Smith', 'asmith@debator.com', 47, 10, 20, 1),
-	(2, 'X2truDebatorX', 'password', 'Bob', 'Gualla', 'email@sendit.com', 10, 3, 10, 1),
-    (3, 'cheesinForTheWeekend', 'password', 'Lana', 'Brown', 'email@sendin.com', 13, 7, 3, 1),
-    (4, 'mdb8r', 'password', 'Arielle', 'Cho', 'thisemail@gmail.com', 13, 10, 25, 1),
-    (5, 'snowOwl22', 'password', 'Gertrude', 'Hammerquist', 'hammyq@gmail.com', 14, 3, 8, 1),
-	(6, 'sawadeeka', 'password', 'Juan', 'Jimenez', 'jimenez@gmail.com', 5, 4, 10, 1),
-	(7, 'SmoothDeb', 'password', 'Neena', 'Gupta', 'neenag@gmail.com', 12, 2, 7, 1),
-    (8, 'CoolAidComrade', 'password', 'Jenson', 'Hearthrow', 'jedeez@gmail.com', 11, 3, 0, 1),
-    (9, 'KilGore', 'password', 'Polly', 'Kilgore', 'dlsjfd@jl.com', 30, 12, 10, 1),
-    (10, 'trash_monster', 'password', 'Sal', 'Trevnal', 'kjdf@gmail.com', 9, 4, 13, 1),
-    (11, 'alaDDin', 'password', 'Trevor', 'OMalley', 'djlk@gmail.com', 3, 0, 1, 1),
-    (12, 'xXbreakdoWnz4lifeXx', 'password', 'Fran', 'Snape', 'lkf@gmail.com', 50, 6, 8, 1),
-    (13, 'synthWave_Rider', 'password', 'Loni', 'Bramer', 'jld@gmail.com', 70, 10, 20, 1);
+VALUES (1, 'debatinNotHatin', '$2a$10$dF7HhXvoH8.M7VlhjRZ1beNIPoN16TKLI5150iOsBETF2p/CaNvl.', 'Ally', 'Smith', 'asmith@debator.com', 47, 10, 20, 1),
+	(2, 'X2truDebatorX', '$2a$10$DDpCsLrSx5yND6UPDqYTkO6qPe9aLSW4FaMXfn7XNBoHorZDve4ZW', 'Bob', 'Gualla', 'email@sendit.com', 10, 3, 10, 1),
+    (3, 'cheesinForTheWeekend', '$2a$10$RH75sfoK8fD/fj2CwoCAnOnpcLNeThm3qYrFxJn4Tqjr7N6G/oC7e', 'Lana', 'Brown', 'email@sendin.com', 13, 7, 3, 1),
+    (4, 'mdb8r', '$2a$10$e4Qqz/MomUAmlTpcp/dLE.osICahHMTKmzn.DbME6yPRyPIotnXFq', 'Arielle', 'Cho', 'thisemail@gmail.com', 13, 10, 25, 1),
+    (5, 'snowOwl22', '$2a$10$PCbwN9rEQi88J/W0QmlS6usmykba4UO2ytCmaHopU9.sNG2heReeK', 'Gertrude', 'Hammerquist', 'hammyq@gmail.com', 14, 3, 8, 1),
+	(6, 'sawadeeka', '$2a$10$rwA5JeH7dZpAJjHKOjdAiOU6InutHh.7AoaJ3xAvRad5Z9RO4cGg2', 'Juan', 'Jimenez', 'jimenez@gmail.com', 5, 4, 10, 1),
+	(7, 'SmoothDeb', '$2a$10$7MSqCrWclTQg5dML9/D./.a/q7RRyJ5LspDJXg24CB1lq48YW2B8O', 'Neena', 'Gupta', 'neenag@gmail.com', 12, 2, 7, 1),
+    (8, 'CoolAidComrade', '$2a$10$b7sqe7/BpsApUPII4fy61ODSVjNl.wodZjiBwH5E2XVCMx2W00RAa', 'Jenson', 'Hearthrow', 'jedeez@gmail.com', 11, 3, 0, 1),
+    (9, 'KilGore', '$2a$10$t6LgVts77wDKcIBHz2p3R.Ot3ruZOQSMnsOckWlWP7jCC89IYs0MK', 'Polly', 'Kilgore', 'dlsjfd@jl.com', 30, 12, 10, 1),
+    (10, 'trash_monster', '$2a$10$HKGpFJWLmO5IZ0FQGU20AeKvR2gandd7OG5MONucQJHxbg1x3UANK', 'Sal', 'Trevnal', 'kjdf@gmail.com', 9, 4, 13, 1),
+    (11, 'alaDDin', '$2a$10$J6BpDmvJrFOp5I7MYOFh7uTf5Gl2gLww1mk.IKgqbUZhDnb6OGGWO', 'Trevor', 'OMalley', 'djlk@gmail.com', 3, 0, 1, 1),
+    (12, 'xXbreakdoWnz4lifeXx', '$2a$10$Q0Rhl6GdyY./6.mjua77nODmPK80LyWNgBkXv4GErHZgOxy97JotS', 'Fran', 'Snape', 'lkf@gmail.com', 50, 6, 8, 1),
+    (13, 'synthWave_Rider', '$2a$10$QtBuy/SnGF56LPHUJs8n7OPiaxGpOzkwx4izWv9Ipz0pfrLCCHdeO', 'Loni', 'Bramer', 'jld@gmail.com', 70, 10, 20, 1);
  
  
 CREATE TABLE IF NOT EXISTS `authorities` (

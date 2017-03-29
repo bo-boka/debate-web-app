@@ -28,7 +28,7 @@
                 <h1>Please log in</h1>
                 <hr/>
                 <c:if test="${param.login_error == 1}">
-                    <h3>Wrong Id or Password. Try Again.</h3>
+                    <h3 style="color: red;">Wrong Id or Password. Try Again.</h3>
                 </c:if>
                 <div class="row">
                     <div class="col-sm-12">

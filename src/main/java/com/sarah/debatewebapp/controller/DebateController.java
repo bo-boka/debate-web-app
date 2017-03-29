@@ -31,10 +31,10 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 @Controller
 public class DebateController {
     
-    UserDao userDao;
-    DebateDao dao;
-    Debate aDebate;
-    String currentUser;
+    private UserDao userDao;
+    private DebateDao dao;
+    private Debate aDebate;
+    private String currentUser;
     
     @Inject
     public DebateController(DebateDao dao, UserDao userDao){
@@ -117,8 +117,7 @@ public class DebateController {
     @ResponseBody
     @ResponseStatus(HttpStatus.CREATED)
     @RequestMapping(value="/debate/rebuttal", method=RequestMethod.POST)
-    //add @Valid as parameter
-    public Rebuttal createRebuttal(@RequestBody Rebuttal rebuttal){
+    public Rebuttal createRebuttal(@Valid @RequestBody Rebuttal rebuttal){
         rebuttal.setDebateId(aDebate.getId());
         rebuttal.setUser(currentUser);
         rebuttal.setPosition(currentUser.equals(aDebate.getAffirmativeUser()));
@@ -130,8 +129,7 @@ public class DebateController {
     @ResponseBody
     @ResponseStatus(HttpStatus.CREATED)
     @RequestMapping(value="/debate", method=RequestMethod.POST)
-    //add @Valid as parameter when adding validation
-    public Debate createDebate(@RequestBody Debate debate){
+    public Debate createDebate(@Valid @RequestBody Debate debate){
         debate.setAffirmativeUser(currentUser);
         dao.createIntroDebate(debate);
         return debate;
@@ -188,6 +186,7 @@ public class DebateController {
         return unpubDs;
     }
     
+    //yes vote
     @ResponseStatus(HttpStatus.NO_CONTENT)
     @RequestMapping(value="/debate/votePro", method=RequestMethod.PUT)
     public void updateDebateProVotes(){
@@ -206,6 +205,7 @@ public class DebateController {
         dao.updateDebate(aDebate);
     }
     
+    //no vote
     @ResponseStatus(HttpStatus.NO_CONTENT)
     @RequestMapping(value="/debate/voteCon", method=RequestMethod.PUT)
     public void updateDebateConVotes(){
@@ -232,10 +232,9 @@ public class DebateController {
     }
     
     //edit debate button
-    //add @Valid twice
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    @RequestMapping(value="/debate/deb/{id}", method=RequestMethod.PUT)
-    public void updateDebate(@PathVariable int id, @RequestBody Debate deb){
+    @RequestMapping(value="/debate/deb", method=RequestMethod.PUT)
+    public void updateDebate(@Valid @RequestBody Debate deb){
         dao.updateDebate(deb);
     }
     

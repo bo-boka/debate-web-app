@@ -34,6 +34,7 @@ $(document).ready(function(){
         event.preventDefault();
         editDebate();
     });
+    
     tinymce.init({
         selector: '#add-challenge-content',
         min_width: 400,
@@ -77,14 +78,6 @@ $(document).ready(function(){
     
 });
 
-//function checkChallengeStatus(id){
-////    var challForm = document.getElementById("challengeForm");
-////    challForm.style.display = "none";
-//    
-//    var challForm = $("#challengeForm");
-//    challForm.hide();
-//}
-
 function challengeDebate(){
     var contentData = tinyMCE.get('add-challenge-content');
         $.ajax({
@@ -101,19 +94,17 @@ function challengeDebate(){
             'dataType': 'json'
         }).success(function (data, status){
             window.location.reload(true);
-//            $("#validationErrors").hide();
-
-            window.onbeforeunload = function() {};
-            
+            $("#validationChallengeError").hide();
+            window.onbeforeunload = function() {}; //keeps from asking if you want to leave page
             $('#add-challenge-content').val('');
-//            }).error(function (data, status) {
-//                var errorDiv = $("#validationErrors");
-//                errorDiv.empty();
-//                $.each(data.responseJSON.fieldErrors, function (index, validationError) {
-//                    errorDiv.append(validationError.message);
-//                    errorDiv.append("<br>");
-//                    errorDiv.show();
-//                });
+        }).error(function (data, status) {
+            var errorDiv = $("#validationChallengeError");
+            errorDiv.empty();
+            $.each(data.responseJSON.fieldErrors, function (index, validationError) {
+                errorDiv.append(validationError.message);
+                errorDiv.append("<br>");
+                errorDiv.show();
+            });
         });
 }
 
@@ -133,18 +124,17 @@ function rebute(){
             'dataType': 'json'
         }).success(function (data, status){
             window.location.reload(true);
-//            $("#validationErrors").hide();
-            window.onbeforeunload = function() {};
-            
+            $("#validationRebuttalError").hide();
+            window.onbeforeunload = function() {}; //keeps from asking if you want to leave page
             $('#add-rebuttal-content').val('');
-//            }).error(function (data, status) {
-//                var errorDiv = $("#validationErrors");
-//                errorDiv.empty();
-//                $.each(data.responseJSON.fieldErrors, function (index, validationError) {
-//                    errorDiv.append(validationError.message);
-//                    errorDiv.append("<br>");
-//                    errorDiv.show();
-//                });
+        }).error(function (data, status) {
+            var errorDiv = $("#validationRebuttalError");
+            errorDiv.empty();
+            $.each(data.responseJSON.fieldErrors, function (index, validationError) {
+                errorDiv.append(validationError.message);
+                errorDiv.append("<br>");
+                errorDiv.show();
+            });
         });
 }
 
@@ -207,8 +197,10 @@ function editDebate(){
     var con = $("#edit-debate-con-votes").val();
     var pub = $('input[name=publishDebate]:checked').val();
     
+    var errorDiv = $("#validationDebateEditErrors");
+    
     $.ajax({
-        url: 'deb/' + id,
+        url: 'deb',
         type: 'PUT',
         headers:{
             'Content-type': 'application/json'
@@ -229,6 +221,13 @@ function editDebate(){
         })
     }).success(function(data){
         window.location.reload(true);
+    }).error(function (data, status) {
+        errorDiv.empty();
+        $.each(data.responseJSON.fieldErrors, function (index, validationError) {
+            errorDiv.append(validationError.message);
+            errorDiv.append("<br>");
+            errorDiv.show();
+        });
     });
 }
 

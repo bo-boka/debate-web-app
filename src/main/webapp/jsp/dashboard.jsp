@@ -45,7 +45,6 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            
                             <div class="col-sm-11">
                                 <textarea name="addDebateContent" id="addDebateContent"></textarea>
                             </div>
@@ -69,6 +68,52 @@
                             </div> 
                         </div>
                     </form>
+                    <!--mod stuff-->
+                    <sec:authorize access="hasRole('ROLE_ADMIN')">
+                        <form class="form-horizontal" role="form">
+                            <center><br><br><br>
+                            <h2>Create Moderator</h2>
+                            <hr>
+                            </center>
+                            <div class="form-group">
+                                <label for="add-mod-first-name" class="col-md-4 control-label">First Name:</label>
+                                <div class="col-md-8">
+                                    <input id="add-mod-first-name" name="modFirstName" type="text" class="form-control" placeholder="first name"/>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="add-mod-last-name" class="col-md-4 control-label">Last Name:</label>
+                                <div class="col-md-8">
+                                    <input id="add-mod-last-name" name="modLastName" type="text" class="form-control" placeholder="last name"/>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="add-mod-email" class="col-md-4 control-label">Email:</label>
+                                <div class="col-md-8">
+                                    <input id="add-mod-email" name="modEmail" type="text" class="form-control" placeholder="email"/>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="add-mod-username" class="col-md-4 control-label">Username:</label>
+                                <div class="col-md-8">
+                                    <input id="add-mod-username" name="modUsername" type="text" class="form-control" placeholder="username"/>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="add-mod-password" class="col-md-4 control-label">Password:</label>
+                                <div class="col-md-8">
+                                    <input id="add-mod-password" name="modPassword" type="password" class="form-control" placeholder="password"/>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-md-offset-4 col-md-8">
+                                    <div id="validationErrorsMod" class="alert alert-danger" style="display:none"></div>
+                                    <button type="submit" id="add-moderator-button" class="btn btn-default">Add Moderator</button>
+                                </div>
+                            </div>
+                        </form>
+                        
+                    </sec:authorize>
                 </div>
                 <div class="col-sm-6">
                     <div class="heading">My Debates</div>
@@ -80,6 +125,7 @@
                         </tr>
                         <tbody id="dashRows"></tbody>
                     </table>
+                    <!--mod stuff-->
                     <sec:authorize access="hasRole('ROLE_ADMIN')">
                         <div class="heading">Unpublished Debates</div>
                         <table class="table table-hover">
@@ -93,55 +139,7 @@
                     </sec:authorize>
                 </div>
             </div>
-            <!--mod stuff-->
-            <sec:authorize access="hasRole('ROLE_ADMIN')">
-            <div class="row">
-                <div class="col-sm-6">
-                    <form class="form-horizontal" role="form">
-                        <center><br><br><br>
-                        <h2>Create Moderator</h2>
-                        <hr>
-                        </center>
-                        <div class="form-group">
-                            <label for="add-mod-first-name" class="col-md-4 control-label">First Name:</label>
-                            <div class="col-md-8">
-                                <input id="add-mod-first-name" name="modFirstName" type="text" class="form-control" placeholder="first name"/>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label for="add-mod-last-name" class="col-md-4 control-label">Last Name:</label>
-                            <div class="col-md-8">
-                                <input id="add-mod-last-name" name="modLastName" type="text" class="form-control" placeholder="last name"/>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label for="add-mod-email" class="col-md-4 control-label">Email:</label>
-                            <div class="col-md-8">
-                                <input id="add-mod-email" name="modEmail" type="text" class="form-control" placeholder="email"/>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label for="add-mod-username" class="col-md-4 control-label">Username:</label>
-                            <div class="col-md-8">
-                                <input id="add-mod-username" name="modUsername" type="text" class="form-control" placeholder="username"/>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label for="add-mod-password" class="col-md-4 control-label">Password:</label>
-                            <div class="col-md-8">
-                                <input id="add-mod-password" name="modPassword" type="password" class="form-control" placeholder="password"/>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <div class="col-md-offset-4 col-md-8">
-                                <button type="submit" id="add-moderator-button" class="btn btn-default">Add Moderator</button>
-                            </div>
-                        </div>
-                    </form>
-                    <div id="validationErrorsMod" class="alert alert-danger" style="display:none"></div>
-                </div>    
-            </div>
-            </sec:authorize>
+            
             <%@include file="editUserModalFrag.jsp" %>
         </div>
         <script src="${pageContext.request.contextPath}/js/jquery-2.2.4.min.js"></script>
