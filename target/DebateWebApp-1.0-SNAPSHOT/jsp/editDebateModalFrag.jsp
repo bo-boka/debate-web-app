@@ -30,7 +30,7 @@
                     <div class="form-group">
                         <label for="editDebateDate" class="col-sm-2 control-label">Date</label>
                         <div class="col-sm-4">
-                            <input type="text" class="form-control" id="edit-debate-date" placeholder="Click to add date">
+                            <input type="text" class="form-control" id="edit-date-picker" placeholder="Click to add date">
                         </div>
                     </div>
                     <div class="form-group">

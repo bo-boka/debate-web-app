@@ -24,6 +24,23 @@ $(document).ready(function(){
         editUser();
     });
     
+    $("#user-register-button").click(function(event){
+        event.preventDefault();
+        registerUser();
+    });
+    
+    $('#search-option').change(function() {
+        var option = $('#search-option').val();
+        if (option === 'date'){
+            $('#search-info').datepicker({
+                showAnim: "slide",
+                dateFormat: 'yy-mm-dd'
+            });
+        } else {
+            $("#search-info").datepicker('destroy');
+        }
+    });
+    
     tinymce.init({
                 selector: '#addDebateContent',
                 min_width: 400,
@@ -91,7 +108,6 @@ function processUnpubDebateList(debates){
                     'onclick' : 'goToDebate(' +debate.id+ ')'}).text(debate.resolution)))
                 .append($('<td>').text(debate.affirmativeUser))
                 .append($('<td>').text(debate.date))
-
                 );
     });
 }
@@ -163,7 +179,7 @@ function addModerator(){
         },
         'dataType': 'json'
     }).success(function (data, status){
-        
+        alert("Moderator has been added.");
         $('#add-mod-first-name').val('');
         $('#add-mod-last-name').val('');
         $('#add-mod-email').val('');
@@ -194,7 +210,7 @@ function getUserEditDetails(name){
         $('#edit-last-name').val(user.lastName);
         $('#edit-email').val(user.email);
         $('#edit-username').val(user.username);
-        $('#edit-password').val(user.password);
+//        $('#edit-password').val(user.password);
     });
 }
 
@@ -213,13 +229,44 @@ function editUser(){
             firstName: $('#edit-first-name').val(),
             lastName: $('#edit-last-name').val(),
             email: $('#edit-email').val(),
-            username: $('#edit-username').val(),
-            password: $('#edit-password').val()
+            username: $('#edit-username').val()
+//            password: $('#edit-password').val()
         })
     }).success(function(data){
         window.location.reload(true);
     }).error(function (data, status){
             var errorDiv = $("#validationEditUserErrors");
+            errorDiv.empty();
+            errorDiv.show();
+            $.each(data.responseJSON.fieldErrors, function (index, validationError){
+                errorDiv.append(validationError.message);
+                errorDiv.append("<br>");
+            });
+    });
+}
+
+function registerUser(){
+    var errorDiv = $("#validationRegisterUserErrors");
+    
+    $.ajax({
+        url: 'user',
+        type: 'POST',
+        headers:{
+            'Content-type': 'application/json'
+        },
+        'dataType' : 'json',
+        data: JSON.stringify({
+            firstName: $('#add-first-name').val(),
+            lastName: $('#add-last-name').val(),
+            email: $('#add-email').val(),
+            username: $('#add-username').val(),
+            password: $('#add-password').val()
+        })
+    }).success(function(data){
+        errorDiv.empty();
+        errorDiv.hide();
+        window.location="login";
+    }).error(function (data, status){
             errorDiv.empty();
             errorDiv.show();
             $.each(data.responseJSON.fieldErrors, function (index, validationError){

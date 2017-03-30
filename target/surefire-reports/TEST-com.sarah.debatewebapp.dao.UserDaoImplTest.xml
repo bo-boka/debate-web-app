@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<testsuite tests="15" failures="0" name="com.sarah.debatewebapp.dao.UserDaoImplTest" time="36.963" errors="0" skipped="0">
+<testsuite tests="12" failures="0" name="com.sarah.debatewebapp.dao.UserDaoImplTest" time="3.12" errors="0" skipped="0">
   <properties>
     <property name="java.runtime.name" value="Java(TM) SE Runtime Environment"/>
     <property name="sun.boot.library.path" value="C:\Program Files\Java\jdk1.8.0_111\jre\bin"/>
@@ -63,19 +63,16 @@
     <property name="sun.desktop" value="windows"/>
     <property name="sun.cpu.isalist" value="amd64"/>
   </properties>
-  <testcase classname="com.sarah.debatewebapp.dao.UserDaoImplTest" name="testAddMultipleUsers" time="7.012"/>
-  <testcase classname="com.sarah.debatewebapp.dao.UserDaoImplTest" name="testAgainstEmptyDAO" time="4.463"/>
-  <testcase classname="com.sarah.debatewebapp.dao.UserDaoImplTest" name="testAddAndRemoveUserTwice" time="2.155"/>
-  <testcase classname="com.sarah.debatewebapp.dao.UserDaoImplTest" name="testUpdateUser" time="2.115"/>
-  <testcase classname="com.sarah.debatewebapp.dao.UserDaoImplTest" name="testUsersAfterRemovalOfNonExistent" time="4.422"/>
-  <testcase classname="com.sarah.debatewebapp.dao.UserDaoImplTest" name="testAddOneUser" time="4.159"/>
-  <testcase classname="com.sarah.debatewebapp.dao.UserDaoImplTest" name="testUserCountAfterRemoval" time="3.277"/>
-  <testcase classname="com.sarah.debatewebapp.dao.UserDaoImplTest" name="testUserCountOnUpdate" time="2.323"/>
-  <testcase classname="com.sarah.debatewebapp.dao.UserDaoImplTest" name="addOneToEmptyDaoTest" time="0.268"/>
-  <testcase classname="com.sarah.debatewebapp.dao.UserDaoImplTest" name="testAddAndRemoveOneUser" time="1.226"/>
-  <testcase classname="com.sarah.debatewebapp.dao.UserDaoImplTest" name="testGetUserByUsername" time="1.002"/>
-  <testcase classname="com.sarah.debatewebapp.dao.UserDaoImplTest" name="testUserCountOnAddition" time="0.884"/>
-  <testcase classname="com.sarah.debatewebapp.dao.UserDaoImplTest" name="testUpdateMultipleUsers" time="0.749"/>
-  <testcase classname="com.sarah.debatewebapp.dao.UserDaoImplTest" name="testAddSimilarUsers" time="1.956"/>
-  <testcase classname="com.sarah.debatewebapp.dao.UserDaoImplTest" name="testAddAndRemoveMultipleUsers" time="0.952"/>
+  <testcase classname="com.sarah.debatewebapp.dao.UserDaoImplTest" name="testAddMultipleUsers" time="0.593"/>
+  <testcase classname="com.sarah.debatewebapp.dao.UserDaoImplTest" name="testAgainstEmptyDAO" time="0.084"/>
+  <testcase classname="com.sarah.debatewebapp.dao.UserDaoImplTest" name="testAddAndRemoveUserTwice" time="0.105"/>
+  <testcase classname="com.sarah.debatewebapp.dao.UserDaoImplTest" name="testUpdateUser" time="0.33"/>
+  <testcase classname="com.sarah.debatewebapp.dao.UserDaoImplTest" name="testUsersAfterRemovalOfNonExistent" time="0.226"/>
+  <testcase classname="com.sarah.debatewebapp.dao.UserDaoImplTest" name="testAddOneUser" time="0.128"/>
+  <testcase classname="com.sarah.debatewebapp.dao.UserDaoImplTest" name="testUserCountAfterRemoval" time="0.304"/>
+  <testcase classname="com.sarah.debatewebapp.dao.UserDaoImplTest" name="testUserCountOnUpdate" time="0.732"/>
+  <testcase classname="com.sarah.debatewebapp.dao.UserDaoImplTest" name="testAddAndRemoveOneUser" time="0.099"/>
+  <testcase classname="com.sarah.debatewebapp.dao.UserDaoImplTest" name="testGetUserByUsername" time="0.064"/>
+  <testcase classname="com.sarah.debatewebapp.dao.UserDaoImplTest" name="testUserCountOnAddition" time="0.169"/>
+  <testcase classname="com.sarah.debatewebapp.dao.UserDaoImplTest" name="testUpdateMultipleUsers" time="0.286"/>
 </testsuite>

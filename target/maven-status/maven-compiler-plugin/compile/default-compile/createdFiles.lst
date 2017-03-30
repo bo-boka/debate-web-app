@@ -6,6 +6,7 @@ com\sarah\debatewebapp\controller\UserController.class
 com\sarah\debatewebapp\dao\DebateDaoImpl.class
 com\sarah\debatewebapp\dao\DebateDao.class
 com\sarah\debatewebapp\dto\Debate.class
+com\sarah\debatewebapp\controller\PWEnc.class
 com\sarah\debatewebapp\dao\DebateDaoImpl$1.class
 com\sarah\debatewebapp\dao\DebateDaoImpl$DebateExtractor.class
 com\sarah\debatewebapp\dto\Status.class

@@ -8,7 +8,6 @@ import com.sarah.debatewebapp.dao.DebateDao;
 import com.sarah.debatewebapp.dao.UserDao;
 import com.sarah.debatewebapp.dto.User;
 import javax.inject.Inject;
-import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import org.springframework.dao.DuplicateKeyException;
 import org.springframework.http.HttpStatus;
@@ -53,43 +52,61 @@ public class UserController {
     }
     
     //register user
-    @RequestMapping(value="/register", method=RequestMethod.POST)
-    public String registerUser(@Valid HttpServletRequest request){
-        
-        String first = request.getParameter("firstName");
-        String last = request.getParameter("lastName");
-        String email = request.getParameter("email");
-        String uname = request.getParameter("username");
-        String hashPw = encoder.encode(request.getParameter("password"));
-//        String message;
-        
-        User newUser = new User(uname, hashPw, first, last, email, "ROLE_USER");
-        userDao.createUser(newUser);
-        
-//        if(first.equals("") || last.equals("") || email.equals("") || uname.equals("") || pw.equals("")) {
-//            message = "Please fill out all feilds.";
-//            request.setAttribute("message", message);
-//            return "register";
-//        } else {
-//            try {
-//                User newUser = new User(uname, pw, first, last, email, "ROLE_USER");
-//                userDao.createUser(newUser);
-//                return "redirect:/home";
-//            } catch (DuplicateKeyException e){
-//                message = "That username is taken.";
-//                request.setAttribute("message", message);
-//                return "register";
-//            }
-//        }
-        return "redirect:/home";
+    @ResponseBody
+    @ResponseStatus(HttpStatus.CREATED)
+    @RequestMapping(value="/user", method=RequestMethod.POST)
+    public User registerUser(@Valid @RequestBody User user, Model model){
+        user.setPassword(encoder.encode(user.getPassword()));
+        try {
+            userDao.createUser(user);
+        } catch (DuplicateKeyException e){
+            boolean duplicate = true;
+            model.addAttribute("duplicate", duplicate);
+        }
+        return user;
     }
+    
+//    @ResponseStatus(HttpStatus.CREATED)
+//    @RequestMapping(value="/register", method=RequestMethod.POST)
+//    public String registerUser(@Valid HttpServletRequest request){
+//        
+//        String first = request.getParameter("firstName");
+//        String last = request.getParameter("lastName");
+//        String email = request.getParameter("email");
+//        String uname = request.getParameter("username");
+//        String clearPw = request.getParameter("password");
+//        String hashPw = encoder.encode(clearPw);
+////        String message;
+//        
+//        User newUser = new User(uname, hashPw, first, last, email, "ROLE_USER");
+//        userDao.createUser(newUser);
+//        
+////        if(first.equals("") || last.equals("") || email.equals("") || uname.equals("") || clearPw.equals("")) {
+////            message = "Please fill out all feilds.";
+////            request.setAttribute("message", message);
+////            return "register";
+////        } else {
+////            try {
+////                hashPw = encoder.encode(clearPw);
+////                User newUser = new User(uname, hashPw, first, last, email, "ROLE_USER");
+////                userDao.createUser(newUser);
+////                return "redirect:/home";
+////            } catch (DuplicateKeyException e){
+////                message = "That username is taken.";
+////                request.setAttribute("message", message);
+////                return "register";
+////            }
+////        }
+//        return "redirect:/home";
+//        //if nothing else, create a validation method that redirects to a create user method on success
+//    }
     
     //create moderator
     @ResponseStatus(HttpStatus.CREATED)
     @ResponseBody
     @RequestMapping(value="/mod", method=RequestMethod.POST)
     public User createModerator(@Valid @RequestBody User mod){
-        
+        mod.setPassword(encoder.encode(mod.getPassword()));
         mod.setRole("ROLE_ADMIN");
         User moderator = userDao.createUser(mod);
         
@@ -108,45 +125,15 @@ public class UserController {
     @RequestMapping(value="/user", method=RequestMethod.PUT)
     public void updateUserInfo(@Valid @RequestBody User user){
         User ogUser = userDao.getUserById(user.getId());
-        if (user.getWins() == 0) user.setWins(ogUser.getWins());
-        if (user.getLosses() == 0) user.setLosses(ogUser.getLosses());
-        if (user.getTies() == 0) user.setTies(ogUser.getTies());
-        if (user.getPassword().equals("")) user.setPassword(ogUser.getPassword());
-        if (user.getRole() == null) user.setRole(ogUser.getRole());
+        user.setWins(ogUser.getWins());
+        user.setLosses(ogUser.getLosses());
+        user.setTies(ogUser.getTies());
+        user.setRole(ogUser.getRole());
+        user.setPassword(ogUser.getPassword());
+//        if (user.getPassword().equals(ogUser.getPassword())) user.setPassword(ogUser.getPassword());
+//        else user.setPassword(encoder.encode(user.getPassword()));
+//        if (user.)
         userDao.updateUser(user);
     }
     
-    
-//    //returns profile page from user dropdown menu
-//    @RequestMapping(value={"/profile"}, method = RequestMethod.GET)
-//    public String displayProfile(Model model, Principal principal){
-//        currentUser = principal.getName(); 
-//        User user = userDao.getUserByUsername(currentUser);
-//        model.addAttribute("oneUser", user);
-//        return "profile";
-//    }
-//    
-//    //gets user from listed debates on homepage, puts in model, returns profile page
-//    @RequestMapping(value="/singleUser/{id}", method=RequestMethod.GET)
-//    public String getUserByUsername(@PathVariable("id")int id, Model model){
-//        Debate deb = debDao.getDebateById(id);
-//        String user = deb.getAffirmativeUser();
-//        User aUser = userDao.getUserByUsername(user);
-//        model.addAttribute("oneUser", aUser);
-//        return "profile";
-//    }
-//    
-//    //gets user from listed users links on homepage, puts in model, returns profile page
-//    @RequestMapping(value="/profile/{id}", method=RequestMethod.GET)
-//    public String getUserById(@PathVariable("id")int id, Model model){
-//        User aUser = userDao.getUserById(id);
-//        model.addAttribute("oneUser", aUser);
-//        return "profile";
-//    }
-//    
-//    @ResponseBody
-//    @RequestMapping(value="/users", method=RequestMethod.GET)
-//    public List<User> getAllUsers(){
-//        return userDao.getAllUsers();
-//    }
 }

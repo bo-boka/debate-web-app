@@ -17,6 +17,20 @@
         <link href="${pageContext.request.contextPath}/css/debateCSS.css" rel="stylesheet">
         <link rel="shortcut icon" href="${pageContext.request.contextPath}/img/deft-logo2.png">
         <title>deft | ${oneUser.username}</title>
+        <link href = "https://code.jquery.com/ui/1.10.4/themes/ui-lightness/jquery-ui.css" rel = "stylesheet">
+        <script>
+            $('#search-option').change(function() {
+                var option = $('#search-option').val();
+                if (option === 'date'){
+                    $('#search-info').datepicker({
+                        showAnim: "slide",
+                        dateFormat: 'yy-mm-dd'
+                    });
+                } else {
+                    $("#search-info").datepicker('destroy');
+                }
+            });
+        </script>
     </head>
     <body>
         <%@include file="headerFragment.jsp" %>
@@ -47,6 +61,6 @@
         <script src="${pageContext.request.contextPath}/js/jquery-2.2.4.min.js"></script>
         <script src="${pageContext.request.contextPath}/js/bootstrap.min.js"></script>
         <script src="${pageContext.request.contextPath}/js/homeJS.js"></script>
-
+        <script src="https://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
     </body>
 </html>

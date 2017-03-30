@@ -16,7 +16,20 @@
         <link href="${pageContext.request.contextPath}/css/bootstrap.min.css" rel="stylesheet">
         <link href="${pageContext.request.contextPath}/css/debateCSS.css" rel="stylesheet">
         <link rel="shortcut icon" href="${pageContext.request.contextPath}/img/deft-logo2.png">
-        
+        <link href = "https://code.jquery.com/ui/1.10.4/themes/ui-lightness/jquery-ui.css" rel = "stylesheet">
+        <script>
+            $('#search-option').change(function() {
+                var option = $('#search-option').val();
+                if (option === 'date'){
+                    $('#search-info').datepicker({
+                        showAnim: "slide",
+                        dateFormat: 'yy-mm-dd'
+                    });
+                } else {
+                    $("#search-info").datepicker('destroy');
+                }
+            });
+        </script>
         <title>deft debate | register</title>
     </head>
     <body>
@@ -33,7 +46,8 @@
         <div class="container-fluid main">
             <div class="row">
                 <div class="col-md-8">
-                    <form action="register" method="POST" class="form-horizontal" role="form">
+                    <form class="form-horizontal" role="form">
+<!--                        <input type='hidden' id='dat' />-->
                         <center>
                         <h2>Register</h2>
                         </center>
@@ -70,19 +84,21 @@
                         </div>
                         <div class="form-group">
                             <div class="col-md-offset-4 col-md-8">
+                                <c:if test="${duplicate}">
+                                    <p class="alert alert-danger">I'm sorry that username is already taken.</p>
+                                </c:if>
+                                <div id="validationRegisterUserErrors" class="alert alert-danger" style="display:none"></div>
                                 <button type="submit" id="user-register-button" class="btn btn-primary">Register</button>
                             </div>
                         </div>
                     </form>
-                    <c:if test="${not empty message}">
-                        <div id="validationRegisterUserErrors" class="alert alert-danger" style="display:none">${message}</div>
-                    </c:if>
+                        
                 </div>   
             </div>
         </div>
-
         <script src="${pageContext.request.contextPath}/js/jquery-2.2.4.min.js"></script>
         <script src="${pageContext.request.contextPath}/js/bootstrap.min.js"></script>
-        
+        <script src="${pageContext.request.contextPath}/js/dashboardJS.js"></script>
+        <script src="https://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
     </body>
 </html>

@@ -31,7 +31,7 @@
                 </select>
             </div>
             <div class="form-group">
-              <input type="text" class="form-control" name="searchInfo" id="search-info" placeholder="keywords">
+                <input type="text" class="form-control" name="searchInfo" id="search-info" placeholder="keywords">
             </div>
             <button type="submit" class="btn btn-default" id="search-button">search</button>
         </form>

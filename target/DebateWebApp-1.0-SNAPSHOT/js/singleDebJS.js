@@ -35,6 +35,18 @@ $(document).ready(function(){
         editDebate();
     });
     
+    $('#search-option').change(function() {
+        var option = $('#search-option').val();
+        if (option === 'date'){
+            $('#search-info').datepicker({
+                showAnim: "slide",
+                dateFormat: 'yy-mm-dd'
+            });
+        } else {
+            $("#search-info").datepicker('destroy');
+        }
+    });
+    
     tinymce.init({
         selector: '#add-challenge-content',
         min_width: 400,
@@ -70,6 +82,29 @@ $(document).ready(function(){
         | link charmap image emoticons | preview save',
         images_upload_base_path: '${pageContext.request.contextPath}/img'
     });
+    
+    tinymce.init({
+        selector: '#edit-debate-content',
+        min_width: 400,
+        min_height: 300,
+        plugins: [
+            'advlist autolink autosave charmap hr link lists print preview ',
+            ' wordcount visualblocks visualchars image imagetools',
+            'table contextmenu emoticons template',
+            'paste save searchreplace textcolor'
+        ],
+        contextmenu: "link image",
+        imagetools_toolbar: "rotateleft rotateright | flipv fliph | editimage imageoptions",
+        toolbar: 'insertfile undo redo | styleselect | forecolor backcolor bold italic underline \n\
+        | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent \n\
+        | link charmap image emoticons | preview save',
+        images_upload_base_path: '${pageContext.request.contextPath}/img'
+    });
+    
+    $('#edit-date-picker').datepicker({
+        showAnim: "slide",
+        dateFormat: 'yy-mm-dd'
+    });
 
 //    $("#delete-debate").click(function(event){
 //        event.preventDefault();
@@ -80,62 +115,62 @@ $(document).ready(function(){
 
 function challengeDebate(){
     var contentData = tinyMCE.get('add-challenge-content');
-        $.ajax({
-            url: 'challenge',
-            type: 'POST',
-            data: JSON.stringify({
-                content: contentData.getContent(),
-                position: false
-            }),
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json'
-            },
-            'dataType': 'json'
-        }).success(function (data, status){
-            window.location.reload(true);
-            $("#validationChallengeError").hide();
-            window.onbeforeunload = function() {}; //keeps from asking if you want to leave page
-            $('#add-challenge-content').val('');
-        }).error(function (data, status) {
-            var errorDiv = $("#validationChallengeError");
-            errorDiv.empty();
-            $.each(data.responseJSON.fieldErrors, function (index, validationError) {
-                errorDiv.append(validationError.message);
-                errorDiv.append("<br>");
-                errorDiv.show();
-            });
+    $.ajax({
+        url: 'challenge',
+        type: 'POST',
+        data: JSON.stringify({
+            content: contentData.getContent(),
+            position: false
+        }),
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+        },
+        'dataType': 'json'
+    }).success(function (data, status){
+        window.location.reload(true);
+        $("#validationChallengeError").hide();
+        window.onbeforeunload = function() {}; //keeps from asking if you want to leave page
+        $('#add-challenge-content').val('');
+    }).error(function (data, status) {
+        var errorDiv = $("#validationChallengeError");
+        errorDiv.empty();
+        $.each(data.responseJSON.fieldErrors, function (index, validationError) {
+            errorDiv.append(validationError.message);
+            errorDiv.append("<br>");
+            errorDiv.show();
         });
+    });
 }
 
 function rebute(){
     var contentData = tinyMCE.get('add-rebuttal-content');
-        $.ajax({
-            url: 'rebuttal',
-            type: 'POST',
-            data: JSON.stringify({
-                content: contentData.getContent(),
-                type: 'refutation'
-            }),
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json'
-            },
-            'dataType': 'json'
-        }).success(function (data, status){
-            window.location.reload(true);
-            $("#validationRebuttalError").hide();
-            window.onbeforeunload = function() {}; //keeps from asking if you want to leave page
-            $('#add-rebuttal-content').val('');
-        }).error(function (data, status) {
-            var errorDiv = $("#validationRebuttalError");
-            errorDiv.empty();
-            $.each(data.responseJSON.fieldErrors, function (index, validationError) {
-                errorDiv.append(validationError.message);
-                errorDiv.append("<br>");
-                errorDiv.show();
-            });
+    $.ajax({
+        url: 'rebuttal',
+        type: 'POST',
+        data: JSON.stringify({
+            content: contentData.getContent(),
+            type: 'refutation'
+        }),
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+        },
+        'dataType': 'json'
+    }).success(function (data, status){
+        window.location.reload(true);
+        $("#validationRebuttalError").hide();
+        window.onbeforeunload = function() {}; //keeps from asking if you want to leave page
+        $('#add-rebuttal-content').val('');
+    }).error(function (data, status) {
+        var errorDiv = $("#validationRebuttalError");
+        errorDiv.empty();
+        $.each(data.responseJSON.fieldErrors, function (index, validationError) {
+            errorDiv.append(validationError.message);
+            errorDiv.append("<br>");
+            errorDiv.show();
         });
+    });
 }
 
 function votePro(){
@@ -173,10 +208,10 @@ function getDebateEditDetails(id){
         $("#edit-debate-id").text(debate.id);
         $("#edit-debate-resolution").val(debate.resolution);
         $("#edit-debate-status").val(debate.status);
-        $("#edit-debate-date").val(debate.date);
+        $("#edit-date-picker").val(debate.date);
         $("#edit-debate-aff-user").val(debate.affirmativeUser);
         $("#edit-debate-neg-user").val(debate.negativeUser);
-        $("#edit-debate-content").val(debate.content);
+        $("#edit-debate-content").val(tinyMCE.get('edit-debate-content').setContent(debate.content));
         $("#edit-debate-category").val(debate.category);
         $("#edit-debate-pro-votes").val(debate.proVotes);
         $("#edit-debate-con-votes").val(debate.conVotes);
@@ -185,13 +220,13 @@ function getDebateEditDetails(id){
 }
 
 function editDebate(){
+    var contentData = tinyMCE.get('edit-debate-content');
     var id = $("#edit-debate-id").text();
     var res = $("#edit-debate-resolution").val();
     var status = $("#edit-debate-status").val();
-    var date = $("#edit-debate-date").val();
+    var date = $("#edit-date-picker").val();
     var affUser = $("#edit-debate-aff-user").val();
     var negUser = $("#edit-debate-neg-user").val();
-    var content = $("#edit-debate-content").val();
     var cat = $("#edit-debate-category").val();
     var pro = $("#edit-debate-pro-votes").val();
     var con = $("#edit-debate-con-votes").val();
@@ -213,7 +248,7 @@ function editDebate(){
             date: date,
             affirmativeUser: affUser,
             negativeUser: negUser,
-            content: content,
+            content: contentData.getContent(),
             category: cat,
             proVotes: pro,
             conVotes: con,

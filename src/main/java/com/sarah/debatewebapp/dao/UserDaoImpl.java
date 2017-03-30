@@ -29,7 +29,7 @@ public class UserDaoImpl implements UserDao {
         this.jdbcTemp = jdbcT;
     }
     
-    private static final String SQL_ADD_USER = "INSERT INTO users (username, `password`, first_name, last_name, email, enabled)\n" +
+    private static final String SQL_ADD_USER = "INSERT INTO users (username, password, first_name, last_name, email, enabled)\n" +
 "	VALUE (?, ?, ?, ?, ?, ?)";
     private static final String SQL_ADD_USER_AUTHORITY = "INSERT INTO authorities (username, authority)\n" +
 "	VALUE (?, ?)";
@@ -37,6 +37,7 @@ public class UserDaoImpl implements UserDao {
     @Transactional(propagation = Propagation.REQUIRED, readOnly = false)
     @Override
     public User createUser(User user){
+        //for debugging
         String userN = user.getUsername();
         String passW = user.getPassword();
         String firstN = user.getFirstName();

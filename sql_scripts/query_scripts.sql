@@ -2,7 +2,7 @@ USE DebateDB;
 USE TestDebateDB;
 USE TestUserDB;
 
-SELECT * FROM debates WHERE affirmativeUser_id = 4;
+SELECT * FROM debates WHERE affirmativeUser_id = 7;
 
 /*published debates w/o rebuttals for rowmapper...not used*/
 SELECT debates.debate_id AS id, resolution, content, deb_statuses.status, affU.username AS affirmativeUser, negU.username AS negativeUser, proVotes, conVotes, categories.category, date, published FROM debates
@@ -178,3 +178,6 @@ DELETE FROM users WHERE user_id = 5;
 
 /*show process list*/
 SHOW FULL PROCESSLIST;
+
+INSERT INTO users (user_id, username, password, first_name, last_name, email, enabled)
+	VALUES (27, 'ttyatin', '$2a$10$dF7HhXvoH8.M7VlhjRZ1beNIPoN16TKLI5150iOsBETF2p/CaNvl.', 'Ally', 'Smith', 'asmith@debator.com', 1);

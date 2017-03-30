@@ -17,7 +17,7 @@
         <link href="${pageContext.request.contextPath}/css/bootstrap.min.css" rel="stylesheet">
         <link href="${pageContext.request.contextPath}/css/debateCSS.css" rel="stylesheet">
         <link rel="shortcut icon" href="${pageContext.request.contextPath}/img/deft-logo2.png">
-        
+        <link href = "https://code.jquery.com/ui/1.10.4/themes/ui-lightness/jquery-ui.css" rel = "stylesheet">
         <script src='//cdn.tinymce.com/4/tinymce.min.js'></script>
     </head>
     <body>
@@ -108,7 +108,7 @@
                             <div class="form-group">
                                 <div class="col-md-offset-4 col-md-8">
                                     <div id="validationErrorsMod" class="alert alert-danger" style="display:none"></div>
-                                    <button type="submit" id="add-moderator-button" class="btn btn-default">Add Moderator</button>
+                                    <button type="submit" id="add-moderator-button" class="btn btn-primary">Add Moderator</button>
                                 </div>
                             </div>
                         </form>
@@ -145,6 +145,6 @@
         <script src="${pageContext.request.contextPath}/js/jquery-2.2.4.min.js"></script>
         <script src="${pageContext.request.contextPath}/js/bootstrap.min.js"></script>
         <script src="${pageContext.request.contextPath}/js/dashboardJS.js"></script>
-        
+        <script src="https://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
     </body>
 </html>

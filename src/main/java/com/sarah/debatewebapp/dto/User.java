@@ -6,8 +6,8 @@
 package com.sarah.debatewebapp.dto;
 
 import java.util.Objects;
+import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
-import org.hibernate.validator.constraints.NotEmpty;
 
 /**
  *
@@ -36,10 +36,7 @@ public class User {
         @Size(min=2, message="Last name cannot be less than {min} characters.")
     })
     private String lastName;
-    @Size.List({
-        @Size(max=30, message="Email cannot be more than {max} characters."),
-        @Size(min=5, message="Username cannot be less than {min} characters.")
-    })
+    @Pattern(regexp=".+@.+\\..+", message="Please provide a valid email address")
     private String email;
     private int wins;
     private int ties;

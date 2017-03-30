@@ -13,6 +13,20 @@ $(document).ready(function(){
             getStatusDebates(selected);
         }
     });
+    
+    $('#search-option').change(function() {
+        var option = $('#search-option').val();
+        if (option === 'date'){
+            $('#search-info').datepicker({
+                showAnim: "slide",
+                dateFormat: 'yy-mm-dd'
+            });
+        } else {
+            $("#search-info").datepicker('destroy');
+        }
+    });
+    
+    
 
 });
 

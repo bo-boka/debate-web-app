@@ -8,7 +8,7 @@
                 <h3 class="modal-title" id="editUserModalLabel">Edit Account Information</h3>
             </div>
             <div class="modal-body">
-                <h3 id="edit-user-id"></h3>
+                <input type=hidden id="edit-user-id"/>
                 <form action="register" method="POST" class="form-horizontal" role="form">
                         <div class="form-group">
                             <label for="edit-first-name" class="col-md-4 control-label">First Name:</label>
@@ -34,12 +34,12 @@
                                 <input id="edit-username" name="editUsername" type="text" class="form-control" placeholder="username"/>
                             </div>
                         </div>
-                        <div class="form-group">
+<!--                        <div class="form-group">
                             <label for="edit-password" class="col-md-4 control-label">Password:</label>
                             <div class="col-md-8">
                                 <input id="edit-password" name="editPassword" type="password" class="form-control" placeholder="password"/>
                             </div>
-                        </div>
+                        </div>-->
                     </form>
             </div>
             <div class="modal-footer">

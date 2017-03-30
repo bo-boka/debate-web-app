@@ -14,7 +14,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 public class PWEnc {
     
     public static void main(String[] args) {
-        String clearTxtPw = "password";
+        String clearTxtPw = "stinkybuttskdf";
         //BCrypt
         BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
         String hashedPw = encoder.encode(clearTxtPw);
