@@ -10,7 +10,10 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import junit.framework.Assert;
+import org.junit.After;
+import org.junit.AfterClass;
 import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
@@ -32,6 +35,14 @@ public class DebateDaoImplTest {
     public DebateDaoImplTest() {
     }
     
+    @BeforeClass
+    public static void setUpClass() {
+    }
+    
+    @AfterClass
+    public static void tearDownClass() {
+    }
+    
     @Before
     public void setUp() {
         ApplicationContext factory = new ClassPathXmlApplicationContext("test-applicationContext.xml");
@@ -39,6 +50,10 @@ public class DebateDaoImplTest {
         JdbcTemplate cleaner = factory.getBean("jdbcTemplateBean", JdbcTemplate.class);
         cleaner.execute("DELETE FROM rebuttals WHERE 1=1");
         cleaner.execute("DELETE FROM debates WHERE 1=1");
+    }
+    
+    @After
+    public void tearDown() {
     }
         
     Debate[] debatesForTesting = {
