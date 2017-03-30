@@ -81,28 +81,28 @@ public class UserDaoImplTest {
 	new User(7, "smooveDebator", "password", "Neena", "Gupta", "neenag@gmail.com", 0, 0, 0, "ROLE_USER", true)
     };
     
-//    @Test
-//    public void addOneToEmptyDaoTest() {
-//        
-//        User testUser = new User(1, "newgsername", "password", "firstn", "lastn", "emailad", 0, 0, 0, "ROLE_USER", true);
-//        testDao.createUser(testUser);
-//        User testUserAgain = testDao.getUserById(testUser.getId());
-//
-//        Assert.assertEquals(testUser.getId(), testUserAgain.getId());
-//        Assert.assertEquals(testUser.getUsername(), testUserAgain.getUsername());
-//        Assert.assertEquals(testUser.getPassword(), testUserAgain.getPassword());
-//        Assert.assertEquals(testUser.getFirstName(), testUserAgain.getFirstName());
-//        Assert.assertEquals(testUser.getLastName(), testUserAgain.getLastName());
-//        Assert.assertEquals(testUser.getEmail(), testUserAgain.getEmail());
-//        Assert.assertEquals(testUser.getWins(), testUserAgain.getWins());
-//        Assert.assertEquals(testUser.getTies(), testUserAgain.getTies());
-//        Assert.assertEquals(testUser.getLosses(), testUserAgain.getLosses());
-//        Assert.assertEquals(testUser.getRole(), testUserAgain.getRole());
-//        Assert.assertEquals(testUser.isEnabled(), testUserAgain.isEnabled());
-//
-//        junit.framework.Assert.assertEquals("User stored, vs. user retrieved does not match",
-//                testUser, testUserAgain);
-//    }
+    @Test
+    public void addOneToEmptyDaoTest() {
+        
+        User testUser = new User(1, "newgsername", "password", "firstn", "lastn", "emailad", 0, 0, 0, "ROLE_USER", true);
+        testDao.createUser(testUser);
+        User testUserAgain = testDao.getUserById(testUser.getId());
+
+        Assert.assertEquals(testUser.getId(), testUserAgain.getId());
+        Assert.assertEquals(testUser.getUsername(), testUserAgain.getUsername());
+        Assert.assertEquals(testUser.getPassword(), testUserAgain.getPassword());
+        Assert.assertEquals(testUser.getFirstName(), testUserAgain.getFirstName());
+        Assert.assertEquals(testUser.getLastName(), testUserAgain.getLastName());
+        Assert.assertEquals(testUser.getEmail(), testUserAgain.getEmail());
+        Assert.assertEquals(testUser.getWins(), testUserAgain.getWins());
+        Assert.assertEquals(testUser.getTies(), testUserAgain.getTies());
+        Assert.assertEquals(testUser.getLosses(), testUserAgain.getLosses());
+        Assert.assertEquals(testUser.getRole(), testUserAgain.getRole());
+        Assert.assertEquals(testUser.isEnabled(), testUserAgain.isEnabled());
+
+        junit.framework.Assert.assertEquals("User stored, vs. user retrieved does not match",
+                testUser, testUserAgain);
+    }
 
     @Test
     public void testAgainstEmptyDAO() {
@@ -227,30 +227,30 @@ public class UserDaoImplTest {
 
     }
 
-//    @Test
-//    public void testAddSimilarUsers() {
-//        for (User user : usersForTesting) {
-//            testDao.createUser(user);
-//        }
-//        for (User user : similarUsers) {
-//            testDao.createUser(user);
-//        }
-//        junit.framework.Assert.assertNotNull("List of all users should not be null.", testDao.getAllUsers());
-//        junit.framework.Assert.assertEquals("Expected user count does not match after adding several similar users.",
-//                usersForTesting.length + similarUsers.length, testDao.getAllUsers().size());
-//        junit.framework.Assert.assertEquals("Expected user count of 'all users' does not match after adding several similar users.",
-//                usersForTesting.length + similarUsers.length, testDao.getAllUsers().size());
-//        for (int i = 0; i < similarUsers.length; i++) {
-//            junit.framework.Assert.assertEquals("Get user does not match expected return on addition of similar user.", similarUsers[i],
-//                    testDao.getUserById(similarUsers[i].getId()));
-//            junit.framework.Assert.assertTrue("Returned user in getAllUsers does not match expected.", testDao.getAllUsers().contains(similarUsers[i]));
-//        }
-//        for (int i = 0; i < usersForTesting.length; i++) {
-//            junit.framework.Assert.assertEquals("Get user does not match expected return on addition of similar user.", usersForTesting[i],
-//                    testDao.getUserById(usersForTesting[i].getId()));
-//            junit.framework.Assert.assertTrue("Returned user in getAllUsers does not match expected.", testDao.getAllUsers().contains(usersForTesting[i]));
-//        }
-//    }
+    @Test
+    public void testAddSimilarUsers() {
+        for (User user : usersForTesting) {
+            testDao.createUser(user);
+        }
+        for (User user : similarUsers) {
+            testDao.createUser(user);
+        }
+        junit.framework.Assert.assertNotNull("List of all users should not be null.", testDao.getAllUsers());
+        junit.framework.Assert.assertEquals("Expected user count does not match after adding several similar users.",
+                usersForTesting.length + similarUsers.length, testDao.getAllUsers().size());
+        junit.framework.Assert.assertEquals("Expected user count of 'all users' does not match after adding several similar users.",
+                usersForTesting.length + similarUsers.length, testDao.getAllUsers().size());
+        for (int i = 0; i < similarUsers.length; i++) {
+            junit.framework.Assert.assertEquals("Get user does not match expected return on addition of similar user.", similarUsers[i],
+                    testDao.getUserById(similarUsers[i].getId()));
+            junit.framework.Assert.assertTrue("Returned user in getAllUsers does not match expected.", testDao.getAllUsers().contains(similarUsers[i]));
+        }
+        for (int i = 0; i < usersForTesting.length; i++) {
+            junit.framework.Assert.assertEquals("Get user does not match expected return on addition of similar user.", usersForTesting[i],
+                    testDao.getUserById(usersForTesting[i].getId()));
+            junit.framework.Assert.assertTrue("Returned user in getAllUsers does not match expected.", testDao.getAllUsers().contains(usersForTesting[i]));
+        }
+    }
 
     @Test
     public void testAddAndRemoveOneUser() {
@@ -276,54 +276,54 @@ public class UserDaoImplTest {
     //!!!!
     //org.springframework.transaction.CannotCreateTransactionException: Could not open JDBC Connection for transaction; nested exception is java.sql.SQLException: Cannot create PoolableConnectionFactory (Data source rejected establishment of connection,  message from server: "Too many connections")
     
-//    @Test
-//    public void testAddAndRemoveMultipleUsers() {
-//
-//        for (User user : usersForTesting) {
-//            testDao.createUser(user);
-//        }
-//
-//        int usersAdded = usersForTesting.length;
-//        for (int i = 0; i < usersForTesting.length; i += 2) {
-//            testDao.deleteUser(usersForTesting[i].getId());
-//            usersAdded--;
-//        }
-//
-//        junit.framework.Assert.assertNotNull("List of all users should not be null.", testDao.getAllUsers());
-//        junit.framework.Assert.assertEquals("Expected user count of 'all users' does not match after adding & removing several users.",
-//                usersAdded, testDao.getAllUsers().size());
-//
-//        for (int i = 0; i < usersForTesting.length; i++) {
-//            if (i % 2 == 1) {
-//                junit.framework.Assert.assertEquals("Returned user does not match expected.", usersForTesting[i], testDao.getUserById(usersForTesting[i].getId()));
-//            } else {
-//                junit.framework.Assert.assertNull("User should be removed and return null.", testDao.getUserById(usersForTesting[i].getId()));
-//            }
-//        }
-//    }
+    @Test
+    public void testAddAndRemoveMultipleUsers() {
 
-//    @Test
-//    public void testAddAndRemoveUsersMultipleTimes() {
-//        for (User user : usersForTesting) {
-//            testDao.createUser(user);
-//        }
-//        for (User user : usersForTesting) {
-//            testDao.deleteUser(user.getId());
-//        }
-//        for (User user : usersForTesting) {
-//            testDao.createUser(user);
-//        }
-//        junit.framework.Assert.assertNotNull("List of all users should not be null.", testDao.getAllUsers());
-//        junit.framework.Assert.assertEquals("Expected user count of 'all users' should be zero when adding/removing a all users.",
-//                usersForTesting.length, testDao.getAllUsers().size());
-//        for (int i = 0; i < usersForTesting.length; i++) {
-//            User user = usersForTesting[i];
-//            junit.framework.Assert.assertEquals("User should return after being re-added.", user, testDao.getUserById(user.getId()));
-//            testDao.deleteUser(user.getId());
-//            junit.framework.Assert.assertNull("User should return null after being removed.", testDao.getUserById(user.getId()));
-//        }
-//        junit.framework.Assert.assertEquals("Expected user count of 'all users' should be zero when adding/removing a all users.", 0, testDao.getAllUsers().size());
-//    }
+        for (User user : usersForTesting) {
+            testDao.createUser(user);
+        }
+
+        int usersAdded = usersForTesting.length;
+        for (int i = 0; i < usersForTesting.length; i += 2) {
+            testDao.deleteUser(usersForTesting[i].getId());
+            usersAdded--;
+        }
+
+        junit.framework.Assert.assertNotNull("List of all users should not be null.", testDao.getAllUsers());
+        junit.framework.Assert.assertEquals("Expected user count of 'all users' does not match after adding & removing several users.",
+                usersAdded, testDao.getAllUsers().size());
+
+        for (int i = 0; i < usersForTesting.length; i++) {
+            if (i % 2 == 1) {
+                junit.framework.Assert.assertEquals("Returned user does not match expected.", usersForTesting[i], testDao.getUserById(usersForTesting[i].getId()));
+            } else {
+                junit.framework.Assert.assertNull("User should be removed and return null.", testDao.getUserById(usersForTesting[i].getId()));
+            }
+        }
+    }
+
+    @Test
+    public void testAddAndRemoveUsersMultipleTimes() {
+        for (User user : usersForTesting) {
+            testDao.createUser(user);
+        }
+        for (User user : usersForTesting) {
+            testDao.deleteUser(user.getId());
+        }
+        for (User user : usersForTesting) {
+            testDao.createUser(user);
+        }
+        junit.framework.Assert.assertNotNull("List of all users should not be null.", testDao.getAllUsers());
+        junit.framework.Assert.assertEquals("Expected user count of 'all users' should be zero when adding/removing a all users.",
+                usersForTesting.length, testDao.getAllUsers().size());
+        for (int i = 0; i < usersForTesting.length; i++) {
+            User user = usersForTesting[i];
+            junit.framework.Assert.assertEquals("User should return after being re-added.", user, testDao.getUserById(user.getId()));
+            testDao.deleteUser(user.getId());
+            junit.framework.Assert.assertNull("User should return null after being removed.", testDao.getUserById(user.getId()));
+        }
+        junit.framework.Assert.assertEquals("Expected user count of 'all users' should be zero when adding/removing a all users.", 0, testDao.getAllUsers().size());
+    }
 
     @Test
     public void testUserCountOnAddition() {
@@ -374,25 +374,25 @@ public class UserDaoImplTest {
                 usersForTesting.length, testDao.getAllUsers().size());
     }
 
-//    @Test
-//    public void testUserCountAfterTwiceRemoved() {
-//        // Add all users
-//        for (int i = 0; i < usersForTesting.length; i++) {
-//            testDao.createUser(usersForTesting[i]);
-//        }
-//        // Remove users one by one and test that count decrements properly
-//        for (int i = 0; i < usersForTesting.length; i++) {
-//            testDao.deleteUser(usersForTesting[i].getId());
-//        }
-//        junit.framework.Assert.assertEquals("Expected " + 0 + " users after removing users.",
-//                0, testDao.getAllUsers().size());
-//        // Remove users one by one and test that count decrements properly
-//        for (int i = 0; i < usersForTesting.length; i++) {
-//            testDao.deleteUser(usersForTesting[i].getId());
-//        }
-//        junit.framework.Assert.assertEquals("Expected " + 0 + " users after attempting to re-remove users.",
-//                0, testDao.getAllUsers().size());
-//    }
+    @Test
+    public void testUserCountAfterTwiceRemoved() {
+        // Add all users
+        for (int i = 0; i < usersForTesting.length; i++) {
+            testDao.createUser(usersForTesting[i]);
+        }
+        // Remove users one by one and test that count decrements properly
+        for (int i = 0; i < usersForTesting.length; i++) {
+            testDao.deleteUser(usersForTesting[i].getId());
+        }
+        junit.framework.Assert.assertEquals("Expected " + 0 + " users after removing users.",
+                0, testDao.getAllUsers().size());
+        // Remove users one by one and test that count decrements properly
+        for (int i = 0; i < usersForTesting.length; i++) {
+            testDao.deleteUser(usersForTesting[i].getId());
+        }
+        junit.framework.Assert.assertEquals("Expected " + 0 + " users after attempting to re-remove users.",
+                0, testDao.getAllUsers().size());
+    }
 
 
 }
