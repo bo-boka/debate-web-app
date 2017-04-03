@@ -8,7 +8,7 @@
                 <h3 class="modal-title" id="exampleModalLabel">Edit Debate</h3>
             </div>
             <div class="modal-body">
-                <h3 id="edit-debate-id"></h3>
+                <input type=hidden id="edit-debate-id"/>
                 <form class="form-horizontal" id="blogForm">
                     <hr>
                     <div class="form-group">

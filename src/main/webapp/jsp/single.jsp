@@ -6,6 +6,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="s" uri="http://www.springframework.org/tags"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -119,7 +120,7 @@
                     
                 <sec:authorize access="isFullyAuthenticated()">
                     <sec:authentication var="user" property="principal.username" /> 
-                    <c:if test="${not empty oneDebate.rebuttals && ((user == oneDebate.negativeUser && oneDebate.rebuttals.size() % 2 == 0) || (user == oneDebate.affirmativeUser && oneDebate.rebuttals.size() % 2 != 0))}">
+                    <c:if test="${not empty oneDebate.rebuttals && (fn:length(oneDebate.rebuttals) lt 5) && ((user == oneDebate.negativeUser && oneDebate.rebuttals.size() % 2 == 0) || (user == oneDebate.affirmativeUser && oneDebate.rebuttals.size() % 2 != 0))}">
                         <form class="form-horizontal" id="rebuteForm">
                             <div class="form-group">
                                 <div>
