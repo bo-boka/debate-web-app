@@ -16,6 +16,7 @@
         <link href="${pageContext.request.contextPath}/css/bootstrap.min.css" rel="stylesheet">
         <link href="${pageContext.request.contextPath}/css/debateCSS.css" rel="stylesheet">
         <link rel="shortcut icon" href="${pageContext.request.contextPath}/img/deft-logo2.png">
+        <link href="https://fonts.googleapis.com/css?family=Orbitron" rel="stylesheet">
         <link href = "https://code.jquery.com/ui/1.10.4/themes/ui-lightness/jquery-ui.css" rel = "stylesheet">
         <script src='//cdn.tinymce.com/4/tinymce.min.js'></script>
         
@@ -27,7 +28,7 @@
         <div>
             <header>
                 <div class="container">
-                    <h1 style="font-size: 55px;">deft debate</h1>
+                    <h1 style="font-size: 42px; font-family: Orbitron, Verdana;">deft debate</h1>
                 </div>
             </header>
             <div id="head1"></div>
@@ -40,7 +41,7 @@
                         <div class="col-sm-3">
                             <div class="heading">Affirmative</div>
                             <div class="deb-user" style="background-color: #c2c2a3;">
-                                <h4>${oneDebate.affirmativeUser}</h4>
+                                <h4><strong>${oneDebate.affirmativeUser}</strong></h4>
                                 <div>
                                     Votes: <div>${oneDebate.proVotes}</div>
                                 </div>
@@ -52,7 +53,7 @@
                                 <h3>${oneDebate.resolution}</h3>
                                 <div id="deb-status">
                                     <i><u>Status:</u></i>
-                                    <div>${message}</div>
+                                    <div><strong>${message}</strong></div>
                                 </div>
                                 <sec:authorize access="isFullyAuthenticated()"> 
                                     <c:if test="${oneDebate.status == 'voting'}">
@@ -66,7 +67,7 @@
                                         </div>
                                     </c:if>
                                 </sec:authorize>
-
+                                <br>            
                                 <div><strong>Category: </strong>${oneDebate.category}</div>
                                 <div><strong>Date: </strong>${oneDebate.date}</div><br>
 
@@ -80,7 +81,7 @@
                         <div class="col-sm-3">
                             <div class="heading">Challenger</div>
                             <div class="deb-user" style="background-color: #998066;">
-                                <h4>${oneDebate.negativeUser}</h4>
+                                <h4><strong>${oneDebate.negativeUser}</strong></h4>
                                 <div>
                                     Votes: <div>${oneDebate.conVotes}</div>
                                 </div>

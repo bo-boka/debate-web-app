@@ -83,7 +83,7 @@ public class UserDaoImpl implements UserDao {
                 user.getWins(),
                 user.getTies(),
                 user.getLosses(),
-                user.isEnabled(), //might need to turn into int first
+                user.isEnabled(),
                 user.getId()
         );
         jdbcTemp.update(SQL_ADD_USER_AUTHORITY,

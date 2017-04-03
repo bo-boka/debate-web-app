@@ -11,6 +11,7 @@
         <link href="${pageContext.request.contextPath}/css/debateCSS.css" rel="stylesheet">
         <link rel="shortcut icon" href="${pageContext.request.contextPath}/img/deft-logo2.png">
         <title>deft debate | home</title>
+        <link href="https://fonts.googleapis.com/css?family=Orbitron" rel="stylesheet">
         <link href = "https://code.jquery.com/ui/1.10.4/themes/ui-lightness/jquery-ui.css" rel = "stylesheet">
     </head>
     <body>
@@ -18,7 +19,7 @@
         <div>
             <header>
                 <div class="container">
-                    <h1 style="font-size: 55px;">deft debate</h1>
+                    <h1 style="font-size: 42px; font-family: Orbitron, Verdana;">deft debate</h1>
                 </div>
             </header>
             <div id="head1"></div>
@@ -27,7 +28,7 @@
         <div class="container-fluid main">
             <div class="row">
                 <div class="col-lg-3">
-                    <div class="heading">Categories</div>
+                    <div class="heading">categories</div>
                     <div class="margin">
                         <c:forEach items="${categories}" var="category">
                             <div id="side-div">
@@ -38,9 +39,9 @@
 
                 </div>
                 <div class="col-lg-6">
-                    <div class="heading">Debates</div>
+                    <div class="heading">debates</div>
                     
-                    <select name="statusChoice" id="status-choice" class="ddbar">
+                    <select name="statusChoice" id="status-choice" class="ddbar" style=" border: 1px solid #33001a;">
                         <option value="all">all</option>
                         <option value="intro">challenge</option>
                         <option value="live">live</option>
@@ -57,7 +58,7 @@
                     </table>
                 </div>
                 <div class="col-lg-3">
-                    <div class="heading">Featured Users</div>
+                    <div class="heading">users</div>
                     <div class="margin">
                         <c:forEach items="${users}" var="user">
                             <div id="side-div">

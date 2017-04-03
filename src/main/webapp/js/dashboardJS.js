@@ -215,7 +215,6 @@ function getUserEditDetails(name){
 }
 
 function editUser(){
-    var id = $("#edit-user-id").text();
     
     $.ajax({
         url: 'user',
@@ -225,7 +224,7 @@ function editUser(){
         },
         'dataType' : 'json',
         data: JSON.stringify({
-            id: id,
+            id: $("#edit-user-id").text(),
             firstName: $('#edit-first-name').val(),
             lastName: $('#edit-last-name').val(),
             email: $('#edit-email').val(),

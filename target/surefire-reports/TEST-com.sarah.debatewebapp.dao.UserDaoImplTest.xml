@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<testsuite tests="12" failures="0" name="com.sarah.debatewebapp.dao.UserDaoImplTest" time="3.12" errors="0" skipped="0">
+<testsuite tests="17" failures="0" name="com.sarah.debatewebapp.dao.UserDaoImplTest" time="5.558" errors="0" skipped="0">
   <properties>
     <property name="java.runtime.name" value="Java(TM) SE Runtime Environment"/>
     <property name="sun.boot.library.path" value="C:\Program Files\Java\jdk1.8.0_111\jre\bin"/>
@@ -18,7 +18,6 @@
     <property name="java.vm.specification.name" value="Java Virtual Machine Specification"/>
     <property name="user.dir" value="C:\Users\Sarah\Documents\_repos\debate-web-app"/>
     <property name="java.runtime.version" value="1.8.0_111-b14"/>
-    <property name="netbeans.deploy" value="true"/>
     <property name="java.awt.graphicsenv" value="sun.awt.Win32GraphicsEnvironment"/>
     <property name="java.endorsed.dirs" value="C:\Program Files\Java\jdk1.8.0_111\jre\lib\endorsed"/>
     <property name="os.arch" value="amd64"/>
@@ -31,7 +30,7 @@
     <property name="maven.ext.class.path" value="C:\Program Files\NetBeans 8.2\java\maven-nblib\netbeans-eventspy.jar"/>
     <property name="classworlds.conf" value="C:\Program Files\Maven-3.3.9\bin\m2.conf"/>
     <property name="sun.jnu.encoding" value="Cp1252"/>
-    <property name="java.library.path" value="C:\Program Files\Java\jdk1.8.0_111\bin;C:\Windows\Sun\Java\bin;C:\Windows\system32;C:\Windows;C:\ProgramData\Oracle\Java\javapath;C:\Program Files\Common Files\Microsoft Shared\Windows Live;C:\Program Files (x86)\Common Files\Microsoft Shared\Windows Live;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Program Files (x86)\Windows Live\Shared;C:\Program Files (x86)\EgisTec MyWinLocker\x64;C:\Program Files (x86)\EgisTec MyWinLocker\;C:\python27;C:\Program Files\Java\jdk1.8.0_111\bin;C:\Program Files\Maven-3.3.9\bin;C:\Program Files\Tomcat-9.0.0.M15\bin;C:\Program Files\MySQL\MySQL Utilities 1.6\;C:\Program Files (x86)\Heroku\bin;C:\Program Files (x86)\git\cmd;C:\Program Files (x86)\Git\cmd;."/>
+    <property name="java.library.path" value="C:\Program Files\Java\jdk1.8.0_111\bin;C:\Windows\Sun\Java\bin;C:\Windows\system32;C:\Windows;C:\ProgramData\Oracle\Java\javapath;C:\Program Files\Common Files\Microsoft Shared\Windows Live;C:\Program Files (x86)\Common Files\Microsoft Shared\Windows Live;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Program Files (x86)\Windows Live\Shared;C:\Program Files (x86)\EgisTec MyWinLocker\x64;C:\Program Files (x86)\EgisTec MyWinLocker\;C:\python27;C:\Program Files\Java\jdk1.8.0_111\bin;C:\Program Files\Maven-3.3.9\bin;C:\Program Files\Tomcat-9.0.0.M15\bin;C:\Program Files\MySQL\MySQL Utilities 1.6\;C:\Program Files (x86)\Heroku\bin;C:\Program Files (x86)\git\cmd;C:\Program Files (x86)\Git\cmd;C:\Program Files\PostgreSQL\9.6\bin;C:\Python27\Scripts;C:\Program Files\boxfuse;C:\ProgramData\Oracle\Java\javapath;C:\Program Files\Common Files\Microsoft Shared\Windows Live;C:\Program Files (x86)\Common Files\Microsoft Shared\Windows Live;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Program Files (x86)\Windows Live\Shared;C:\Program Files (x86)\EgisTec MyWinLocker\x64;C:\Program Files (x86)\EgisTec MyWinLocker\;C:\python27;C:\Program Files\Java\jdk1.8.0_111\bin;C:\Program Files\Maven-3.3.9\bin;C:\Program Files\Tomcat-9.0.0.M15\bin;C:\Program Files\MySQL\MySQL Utilities 1.6\;C:\Program Files (x86)\Heroku\bin;C:\Program Files (x86)\git\cmd;C:\Program Files (x86)\Git\cmd;C:\Program Files\PostgreSQL\9.6\bin;C:\ProgramData\Oracle\Java\javapath;C:\Program Files\Common Files\Microsoft Shared\Windows Live;C:\Program Files (x86)\Common Files\Microsoft Shared\Windows Live;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Program Files (x86)\Windows Live\Shared;C:\Program Files (x86)\Eg;."/>
     <property name="java.specification.name" value="Java Platform API Specification"/>
     <property name="java.class.version" value="52.0"/>
     <property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers"/>
@@ -46,7 +45,7 @@
     <property name="java.vm.specification.version" value="1.8"/>
     <property name="sun.arch.data.model" value="64"/>
     <property name="java.home" value="C:\Program Files\Java\jdk1.8.0_111\jre"/>
-    <property name="sun.java.command" value="org.codehaus.plexus.classworlds.launcher.Launcher -Dnetbeans.deploy=true -Dmaven.ext.class.path=C:\Program Files\NetBeans 8.2\java\maven-nblib\netbeans-eventspy.jar -Dfile.encoding=UTF-8 package"/>
+    <property name="sun.java.command" value="org.codehaus.plexus.classworlds.launcher.Launcher -Dmaven.ext.class.path=C:\Program Files\NetBeans 8.2\java\maven-nblib\netbeans-eventspy.jar -Dfile.encoding=UTF-8 clean install"/>
     <property name="java.specification.vendor" value="Oracle Corporation"/>
     <property name="user.language" value="en"/>
     <property name="awt.toolkit" value="sun.awt.windows.WToolkit"/>
@@ -63,16 +62,21 @@
     <property name="sun.desktop" value="windows"/>
     <property name="sun.cpu.isalist" value="amd64"/>
   </properties>
-  <testcase classname="com.sarah.debatewebapp.dao.UserDaoImplTest" name="testAddMultipleUsers" time="0.593"/>
-  <testcase classname="com.sarah.debatewebapp.dao.UserDaoImplTest" name="testAgainstEmptyDAO" time="0.084"/>
-  <testcase classname="com.sarah.debatewebapp.dao.UserDaoImplTest" name="testAddAndRemoveUserTwice" time="0.105"/>
-  <testcase classname="com.sarah.debatewebapp.dao.UserDaoImplTest" name="testUpdateUser" time="0.33"/>
-  <testcase classname="com.sarah.debatewebapp.dao.UserDaoImplTest" name="testUsersAfterRemovalOfNonExistent" time="0.226"/>
-  <testcase classname="com.sarah.debatewebapp.dao.UserDaoImplTest" name="testAddOneUser" time="0.128"/>
-  <testcase classname="com.sarah.debatewebapp.dao.UserDaoImplTest" name="testUserCountAfterRemoval" time="0.304"/>
-  <testcase classname="com.sarah.debatewebapp.dao.UserDaoImplTest" name="testUserCountOnUpdate" time="0.732"/>
-  <testcase classname="com.sarah.debatewebapp.dao.UserDaoImplTest" name="testAddAndRemoveOneUser" time="0.099"/>
-  <testcase classname="com.sarah.debatewebapp.dao.UserDaoImplTest" name="testGetUserByUsername" time="0.064"/>
-  <testcase classname="com.sarah.debatewebapp.dao.UserDaoImplTest" name="testUserCountOnAddition" time="0.169"/>
-  <testcase classname="com.sarah.debatewebapp.dao.UserDaoImplTest" name="testUpdateMultipleUsers" time="0.286"/>
+  <testcase classname="com.sarah.debatewebapp.dao.UserDaoImplTest" name="testAddMultipleUsers" time="0.601"/>
+  <testcase classname="com.sarah.debatewebapp.dao.UserDaoImplTest" name="testAgainstEmptyDAO" time="0.151"/>
+  <testcase classname="com.sarah.debatewebapp.dao.UserDaoImplTest" name="testAddAndRemoveUserTwice" time="0.383"/>
+  <testcase classname="com.sarah.debatewebapp.dao.UserDaoImplTest" name="testUpdateUser" time="0.983"/>
+  <testcase classname="com.sarah.debatewebapp.dao.UserDaoImplTest" name="testUsersAfterRemovalOfNonExistent" time="0.331"/>
+  <testcase classname="com.sarah.debatewebapp.dao.UserDaoImplTest" name="testAddOneUser" time="0.054"/>
+  <testcase classname="com.sarah.debatewebapp.dao.UserDaoImplTest" name="testUserCountAfterRemoval" time="0.257"/>
+  <testcase classname="com.sarah.debatewebapp.dao.UserDaoImplTest" name="testAddAndRemoveUsersMultipleTimes" time="0.715"/>
+  <testcase classname="com.sarah.debatewebapp.dao.UserDaoImplTest" name="testUserCountOnUpdate" time="0.313"/>
+  <testcase classname="com.sarah.debatewebapp.dao.UserDaoImplTest" name="addOneToEmptyDaoTest" time="0.096"/>
+  <testcase classname="com.sarah.debatewebapp.dao.UserDaoImplTest" name="testAddAndRemoveOneUser" time="0.084"/>
+  <testcase classname="com.sarah.debatewebapp.dao.UserDaoImplTest" name="testGetUserByUsername" time="0.062"/>
+  <testcase classname="com.sarah.debatewebapp.dao.UserDaoImplTest" name="testUserCountOnAddition" time="0.261"/>
+  <testcase classname="com.sarah.debatewebapp.dao.UserDaoImplTest" name="testUpdateMultipleUsers" time="0.281"/>
+  <testcase classname="com.sarah.debatewebapp.dao.UserDaoImplTest" name="testAddSimilarUsers" time="0.259"/>
+  <testcase classname="com.sarah.debatewebapp.dao.UserDaoImplTest" name="testUserCountAfterTwiceRemoved" time="0.485"/>
+  <testcase classname="com.sarah.debatewebapp.dao.UserDaoImplTest" name="testAddAndRemoveMultipleUsers" time="0.242"/>
 </testsuite>

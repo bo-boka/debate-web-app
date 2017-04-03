@@ -16,6 +16,7 @@
         <link href="${pageContext.request.contextPath}/css/bootstrap.min.css" rel="stylesheet">
         <link href="${pageContext.request.contextPath}/css/debateCSS.css" rel="stylesheet">
         <link rel="shortcut icon" href="${pageContext.request.contextPath}/img/deft-logo2.png">
+        <link href="https://fonts.googleapis.com/css?family=Orbitron" rel="stylesheet">
         <title>deft | ${oneUser.username}</title>
         <link href = "https://code.jquery.com/ui/1.10.4/themes/ui-lightness/jquery-ui.css" rel = "stylesheet">
         <script>
@@ -37,7 +38,7 @@
         <div>
             <header>
                 <div class="container">
-                    <h1 style="font-size: 55px;">deft debate</h1>
+                    <h1 style="font-size: 42px; font-family: Orbitron, Verdana;">deft debate</h1>
                 </div>
             </header>
             <div id="head1"></div>

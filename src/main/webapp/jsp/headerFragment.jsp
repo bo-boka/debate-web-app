@@ -14,7 +14,7 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="${pageContext.request.contextPath}/home" style="letter-spacing: 14px;">deft debate</a>
+      <a class="navbar-brand" href="${pageContext.request.contextPath}/home" style="letter-spacing: 10px; font-family: Orbitron, Verdana;">deft debate</a>
     </div>
 
     <!-- Collect the nav links, forms, and other content for toggling -->
@@ -23,8 +23,8 @@
         <form action="search" method="POST" class="navbar-form navbar-left" style="padding-right: 100px;">
             <div class="form-group">
                 <select name="searchOption" id="search-option" class="ddbar">
-                    <option value="---">...choose...</option>
-                    <option value="resolution" style="background-color: #d6e9c6">resolution</option>
+                    <option value="---">..choose..</option>
+                    <option value="resolution" style="background-color: #d6e9c6;">resolution</option>
                     <option value="category" style="background-color: #d6e9c6">category</option>
                     <option value="user" style="background-color: #d6e9c6">username</option>
                     <option value="date" style="background-color: #d6e9c6">date</option>

@@ -129,10 +129,10 @@ public class UserController {
         user.setLosses(ogUser.getLosses());
         user.setTies(ogUser.getTies());
         user.setRole(ogUser.getRole());
+        user.setEnabled(ogUser.isEnabled());
         user.setPassword(ogUser.getPassword());
 //        if (user.getPassword().equals(ogUser.getPassword())) user.setPassword(ogUser.getPassword());
 //        else user.setPassword(encoder.encode(user.getPassword()));
-//        if (user.)
         userDao.updateUser(user);
     }
     

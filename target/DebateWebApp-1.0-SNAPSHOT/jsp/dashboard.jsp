@@ -18,6 +18,7 @@
         <link href="${pageContext.request.contextPath}/css/debateCSS.css" rel="stylesheet">
         <link rel="shortcut icon" href="${pageContext.request.contextPath}/img/deft-logo2.png">
         <link href = "https://code.jquery.com/ui/1.10.4/themes/ui-lightness/jquery-ui.css" rel = "stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Orbitron" rel="stylesheet">
         <script src='//cdn.tinymce.com/4/tinymce.min.js'></script>
     </head>
     <body>
@@ -29,14 +30,14 @@
         </div><!--end dash head-->
         <div class="container-fluid main">
              
-            <div align="right">
-                <sec:authentication var="user" property="principal.username" />
-                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#edit-user-modal" data-user-name="${user}">Edit Account</button>
-            </div>
-            <div class="row">
+            <div class="row" id="dash-main">
+                <div align="right">
+                    <sec:authentication var="user" property="principal.username" />
+                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#edit-user-modal" data-user-name="${user}">Edit Account</button>
+                </div>
                 <div class="col-sm-6">
                     <form class="form-horizontal" id="debateForm">
-                        <center><h3>Add Debate</h3></center>
+                        <center><div class="heading">Add Debate</div></center>
                         <hr>
                         <div class="form-group">
                             <label for="addResolution" class="col-sm-2 control-label">Resolution</label>
@@ -72,7 +73,7 @@
                     <sec:authorize access="hasRole('ROLE_ADMIN')">
                         <form class="form-horizontal" role="form">
                             <center><br><br><br>
-                            <h2>Create Moderator</h2>
+                            <div class="heading">Create Moderator</div>
                             <hr>
                             </center>
                             <div class="form-group">
