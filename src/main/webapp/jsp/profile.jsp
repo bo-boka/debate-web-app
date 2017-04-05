@@ -57,6 +57,16 @@
             Ties: ${oneUser.ties}<br>
             </div>
             </center>
+            <sec:authorize access="hasRole('ROLE_ADMIN')">
+                <div class="heading">Moderator Settings</div>
+                <!--disable passed with username because controller method is also used in user dash that passes username-->
+                <a href="editRole?userid=${oneUser.id}"><button type="button" class="btn btn-lg btn-primary" id="change-to-moderator">Add Moderator</button></a>
+                <a href="disableUser?username=${oneUser.username}"><button type="button" class="btn btn-lg btn-primary" id="disable-user">Disable Account</button></a>
+                <a href="deleteUser?userid=${oneUser.id}"><button type="button" class="btn btn-lg btn-primary" id="delete-user">Delete Account</button></a>
+            </sec:authorize>
+            <c:if test="${badInput}">
+                <div class="alert alert-danger">You cannot delete a user that has engaged in debates as it affects other debator stats.</div>
+            </c:if>
         </div>
 
         <script src="${pageContext.request.contextPath}/js/jquery-2.2.4.min.js"></script>

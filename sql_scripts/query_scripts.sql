@@ -175,9 +175,12 @@ SELECT username FROM users WHERE user_id = 5;
 DELETE FROM authorities WHERE username = 'snowOwl22';
 DELETE FROM users WHERE user_id = 5;
 
-
 /*show process list*/
 SHOW FULL PROCESSLIST;
 
 INSERT INTO users (user_id, username, password, first_name, last_name, email, enabled)
 	VALUES (27, 'ttyatin', '$2a$10$dF7HhXvoH8.M7VlhjRZ1beNIPoN16TKLI5150iOsBETF2p/CaNvl.', 'Ally', 'Smith', 'asmith@debator.com', 1);
+
+
+SELECT * FROM authorities;
+UPDATE authorities SET authority = 'ROLE_ADMIN' WHERE username='cheesinForTheWeekend';

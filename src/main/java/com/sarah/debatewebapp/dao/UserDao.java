@@ -23,6 +23,12 @@ public interface UserDao {
     @Transactional(propagation = Propagation.REQUIRED, readOnly = false)
     void updateUser(User user);
     
+    @Transactional(propagation = Propagation.REQUIRED, readOnly = false)
+    void deactivateUser(User user);
+    
+    @Transactional(propagation = Propagation.REQUIRED, readOnly = false)
+    void changeAuthority(User user);
+    
     User getUserById(int id);
     
     User getUserByUsername(String username);

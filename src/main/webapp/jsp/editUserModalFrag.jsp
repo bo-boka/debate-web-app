@@ -9,7 +9,7 @@
             </div>
             <div class="modal-body">
                 <input type=hidden id="edit-user-id"/>
-                <form action="register" method="POST" class="form-horizontal" role="form">
+                <form class="form-horizontal" role="form">
                         <div class="form-group">
                             <label for="edit-first-name" class="col-md-4 control-label">First Name:</label>
                             <div class="col-md-8">
@@ -44,6 +44,8 @@
             </div>
             <div class="modal-footer">
                 <button type="submit" class="btn btn-lg btn-primary" id="edit-user">Save changes</button>
+                <a href="disableUser?username=${user}"><button type="button" class="btn btn-lg btn-primary" id="delete-user">Disable Account</button></a>
+                
                 <div id="validationEditUserErrors" class="alert alert-danger" style="display:none"></div>
             </div>
         </div>

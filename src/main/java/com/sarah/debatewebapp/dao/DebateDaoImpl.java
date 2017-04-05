@@ -229,7 +229,18 @@ public class DebateDaoImpl implements DebateDao {
             deb.setStatus("voting");
             return null;
         }
-    }   
+    }  
+    
+//    private static final String SQL_GET_REBUTTAL_BY_ID = "";
+//    //GET A Rebuttal
+//    @Override
+//    public Debate getRebuttalById(int id){
+//         try{
+//            return jdbcTemp.queryForObject(SQL_GET_USER_BY_ID, new UserMapper(), id);
+//        }catch(EmptyResultDataAccessException e){
+//            return null;
+//        }
+//    }
     
     private static final String SQL_GET_ALL_CATEGORIES = "SELECT category FROM categories";
     //GET CATEGORIES

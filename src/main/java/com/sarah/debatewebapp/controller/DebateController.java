@@ -238,13 +238,6 @@ public class DebateController {
         dao.updateDebate(deb);
     }
     
-//    //delete button in debate modal doesn't redirect properly
-//    @ResponseStatus(HttpStatus.NO_CONTENT)
-//    @RequestMapping(value="/debate/deb/{id}", method=RequestMethod.DELETE)
-//    public void deleteDebate(@PathVariable int id) {
-//        dao.deleteDebate(id);
-//    }
-    
     //delete button on debate page
     //using get meth type instead of delete to go through context path and redirect to home page
     @RequestMapping(value="/debate/del/{id}", method=RequestMethod.GET)
@@ -253,36 +246,11 @@ public class DebateController {
         return "redirect:/home";
     }
     
-    
-    //search functionality is now handled via HttpServletRequest in SearchController
-//    //search by resolution
+//    //gets a rebuttal for edit modal
 //    @ResponseBody
-//    @RequestMapping(value = "/searchRes/{res}", method = RequestMethod.GET)
-//    public List<Debate> displayDebatesByResolution(@PathVariable String res){
-//        List<Debate> result = dao.searchDebatesByResolution(res);
-//        return result;
-//    }
-//    
-//    //search by category
-//    @ResponseBody
-//    @RequestMapping(value = "/searchCategory/{category}", method = RequestMethod.GET)
-//    public List<Debate> displayDebatesByCategory(@PathVariable String category){
-//        List<Debate> result = dao.searchDebatesByCategory(category);
-//        return result;
-//    }
-//    
-//    @ResponseBody
-//    @RequestMapping(value = "/searchUser/{user}", method = RequestMethod.GET)
-//    public List<Debate> displayDebatesByUser(@PathVariable String user){
-//        List<Debate> result = dao.searchDebatesByUser(user);
-//        return result;
-//    }
-//    
-//    @ResponseBody
-//    @RequestMapping(value = "/searchDate/{date}", method = RequestMethod.GET)
-//    public List<Debate> displayDebatesByDate(@PathVariable String date){
-//        List<Debate> result = dao.searchDebatesByDate(date);
-//        return result;
+//    @RequestMapping(value="/debate/reb/{id}", method=RequestMethod.GET)
+//    public Rebuttal getRebuttal(@PathVariable int id){
+//        return dao.getDebateById(id);
 //    }
     
 }

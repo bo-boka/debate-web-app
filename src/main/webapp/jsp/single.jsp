@@ -115,6 +115,12 @@
                         ${rebute.content}
                         <div><strong>${rebute.user}</strong></div>
                         ${rebute.date}
+                        <sec:authorize access="isFullyAuthenticated()">
+                            <sec:authentication var="user" property="principal.username" /> 
+                            <c:if test="${rebute.user == user}">
+                                <button class="pull-right" data-toggle="modal" data-target="#edit-rebuttal-modal" data-rebuttal-id="${rebute.id}">Edit</button>
+                            </c:if>
+                        </sec:authorize>
                     </div>
                 </c:forEach>
                     
@@ -133,10 +139,9 @@
                     </c:if>
                 </sec:authorize>
             </center>
-                
-                
-                
-                <%@include file="editDebateModalFrag.jsp" %>
+             
+            <%@include file="editDebateModalFrag.jsp" %>
+            <%@include file="editRebuttalModal.jsp" %>
         </div>
         
         <script src="${pageContext.request.contextPath}/js/jquery-2.2.4.min.js"></script>

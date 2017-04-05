@@ -9,7 +9,7 @@
             </div>
             <div class="modal-body">
                 <input type=hidden id="edit-debate-id"/>
-                <form class="form-horizontal" id="blogForm">
+                <form class="form-horizontal" id="debate-edit-form">
                     <hr>
                     <div class="form-group">
                         <label for="editDebateCategory" class="col-sm-2 control-label">Category</label>
@@ -78,8 +78,7 @@
                     </div>
                 </form>
             </div>
-            <div class="modal-footer">
-                <!--<button type="submit" class="btn btn-secondary" id="delete-debate">Delete</button>-->
+            <div class="modal-footer">                
                 <button type="submit" class="btn btn-lg btn-primary" id="edit-debate">Save changes</button>
                 <div id="validationDebateEditErrors" class="alert alert-danger"
                     style="display:none">

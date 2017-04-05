@@ -24,6 +24,11 @@ $(document).ready(function(){
         editUser();
     });
     
+//    $('#delete-user').click(function(event){
+//        event.preventDefault();
+//        deleteUser();
+//    });
+    
     $("#user-register-button").click(function(event){
         event.preventDefault();
         registerUser();
@@ -163,6 +168,7 @@ function addDebate(){
 }
 
 function addModerator(){
+    var errorDiv = $("#validationErrorsMod");
     $.ajax({
         url: 'mod',
         type: 'POST',
@@ -185,9 +191,8 @@ function addModerator(){
         $('#add-mod-email').val('');
         $('#add-mod-username').val('');
         $('#add-mod-password').val('');
-        
+        errorDiv.hide();
         }).error(function (data, status){
-            var errorDiv = $("#validationErrorsMod");
             errorDiv.empty();
             errorDiv.show();
             $.each(data.responseJSON.fieldErrors, function (index, validationError){

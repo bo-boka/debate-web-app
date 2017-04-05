@@ -72,6 +72,7 @@ public class UserDaoImpl implements UserDao {
     @Transactional(propagation = Propagation.REQUIRED, readOnly = false)
     @Override
     public void updateUser(User user){
+        //getting original username by id just in case username was changed in new obj
         String name = jdbcTemp.queryForObject(SQL_GET_USERNAME, String.class, user.getId());
         jdbcTemp.update(SQL_DELETE_ATHORITY, name);
         jdbcTemp.update(SQL_UPDATE_USER,
@@ -89,6 +90,36 @@ public class UserDaoImpl implements UserDao {
         jdbcTemp.update(SQL_ADD_USER_AUTHORITY,
                 user.getUsername(),
                 user.getRole()
+        );
+    }
+    
+    private static final String SQL_DEACTIVATE_USER = "UPDATE users SET enabled=? \n" +
+"	WHERE user_id=?";
+    //DEACTIVATE USER
+    @Transactional(propagation = Propagation.REQUIRED, readOnly = false)
+    @Override
+    public void deactivateUser(User user){
+        
+        jdbcTemp.update(SQL_DELETE_ATHORITY, user.getUsername());
+        jdbcTemp.update(SQL_DEACTIVATE_USER,
+                0,
+                user.getId()
+        );
+        jdbcTemp.update(SQL_ADD_USER_AUTHORITY,
+                user.getUsername(),
+                user.getRole()
+        );
+    }
+    
+    private static final String SQL_CHANGE_AUTHORITY = "UPDATE authorities SET authority = ? WHERE username=?";
+    //CHANGE USER AUTHORITY
+    @Transactional(propagation = Propagation.REQUIRED, readOnly = false)
+    @Override
+    public void changeAuthority(User user){
+        
+        jdbcTemp.update(SQL_CHANGE_AUTHORITY,
+                "ROLE_ADMIN",
+                user.getUsername()
         );
     }
     
@@ -124,7 +155,7 @@ public class UserDaoImpl implements UserDao {
     @Override
     public List<User> getAllUsers(){
         List<User> allUsers = jdbcTemp.query(SQL_GET_ALL_USERS, new UserMapper());
-        return allUsers; //might need list caste
+        return allUsers; 
     }
     
     private static final String SQL_DELETE_USER = "DELETE FROM users WHERE user_id = ?";
@@ -132,9 +163,9 @@ public class UserDaoImpl implements UserDao {
     @Override
     public void deleteUser(int id){
         try {
-        String name = jdbcTemp.queryForObject(SQL_GET_USERNAME, String.class, id);
-        jdbcTemp.update(SQL_DELETE_ATHORITY, name);
-        jdbcTemp.update(SQL_DELETE_USER, id);
+            String name = jdbcTemp.queryForObject(SQL_GET_USERNAME, String.class, id);
+            jdbcTemp.update(SQL_DELETE_ATHORITY, name);
+            jdbcTemp.update(SQL_DELETE_USER, id);
         } catch (EmptyResultDataAccessException e){
             Logger.getLogger(UserDaoImpl.class.getName()).log(Level.WARNING, null, e);
         }

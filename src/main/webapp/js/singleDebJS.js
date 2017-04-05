@@ -47,6 +47,12 @@ $(document).ready(function(){
         }
     });
     
+    $("#edit-rebuttal-modal").on('show.bs.modal', function(event){
+        var element = $(event.relatedTarget);
+        var id = element.data('rebuttal-id');
+        getRebuttalEditDetails(id);
+    });
+    
     tinymce.init({
         selector: '#add-challenge-content',
         min_width: 400,
@@ -106,11 +112,6 @@ $(document).ready(function(){
         dateFormat: 'yy-mm-dd'
     });
 
-//    $("#delete-debate").click(function(event){
-//        event.preventDefault();
-//        deleteDebate();
-//    });
-    
 });
 
 function challengeDebate(){
@@ -266,20 +267,17 @@ function editDebate(){
     });
 }
 
-//function deleteDebate(){
-//    var id = $("#edit-debate-id").text();
-//    
+//function getRebuttalEditDetails(id) {
 //    $.ajax({
-//        url: 'deb/' +id,
-//        type: 'DELETE'
-//    }).success(function(){
-//        alert("deleted");
+//        url: 'reb/'+id,
+//        type: 'GET',
+//        headers: {
+//            'Accept': 'application/json'
+//        }
+//    }).success(function(debate){
+//        $("#edit-rebuttal-id").text(rebuttal.id);
 //        
-////        window.location.reload(true);
-////        window.history.back();
-////        window.location="redirect:/home";
-////        
-//        //reload doesn't work when back is used
-//        //so deleted item still appears in home list until page is manually refreshed
+//        $("#edit-rebuttal-content").val(tinyMCE.get('edit-rebuttal-content').setContent(debate.content));
+//        
 //    });
 //}

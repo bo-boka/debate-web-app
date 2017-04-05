@@ -7,8 +7,10 @@ package com.sarah.debatewebapp.controller;
 import com.sarah.debatewebapp.dao.DebateDao;
 import com.sarah.debatewebapp.dao.UserDao;
 import com.sarah.debatewebapp.dto.User;
+import java.util.Map;
 import javax.inject.Inject;
 import javax.validation.Valid;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.DuplicateKeyException;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -18,6 +20,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
@@ -135,5 +138,34 @@ public class UserController {
 //        else user.setPassword(encoder.encode(user.getPassword()));
         userDao.updateUser(user);
     }
+    
+    @RequestMapping(value="/profile/deleteUser", method=RequestMethod.GET)
+    public String deleteUser(@RequestParam("userid") int userid, Model model) {
+        User user = userDao.getUserById(userid);
+        boolean badInput;
+        try{
+            userDao.deleteUser(userid);
+            return "redirect:/home";
+        } catch (DataIntegrityViolationException e){
+            badInput = true;
+            model.addAttribute("badInput", badInput);
+            return "redirect:/profile/" + user.getUsername();
+        }
+        
+    } 
+    
+    @RequestMapping(value="/profile/editRole", method=RequestMethod.GET)
+    public String editRole(@RequestParam("userid") int userid) {
+        User user = userDao.getUserById(userid);
+        userDao.changeAuthority(user);
+        return "redirect:/profile/" + user.getUsername();
+    } 
+    
+    @RequestMapping(value={"/profile/disableUser", "/disableUser"}, method=RequestMethod.GET)
+    public String disableUser(@RequestParam("username") String username) {
+        User user = userDao.getUserByUsername(username);
+        userDao.deactivateUser(user);
+        return "redirect:/profile/" + username;
+    } 
     
 }
