@@ -53,6 +53,11 @@ $(document).ready(function(){
         getRebuttalEditDetails(id);
     });
     
+    $("#edit-rebuttal").click(function(event){
+        event.preventDefault();
+        editRebuttal();
+    });
+    
     tinymce.init({
         selector: '#add-challenge-content',
         min_width: 400,
@@ -91,6 +96,24 @@ $(document).ready(function(){
     
     tinymce.init({
         selector: '#edit-debate-content',
+        min_width: 400,
+        min_height: 300,
+        plugins: [
+            'advlist autolink autosave charmap hr link lists print preview ',
+            ' wordcount visualblocks visualchars image imagetools',
+            'table contextmenu emoticons template',
+            'paste save searchreplace textcolor'
+        ],
+        contextmenu: "link image",
+        imagetools_toolbar: "rotateleft rotateright | flipv fliph | editimage imageoptions",
+        toolbar: 'insertfile undo redo | styleselect | forecolor backcolor bold italic underline \n\
+        | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent \n\
+        | link charmap image emoticons | preview save',
+        images_upload_base_path: '${pageContext.request.contextPath}/img'
+    });
+    
+    tinymce.init({
+        selector: '#edit-rebuttal-content',
         min_width: 400,
         min_height: 300,
         plugins: [
@@ -210,8 +233,8 @@ function getDebateEditDetails(id){
         $("#edit-debate-resolution").val(debate.resolution);
         $("#edit-debate-status").val(debate.status);
         $("#edit-date-picker").val(debate.date);
-        $("#edit-debate-aff-user").val(debate.affirmativeUser);
-        $("#edit-debate-neg-user").val(debate.negativeUser);
+        $("#edit-debate-aff-user").text(debate.affirmativeUser);
+        $("#edit-debate-neg-user").text(debate.negativeUser);
         $("#edit-debate-content").val(tinyMCE.get('edit-debate-content').setContent(debate.content));
         $("#edit-debate-category").val(debate.category);
         $("#edit-debate-pro-votes").val(debate.proVotes);
@@ -267,17 +290,46 @@ function editDebate(){
     });
 }
 
-//function getRebuttalEditDetails(id) {
-//    $.ajax({
-//        url: 'reb/'+id,
-//        type: 'GET',
-//        headers: {
-//            'Accept': 'application/json'
-//        }
-//    }).success(function(debate){
-//        $("#edit-rebuttal-id").text(rebuttal.id);
-//        
-//        $("#edit-rebuttal-content").val(tinyMCE.get('edit-rebuttal-content').setContent(debate.content));
-//        
-//    });
-//}
+function getRebuttalEditDetails(id) {
+    $.ajax({
+        url: 'reb/'+id,
+        type: 'GET',
+        headers: {
+            'Accept': 'application/json'
+        }
+    }).success(function(rebuttal){
+        $("#edit-rebuttal-id").text(rebuttal.id);
+        $("#edit-rebuttal-content").val(tinyMCE.get('edit-rebuttal-content').setContent(rebuttal.content));
+    });
+}
+
+function editRebuttal(){
+    
+    var contentData = tinyMCE.get('edit-rebuttal-content');
+    var id = $("#edit-rebuttal-id").text();
+    var errorDiv = $("#validationRebuttalEditErrors");
+    
+    $.ajax({
+        url: 'reb',
+        type: 'PUT',
+        headers:{
+            'Content-type': 'application/json'
+        },
+        'dataType' : 'json',
+        data: JSON.stringify({
+            id: id,
+            content: contentData.getContent()
+        })
+    }).success(function(data){
+        window.location.reload(true);
+        window.onbeforeunload = function() {};
+    }).error(function (data, status) {
+        errorDiv.empty();
+        $.each(data.responseJSON.fieldErrors, function (index, validationError) {
+            errorDiv.append(validationError.message);
+            errorDiv.append("<br>");
+            errorDiv.show();
+        });
+    });
+
+}

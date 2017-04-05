@@ -1,5 +1,6 @@
 com\sarah\debatewebapp\controller\RestValidationHandler.class
 com\sarah\debatewebapp\dto\Role.class
+com\sarah\debatewebapp\dao\DebateDaoImpl$RebuttalMapper.class
 com\sarah\debatewebapp\dao\UserDaoImpl$UserMapper.class
 com\sarah\debatewebapp\dto\User.class
 com\sarah\debatewebapp\controller\UserController.class

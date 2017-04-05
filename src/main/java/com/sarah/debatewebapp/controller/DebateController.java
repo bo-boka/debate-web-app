@@ -246,11 +246,18 @@ public class DebateController {
         return "redirect:/home";
     }
     
-//    //gets a rebuttal for edit modal
-//    @ResponseBody
-//    @RequestMapping(value="/debate/reb/{id}", method=RequestMethod.GET)
-//    public Rebuttal getRebuttal(@PathVariable int id){
-//        return dao.getDebateById(id);
-//    }
+    //gets a rebuttal for edit modal
+    @ResponseBody
+    @RequestMapping(value="/debate/reb/{id}", method=RequestMethod.GET)
+    public Rebuttal getRebuttal(@PathVariable int id){
+        return dao.getRebuttalById(id);
+    }
+    
+    //edit rebuttal
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    @RequestMapping(value="/debate/reb", method=RequestMethod.PUT)
+    public void updateRebuttal(@Valid @RequestBody Rebuttal reb){
+        dao.updateRebuttal(reb);
+    }
     
 }

@@ -12,7 +12,7 @@
                 <form class="form-horizontal" id="debate-edit-form">
                     <hr>
                     <div class="form-group">
-                        <label for="editDebateCategory" class="col-sm-2 control-label">Category</label>
+                        <label for="editDebateCategory" class="col-sm-3 control-label">Category</label>
                         <div class="col-sm-4">
                             <select name="edit-debate-category" class="form-control" id="edit-debate-category">
                                 <c:forEach items="${categories}" var="category">
@@ -22,55 +22,55 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="editDebateResolution" class="col-sm-2 control-label">Resolution</label>
+                        <label for="editDebateResolution" class="col-sm-3 control-label">Resolution</label>
                         <div class="col-sm-8">
                             <input type="text" class="form-control" id="edit-debate-resolution" placeholder="Resolution">
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="editDebateDate" class="col-sm-2 control-label">Date</label>
+                        <label for="editDebateDate" class="col-sm-3 control-label">Date</label>
                         <div class="col-sm-4">
                             <input type="text" class="form-control" id="edit-date-picker" placeholder="Click to add date">
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="editDebateAffUser" class="col-sm-2 control-label">Affirmative User</label>
+                        <label for="editDebateAffUser" class="col-sm-3 control-label">Affirmative User</label>
                         <div class="col-sm-4">
-                            <input type="text" class="form-control" id="edit-debate-aff-user" placeholder="Affirmative User">
+                            <div id="edit-debate-aff-user"></div>
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="editDebateNegUser" class="col-sm-2 control-label">Negative User</label>
+                        <label for="editDebateNegUser" class="col-sm-3 control-label">Negative User</label>
                         <div class="col-sm-4">
-                            <input type="text" class="form-control" id="edit-debate-neg-user" placeholder="Negative User">
+                            <div id="edit-debate-neg-user"></div>
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="editDebateContent" class="col-sm-2 control-label">Content</label>
+                        <label for="editDebateContent" class="col-sm-3 control-label">Content</label>
                         <div class="col-sm-11">
                             <textarea name="editDebateContent" id="edit-debate-content"></textarea>
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="editDebateStatus" class="col-sm-2 control-label">Status</label>
+                        <label for="editDebateStatus" class="col-sm-3 control-label">Status</label>
                         <div class="col-sm-4">
                             <input type="text" class="form-control" id="edit-debate-status" placeholder="Status">
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="editDebateProVotes" class="col-sm-2 control-label">Pro Votes</label>
+                        <label for="editDebateProVotes" class="col-sm-3 control-label">Pro Votes</label>
                         <div class="col-sm-4">
                             <input type="number" class="form-control" id="edit-debate-pro-votes" placeholder="Pro Votes">
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="editDebateConVotes" class="col-sm-2 control-label">Con Votes</label>
+                        <label for="editDebateConVotes" class="col-sm-3 control-label">Con Votes</label>
                         <div class="col-sm-4">
                             <input type="number" class="form-control" id="edit-debate-con-votes" placeholder="Con Votes">
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="isPublished" class="col-sm-4 control-label">Publish?</label>
+                        <label for="isPublished" class="col-sm-3 control-label">Publish?</label>
                         <div class="col-sm-4">
                             <input type="radio" name="publishDebate" value="false">No
                             <input type="radio" name="publishDebate" value="true">Yes

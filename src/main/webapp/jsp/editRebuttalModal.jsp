@@ -5,14 +5,13 @@
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
-                <h3 class="modal-title" id="exampleModalLabel">Edit Debate</h3>
+                <h3 class="modal-title" id="exampleModalLabel">Edit Rebuttal</h3>
             </div>
             <div class="modal-body">
                 <input type=hidden id="edit-rebuttal-id"/>
                 <form class="form-horizontal" id="rebuttal-form">
                     <hr>                    
                     <div class="form-group">
-                        <label for="editRebuttalContent" class="col-sm-2 control-label">Edit Content</label>
                         <div class="col-sm-11">
                             <textarea name="editRebuttalContent" id="edit-rebuttal-content"></textarea>
                         </div>
