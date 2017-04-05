@@ -18,6 +18,7 @@ import org.springframework.dao.DataAccessException;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.ResultSetExtractor;
+import org.springframework.jdbc.core.RowMapper;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -231,16 +232,29 @@ public class DebateDaoImpl implements DebateDao {
         }
     }  
     
-//    private static final String SQL_GET_REBUTTAL_BY_ID = "";
-//    //GET A Rebuttal
-//    @Override
-//    public Debate getRebuttalById(int id){
-//         try{
-//            return jdbcTemp.queryForObject(SQL_GET_USER_BY_ID, new UserMapper(), id);
-//        }catch(EmptyResultDataAccessException e){
-//            return null;
-//        }
-//    }
+    private static final String SQL_GET_REBUTTAL_BY_ID = "SELECT rebuttal_id, rebuttals.content, users.username, debate_id, date, position FROM rebuttals \n" +
+"	LEFT OUTER JOIN users ON users.user_id = rebuttals.user_id\n" +
+"	WHERE rebuttal_id = ?";
+    //GET A Rebuttal
+    @Override
+    public Rebuttal getRebuttalById(int id){
+         try{
+            return jdbcTemplate.queryForObject(SQL_GET_REBUTTAL_BY_ID, new RebuttalMapper(), id);
+        }catch(EmptyResultDataAccessException e){
+            return null;
+        }
+    }
+    
+    private static final String SQL_UPDATE_REBUTTAL = "UPDATE rebuttals SET content = ? WHERE rebuttal_id = ?";
+    //UPDATE DEBATE
+    @Transactional(propagation = Propagation.REQUIRED, readOnly = false)
+    @Override
+    public void updateRebuttal(Rebuttal reb){
+        jdbcTemplate.update(SQL_UPDATE_REBUTTAL,
+                reb.getContent(),
+                reb.getId()
+                );
+    }
     
     private static final String SQL_GET_ALL_CATEGORIES = "SELECT category FROM categories";
     //GET CATEGORIES
@@ -324,7 +338,7 @@ public class DebateDaoImpl implements DebateDao {
     }
 
     
-    //SET EXTRACTOR
+    //SET EXTRACTOR FOR DEBATES
     private static class DebateExtractor implements ResultSetExtractor {
 
         @Override
@@ -366,6 +380,24 @@ public class DebateDaoImpl implements DebateDao {
                 }
             }
             return new ArrayList<>(map.values());
+        }
+    }
+    
+    //ROW MAPPER FOR REBUTTALS
+    private static final class RebuttalMapper implements RowMapper<Rebuttal>{
+        
+        @Override
+        public Rebuttal mapRow(ResultSet rs, int rowNum) throws SQLException{
+            Rebuttal rebuttal;          
+            int reb_id = rs.getInt("rebuttal_id");
+            String reb_content = rs.getString("content");
+            String user = rs.getString("username");
+            int deb_id = rs.getInt("debate_id");
+            String reb_date = rs.getString("date");
+            boolean position = rs.getBoolean("position");
+            rebuttal = new Rebuttal(reb_id, reb_content, user, deb_id, reb_date, position);
+            
+            return rebuttal;
         }
     }
 }

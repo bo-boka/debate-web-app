@@ -1,0 +1,176 @@
+/*
+ Copyright 2017 SarahBoka
+*/
+/* 
+    Created on : Feb 25, 2017, 12:34:10 PM
+    Author     : Sarah
+*/
+
+body {
+    background-color: #998066;
+    font-family: Courier, "Courier New", monospace;
+}
+
+.navbar-default {
+    position: fixed;
+    width: 100%;
+    z-index: 100;
+    background-color: #d6d6c2;
+    border: 1px solid white;
+    /*background-color: #e0e0d1;*/
+}
+
+.navbar-default .navbar-brand:hover {
+    color: #fff;
+}
+
+header {
+    padding: 5% 0% 2% 4%;
+    color: #fff;
+    letter-spacing: 75px;
+}
+
+#head1 {
+    /*background-color: #1a000d;*/
+    background-color: #33001a;
+    /*background-color: #4d0026;*/
+    padding-top: 2%;
+}
+
+#head2 {
+    background-color: #3d3d29;
+    padding-top: 1%;
+}
+
+.main {
+    background-color: #fff;
+    margin: 1% 10%;
+}
+
+.heading {
+    /*font-size: 30px;*/
+    color:  gray;
+    padding-top: 65px;
+    padding-bottom: 35px;
+    letter-spacing: 10px;
+    text-transform: uppercase;
+    font-family: verdana;
+    /*font-family: Calibri,Arial,sans-serif;*/
+    /*font-family: Optima,Segoe,"Segoe UI","Lucida Sans Unicode","Lucida Grande",Candara,Calibri,Arial,sans-serif;*/
+}
+
+.margin {
+    margin-right: 16%;
+    margin-left: 16%;
+   
+}
+
+#side-div{
+    padding-top: 25px;
+    text-align: center;
+}
+
+.margin a {
+    color: #fff;
+}
+
+.ddbar {
+    padding: 7px;
+    margin: 3px;
+}
+
+#status-choice {
+    margin: 10px;
+    background-color:#c2c2a3;
+}
+
+table, th, td{
+    background-color: #998066;
+    border-radius: 10px;
+}
+
+table a {
+    color: #fff;
+    cursor: pointer;
+}
+
+.deb-div {
+    border: 1px solid black;
+    margin-bottom: 25px;
+    padding: 5px;
+    border-radius: 10px;
+    background-color: #d6d6c2;
+    color: #777;
+}
+
+.deb-div a {
+    color: #3d3d29;
+}
+
+.deb-div a:hover {
+    color: #fff;
+}
+
+#deb-main {
+    padding-right: 10%;
+    padding-left: 10%;
+}
+
+.deb-user {
+    border: 1px solid black;
+    padding: 7%;
+    border-radius: 40px;
+}
+
+#challengeForm, #rebuteForm {
+    margin: 7% 20%;
+}
+
+#deb-deets {
+    border: 1px solid black;
+    padding: 1%;
+    border-radius: 10px;
+    background-color: #d6d6c2;
+    color: #777;
+}
+
+#deb-status {
+    border: 1px dashed black; 
+    margin: 5% 20% 5% 20%; 
+    padding: 1%;
+    font-size: 25px;
+    background-color: #fff;
+    color: black;
+}
+
+#dash-main {
+    padding: 2%;
+}
+
+.deb-reb, #login {
+    border: solid 2px; 
+    padding: 1%; 
+    margin: 5% 20%;
+    background-color: #c2c2a3;
+}
+
+#login, #reg{
+    border: solid 1px; 
+    padding: 1%; 
+    margin: 5% 30%;
+    border-radius: 10px;
+    background-color: #c2c2a3;
+}
+
+.main, .margin {
+    box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.5);
+    border-radius: 10px;
+}
+
+header, .heading {
+    text-align: center; 
+}
+
+header, .ddbar, .margin {
+    background-color: #c2c2a3;
+}

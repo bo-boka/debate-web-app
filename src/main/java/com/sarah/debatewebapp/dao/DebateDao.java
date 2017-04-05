@@ -40,6 +40,11 @@ public interface DebateDao {
     @Transactional(propagation = Propagation.REQUIRED, readOnly = false)
     Rebuttal createRebuttal(Rebuttal rebuttal);
     
+    Rebuttal getRebuttalById(int id);
+    
+    @Transactional(propagation = Propagation.REQUIRED, readOnly = false)
+    void updateRebuttal(Rebuttal reb);
+    
     List<String> getAllCategories();
     
     List<Debate> searchDebatesByResolution(String resolution);

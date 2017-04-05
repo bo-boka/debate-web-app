@@ -184,3 +184,12 @@ INSERT INTO users (user_id, username, password, first_name, last_name, email, en
 
 SELECT * FROM authorities;
 UPDATE authorities SET authority = 'ROLE_ADMIN' WHERE username='cheesinForTheWeekend';
+
+/*get rebuttal by id*/
+SELECT rebuttal_id, rebuttals.content, users.username, debate_id, date, position FROM rebuttals 
+	LEFT OUTER JOIN users ON users.user_id = rebuttals.user_id
+	WHERE rebuttal_id= 1;
+    
+/*update rebuttal content*/
+SELECT * FROM rebuttals;
+UPDATE rebuttals SET content = "blah bloob" WHERE rebuttal_id = 2;

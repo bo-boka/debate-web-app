@@ -1,0 +1,61 @@
+<beans:beans xmlns="http://www.springframework.org/schema/security"
+             xmlns:beans="http://www.springframework.org/schema/beans"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xsi:schemaLocation="http://www.springframework.org/schema/beans
+ http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+ http://www.springframework.org/schema/security
+ http://www.springframework.org/schema/security/spring-security-3.1.xsd">
+    <!--pw encryption-->
+    <beans:bean id="webexpressionHandler" class="org.springframework.security.web.access.expression.DefaultWebSecurityExpressionHandler"/> 
+    <beans:bean id="encoder" class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder"/>
+
+    <beans:bean id="simpleUrlAuthenticationSuccessHandler" class="org.springframework.security.web.authentication.SimpleUrlAuthenticationSuccessHandler">
+        <beans:property name="defaultTargetUrl" value="/dashboard"/>
+        <beans:property name="targetUrlParameter" value="spring-security-redirect"/>
+    </beans:bean>   
+    <!-- #2 - Make sure we don't need authorization to get to the login or home page -->
+    <http pattern="/login" security="none" />
+    <http pattern="/css/**" security="none" />
+    <http pattern="/js/**" security="none" />
+    <http pattern="/img/**" security="none" />
+    <!-- #3 - Authentication/login form and protected endpoint configuration -->
+    <http auto-config="true" use-expressions="false">
+        <!-- #3a - Login via html form, use Spring to do the security check -->
+        <!-- #3b - Use the login page at this endpoint -->
+        <!-- #3c - Redirect here if login fails -->
+        <form-login login-processing-url="/j_spring_security_check"
+                    login-page="/login"
+                    authentication-failure-url="/login?login_error=1"
+                    authentication-success-handler-ref="simpleUrlAuthenticationSuccessHandler"/>
+        <!-- #3d - Go back to home page when user logs out -->
+        <logout logout-success-url="/home" />
+        <!-- #3e - Access to these endpoints require admin role -->
+        <intercept-url pattern="/dashboard" access="IS_AUTHENTICATED_FULLY" />
+        <intercept-url pattern="/mod" access="ROLE_ADMIN" />
+        <intercept-url pattern="/unpubDebates" access="ROLE_ADMIN" />
+        <intercept-url pattern="/debate/deb" access="ROLE_ADMIN" />
+        <intercept-url pattern="/debate/del/**" access="ROLE_ADMIN" />
+        <intercept-url pattern="/debate/rebuttal" access="IS_AUTHENTICATED_FULLY" />
+        <intercept-url pattern="/debate/challenge" access="IS_AUTHENTICATED_FULLY" />
+        <!-- #3f - Access to all other controller endpoints require user role -->
+        <!--<intercept-url pattern="/**" access="ROLE_USER" />-->
+        <intercept-url pattern="/search/**" access="IS_AUTHENTICATED_ANONYMOUSLY, IS_AUTHENTICATED_FULLY" />
+        
+    </http>
+    <!-- #4 - Authentication Manager config -->
+    <authentication-manager>
+        <!-- #4a - Authentication Provider - we're using the JDBC service -->
+        <authentication-provider>
+            <password-encoder ref="encoder"/>
+            <!-- #4b - Tells Spring Security where to look for user information -->
+            <!-- We use the dataSource defined in spring-persistence.xml -->
+            <!-- and we give Spring Security the query to use to lookup -->
+            <!-- the user's credentials (get the password from the users -->
+            <!-- tables and get the roles from the authorities table) -->
+            <jdbc-user-service id="userService"
+                               data-source-ref="dataSourceBean"
+                               users-by-username-query="select username, password, enabled from users where username=?"
+                               authorities-by-username-query="select username, authority from authorities where username=?" />
+        </authentication-provider>
+    </authentication-manager>
+</beans:beans>

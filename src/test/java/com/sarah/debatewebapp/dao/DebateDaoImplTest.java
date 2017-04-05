@@ -131,7 +131,7 @@ public class DebateDaoImplTest {
         new Debate(12, "Hairy Maclary from Donaldson's Dairy and his hard yakka weka.", " cookie times are really beached as good with buzzy lengths of number 8 wire, aye. You have no idea how rip-off our mint Edmonds Cook Books were aye.", "sawadeeka", "music", date, true)
     };
     
-    Rebuttal[] rebuttalsForTesting = {
+    Rebuttal[] rebuttalsForTesting1 = {
         new Rebuttal(1, "TestTestTestContent", "cheesinForTheWeekend", 1, date, false),
         new Rebuttal(2, "TestTestTestConte", "snowOwl22", 1, date, true),
         new Rebuttal(3, "TestTestTestCont", "cheesinForTheWeekend", 1, date, false),
@@ -140,6 +140,22 @@ public class DebateDaoImplTest {
         new Rebuttal(6, "TestTestTestC", "snowOwl22", 1, date, true),
         new Rebuttal(7, "TestTestTes", "cheesinForTheWeekend", 1, date, false),
         new Rebuttal(8, "TestTestT", "snowOwl22", 1, date, true)
+        
+        
+    };
+    
+    Rebuttal[] rebuttalsForTesting2 = {
+        new Rebuttal(9, "TestTestTestContent", "cheesinForTheWeekend", 2, date, false),
+        new Rebuttal(10, "TestTestTestConte", "snowOwl22", 2, date, true),
+        new Rebuttal(11, "TestTestTestCont", "cheesinForTheWeekend", 2, date, false),
+        new Rebuttal(12, "TestTestTestCon", "snowOwl22", 2, date, true),
+        new Rebuttal(13, "TestTestTestCo", "cheesinForTheWeekend", 2, date, false)
+    };
+    
+    Rebuttal[] rebuttalsForTesting3 = {
+        new Rebuttal(14, "TestTestTestC", "snowOwl22", 3, date, true),
+        new Rebuttal(15, "TestTestTes", "cheesinForTheWeekend", 3, date, false),
+        new Rebuttal(16, "TestTestT", "snowOwl22", 3, date, true)
     };
     
     @Test
@@ -524,12 +540,38 @@ public class DebateDaoImplTest {
     public void testAddMaxRebuttalsOnADebate(){
         Debate testDebate = new Debate(1, "Terrrrrrst Resolution.", "Some stuff in this test content.", "intro", "X2truDebatorX", "cheesinForTheWeekend", 0, 0, "music", date, true);
         testDao.createDebate(testDebate);
-        for(Rebuttal r : rebuttalsForTesting){
+        for(Rebuttal r : rebuttalsForTesting1){
             r.setDebateId(testDebate.getId());
             testDao.createRebuttal(r);
         }
         Assert.assertEquals(5, testDao.getDebateById(testDebate.getId()).getRebuttals().size());
         Assert.assertEquals("voting", testDao.getDebateById(testDebate.getId()).getStatus());
+    }
+    
+    @Test
+    public void testGetRebuttalById(){
+        for (int i = 0; i < 3; i++) {
+            testDao.createDebate(debatesForTesting[i]);
+        }
+        rebuttalsForTesting1[0].setDebateId(debatesForTesting[0].getId());
+        Rebuttal rebTest = testDao.createRebuttal(rebuttalsForTesting1[0]);
+        
+        Rebuttal reb = testDao.getRebuttalById(rebTest.getId());
+        Assert.assertEquals("Rebuttal does not match returned rebuttal.", rebTest, reb);
+    }
+    
+    @Test
+    public void testUpdateRebuttal(){
+        testDao.createDebate(debatesForTesting[3]);
+        rebuttalsForTesting1[0].setDebateId(debatesForTesting[3].getId());
+        testDao.createRebuttal(rebuttalsForTesting1[0]);
+        Assert.assertEquals("Content of rebuttal does not match after adding rebuttal to dao", rebuttalsForTesting1[0].getContent(),
+                testDao.getRebuttalById(rebuttalsForTesting1[0].getId()).getContent());
+        rebuttalsForTesting1[1].setId(rebuttalsForTesting1[0].getId());
+        testDao.updateRebuttal(rebuttalsForTesting1[1]);
+        Assert.assertEquals("Content of rebuttal does not match after updating rebuttal to dao", rebuttalsForTesting1[1].getContent(),
+                testDao.getRebuttalById(rebuttalsForTesting1[0].getId()).getContent());
+        
     }
     
     @Test
