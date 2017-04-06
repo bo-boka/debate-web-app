@@ -51,7 +51,7 @@
                         <div class="col-sm-6">
                             <div class="heading">Resolved</div>
                             <div id="deb-deets">
-                                <h3>${oneDebate.resolution}</h3>
+                                <h3><strong>${oneDebate.resolution}</strong></h3>
                                 <div id="deb-status">
                                     <i><u>Status:</u></i>
                                     <div><strong>${message}</strong></div>
@@ -147,7 +147,7 @@
             <%@include file="editDebateModalFrag.jsp" %>
             <%@include file="editRebuttalModal.jsp" %>
         </div>
-        
+        <%@include file="footerFragment.jsp" %>
         <script src="${pageContext.request.contextPath}/js/jquery-2.2.4.min.js"></script>
         <script src="${pageContext.request.contextPath}/js/bootstrap.min.js"></script>
         <script src="${pageContext.request.contextPath}/js/singleDebJS.js"></script>       

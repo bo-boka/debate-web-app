@@ -80,7 +80,7 @@
                 <div class="alert alert-danger">You cannot delete a user that has engaged in debates as it affects other debator stats.</div>
             </c:if>
         </div>
-
+        <%@include file="footerFragment.jsp" %>
         <script src="${pageContext.request.contextPath}/js/jquery-2.2.4.min.js"></script>
         <script src="${pageContext.request.contextPath}/js/bootstrap.min.js"></script>
         <script src="${pageContext.request.contextPath}/js/homeJS.js"></script>
