@@ -15,23 +15,11 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <link href="${pageContext.request.contextPath}/css/bootstrap.min.css" rel="stylesheet">
         <link href="${pageContext.request.contextPath}/css/debateCSS.css" rel="stylesheet">
-        <link rel="shortcut icon" href="${pageContext.request.contextPath}/img/deft-logo2.png">
+        <link rel="shortcut icon" href="${pageContext.request.contextPath}/img/deft-logo3.png">
         <link href="https://fonts.googleapis.com/css?family=Orbitron" rel="stylesheet">
         <title>deft | ${oneUser.username}</title>
         <link href = "https://code.jquery.com/ui/1.10.4/themes/ui-lightness/jquery-ui.css" rel = "stylesheet">
-        <script>
-            $('#search-option').change(function() {
-                var option = $('#search-option').val();
-                if (option === 'date'){
-                    $('#search-info').datepicker({
-                        showAnim: "slide",
-                        dateFormat: 'yy-mm-dd'
-                    });
-                } else {
-                    $("#search-info").datepicker('destroy');
-                }
-            });
-        </script>
+        
     </head>
     <body>
         <%@include file="headerFragment.jsp" %>
@@ -47,22 +35,46 @@
         
         <div class="container-fluid main">
             
-            <div class="heading">${oneUser.username}</div>
-            <center>
-            <div>
-            First name: ${oneUser.firstName}<br>
-            Last name: ${oneUser.lastName}<br>
-            Wins: ${oneUser.wins}<br>
-            Losses: ${oneUser.losses}<br>
-            Ties: ${oneUser.ties}<br>
+            <div align="center" style="padding: 40px; font-size: 40px;">${oneUser.username}</div>
+<!--            <center>-->
+            <div class="row" style="padding: 20px;">
+                
+                <div class="col-sm-4">
+                    <div align="center" style="font-size: 20px; padding: 20px; border: 1px solid black">
+                        <strong>First name: </strong> ${oneUser.firstName}<br>
+                        <strong>Last name: </strong>${oneUser.lastName}<br>
+                        <strong>Wins: </strong>${oneUser.wins}<br>
+                        <strong>Losses: </strong>${oneUser.losses}<br>
+                        <strong>Ties: </strong>${oneUser.ties}<br>
+                    </div>
+                </div>
+                <div class="col-sm-8">
+                    <table class="table table-hover">
+                        <tr>
+                            <th width="50%">Resolution</th>
+                            <th>User</th>
+                            <th>Date</th>
+                        </tr>
+                        <tbody id="profileRows">
+                            <c:forEach items="${debs}" var="deb">
+                            <tr>
+                                <td>${deb.resolution}</td>
+                                <td>${deb.affirmativeUser}</td>
+                                <td>${deb.date}</td>
+                            </tr>
+                            </c:forEach>
+                        </tbody>
+                    </table>
+                </div>
             </div>
-            </center>
+            <!--</center>-->
             <sec:authorize access="hasRole('ROLE_ADMIN')">
                 <div class="heading">Moderator Settings</div>
                 <!--disable passed with username because controller method is also used in user dash that passes username-->
                 <a href="editRole?userid=${oneUser.id}"><button type="button" class="btn btn-lg btn-primary" id="change-to-moderator">Add Moderator</button></a>
-                <a href="disableUser?username=${oneUser.username}"><button type="button" class="btn btn-lg btn-primary" id="disable-user">Disable Account</button></a>
-                <a href="deleteUser?userid=${oneUser.id}"><button type="button" class="btn btn-lg btn-primary" id="delete-user">Delete Account</button></a>
+                <a href="disableUser?username=${oneUser.username}"><button type="button" class="btn btn-lg btn-warning" id="disable-user">Disable Account</button></a>
+                <a href="deleteUser?userid=${oneUser.id}"><button type="button" class="btn btn-lg btn-danger" id="delete-user">Delete Account</button></a>
+                <span style="color: red;">NOTE: </span> You can only delete nonactive users.
             </sec:authorize>
             <c:if test="${badInput}">
                 <div class="alert alert-danger">You cannot delete a user that has engaged in debates as it affects other debator stats.</div>

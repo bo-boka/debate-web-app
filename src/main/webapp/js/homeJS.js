@@ -3,6 +3,7 @@
  */
 
 $(document).ready(function(){
+//    loadProfileDebates();
     loadDebates();   
 
     $( "#status-choice").change(function() {
@@ -40,9 +41,36 @@ function loadDebates(){
     });
 }
 
+//function loadProfileDebates(){
+//    
+//    $.ajax({        
+//        url: 'profileDebates',
+//        type: 'GET'
+//    }).success(function (data){
+//        //alert("processing error");
+//        processProfileDebateList(data);
+//    });
+//}
+
 function clearTable(){
     $('#home-rows').empty();
 }
+
+//function processProfileDebateList(debates){
+//    
+//    $('#profileRows').empty();
+//    
+//    $.each(debates, function (index, debate){
+//        
+//        $('#profileRows').append($('<tr>')
+//                .append($('<td>').append($('<a>').attr({
+//                    'onclick' : 'goToDebate(' +debate.id+ ')'}).text(debate.resolution)))
+//                .append($('<td>').text(debate.affirmativeUser))
+//                .append($('<td>').text(debate.date))
+//
+//                );
+//    });
+//}
 
 function processDebateList(debates){
     

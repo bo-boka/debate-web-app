@@ -249,8 +249,8 @@ function editDebate(){
     var res = $("#edit-debate-resolution").val();
     var status = $("#edit-debate-status").val();
     var date = $("#edit-date-picker").val();
-    var affUser = $("#edit-debate-aff-user").val();
-    var negUser = $("#edit-debate-neg-user").val();
+    var affUser = $("#edit-debate-aff-user").text();
+    var negUser = $("#edit-debate-neg-user").text();
     var cat = $("#edit-debate-category").val();
     var pro = $("#edit-debate-pro-votes").val();
     var con = $("#edit-debate-con-votes").val();
@@ -280,6 +280,7 @@ function editDebate(){
         })
     }).success(function(data){
         window.location.reload(true);
+        window.onbeforeunload = function() {};
     }).error(function (data, status) {
         errorDiv.empty();
         $.each(data.responseJSON.fieldErrors, function (index, validationError) {

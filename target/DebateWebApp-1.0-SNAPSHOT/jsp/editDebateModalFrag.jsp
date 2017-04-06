@@ -54,7 +54,13 @@
                     <div class="form-group">
                         <label for="editDebateStatus" class="col-sm-3 control-label">Status</label>
                         <div class="col-sm-4">
-                            <input type="text" class="form-control" id="edit-debate-status" placeholder="Status">
+                            <select name="edit-debate-status" class="form-control" id="edit-debate-status">
+                                <option value="intro">intro</option>
+                                <option value="live">live</option>
+                                <option value="voting">voting</option>
+                                <option value="proWon">pro won</option>
+                                <option value="conWon">con won</option>
+                            </select>
                         </div>
                     </div>
                     <div class="form-group">

@@ -16,7 +16,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <link href="${pageContext.request.contextPath}/css/bootstrap.min.css" rel="stylesheet">
         <link href="${pageContext.request.contextPath}/css/debateCSS.css" rel="stylesheet">
-        <link rel="shortcut icon" href="${pageContext.request.contextPath}/img/deft-logo2.png">
+        <link rel="shortcut icon" href="${pageContext.request.contextPath}/img/deft-logo3.png">
         <link href = "https://code.jquery.com/ui/1.10.4/themes/ui-lightness/jquery-ui.css" rel = "stylesheet">
         <link href="https://fonts.googleapis.com/css?family=Orbitron" rel="stylesheet">
         <script src='//cdn.tinymce.com/4/tinymce.min.js'></script>
@@ -33,12 +33,11 @@
             <div class="row" id="dash-main">
                 <div align="right">
                     <sec:authentication var="user" property="principal.username" />
-                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#edit-user-modal" data-user-name="${user}">Edit Account</button>
+                    <button type="button" class="btn" data-toggle="modal" data-target="#edit-user-modal" data-user-name="${user}" style="border: 1px solid black"><span class="glyphicon glyphicon-wrench" aria-hidden="true"></span></button>
                 </div>
                 <div class="col-sm-6">
                     <form class="form-horizontal" id="debateForm">
                         <center><div class="heading">Add Debate</div></center>
-                        <hr>
                         <div class="form-group">
                             <label for="addResolution" class="col-sm-2 control-label">Resolution</label>
                             <div class="col-sm-4">
@@ -74,7 +73,6 @@
                         <form class="form-horizontal" role="form">
                             <center><br><br><br>
                             <div class="heading">Create Moderator</div>
-                            <hr>
                             </center>
                             <div class="form-group">
                                 <label for="add-mod-first-name" class="col-md-4 control-label">First Name:</label>

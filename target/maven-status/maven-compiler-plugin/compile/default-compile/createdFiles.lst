@@ -16,6 +16,7 @@ com\sarah\debatewebapp\dto\Rebuttal.class
 com\sarah\debatewebapp\dao\UserDaoImpl$1.class
 com\sarah\debatewebapp\controller\DebateController.class
 com\sarah\debatewebapp\controller\SearchController.class
+com\sarah\debatewebapp\controller\ErrorController.class
 com\sarah\debatewebapp\dao\UserDaoImpl.class
 com\sarah\debatewebapp\dao\UserDao.class
 com\sarah\debatewebapp\dao\SearchEnum.class

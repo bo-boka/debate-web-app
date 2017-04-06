@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<testsuite tests="27" failures="0" name="com.sarah.debatewebapp.dao.DebateDaoImplTest" time="11.924" errors="0" skipped="0">
+<testsuite tests="27" failures="0" name="com.sarah.debatewebapp.dao.DebateDaoImplTest" time="30.995" errors="0" skipped="0">
   <properties>
     <property name="java.runtime.name" value="Java(TM) SE Runtime Environment"/>
     <property name="sun.boot.library.path" value="C:\Program Files\Java\jdk1.8.0_111\jre\bin"/>
@@ -62,31 +62,31 @@
     <property name="sun.desktop" value="windows"/>
     <property name="sun.cpu.isalist" value="amd64"/>
   </properties>
-  <testcase classname="com.sarah.debatewebapp.dao.DebateDaoImplTest" name="testSearchDebatesByResolution" time="6.876"/>
-  <testcase classname="com.sarah.debatewebapp.dao.DebateDaoImplTest" name="testAgainstEmptyDao" time="0.129"/>
-  <testcase classname="com.sarah.debatewebapp.dao.DebateDaoImplTest" name="testAddMultipleIntroDebates" time="0.318"/>
-  <testcase classname="com.sarah.debatewebapp.dao.DebateDaoImplTest" name="testUpdateRebuttal" time="0.126"/>
-  <testcase classname="com.sarah.debatewebapp.dao.DebateDaoImplTest" name="testUpdateMultipleIntroDebates" time="0.354"/>
-  <testcase classname="com.sarah.debatewebapp.dao.DebateDaoImplTest" name="testAddAndRemoveMultipleDebates" time="0.178"/>
-  <testcase classname="com.sarah.debatewebapp.dao.DebateDaoImplTest" name="testSearchDebatesByUsers" time="0.157"/>
-  <testcase classname="com.sarah.debatewebapp.dao.DebateDaoImplTest" name="testAddAndRemoveOneDebate" time="0.12"/>
-  <testcase classname="com.sarah.debatewebapp.dao.DebateDaoImplTest" name="testDebateCountAfterRemoval" time="0.33"/>
-  <testcase classname="com.sarah.debatewebapp.dao.DebateDaoImplTest" name="testAddSimilarDebates" time="0.197"/>
-  <testcase classname="com.sarah.debatewebapp.dao.DebateDaoImplTest" name="testAddRebuttalToEmptyDaoTest" time="0.171"/>
-  <testcase classname="com.sarah.debatewebapp.dao.DebateDaoImplTest" name="testUpdateDebate" time="0.139"/>
-  <testcase classname="com.sarah.debatewebapp.dao.DebateDaoImplTest" name="testAddAndRemoveDebatesMultipleTimes" time="0.551"/>
-  <testcase classname="com.sarah.debatewebapp.dao.DebateDaoImplTest" name="testDebateCountOnUpdate" time="0.268"/>
-  <testcase classname="com.sarah.debatewebapp.dao.DebateDaoImplTest" name="addOneToEmptyDaoTest" time="0.098"/>
-  <testcase classname="com.sarah.debatewebapp.dao.DebateDaoImplTest" name="testUpdateMultipleDebates" time="0.257"/>
-  <testcase classname="com.sarah.debatewebapp.dao.DebateDaoImplTest" name="testDebateCountAfterTwiceRemoved" time="0.305"/>
-  <testcase classname="com.sarah.debatewebapp.dao.DebateDaoImplTest" name="testUpdateIntroDebate" time="0.213"/>
-  <testcase classname="com.sarah.debatewebapp.dao.DebateDaoImplTest" name="testDebateCountOnAddition" time="0.191"/>
-  <testcase classname="com.sarah.debatewebapp.dao.DebateDaoImplTest" name="testSearchDebatesByCategory" time="0.148"/>
-  <testcase classname="com.sarah.debatewebapp.dao.DebateDaoImplTest" name="testAddAndRemoveDebateTwice" time="0.086"/>
-  <testcase classname="com.sarah.debatewebapp.dao.DebateDaoImplTest" name="testAddMultipleDebates" time="0.197"/>
-  <testcase classname="com.sarah.debatewebapp.dao.DebateDaoImplTest" name="testAddMaxRebuttalsOnADebate" time="0.103"/>
-  <testcase classname="com.sarah.debatewebapp.dao.DebateDaoImplTest" name="testSearchDebateByDate" time="0.128"/>
-  <testcase classname="com.sarah.debatewebapp.dao.DebateDaoImplTest" name="addIntroDebateToEmptyDaoTest" time="0.065"/>
-  <testcase classname="com.sarah.debatewebapp.dao.DebateDaoImplTest" name="testDebatesAfterRemovalOfNonExistent" time="0.118"/>
-  <testcase classname="com.sarah.debatewebapp.dao.DebateDaoImplTest" name="testGetRebuttalById" time="0.101"/>
+  <testcase classname="com.sarah.debatewebapp.dao.DebateDaoImplTest" name="testSearchDebatesByResolution" time="14.894"/>
+  <testcase classname="com.sarah.debatewebapp.dao.DebateDaoImplTest" name="testAgainstEmptyDao" time="0.887"/>
+  <testcase classname="com.sarah.debatewebapp.dao.DebateDaoImplTest" name="testAddMultipleIntroDebates" time="1.146"/>
+  <testcase classname="com.sarah.debatewebapp.dao.DebateDaoImplTest" name="testUpdateRebuttal" time="0.778"/>
+  <testcase classname="com.sarah.debatewebapp.dao.DebateDaoImplTest" name="testUpdateMultipleIntroDebates" time="1.125"/>
+  <testcase classname="com.sarah.debatewebapp.dao.DebateDaoImplTest" name="testAddAndRemoveMultipleDebates" time="0.711"/>
+  <testcase classname="com.sarah.debatewebapp.dao.DebateDaoImplTest" name="testSearchDebatesByUsers" time="0.471"/>
+  <testcase classname="com.sarah.debatewebapp.dao.DebateDaoImplTest" name="testAddAndRemoveOneDebate" time="0.266"/>
+  <testcase classname="com.sarah.debatewebapp.dao.DebateDaoImplTest" name="testDebateCountAfterRemoval" time="0.668"/>
+  <testcase classname="com.sarah.debatewebapp.dao.DebateDaoImplTest" name="testAddSimilarDebates" time="0.707"/>
+  <testcase classname="com.sarah.debatewebapp.dao.DebateDaoImplTest" name="testAddRebuttalToEmptyDaoTest" time="0.47"/>
+  <testcase classname="com.sarah.debatewebapp.dao.DebateDaoImplTest" name="testUpdateDebate" time="0.575"/>
+  <testcase classname="com.sarah.debatewebapp.dao.DebateDaoImplTest" name="testAddAndRemoveDebatesMultipleTimes" time="0.868"/>
+  <testcase classname="com.sarah.debatewebapp.dao.DebateDaoImplTest" name="testDebateCountOnUpdate" time="3.283"/>
+  <testcase classname="com.sarah.debatewebapp.dao.DebateDaoImplTest" name="addOneToEmptyDaoTest" time="1.039"/>
+  <testcase classname="com.sarah.debatewebapp.dao.DebateDaoImplTest" name="testUpdateMultipleDebates" time="0.361"/>
+  <testcase classname="com.sarah.debatewebapp.dao.DebateDaoImplTest" name="testDebateCountAfterTwiceRemoved" time="0.279"/>
+  <testcase classname="com.sarah.debatewebapp.dao.DebateDaoImplTest" name="testUpdateIntroDebate" time="0.178"/>
+  <testcase classname="com.sarah.debatewebapp.dao.DebateDaoImplTest" name="testDebateCountOnAddition" time="0.237"/>
+  <testcase classname="com.sarah.debatewebapp.dao.DebateDaoImplTest" name="testSearchDebatesByCategory" time="0.333"/>
+  <testcase classname="com.sarah.debatewebapp.dao.DebateDaoImplTest" name="testAddAndRemoveDebateTwice" time="0.273"/>
+  <testcase classname="com.sarah.debatewebapp.dao.DebateDaoImplTest" name="testAddMultipleDebates" time="0.266"/>
+  <testcase classname="com.sarah.debatewebapp.dao.DebateDaoImplTest" name="testAddMaxRebuttalsOnADebate" time="0.257"/>
+  <testcase classname="com.sarah.debatewebapp.dao.DebateDaoImplTest" name="testSearchDebateByDate" time="0.137"/>
+  <testcase classname="com.sarah.debatewebapp.dao.DebateDaoImplTest" name="addIntroDebateToEmptyDaoTest" time="0.215"/>
+  <testcase classname="com.sarah.debatewebapp.dao.DebateDaoImplTest" name="testDebatesAfterRemovalOfNonExistent" time="0.292"/>
+  <testcase classname="com.sarah.debatewebapp.dao.DebateDaoImplTest" name="testGetRebuttalById" time="0.279"/>
 </testsuite>

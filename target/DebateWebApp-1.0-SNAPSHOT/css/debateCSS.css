@@ -7,7 +7,13 @@
 */
 
 body {
-    background-color: #998066;
+    background-color: black;
+    /*background-color: #282828;*/
+    background-image: url("../img/smoke5.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
     font-family: Courier, "Courier New", monospace;
 }
 
@@ -25,9 +31,10 @@ body {
 }
 
 header {
-    padding: 5% 0% 2% 4%;
+    padding: 6% 0% 3% 4%;
     color: #fff;
     letter-spacing: 75px;
+    border-bottom: 1px solid white;
 }
 
 #head1 {
@@ -35,15 +42,18 @@ header {
     background-color: #33001a;
     /*background-color: #4d0026;*/
     padding-top: 2%;
+    
 }
 
 #head2 {
-    background-color: #3d3d29;
+    background-color: #282828;
+    /*background-color: black;*/
     padding-top: 1%;
+    border-bottom: 1px solid white;
 }
 
 .main {
-    background-color: #fff;
+    background-color: #E8E8E8;
     margin: 1% 10%;
 }
 
@@ -85,12 +95,12 @@ header {
 }
 
 table, th, td{
-    background-color: #998066;
+    /*background-color: #998066;*/
     border-radius: 10px;
 }
 
 table a {
-    color: #fff;
+    /*color: #fff;*/
     cursor: pointer;
 }
 
@@ -118,7 +128,7 @@ table a {
 
 .deb-user {
     border: 1px solid black;
-    padding: 7%;
+    padding-left: 5%;
     border-radius: 40px;
 }
 

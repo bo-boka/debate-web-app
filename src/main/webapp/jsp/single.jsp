@@ -16,7 +16,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <link href="${pageContext.request.contextPath}/css/bootstrap.min.css" rel="stylesheet">
         <link href="${pageContext.request.contextPath}/css/debateCSS.css" rel="stylesheet">
-        <link rel="shortcut icon" href="${pageContext.request.contextPath}/img/deft-logo2.png">
+        <link rel="shortcut icon" href="${pageContext.request.contextPath}/img/deft-logo3.png">
         <link href="https://fonts.googleapis.com/css?family=Orbitron" rel="stylesheet">
         <link href = "https://code.jquery.com/ui/1.10.4/themes/ui-lightness/jquery-ui.css" rel = "stylesheet">
         <script src='//cdn.tinymce.com/4/tinymce.min.js'></script>
@@ -42,7 +42,7 @@
                         <div class="col-sm-3">
                             <div class="heading">Affirmative</div>
                             <div class="deb-user" style="background-color: #c2c2a3;">
-                                <h4><strong>${oneDebate.affirmativeUser}</strong></h4>
+                                <h5><strong>${oneDebate.affirmativeUser}</strong></h5>
                                 <div>
                                     Votes: <div>${oneDebate.proVotes}</div>
                                 </div>
@@ -59,11 +59,12 @@
                                 <sec:authorize access="isFullyAuthenticated()"> 
                                     <c:if test="${oneDebate.status == 'voting'}">
                                         <div class="row" id="vote-buttons">
-                                            <div class="col-sm-6">
-                                                <button type="button" class="btn btn-success" id="pro-vote">Pro</button>
+                                            <div class="col-sm-3">
+                                                <button type="button" class="btn btn-success btn-lg" id="pro-vote"><span class="glyphicon glyphicon-hand-left" aria-hidden="true"></span></button>
                                             </div>
-                                            <div class="col-sm-6">
-                                                <button type="button" class="btn btn-danger" id="con-vote">Con</button>
+                                            <div class="col-sm-6" style="color: red;"><strong>First person to reach 10 votes wins!</strong></div>
+                                            <div class="col-sm-3">
+                                                <button type="button" class="btn btn-danger btn-lg" id="con-vote"><span class="glyphicon glyphicon-hand-right" aria-hidden="true"></span></button>
                                             </div>
                                         </div>
                                     </c:if>
@@ -82,7 +83,7 @@
                         <div class="col-sm-3">
                             <div class="heading">Challenger</div>
                             <div class="deb-user" style="background-color: #998066;">
-                                <h4><strong>${oneDebate.negativeUser}</strong></h4>
+                                <h5><strong>${oneDebate.negativeUser}</strong></h5>
                                 <div>
                                     Votes: <div>${oneDebate.conVotes}</div>
                                 </div>
@@ -112,15 +113,18 @@
                 <c:forEach items="${oneDebate.rebuttals}" var="rebute">
                     <hr>
                     <div class="deb-reb" <c:if test="${!rebute.position}"> style="background-color: #998066;" </c:if>>
-                        ${rebute.content}
-                        <div><strong>${rebute.user}</strong></div>
-                        ${rebute.date}
                         <sec:authorize access="isFullyAuthenticated()">
                             <sec:authentication var="user" property="principal.username" /> 
                             <c:if test="${rebute.user == user}">
-                                <button class="pull-right" data-toggle="modal" data-target="#edit-rebuttal-modal" data-rebuttal-id="${rebute.id}">Edit</button>
+                                <button class="pull-right btn" data-toggle="modal" data-target="#edit-rebuttal-modal" data-rebuttal-id="${rebute.id}"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></button>
                             </c:if>
                         </sec:authorize>
+                        ${rebute.content}
+                        <div>
+                            <strong>${rebute.user}</strong><br>
+                            ${rebute.date}
+                        </div>
+                        
                     </div>
                 </c:forEach>
                     

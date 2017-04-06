@@ -6,8 +6,10 @@ package com.sarah.debatewebapp.controller;
 
 import com.sarah.debatewebapp.dao.DebateDao;
 import com.sarah.debatewebapp.dao.UserDao;
+import com.sarah.debatewebapp.dto.Debate;
 import com.sarah.debatewebapp.dto.User;
-import java.util.Map;
+import java.util.ArrayList;
+import java.util.List;
 import javax.inject.Inject;
 import javax.validation.Valid;
 import org.springframework.dao.DataIntegrityViolationException;
@@ -33,6 +35,7 @@ public class UserController {
     private UserDao userDao;
     private DebateDao debDao;
     private PasswordEncoder encoder;
+    private User aUser;
     
     @Inject
     public UserController(UserDao dao, DebateDao debDao, PasswordEncoder encoder){
@@ -44,7 +47,19 @@ public class UserController {
     //gets and displays user profile
     @RequestMapping(value = "/profile/{user}", method = RequestMethod.GET)
     public String displayDebatesByCategory(@PathVariable String user, Model model){
-        User aUser = userDao.getUserByUsername(user);
+        aUser = userDao.getUserByUsername(user);
+        List<Debate> allDebs = debDao.getAllPublishedDebates();
+        List<Debate> profDebs = new ArrayList<>();
+        for(Debate d : allDebs){
+            if (d.getAffirmativeUser().equals(aUser.getUsername())){
+                profDebs.add(d);
+            } else if (d.getNegativeUser() != null){
+                if (d.getNegativeUser().equals(aUser.getUsername())){
+                    profDebs.add(d);
+                }
+            }
+        }
+        model.addAttribute("debs", profDebs);
         model.addAttribute("oneUser", aUser);
         return "profile";
     }
@@ -54,12 +69,31 @@ public class UserController {
         return "register";
     }
     
+    //gets user debs for profile, is dependent on 'aUser' variable initiated display profile method
+//    @ResponseBody
+//    @RequestMapping(value="/profile/profileDebates", method=RequestMethod.GET)
+//    public List<Debate> getAllProfileDebates(){
+//        List<Debate> allpubDs = debDao.getAllPublishedDebates();
+//        List<Debate> userDs = new ArrayList<>();
+//        for(Debate d : allpubDs){
+//            if (d.getAffirmativeUser().equals(aUser.getUsername())){
+//                userDs.add(d);
+//            } else if (d.getNegativeUser() != null){
+//                if (d.getNegativeUser().equals(aUser.getUsername())){
+//                    userDs.add(d);
+//                }
+//            }
+//        }
+//        return userDs;
+//    }
+    
     //register user
     @ResponseBody
     @ResponseStatus(HttpStatus.CREATED)
     @RequestMapping(value="/user", method=RequestMethod.POST)
     public User registerUser(@Valid @RequestBody User user, Model model){
         user.setPassword(encoder.encode(user.getPassword()));
+        user.setRole("ROLE_USER");
         try {
             userDao.createUser(user);
         } catch (DuplicateKeyException e){

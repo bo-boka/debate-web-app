@@ -9,7 +9,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <link href="${pageContext.request.contextPath}/css/bootstrap.min.css" rel="stylesheet">
         <link href="${pageContext.request.contextPath}/css/debateCSS.css" rel="stylesheet">
-        <link rel="shortcut icon" href="${pageContext.request.contextPath}/img/deft-logo2.png">
+        <link rel="shortcut icon" href="${pageContext.request.contextPath}/img/deft-logo3.png">
         <link href="https://fonts.googleapis.com/css?family=Orbitron" rel="stylesheet">
         <title>deft debate | login</title>
         <link href = "https://code.jquery.com/ui/1.10.4/themes/ui-lightness/jquery-ui.css" rel = "stylesheet">

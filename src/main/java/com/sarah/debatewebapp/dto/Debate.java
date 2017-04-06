@@ -35,7 +35,6 @@ public class Debate {
     private ArrayList<String> citedSources;
     @NotEmpty(message="Status cannot be empty.")
     private String status; //statuses are 'intro', 'live', 'proWon', 'conWon', or 'wash' ..(or maybe 'expired' eventually?)
-    @NotEmpty(message="Pro user cannot be empty.")
     private String affirmativeUser;
     private String negativeUser;
     private int proVotes;

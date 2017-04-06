@@ -23,12 +23,7 @@ $(document).ready(function(){
         event.preventDefault();
         editUser();
     });
-    
-//    $('#delete-user').click(function(event){
-//        event.preventDefault();
-//        deleteUser();
-//    });
-    
+ 
     $("#user-register-button").click(function(event){
         event.preventDefault();
         registerUser();
@@ -237,6 +232,7 @@ function editUser(){
 //            password: $('#edit-password').val()
         })
     }).success(function(data){
+        alert("If username was changed, please login again.");
         window.location.reload(true);
     }).error(function (data, status){
             var errorDiv = $("#validationEditUserErrors");

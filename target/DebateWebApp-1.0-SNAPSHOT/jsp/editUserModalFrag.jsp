@@ -44,7 +44,7 @@
             </div>
             <div class="modal-footer">
                 <button type="submit" class="btn btn-lg btn-primary" id="edit-user">Save changes</button>
-                <a href="disableUser?username=${user}"><button type="button" class="btn btn-lg btn-primary" id="delete-user">Disable Account</button></a>
+                <a href="disableUser?username=${user}"><button type="button" class="btn btn-lg btn-danger" id="delete-user">Disable Account</button></a>
                 
                 <div id="validationEditUserErrors" class="alert alert-danger" style="display:none"></div>
             </div>

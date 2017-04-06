@@ -20,6 +20,7 @@ public class User {
         @Size(max=21, message="Username cannot be more than {max} characters."),
         @Size(min=2, message="Username cannot be less than {min} characters.")
     })
+    @Pattern(regexp="[A-Za-z0-9_]+", message="Characters can only include numbers, letters, and underscores")
     private String username;
     @Size.List({
         @Size(max=16, message="Password cannot be more than {max} characters."),

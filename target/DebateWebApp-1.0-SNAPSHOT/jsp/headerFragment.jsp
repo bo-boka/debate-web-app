@@ -33,7 +33,7 @@
             <div class="form-group">
                 <input type="text" class="form-control" name="searchInfo" id="search-info" placeholder="keywords">
             </div>
-            <button type="submit" class="btn btn-default" id="search-button">search</button>
+            <button type="submit" class="btn btn-default" id="search-button"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
         </form>
         <sec:authorize access="!isFullyAuthenticated()">
         <li><a href="${pageContext.request.contextPath}/login">login</a></li>
