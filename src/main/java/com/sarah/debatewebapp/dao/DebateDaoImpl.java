@@ -128,8 +128,8 @@ public class DebateDaoImpl implements DebateDao {
     //DELETE DEBATE
     @Override
     public void deleteDebate(int id){
-        jdbcTemplate.update(SQL_DELETE_DEBATE, id);
         jdbcTemplate.update(SQL_DELETE_DEBATE_REBUTTALS, id);
+        jdbcTemplate.update(SQL_DELETE_DEBATE, id);
     }
     
     private static final String SQL_GET_DEBATE_BY_ID = "SELECT debates.debate_id AS id, resolution, debates.content AS deb_content, deb_statuses.status, affU.username AS affirmativeUser, negU.username AS negativeUser, proVotes, conVotes, categories.category, debates.date AS deb_date, published, rebuttal_id, rebuttals.content AS reb_content, rebU.username AS rebUser, rebuttals.date AS reb_date, position FROM debates\n" +

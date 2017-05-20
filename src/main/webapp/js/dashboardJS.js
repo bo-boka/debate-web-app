@@ -120,7 +120,8 @@ function goToDebate(id){
             'Accept' : 'application/json'
         }
     }).success(function(){
-        window.location="/DebateWebApp/debate/"+ id;
+//        window.location="/DebateWebApp/debate/"+ id; //developing in local env
+        window.location="/debate/"+ id; //deployed online
     });
 }
 

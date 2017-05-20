@@ -111,7 +111,8 @@ function goToDebate(id){
             'Accept' : 'application/json'
         }
     }).success(function(){
-        window.location="/DebateWebApp/debate/"+ id;
+//        window.location="/DebateWebApp/debate/"+ id;
+        window.location="/debate/"+ id;
     });
 }
 

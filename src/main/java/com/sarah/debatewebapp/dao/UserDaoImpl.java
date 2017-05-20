@@ -64,7 +64,7 @@ public class UserDaoImpl implements UserDao {
     
     private static final String SQL_GET_USERNAME = "SELECT username FROM users WHERE user_id = ?";
     private static final String SQL_DELETE_ATHORITY = "DELETE FROM authorities WHERE username = ?";
-    private static final String SQL_UPDATE_USER = "UPDATE users SET username=?, password=?, first_name=?, last_name=?, email=?, wins=?, ties=?, losses=?, enabled=? \n" +
+    private static final String SQL_UPDATE_USER = "UPDATE users SET username=?, first_name=?, last_name=?, email=?, wins=?, ties=?, losses=?, enabled=? \n" +
 "	WHERE user_id=?";
     
     //UPDATE USER ... key constraints on username require deletion of child authorities, 
@@ -77,7 +77,6 @@ public class UserDaoImpl implements UserDao {
         jdbcTemp.update(SQL_DELETE_ATHORITY, name);
         jdbcTemp.update(SQL_UPDATE_USER,
                 user.getUsername(),
-                user.getPassword(),
                 user.getFirstName(),
                 user.getLastName(),
                 user.getEmail(),

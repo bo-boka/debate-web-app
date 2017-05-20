@@ -13,6 +13,41 @@
         <title>deft debate | home</title>
         <link href="https://fonts.googleapis.com/css?family=Orbitron" rel="stylesheet">
         <link href = "https://code.jquery.com/ui/1.10.4/themes/ui-lightness/jquery-ui.css" rel = "stylesheet">
+        <script LANGUAGE="JavaScript">
+            function getCookie(c_name) {
+                var c_value = document.cookie;
+                var c_start = c_value.indexOf(" " + c_name + "=");
+                if (c_start == -1) {
+                    c_start = c_value.indexOf(c_name + "=");
+                }
+                if (c_start == -1) {
+                    c_value = null;
+                } else {
+                    c_start = c_value.indexOf("=", c_start) + 1;
+                    var c_end = c_value.indexOf(";", c_start);
+                    if (c_end == -1) {
+                        c_end = c_value.length;
+                    }
+                    c_value = unescape(c_value.substring(c_start, c_end));
+                }
+                return c_value;
+            }
+            var visit=GetCookie("cookie");
+            if (visit==null){
+                alert("Welcome to Mode:Test of Deft Debate! \n\
+                        Some functions are disabled for functionality previewing purposes. \n\
+                        Moderators have '1_' before their username. \n\
+                        All other precreated acconts have a '2' before their name.\n\
+                        All passwords to precreated user accounts are 'password'.\n\
+                        Moderator functionality:\n\
+                            \t 1_debatinNotHatin\n\
+                            \t 1_SmoothDeb\n\
+                        ");
+                var expire=new Date();
+                expire=new Date(expire.getTime()+7776000000);
+                document.cookie="cookie=here; expires="+expire;
+            }
+        </script>
     </head>
     <body>
         <%@include file="headerFragment.jsp" %>
@@ -27,6 +62,12 @@
         </div>
         <div class="container-fluid main">
             <div class="row">
+                <div style='padding-left: 15px;'>
+                    <div>Mode:TEST</div>
+                    <div>To preview site, please login as a moderator(1_ before name) or a user(2 before name).</div>
+                    <div>All passwords are 'password'.</div>
+                    <div>Or register as a new user. Change your status to moderator by logging in as mod.</div>
+                </div>
                 <div class="col-lg-3">
                     <div class="heading">categories</div>
                     <div class="margin">

@@ -34,7 +34,7 @@ public class SearchController extends HttpServlet{
         this.userDao = userDao;
     }
 
-    @RequestMapping(value={"/search", "/profile/search", "/debate/search"}, method=RequestMethod.POST)
+    @RequestMapping(value={"/search", "/profile/search", "/debate/search", "/categories/search"}, method=RequestMethod.POST)
     public String doPost(HttpServletRequest request, Model model){
         
         List<String> categories = debDao.getAllCategories();

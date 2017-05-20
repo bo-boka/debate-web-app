@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+              xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+                           http://www.springframework.org/schema/beans/spring-beans.xsd
+                           http://www.springframework.org/schema/mvc
+                           http://www.springframework.org/schema/mvc/spring-mvc.xsd
+                           http://www.springframework.org/schema/tx 
+                           http://www.springframework.org/schema/tx/spring-tx-3.0.xsd
+                           http://www.springframework.org/schema/context
+                           http://www.springframework.org/schema/context/spring-context.xsd
+       http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.2.xsd"> 
+
+    
+    <tx:annotation-driven />
+    
+    <!--using aws rds-->
+    <bean id="dataSourceBean" class="org.apache.commons.dbcp2.BasicDataSource">
+        <property name="url" value="jdbc:mysql://aa7hrdlh0ob4g0.cx3qo10ewbws.us-east-1.rds.amazonaws.com/ebdb" />
+        <property name="username" value="sarahboka" />
+        <property name="password" value="3640giggitY" />
+        <property name="driverClassName" value="com.mysql.jdbc.Driver" />
+<!--        <property name="initialSize" value="5" />
+        <property name="maxTotal" value="20" />-->
+    </bean>
+    
+    <!--running from local environment using local database-->
+<!--    <bean id="dataSourceBean" class="org.apache.commons.dbcp2.BasicDataSource">
+        <property name="url" value="jdbc:mysql://localhost:3306/DebateDB" />
+        <property name="username" value="root" />
+        <property name="password" value="3640giggitY!" />
+        <property name="driverClassName" value="com.mysql.jdbc.Driver" />
+        <property name="initialSize" value="5" />
+        <property name="maxTotal" value="20" />
+    </bean>-->
+
+    <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <property name="dataSource" ref="dataSourceBean" />
+    </bean>
+    
+    <bean id="jdbcTemplateBean" class="org.springframework.jdbc.core.JdbcTemplate">
+        <property name="dataSource" ref="dataSourceBean" />
+    </bean>
+   
+    <bean id="debateJdbcDao" class="com.sarah.debatewebapp.dao.DebateDaoImpl" >
+        <property name="jdbcTemplate" ref="jdbcTemplateBean" />
+    </bean>
+    
+    <bean id="userJdbcDao" class="com.sarah.debatewebapp.dao.UserDaoImpl" >
+        <property name="jdbcTemplate" ref="jdbcTemplateBean" />
+    </bean>
+   
+    
+</beans>

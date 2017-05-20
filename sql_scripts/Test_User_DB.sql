@@ -74,7 +74,7 @@ CREATE TABLE IF NOT EXISTS debates(
 INSERT INTO debates (`debate_id`, `resolution`, `content`, `status_id`, `affirmativeUser_id`, `negativeUser_id`, `proVotes`, `conVotes`, `category_id`, `date`, `published`) 
 VALUES 
 	(1, 'Americans should have free healthcare like all the other major developed countries.', 'x', 1, 1, null, null, null, 1, '2017-02-21', true),
-	(2, 'Islands are being eaten by the sea and humans have an obigation to stop it.', 'anthropogenic global warming', 1, 2, null, null, null, 5, '2017-02-22', true),
+	(2, 'Islands are being eaten by the sea and humans have an obligation to stop it.', 'anthropogenic global warming', 1, 2, null, null, null, 5, '2017-02-22', true),
     (3, 'Elliot Smith is better than Bob Dylan.', 'x', 2, 1, 3, null, null, 3, '2017-01-18', true),
     (4, 'Decentralizing government would solve a lot of problems.', 'x', 2, 7, 12, null, null, 1, '2017-01-05', 1),
     (5, 'Using a synth drum machine in grindcore is cheating.', 'x', 3, 12, 6, 0, 1, 3, '2017-03-25', 1),
